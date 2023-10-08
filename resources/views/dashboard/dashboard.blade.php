@@ -258,14 +258,14 @@
 
                 const data = {
                     username: username,
-                    passwordLama: passwordLama,
-                    passwordBaru: passwordBaru
+                    password_lama: passwordLama,
+                    password_baru: passwordBaru
                 };
 
                 Swal.fire({
                     title: 'Loading!',
                     text: 'Data Update Process',
-                    imageUrl: '{{asset('/img/STK-20230906-WA0023.webp')}}',
+                    imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
                     imageWidth: 100,
                     imageHeight: 100,
                     imageAlt: 'Custom image',
@@ -281,8 +281,36 @@
                     data: data,
                     success: function (response) {
                         if (response.status === "success") {
-                            
+                            Swal.close();
+                            Swal.fire({
+                                title: 'Success',
+                                text: 'Update Password User Successfuly.',
+                                imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                                imageWidth: 100,
+                                imageHeight: 100,
+                                imageAlt: 'Custom image',
+                                showConfirmButton: false,
+                                timer: 1200,
+                            })
+                        } else {
+                            Swal.close();
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Data Unsuccessfully Updated.',
+                                imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                                imageWidth: 100,
+                                imageHeight: 100,
+                                imageAlt: 'Custom image',
+                                showConfirmButton: false,
+                                timer: 1200,
+                            })
+                            console.log(response);
                         }
+                    },
+                    error: function (error) {
+                        console.error('Error updating data:', error);
+                        console.log(error);
+                        console.log(data);
                     }
                 })
             })
