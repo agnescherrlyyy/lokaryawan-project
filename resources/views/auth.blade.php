@@ -58,7 +58,7 @@
         </div>
     </section>
 
-    <script src="{{ asset('js/scriptModal.js') }}"></script>
+
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
     <script>
