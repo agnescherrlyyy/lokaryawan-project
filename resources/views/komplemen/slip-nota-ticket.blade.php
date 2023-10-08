@@ -78,17 +78,14 @@
                         </div>
                     </div>
                     <div class="w-full my-2">
-                        <button type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-gradient-to-r from-sekunder-60 to-primer-60 hover:bg-gradient-to-r hover:from-primer-40 hover:to-sekunder-40 transition-all duration-200 ease-in-out uppercase">Checkout</button>
+                        <button type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Checkout</button>
                     </div>
                     <div class="w-10 h-10 rounded-full bg-white absolute -bottom-6 left-[46%]"></div>
                 </div>
             </div>
         </div>
     </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(".btn-dashboard").click(function (e) {

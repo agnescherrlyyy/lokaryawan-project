@@ -151,7 +151,42 @@
                         <span class="text-sm text-slate-500">Total dibayar</span>
                         <span class="font-semibold text-sm">Rp 60.000</span>
                     </div>
-                    <button id="btn-checkout" type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-gradient-to-r from-sekunder-60 to-primer-60 hover:bg-gradient-to-r hover:from-primer-40 hover:to-sekunder-40 transition-all duration-200 ease-in-out uppercase">Checkout</button>
+                    <button id="btn-checkout" type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Checkout</button>
+                </div>
+            </div>
+        </div>
+        <div class="w-full flex flex-col xl:flex-row gap-4 mt-6">
+            <div class="w-full bg-white dark:bg-slate-800 rounded-lg mt-0">
+                <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+                    <span class="inline-block font-semibold text-sm">Log Komplemen Tiket</span>
+                </div>
+                <div class="w-full flex flex-col px-2 py-4">
+                    <div class="p-4 rounded-lg">
+                        <div class="flex">
+                            <div class="h-16 w-16 mr-6">
+                                <img src="{{ asset('img/koplemen100.svg') }}" alt="" srcset="" class="h-full w-full">
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <span class="block font-semibold text-sm">Reguler Ticket &mdash; Weekday</span>
+                                <p class="text-xs">Komplemen 100%</p>
+                                <span class="block text-xs text-primer-60">10/10/2023</span>
+                                <span class="block text-xs text-gray-500 dark:text-gray-400">08/10/23 09:49</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-lg">
+                        <div class="flex">
+                            <div class="h-16 w-16 mr-6">
+                                <img src="{{ asset('img/komplemen50.svg') }}" alt="" srcset="" class="h-full w-full">
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <span class="block font-semibold text-sm">Reguler Ticket &mdash; Weekday</span>
+                                <p class="text-xs">Komplemen 50%</p>
+                                <span class="block text-xs text-primer-60">10/10/2023</span>
+                                <span class="block text-xs text-gray-500 dark:text-gray-400">08/10/23 09:49</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,9 +196,7 @@
 
 @section('script')
     <script src="{{ asset('js/calender.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             const minusButtons = $(".minus-ticket");

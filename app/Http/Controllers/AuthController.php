@@ -26,6 +26,11 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'message' => 'Username atau password salah'], 401);
         }
     }
+
+    public function logout(){
+        Auth::guard('web')->logout();
+        return redirect('/')->with('message', 'Logout Berhasil');
+    }
     /**
      * Show the form for creating a new resource.
      */

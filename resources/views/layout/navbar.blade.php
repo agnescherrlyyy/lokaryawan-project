@@ -41,5 +41,23 @@
 </nav>
 <!-- Navbar End -->
 <script type="text/javascript">
-    
+    function logout(){
+        Swal.fire({
+            title: 'Berhasil Logout!',
+            text: 'Sampai jumpa lagi👋.',
+            imageUrl: '{{asset('/img/STK-20230906-WA0025.webp')}}',
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+            showConfirmButton: false,
+            timer: 1500,
+        });
+        setTimeout(function() {
+            window.location.href = '{{url('/logout')}}';
+        }, 1000);
+    }
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        logout();
+    });
 </script>

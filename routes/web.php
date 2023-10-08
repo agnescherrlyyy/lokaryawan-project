@@ -23,22 +23,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::middleware(['auth.custom'])->group(function () {
+// });
 Route::get('/', [AuthController::class, 'index']);
 Route::post('/login', [AuthController::class, 'login'])->name('login.check_login');
+Route::get('/logout', [AuthController::class, 'logout']);
 
 
-Route::get('/dashboard', [DashboardLokaryawan::class, 'index'])->name('dashboard.index');
+Route::middleware(['auth.custom'])->group(function () {
+    Route::get('/dashboard', [DashboardLokaryawan::class, 'index'])->name('dashboard.index');
 
-Route::get('/jadwalku', [JadwalkuController::class, 'index']);
-Route::get('/absenku', [AbsenkuController::class, 'index']);
-Route::get('/lemburku', [LemburkuController::class, 'index']);
+    Route::get('/jadwalku', [JadwalkuController::class, 'index']);
+    Route::get('/absenku', [AbsenkuController::class, 'index']);
+    Route::get('/lemburku', [LemburkuController::class, 'index']);
 
-Route::get('/gajiku', [GajikuController::class, 'index']);
+    Route::get('/gajiku', [GajikuController::class, 'index']);
 
-Route::get('/tiket', [TiketkuController::class, 'index']);
-Route::get('/tiket/konfirmasi-pembayaran', [SlipTiketKonfirmasiController::class, 'index']);
-Route::get('/tiket/kodebookingku', [KodeBookingkuController::class, 'index']);
+    Route::get('/tiket', [TiketkuController::class, 'index']);
+    Route::get('/tiket/konfirmasi-pembayaran', [SlipTiketKonfirmasiController::class, 'index']);
+    Route::get('/tiket/kodebookingku', [KodeBookingkuController::class, 'index']);
 
-Route::get('/cutitahunan', [CutiTahunanController::class, 'index']);
-Route::get('/cuti/permintaan-cutitahunan', [CutiTahunanController::class, 'permintaanCuti']);
-Route::get('/cuti/riwayat-cutitahunan', [CutiTahunanController::class, 'riwayatCuti']);
+    Route::get('/cutitahunan', [CutiTahunanController::class, 'index']);
+    Route::get('/cuti/permintaan-cutitahunan', [CutiTahunanController::class, 'permintaanCuti']);
+    Route::get('/cuti/riwayat-cutitahunan', [CutiTahunanController::class, 'riwayatCuti']);
+});

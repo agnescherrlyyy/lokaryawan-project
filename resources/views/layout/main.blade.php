@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,7 @@
         </div>
     </section>
     @yield('script')
+    <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/darkmode.js') }}"></script>
 </body>
