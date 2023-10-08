@@ -34,6 +34,12 @@ class AuthController extends Controller
         return redirect('dashboard');
     }
 
+    public function end_session(Request $request)
+    {
+        session()->flush();
+        return redirect('/');
+    }
+
     public function logout(){
         Auth::guard('web')->logout();
         return redirect('/')->with('message', 'Logout Berhasil');

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AuthController::class, 'index']);
 Route::get('/login', [AuthController::class, 'index']);
 Route::get('/start-session', [AuthController::class, 'start_session']);
+Route::get('/end-session', [AuthController::class, 'end_session']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['check_login'])->group(function () {

@@ -49,7 +49,7 @@
             timer: 1500,
         });
         setTimeout(function() {
-            window.location.href = '{{url('/logout')}}';
+            window.location.href = '{{url("end-session")}}';
         }, 1000);
     }
     document.getElementById('logout-link').addEventListener('click', function (e) {
