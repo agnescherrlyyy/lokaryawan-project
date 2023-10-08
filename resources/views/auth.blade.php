@@ -58,7 +58,6 @@
         </div>
     </section>
 
-
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
     <script>
@@ -87,7 +86,7 @@
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
-                            window.location.href = "{{ route('dashboard.index') }}";
+                            window.location.href = "{{ url('start-session') }}?name="+data.user.name+"&username="+data.user.username;
                         } else {
                             Swal.fire({
                                 title: 'Login Gagal',
@@ -117,5 +116,19 @@
             });
         });
     </script>
+    @if (session('danger'))
+        <script>
+            Swal.fire({
+                title: 'Access Dinied',
+                text: "{{session('danger')}}",
+                imageUrl: '{{ asset('img/STK-20230906-WA0027.webp') }}',
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        </script>
+    @endif
 </body>
 </html>
