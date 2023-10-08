@@ -21,6 +21,7 @@
         </div>
     </section>
     @yield('script')
+    <script src="{{ asset('js/scriptModal.js') }}"></script>
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/darkmode.js') }}"></script>

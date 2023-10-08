@@ -51,9 +51,6 @@
                                 <path fill-rule="evenodd" d="M15.75 1.5a6.75 6.75 0 00-6.651 7.906c.067.39-.032.717-.221.906l-6.5 6.499a3 3 0 00-.878 2.121v2.818c0 .414.336.75.75.75H6a.75.75 0 00.75-.75v-1.5h1.5A.75.75 0 009 19.5V18h1.5a.75.75 0 00.53-.22l2.658-2.658c.19-.189.517-.288.906-.22A6.75 6.75 0 1015.75 1.5zm0 3a.75.75 0 000 1.5A2.25 2.25 0 0118 8.25a.75.75 0 001.5 0 3.75 3.75 0 00-3.75-3.75z" clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <a id="modal-password" class="btn-modal block w-full text-center font-semibold text-xs text-blue-500 hover:text-blue-400 cursor-pointer">                         
-                            Ganti Password?                    
-                        </a>
                         <button id="btn-login" type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-6 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out">Login</button>
                     </form>
                 </div>
@@ -61,53 +58,7 @@
         </div>
     </section>
 
-    <!-- Modal Start-->
-    <section id="#modalAdd" class="modal-container hidden max-w-full w-full max-h-screen h-full fixed top-0 left-0 z-[100]">
-        <div class="w-full h-full flex items-center justify-center px-5">
-            <div id="modal-password" class="show-modal w-full max-w-full md:max-w-lg rounded-lg bg-white dark:bg-slate-700 p-4">
-                <div class="w-full flex items-center justify-between relative pb-6 border-b border-slate-100">
-                    <strong>Ganti Password</strong>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-modal w-8 h-8 absolute top-0 right-0 cursor-pointer">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>                                            
-                </div>
-                <div class="w-full pt-6">
-                    <form id="form_add" class="w-full flex flex-col items-center justify-center gap-4">
-                        @csrf
-                        <div class="w-full flex flex-col justify-center items-start gap-2 px-4">
-                            <label for="username" class="block font-semibold text-sm">Username</label>
-                            <div class="w-full">
-                                <input type="text" name="username" id="username" value="" placeholder="Username" class="item-input" required>
-                            </div>
-                        </div>
-                        <div class="w-full flex flex-col justify-center items-start gap-2 px-4">
-                            <label for="password-lama" class="block font-semibold text-sm">Password lama</label>
-                            <div class="w-full">
-                                <input type="password" name="password-lama" id="password-lama" value="" placeholder="Password lama" class="item-input" required>
-                            </div>
-                        </div>
-                        <div class="w-full flex flex-col justify-center items-start gap-2 px-4">
-                            <label for="password-baru" class="block font-semibold text-sm">Password lama</label>
-                            <div class="w-full">
-                                <input type="password" name="password-baru" id="password-baru" value="" placeholder="Password baru" class="item-input" required>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="w-full flex item-center justify-end gap-3 mt-6">
-                    <button class="close-modal px-4 py-3 rounded-lg bg-slate-300 text-slate-950 text-xs hover:bg-slate-200 w-fit">                         
-                        Batal
-                    </button>
-                    <button type="submit" form="form_add" class="close-modal px-4 py-3 rounded-lg text-slate-50 text-xs bg-primer-60 hover:bg-primer-80 transition-colors duration-200 ease-in-out w-fit">                         
-                        Perbaharui Password
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Modal End-->
 
-    <script src="{{ asset('js/scriptModal.js') }}"></script>
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
     <script>
