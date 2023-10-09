@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('auth');
@@ -25,6 +22,22 @@ class AuthController extends Controller
         } else {
             return response()->json(['success' => false, 'message' => 'Username atau password salah'], 401);
         }
+    }
+
+    public function start_session(Request $request)
+    {
+        session([
+                'username' => $request->username,
+                'name' => $request->name,
+                'already_login' => true
+            ]);
+        return redirect('dashboard');
+    }
+
+    public function end_session(Request $request)
+    {
+        session()->flush();
+        return redirect('/');
     }
 
     public function logout(){

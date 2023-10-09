@@ -12,25 +12,15 @@ use App\Http\Controllers\SlipTiketKonfirmasiController;
 use App\Http\Controllers\TiketkuController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 // Route::middleware(['auth.custom'])->group(function () {
 // });
 Route::get('/', [AuthController::class, 'index']);
-Route::post('/login', [AuthController::class, 'login'])->name('login.check_login');
+Route::get('/login', [AuthController::class, 'index']);
+Route::get('/start-session', [AuthController::class, 'start_session']);
+Route::get('/end-session', [AuthController::class, 'end_session']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
-
-// Route::middleware(['auth.custom'])->group(function () {
+Route::middleware(['check_login'])->group(function () {
     Route::get('/dashboard', [DashboardLokaryawan::class, 'index'])->name('dashboard.index');
 
     Route::get('/jadwalku', [JadwalkuController::class, 'index']);
@@ -46,4 +36,4 @@ Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/cutitahunan', [CutiTahunanController::class, 'index']);
     Route::get('/cuti/permintaan-cutitahunan', [CutiTahunanController::class, 'permintaanCuti']);
     Route::get('/cuti/riwayat-cutitahunan', [CutiTahunanController::class, 'riwayatCuti']);
-// });
+});
