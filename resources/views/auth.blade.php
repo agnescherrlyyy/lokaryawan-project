@@ -78,7 +78,7 @@
                         if (data.status == "success") {
                             Swal.fire({
                                 title: 'Login Berhasil',
-                                text: 'Selamat Data di LOKARYAWAN👋',
+                                text: 'Selamat Datang di LOKARYAWAN👋',
                                 imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,

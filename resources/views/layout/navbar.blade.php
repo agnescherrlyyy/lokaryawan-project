@@ -24,6 +24,12 @@
         </div>
         <div id="menu-profile" class="hidden w-48 absolute top-10 right-0 mt-2 py-3 bg-white text-slate-950 z-10 dark:bg-slate-700 dark:text-slate-50 rounded-lg overflow-hidden drop-shadow-md transition-all duration-300 ease-linear">
             <div class="py-2 px-5 text-sm uppercase font-semibold">Profile</div>
+            <a id="profile-user" class="py-2 px-5 flex items-center gap-2 group hover:bg-blue-50 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 group-hover:text-blue-500">
+                    <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+                </svg> 
+                <span class="text-sm group-hover:text-blue-500">Profile</span>
+            </a>
             <a id="logout-link" class="py-2 px-5 flex items-center gap-2 group hover:bg-red-50 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 group-hover:text-red-500">
                     <path fill-rule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm5.03 4.72a.75.75 0 010 1.06l-1.72 1.72h10.94a.75.75 0 010 1.5H10.81l1.72 1.72a.75.75 0 11-1.06 1.06l-3-3a.75.75 0 010-1.06l3-3a.75.75 0 011.06 0z" clip-rule="evenodd" />
@@ -55,5 +61,9 @@
     document.getElementById('logout-link').addEventListener('click', function (e) {
         e.preventDefault();
         logout();
+    });
+    $('#profile-user').click(function(e){
+        e.preventDefault();
+        window.location.href = '{{url("/profile-user")}}';
     });
 </script>

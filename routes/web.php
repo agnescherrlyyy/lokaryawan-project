@@ -8,6 +8,7 @@ use App\Http\Controllers\GajikuController;
 use App\Http\Controllers\JadwalkuController;
 use App\Http\Controllers\KodeBookingkuController;
 use App\Http\Controllers\LemburkuController;
+use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\SlipTiketKonfirmasiController;
 use App\Http\Controllers\TiketkuController;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,6 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/cutitahunan', [CutiTahunanController::class, 'index']);
     Route::get('/cuti/permintaan-cutitahunan', [CutiTahunanController::class, 'permintaanCuti']);
     Route::get('/cuti/riwayat-cutitahunan', [CutiTahunanController::class, 'riwayatCuti']);
+
+    Route::get('/profile-user', [ProfileUserController::class, 'index']);
 });
