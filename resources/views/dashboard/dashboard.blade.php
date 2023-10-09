@@ -250,7 +250,6 @@
         $(document).ready(function () {
             $('#btn-up-password').click(function (e) {
                 e.preventDefault();
-                console.log('test');
 
                 const username = $('#username').val();
                 const passwordLama = $('#password-lama').val();
@@ -285,7 +284,7 @@
                             Swal.fire({
                                 title: 'Success',
                                 text: 'Update Password User Successfuly.',
-                                imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                                imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
                                 imageWidth: 100,
                                 imageHeight: 100,
                                 imageAlt: 'Custom image',
@@ -304,7 +303,6 @@
                                 showConfirmButton: false,
                                 timer: 1200,
                             })
-                            console.log(response);
                         }
                     },
                     error: function (error) {
