@@ -639,6 +639,7 @@ table.dataTable tbody th, table.dataTable tbody td {
     padding: 1rem !important;
 }
 
+/*
 tbody tr:nth-child(odd) {
     background-color: #f8fafc !important;
 }
@@ -646,6 +647,7 @@ tbody tr:nth-child(odd) {
 :is(.dark tbody tr:nth-child(odd)){
     background-color: #2d3748 !important;
 }
+*/
 
 .text-success{
     color: #169870 !important;

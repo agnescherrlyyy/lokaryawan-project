@@ -194,28 +194,39 @@
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $.ajax({
-                url: '{{ env('APP_API') }}summary_kehadiran?id_karyawan=02-1220-586',
-                type: 'GET',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        var tanggal = response.summaryKehadiran.tanggal;
-                        var absenTerakhir = response.summaryKehadiran.jam_kehadiran;
-                        var absenSelanjutnya = response.summaryKehadiran.jam_pulang;
-                        var terlambat = response.summaryTerlambat;
+            var id_karyawan = localStorage.getItem('username');
 
-                        $('.tanggal').text(tanggal);
-                        $('#absen-terakhir').text(absenTerakhir);
-                        $('#absen-selanjutnya').text(absenSelanjutnya);
-                        $('#terlambat').text(terlambat);
-                    } else {
-                        alert('Gagal mengambil data dari API');
+            if (id_karyawan) {
+                $.ajax({
+                    url: 'https://lokahr.salokapark.app/api/summary_kehadiran?id_karyawan=' + id_karyawan,
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            console.log(response);
+                            var tanggal = response.summaryKehadiran.tanggal;
+                            var absenTerakhir = response.summaryKehadiran.jam_kehadiran_karyawan;
+                            var absenSelanjutnya = response.summaryKehadiran.jam_pulang;
+                            var terlambat = response.summaryTerlambat.status;
+                            if (terlambat.indexOf('-') === -1) {
+                                terlambat = '00.00';
+                            }
+    
+    
+                            $('.tanggal').text(tanggal);
+                            $('#absen-terakhir').text(absenTerakhir);
+                            $('#absen-selanjutnya').text(absenSelanjutnya);
+                            $('#terlambat').text(terlambat);
+                        } else {
+                            alert('Gagal mengambil data dari API');
+                        }
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan saat mengambil data dari API');
                     }
-                },
-                error: function(){
-                    alert('Terjadi kesalahan saat mengambil data dari API');
-                }
-            });
+                });
+            } else{
+                alert('ID Karywawan tidak tersedia');
+            }
         });
     </script>
 @endsection

@@ -49,7 +49,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">30</span>
+                        <span id="total-hari-priode" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total hari priode</span>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">20</span>
+                        <span id="total-berangkat" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total hari berangkat</span>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">9</span>
+                        <span id="total-libur" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total hari libur</span>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">1</span>
+                        <span id="total-ph" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total PH</span>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-izin" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Izin</span>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-alfa" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Alfa</span>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-sakit" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Sakit</span>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-cuti" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Cuti</span>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-terlambat" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Terlambat</span>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-terlambat-form" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Terlambat dgn Form</span>
                     </div>
                 </div>
@@ -190,8 +190,8 @@
                         <thead class="border-y-2 dark:border-y-gray-600 bg-white dark:bg-gray-800">
                             <tr>
                                 <th class="pl-6 pr-3 py-3 text-sm font-semibold tracking-wide text-left">No.</th>
-                                <th class="p-3 text-sm font-semibold tracking-wide text-left">Hari</th>
-                                <th class="p-3 text-sm font-semibold tracking-wide text-left">Tanggal</th>
+                                <th class="sticky left-0 z-[9999] bg-white p-3 text-sm font-semibold tracking-wide text-left">Hari</th>
+                                <th class="sticky left-20 p-3 z-[9999] bg-white text-sm font-semibold tracking-wide text-left">Tanggal</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Pulang</th>
@@ -200,37 +200,13 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 dark:divide-gray-600">
-                            @foreach ($absenku_table as $item) 
-                            <tr class="odd:bg-gray-50 even:bg-white dark:odd:bg-gray-700 dark:even:bg-gray-800 {{ $item->kehadiran === 'PH' ? ' text-blue-500' : '' }} {{ $item->kehadiran === 'OFF' ? ' text-red-500' : '' }}">
-                                <td class="pl-6 pr-3 py-3 text-sm tracking-wide text-left">{{ $item->id }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->hari }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left whitespace-nowrap">{{ $item->tanggal }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->kehadiran }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->jam_kehadiran }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->jam_pulang }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->event }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->keterangan }}</td>
-                            </tr>
-                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
                 <div class="pagination bg-transparent px-6 pt-6">
                     <ul class="flex items-center justify-center">
-                        <li><a href="#" class="btn-pagination">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clip-rule="evenodd" />
-                            </svg>                          
-                        </a></li>
-                        <li><a href="#" class="btn-pagination active">1</a></li>
-                        <li><a href="#" class="btn-pagination">2</a></li>
-                        <li><a href="#" class="btn-pagination">3</a></li>
-                        <li><a href="#" class="btn-pagination">4</a></li>
-                        <li><a href="#" class="btn-pagination">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
-                            </svg>                              
-                        </a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -241,4 +217,43 @@
 
 @section('script')
     <script src="{{ asset('js/selectinput.js') }}"></script>
+    <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var id_karyawan = '{{ session('username') }}';
+
+            if (id_karyawan){
+                $.ajax({
+                    url: '{{ env('APP_API') }}jadwalku?id_periode=230013&id_karyawan=' + id_karyawan,
+                    type: 'GET',
+                    success: function(response) {
+                        if(response.status === 'success'){
+                            console.log(response);
+                            summary = response.summary[0];
+                            absenData = response.jadwal;
+                            console.log(absenData);
+                            $('#total-hari-priode').text(summary.tot_hari + summary.tot_libur);
+                            $('#total-berangkat').text(summary.tot_masuk);
+                            $('#total-libur').text(summary.tot_libur);
+                            $('#total-ph').text(summary.tot_ph);
+                            $('#total-izin').text(summary.tot_izin);
+                            $('#total-alfa').text(summary.tot_alfa);
+                            $('#total-sakit').text(summary.tot_sakit);
+                            $('#total-cuti').text(summary.tot_cuti);
+                            $('#total-terlambat').text(summary.tot_terlambat);
+                            $('#total-terlambat-form').text(summary.tot_terlambat_dgn_form);
+
+                        } else {
+                            alert('Gagal mengambil data dari API');
+                        }
+                    },
+                    error: function () {
+                        alert('Terjadi kesalahan saat mengambil data dari API');
+                    }
+                });
+            } else {
+                alert('ID Karywawan tidak tersedia');
+            }
+        });
+    </script>
 @endsection

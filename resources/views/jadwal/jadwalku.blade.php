@@ -17,8 +17,8 @@
                 <img src="{{ asset('img/STK-20230906-WA0007.png') }}" alt="" class="w-full h-full">
             </div>
             <div class="w-full flex flex-col items-center justify-center gap-1">
-                <strong class="text-lg">Agnes Cherrly</strong>
-                <span class="text-sm">02-2023-109</span>
+                <strong class="text-lg">{{ session('name') }}</strong>
+                <span class="text-sm">{{ session('username') }}</span>
                 <span class="text-sm font-medium text-slate-500 dark:text-slate-400">IT &mdash; Aplikasi dan Sytem</span>
             </div>
             <div class="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-y-6 mt-6 bg-white dark:bg-slate-800 rounded-lg">
@@ -31,7 +31,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">30</span>
+                        <span id="total-hari-priode" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total hari priode</span>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">20</span>
+                        <span id="total-masuk" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total hari berangkat</span>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">9</span>
+                        <span id="total-libur" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total hari libur</span>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">1</span>
+                        <span id="total-ph" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total PH</span>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-izin" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Izin</span>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-alfa" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Alfa</span>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-sakit" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Sakit</span>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="font-semibold">0</span>
+                        <span id="total-cuti" class="font-semibold"></span>
                         <span class="text-xs text-slate-500">Total Cuti</span>
                     </div>
                 </div>
@@ -146,8 +146,8 @@
                         <thead class="border-y-2 dark:border-y-gray-600 bg-white dark:bg-gray-800">
                             <tr>
                                 <th class="pl-6 pr-3 py-3 text-sm font-semibold tracking-wide text-left">No.</th>
-                                <th class="p-3 text-sm font-semibold tracking-wide text-left">Hari</th>
-                                <th class="p-3 text-sm font-semibold tracking-wide text-left">Tanggal</th>
+                                <th class="sticky left-0 z-10 p-3 text-sm font-semibold tracking-wide text-left bg-white dark:bg-gray-800">Hari</th>
+                                <th class="sticky left-16 p-3 z-10 text-sm font-semibold tracking-wide text-left bg-white dark:bg-gray-800">Tanggal</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Pulang</th>
@@ -156,41 +156,104 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 dark:divide-gray-600">
-                            @foreach ($jadwalku_table as $item) 
-                            <tr class="odd:bg-gray-50 even:bg-white dark:odd:bg-gray-700 dark:even:bg-gray-800 {{ $item->kehadiran === 'PH' ? ' text-blue-500' : '' }} {{ $item->kehadiran === 'OFF' ? ' text-red-500' : '' }}">
-                                <td class="pl-6 pr-3 py-3 text-sm tracking-wide text-left">{{ $item->id }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->hari }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left whitespace-nowrap">{{ $item->tanggal }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->kehadiran }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->jam_kehadiran }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->jam_pulang }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->event }}</td>
-                                <td class="p-3 text-sm tracking-wide text-left">{{ $item->keterangan }}</td>
-                            </tr>
-                            @endforeach
+                            
                         </tbody>
                     </table>
-                </div>
-                <div class="pagination bg-transparent px-6 pt-6">
-                    <ul class="flex items-center justify-center">
-                        <li><a href="#" class="btn-pagination">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clip-rule="evenodd" />
-                            </svg>                          
-                        </a></li>
-                        <li><a href="#" class="btn-pagination active">1</a></li>
-                        <li><a href="#" class="btn-pagination">2</a></li>
-                        <li><a href="#" class="btn-pagination">3</a></li>
-                        <li><a href="#" class="btn-pagination">4</a></li>
-                        <li><a href="#" class="btn-pagination">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
-                            </svg>                              
-                        </a></li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
     <!-- Jadwalku Content End -->
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var id_karyawan = '{{ session('username') }}';
+            var currentPage = 1;
+            var jadwalData = [];
+            var itemsPerPage = 10;
+            
+            if (id_karyawan) {
+                $.ajax({
+                    url: '{{ env('APP_API') }}jadwalku?id_karyawan=' + id_karyawan,
+                    type: 'GET',
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            console.log(response);
+                            jadwalData = response.jadwal;
+                            var totalHari = response.summary[0].tot_hari;
+                            var totalMasuk = response.summary[0].tot_masuk;
+                            var totalLibur = response.summary[0].tot_libur;
+                            var totalPH = response.summary[0].tot_ph;
+                            var totalIzin = response.summary[0].tot_izin;
+                            var totalSakit = response.summary[0].tot_sakit;
+                            var totalAlfa = response.summary[0].tot_alfa;
+                            var totalHariPriode = totalHari + totalLibur;
+                            var totdalCuti = response.summary[0].tot_cuti;
+
+                            $('#total-hari-priode').text(totalHariPriode);
+                            $('#total-masuk').text(totalMasuk);
+                            $('#total-libur').text(totalLibur);
+                            $('#total-ph').text(totalPH);
+                            $('#total-izin').text(totalIzin);
+                            $('#total-sakit').text(totalSakit);
+                            $('#total-alfa').text(totalAlfa);
+                            $('#total-cuti').text(totdalCuti);
+
+                            var tableBody = $('.w-full tbody');
+                            tableBody.empty();
+
+                            $.each(jadwalData, function(index, jadwal) {
+                                var row = $('<tr class="bg-white dark:bg-slate-800"></tr>');
+                                row.append('<td class="pl-6 pr-3 py-3 text-sm tracking-wide text-left">' + (index + 1) + '</td>');
+                                row.append('<td class="sticky left-0 bg-white dark:bg-slate-800 p-3 text-sm tracking-wide text-left ">' + jadwal.hari + '</td>');
+                                row.append('<td class="sticky left-16 p-3 bg-white dark:bg-slate-800 text-sm tracking-wide text-left whitespace-nowrap">' + jadwal.tanggal + '</td>');
+                                var textKehadiran = '';
+                                if (jadwal.kehadiran === 0) {
+                                    textKehadiran = 'Berangkat';
+                                } else if (jadwal.kehadiran === 1) {
+                                    textKehadiran = 'Libur';
+                                } else if (jadwal.kehadiran === 2) {
+                                    textKehadiran = 'PH';
+                                } else if (jadwal.kehadiran === 3) {
+                                    textKehadiran = 'Izin';
+                                } else if (jadwal.kehadiran === 4) {
+                                    textKehadiran = 'Alfa';
+                                } else if (jadwal.kehadiran === 5) {
+                                    textKehadiran = 'Sakit';
+                                } else if (jadwal.kehadiran === 6) {
+                                    textKehadiran = 'Cuti';
+                                } else if (jadwal.kehadiran === 7) {
+                                    textKehadiran = 'Cuti Tahunan';
+                                } else if (jadwal.kehadiran === 9) {
+                                    textKehadiran = 'Terlambat';
+                                } else if (jadwal.kehadiran === 99) {
+                                    textKehadiran = 'Terlambat dgn Form';
+                                } else {
+                                    textKehadiran = 'Tanpa Status';
+                                }
+                                row.append('<td class="p-3 text-sm tracking-wide text-left">' + textKehadiran + '</td>');
+                                row.append('<td class="p-3 text-sm tracking-wide text-left">' + jadwal.jam_kehadiran + '</td>');
+                                row.append('<td class="p-3 text-sm tracking-wide text-left">' + jadwal.jam_pulang + '</td>');
+                                row.append('<td class="p-3 text-sm tracking-wide text-left">' + (jadwal.status || '') + '</td>');
+                                row.append('<td class="pr-6 pl-3 py-3 text-sm tracking-wide text-left">' + jadwal.keterangan + '</td>');
+
+                                tableBody.append(row);
+                            });
+
+                        } else {
+                            alert('Gagal mengambil data dari API');
+                        }
+                    },
+                    error: function () {
+                        alert('Terjadi kesalahan saat mengambil data dari API');
+                    }
+                });
+            } else {
+                alert('ID Karywawan tidak tersedia');
+            }
+        });
+    </script>
 @endsection
