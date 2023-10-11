@@ -16,16 +16,16 @@
             <div class="w-full lg:w-1/2">
                 <div class="w-full relative select-box">
                     <div class="show-menu w-full flex items-center justify-between gap-4 border-2 border-sekunder-40 px-4 py-3 rounded-lg cursor-pointer bg-white dark:bg-slate-700">
-                        <input class="w-full text-box focus:outline-none active:outline-none text-sm placeholder:text-slate-950 dark:placeholder:text-slate-50 bg-transparent font-medium cursor-pointer" type="text" name="" placeholder="Pilih Priode Absenku" id="so-value" readonly>
+                        <input class="w-full text-box focus:outline-none active:outline-none text-sm placeholder:text-slate-950 dark:placeholder:text-slate-50 bg-transparent font-medium cursor-pointer" type="text" name="" placeholder="Pilih Periode Absenku" id="so-value" readonly>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 font-semibold transition-transform duration-150 ease-in-out">
                             <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
                         </svg>                                  
                     </div>
-                    <ul class="menu-list w-full mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
+                    <ul id="list-periode" class="menu-list w-full mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
                         <li class="px-4" ><input class="w-full item-input" type="text" name="" id="option-search" placeholder="Search"></li>
-                        <li><a href="#" id="item-list" class="block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm  cursor-pointer">Juli - Agustus 2023</a></li>
-                        <li><a href="#" id="item-list" class="block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm  cursor-pointer">Agustus - September 2023</a></li>
-                        <li><a href="#" id="item-list" class="block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm  cursor-pointer">September - Oktober 2023</a></li>
+                        @foreach ($periodes as $periode)
+                            <li><a data-id_periode="{{$periode->id_periode}}" data-periode="{{$periode->periode}}" id="item-list" class="block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm cursor-pointer item-list">{{$periode->periode}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -35,8 +35,8 @@
                 <img src="{{ asset('img/STK-20230906-WA0007.png') }}" alt="" class="w-full h-full">
             </div>
             <div class="w-full flex flex-col items-center justify-center gap-1">
-                <strong class="text-lg">Agnes Cherrly</strong>
-                <span class="text-sm">02-2023-109</span>
+                <strong class="text-lg">{{session('name')}}</strong>
+                <span class="text-sm">{{session('username')}}</span>
                 <span class="text-sm font-medium text-slate-500 dark:text-slate-400">IT &mdash; Aplikasi dan Sytem</span>
             </div>
             <div class="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-y-6 mt-6 bg-white dark:bg-slate-800 rounded-lg">
@@ -174,7 +174,7 @@
         </div>
         <div class="w-full bg-white dark:bg-slate-800 rounded-lg mt-9">
             <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-                <span class="inline-block font-semibold text-sm">Jadwalku Priode September - Oktober 2023</span>
+                <span class="inline-block font-semibold text-sm">Jadwalku Priode <span id="nama_periode">{{$periode_now->periode}}</span></span>
                 <div class="flex items-center relative">
                     <input type="text" name="" id="" placeholder="Serach" class=" w-full px-10 py-3 border border-slate-300 bg-white dark:bg-slate-600 rounded-full focus:outline-none focus:border-primer-80 text-slate-700 dark:text-slate-50 text-xs focus:ring-2 focus:ring-primer-40">
                     <button type="submit" class="absolute left-3 group opacity-30">
@@ -186,7 +186,7 @@
             </div>
             <div class="w-full py-4">
                 <div class="overflow-auto">
-                    <table class="w-full ">
+                    <table class="w-full">
                         <thead class="border-y-2 dark:border-y-gray-600 bg-white dark:bg-gray-800">
                             <tr>
                                 <th class="pl-6 pr-3 py-3 text-sm font-semibold tracking-wide text-left">No.</th>
@@ -219,30 +219,57 @@
     <script src="{{ asset('js/selectinput.js') }}"></script>
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            var id_karyawan = '{{ session('username') }}';
+        const id_karyawan = '{{ session('username') }}';
+        let id_periode = '{{$periode_now->id_periode}}';
+        let nama_periode = '{{$periode_now->periode}}';
+        let datas = [];
 
+        $(document).ready(function() {
             if (id_karyawan){
+                get_data();
+            } else {
+                alert('ID Karywawan tidak tersedia');
+            }
+
+        });
+
+        function get_data(){
+            try {
                 $.ajax({
-                    url: '{{ env('APP_API') }}jadwalku?id_periode=230013&id_karyawan=' + id_karyawan,
+                    url: '{{ env('APP_API') }}jadwalku?id_periode='+id_periode+'&id_karyawan=' + id_karyawan,
                     type: 'GET',
                     success: function(response) {
                         if(response.status === 'success'){
-                            console.log(response);
-                            summary = response.summary[0];
-                            absenData = response.jadwal;
-                            console.log(absenData);
-                            $('#total-hari-priode').text(summary.tot_hari + summary.tot_libur);
-                            $('#total-berangkat').text(summary.tot_masuk);
-                            $('#total-libur').text(summary.tot_libur);
-                            $('#total-ph').text(summary.tot_ph);
-                            $('#total-izin').text(summary.tot_izin);
-                            $('#total-alfa').text(summary.tot_alfa);
-                            $('#total-sakit').text(summary.tot_sakit);
-                            $('#total-cuti').text(summary.tot_cuti);
-                            $('#total-terlambat').text(summary.tot_terlambat);
-                            $('#total-terlambat-form').text(summary.tot_terlambat_dgn_form);
-
+                            if((response.summary).length > 0){
+                                summary = response.summary[0];
+                                absenData = response.jadwal;
+                                $('#total-hari-priode').text(summary.tot_masuk + summary.tot_libur + summary.tot_ph + summary.tot_izin + summary.tot_alfa + summary.tot_sakit);
+                                $('#total-berangkat').text(summary.tot_masuk);
+                                $('#total-libur').text(summary.tot_libur);
+                                $('#total-ph').text(summary.tot_ph);
+                                $('#total-izin').text(summary.tot_izin);
+                                $('#total-alfa').text(summary.tot_alfa);
+                                $('#total-sakit').text(summary.tot_sakit);
+                                $('#total-cuti').text(summary.tot_cuti);
+                                $('#total-terlambat').text(summary.tot_terlambat);
+                                $('#total-terlambat-form').text(summary.tot_terlambat_dgn_form);
+                                datas = absenData;
+                                fill_table();
+                            }else{
+                                absenData = response.jadwal;
+                                $('#total-hari-priode').text(0);
+                                $('#total-berangkat').text(0);
+                                $('#total-libur').text(0);
+                                $('#total-ph').text(0);
+                                $('#total-izin').text(0);
+                                $('#total-alfa').text(0);
+                                $('#total-sakit').text(0);
+                                $('#total-cuti').text(0);
+                                $('#total-terlambat').text(0);
+                                $('#total-terlambat-form').text(0);
+                                datas = absenData;
+                                fill_table();
+                            }
                         } else {
                             alert('Gagal mengambil data dari API');
                         }
@@ -251,9 +278,60 @@
                         alert('Terjadi kesalahan saat mengambil data dari API');
                     }
                 });
-            } else {
-                alert('ID Karywawan tidak tersedia');
+            } catch (error) {
+                console.log(error);
+                alert('Error');
             }
+        }
+        
+        function fill_table(){
+            var tableBody = $('.w-full tbody');
+            tableBody.empty();
+
+            $.each(datas, function(index, absen) {
+                var row = $('<tr class="bg-white dark:bg-slate-800"></tr>');
+                row.append('<td class="pl-6 pr-3 py-3 text-sm tracking-wide text-left">' + (index + 1) + '</td>');
+                row.append('<td class="sticky left-0 bg-white dark:bg-slate-800 p-3 text-sm tracking-wide text-left ">' + absen.hari + '</td>');
+                row.append('<td class="sticky left-16 p-3 bg-white dark:bg-slate-800 text-sm tracking-wide text-left whitespace-nowrap">' + absen.tanggal + '</td>');
+                var textKehadiran = '';
+                if (absen.kehadiran === 0) {
+                    textKehadiran = 'Berangkat';
+                } else if (absen.kehadiran === 1) {
+                    textKehadiran = 'Libur';
+                } else if (absen.kehadiran === 2) {
+                    textKehadiran = 'PH';
+                } else if (absen.kehadiran === 3) {
+                    textKehadiran = 'Izin';
+                } else if (absen.kehadiran === 4) {
+                    textKehadiran = 'Alfa';
+                } else if (absen.kehadiran === 5) {
+                    textKehadiran = 'Sakit';
+                } else if (absen.kehadiran === 6) {
+                    textKehadiran = 'Cuti';
+                } else if (absen.kehadiran === 7) {
+                    textKehadiran = 'Cuti Tahunan';
+                } else if (absen.kehadiran === 9) {
+                    textKehadiran = 'Terlambat';
+                } else if (absen.kehadiran === 99) {
+                    textKehadiran = 'Terlambat dgn Form';
+                } else {
+                    textKehadiran = 'Tanpa Status';
+                }
+                row.append('<td class="p-3 text-sm tracking-wide text-left">' + textKehadiran + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide text-left">' + absen.jam_kehadiran + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide text-left">' + absen.jam_pulang + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide text-left">' + (absen.status || '') + '</td>');
+                row.append('<td class="pr-6 pl-3 py-3 text-sm tracking-wide text-left">' + absen.keterangan + '</td>');
+
+                tableBody.append(row);
+            });
+        }
+        
+        $('.item-list').on('click', function(){
+            id_periode = $(this).data('id_periode');
+            nama_periode = $(this).data('periode');
+            $('#nama_periode').text(nama_periode);
+            get_data();
         });
     </script>
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Absenku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
 
 class AbsenkuController extends Controller
 {
@@ -12,15 +14,22 @@ class AbsenkuController extends Controller
      */
     public function index()
     {   
-        $absenku_table = Absenku::all();
+        $url     = 'https://lokahr.salokapark.app/api/get_periode';
+        $client = new \GuzzleHttp\Client(['verify' => false]);
+        $request = $client->get($url);
+        $response = $request->getBody()->getContents();
+        $periodes = json_decode($response)->periode;
+        $periode_now = collect($periodes)->where('tgl_awal', '<=', date('Y-m-d'))->where('tgl_akhir', '>=', date('Y-m-d'))->first();
+        
         $title = 'Jadwal';
         $subtitle = 'Absenku';
         return view('jadwal.absenku',
             [
                 'title' => $title,
-                'subtitle' => $subtitle
-            ],
-            compact('absenku_table')
+                'subtitle' => $subtitle,
+                'periodes' => $periodes,
+                'periode_now' => $periode_now,
+            ]
         );
     }
 

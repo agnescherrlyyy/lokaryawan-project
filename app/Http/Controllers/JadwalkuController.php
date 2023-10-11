@@ -12,13 +12,11 @@ class JadwalkuController extends Controller
      */
     public function index()
     {   
-        $jadwalku_table = Jadwalku::all();
         $title = 'Jadwal';
         $subtitle = 'Jadwalku';
         return view('jadwal.jadwalku', [
             'title' => $title,
             'subtitle' => $subtitle],
-            compact('jadwalku_table')
         );
     }
 
