@@ -76,8 +76,7 @@
                     success: function (data) {
                         console.log(data)
                         if (data.status == "success") {
-                            localStorage.setItem('username', data.user.username);
-                            localStorage.setItem('password', formData.username);
+                            localStorage.setItem('username', formData.username);
                             Swal.fire({
                                 title: 'Login Berhasil',
                                 text: 'Selamat Datang di LOKARYAWAN👋',

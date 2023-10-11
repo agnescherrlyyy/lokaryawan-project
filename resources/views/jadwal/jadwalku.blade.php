@@ -174,7 +174,8 @@
             var currentPage = 1;
             var jadwalData = [];
             var itemsPerPage = 10;
-            
+            var username = localStorage.getItem('username');
+            console.log('Username:', username);
             if (id_karyawan) {
                 $.ajax({
                     url: '{{ env('APP_API') }}jadwalku?id_karyawan=' + id_karyawan,

@@ -190,8 +190,8 @@
                         <thead class="border-y-2 dark:border-y-gray-600 bg-white dark:bg-gray-800">
                             <tr>
                                 <th class="pl-6 pr-3 py-3 text-sm font-semibold tracking-wide text-left">No.</th>
-                                <th class="sticky left-0 z-[9999] bg-white p-3 text-sm font-semibold tracking-wide text-left">Hari</th>
-                                <th class="sticky left-20 p-3 z-[9999] bg-white text-sm font-semibold tracking-wide text-left">Tanggal</th>
+                                <th class="sticky left-0 bg-white dark:bg-slate-800 p-3 text-sm font-semibold tracking-wide text-left">Hari</th>
+                                <th class="sticky left-16 p-3 bg-white dark:bg-slate-800 text-sm font-semibold tracking-wide text-left">Tanggal</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Pulang</th>
@@ -221,7 +221,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var id_karyawan = '{{ session('username') }}';
-
             if (id_karyawan){
                 $.ajax({
                     url: '{{ env('APP_API') }}jadwalku?id_periode=230013&id_karyawan=' + id_karyawan,

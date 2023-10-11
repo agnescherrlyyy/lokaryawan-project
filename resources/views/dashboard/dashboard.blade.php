@@ -194,11 +194,11 @@
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var id_karyawan = localStorage.getItem('username');
+            var id_karyawan = '{{ session('username') }}';
 
             if (id_karyawan) {
                 $.ajax({
-                    url: 'https://lokahr.salokapark.app/api/summary_kehadiran?id_karyawan=' + id_karyawan,
+                    url: '{{ env('APP_API') }}summary_kehadiran?id_karyawan=' + id_karyawan,
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
@@ -210,7 +210,6 @@
                             if (terlambat.indexOf('-') === -1) {
                                 terlambat = '00.00';
                             }
-    
     
                             $('.tanggal').text(tanggal);
                             $('#absen-terakhir').text(absenTerakhir);

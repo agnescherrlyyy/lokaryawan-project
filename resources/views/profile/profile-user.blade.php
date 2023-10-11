@@ -160,8 +160,8 @@
                                 title: 'Success',
                                 text: 'Update Password User Successfuly.',
                                 imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
-                                imageWidth: 100,
-                                imageHeight: 100,
+                                imageWidth: 200,
+                                imageHeight: 200,
                                 imageAlt: 'Custom image',
                                 showConfirmButton: false,
                                 timer: 1200,
@@ -176,8 +176,8 @@
                                 title: 'Error',
                                 text: 'Data Unsuccessfully Updated.',
                                 imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
-                                imageWidth: 100,
-                                imageHeight: 100,
+                                imageWidth: 200,
+                                imageHeight: 200,
                                 imageAlt: 'Custom image',
                                 showConfirmButton: false,
                                 timer: 1200,
@@ -186,8 +186,6 @@
                     },
                     error: function (error) {
                         console.error('Error updating data:', error);
-                        console.log(error);
-                        console.log(data);
                     }
                 });
             });
