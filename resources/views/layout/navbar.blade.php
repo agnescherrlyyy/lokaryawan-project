@@ -103,7 +103,6 @@
 
     $('#notification').click(function(e){
         e.preventDefault();
-        var url = '{{url("/notification")}}';
-        window.open(url, '_blank');
+        window.location.href = '{{url("/notification")}}';
     });
 </script>

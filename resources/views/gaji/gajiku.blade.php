@@ -316,8 +316,9 @@
                 var username = localStorage.getItem('username');
                 var passwordKaryawan = formData.password;
                 var id_karyawan = '{{ session('username') }}';
+                let id_periode = '{{$periode_now->id_periode}}';
                 $.ajax({
-                    url: 'http://192.168.0.75:8099/api/gajiku?username=' + username + '&password=' + passwordKaryawan + '&id_periode=230011&id_karyawan=' + id_karyawan,
+                    url: 'http://192.168.0.75:8099/api/gajiku?username=' + username + '&password=' + passwordKaryawan + '&id_periode=' + id_periode + '&id_karyawan=' + id_karyawan,
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
