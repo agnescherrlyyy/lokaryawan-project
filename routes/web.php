@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AbsenkuController;
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\ApprovedCutiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CutiTahunanController;
 use App\Http\Controllers\DashboardLokaryawan;
@@ -42,4 +44,7 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/profile-user', [ProfileUserController::class, 'index']);
 
     Route::get('/notification', [NotificationController::class, 'index']);
+    Route::get('/approved-cuti', [ApprovedCutiController::class, 'index']);
 });
+
+Route::get('/login-admin', [AdminAuthController::class, 'index']);

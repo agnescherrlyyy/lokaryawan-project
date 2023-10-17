@@ -719,6 +719,9 @@ html.dark .dataTables_wrapper .dataTables_filter input, html.dark .dataTables_wr
     background-image: url("./img/scattered-forcefields.svg");
 }
 
+#bg-login{
+    background-image: url("./img/Colored Patterns.svg");
+}
 @font-face{
     font-family: 'Poppins';
     src: 
@@ -783,4 +786,12 @@ tbody tr[data-kehadiran="PH"] {
 
 .calendar-day.empty.disabled{
     @apply pointer-events-none text-transparent;
+}
+
+#reject:disabled{
+    @apply opacity-50 cursor-not-allowed;
+}
+
+#approve:disabled{
+    @apply opacity-50 cursor-not-allowed;
 }

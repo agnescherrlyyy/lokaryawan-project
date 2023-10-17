@@ -238,7 +238,7 @@
         function get_data(){
             try {
                 $.ajax({
-                    url: '{{ env('APP_API') }}jadwalku?id_periode='+id_periode+'&id_karyawan=' + id_karyawan,
+                    url: '{{ env('APP_API') }}jadwalku?id_periode='+id_periode+'&id_karyawan='+ id_karyawan,
                     type: 'GET',
                     success: function(response) {
                         if(response.status === 'success'){

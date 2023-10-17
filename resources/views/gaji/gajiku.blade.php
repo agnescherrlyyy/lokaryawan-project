@@ -317,8 +317,12 @@
                 var passwordKaryawan = formData.password;
                 var id_karyawan = '{{ session('username') }}';
                 let id_periode = '{{$periode_now->id_periode}}';
+                console.log(username);
+                console.log(passwordKaryawan);
+                console.log(id_periode);
+                console.log(id_karyawan);
                 $.ajax({
-                    url: 'http://192.168.0.75:8099/api/gajiku?username=' + username + '&password=' + passwordKaryawan + '&id_periode=' + id_periode + '&id_karyawan=' + id_karyawan,
+                    url: 'http://192.168.0.75:8099/api/gajiku?username='+username+'&password='+passwordKaryawan+'&id_periode=230012&id_karyawan='+id_karyawan,
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
@@ -372,7 +376,7 @@
                             $('#bpjs-kes').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[16].nominal));
 
                         } else {
-                            alert('Gajiku mengambil data dari API');
+                            alert('Terjadi kesalaham menampilkan nominal gaji');
                         }
                     },
                     error: function () {

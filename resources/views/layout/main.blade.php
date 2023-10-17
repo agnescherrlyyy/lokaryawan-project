@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="{{ asset('/img/favicon.png') }}" type="image/x-icon">
     <title>{{ $subtitle }} &mdash; LOKARYAWAN</title>
     @vite('resources/css/app.css')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="font-Poppins bg-slate-100 text-slate-950 dark:bg-slate-900 dark:text-slate-50 transition-colors duration-300 ease-in-out">
     <section class="max-w-full w-full min-h-screen h-full">
@@ -21,6 +20,7 @@
         </div>
     </section>
     @yield('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/scriptModal.js') }}"></script>
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
