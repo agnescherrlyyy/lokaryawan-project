@@ -80,7 +80,7 @@
                         >
                 </div>
                 <div class="flex flex-col gap-1">
-                    <span class="font-semibold text-2xl">5</span>
+                    <span id="komplemen100" class="font-semibold text-2xl">5</span>
                     <span class="text-sm text-slate-500">Sisa komplemen 100%</span>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                         >
                 </div>
                 <div class="flex flex-col gap-1">
-                    <span class="font-semibold text-2xl">5</span>
+                    <span id="komplemen50" class="font-semibold text-2xl">5</span>
                     <span class="text-sm text-slate-500">Sisa komplemen 50%</span>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                         >
                 </div>
                 <div class="flex flex-col gap-2">
-                    <span class="font-semibold text-2xl">12</span>
+                    <span id="sisa-cuti-tahunan" class="font-semibold text-2xl">0</span>
                     <span class="text-sm text-slate-500">Sisa Cuti Tahunan</span>
                 </div>
             </div>
@@ -117,9 +117,9 @@
             <div class="w-full flex items-center justify-between">
                 <div class="flex flex-col gap-1">
                     <span class="font-semibold text-xl">Informasi Terbaru</span>
-                    <span class="font-medium text-sm">Ragam Informasi terkini seputar Saloka Theme Park</span>
+                    <span class="font-medium text-sm">Ragam Informasi terbaru seputar Saloka Theme Park</span>
                 </div>
-                <button id="modal-confirm" class="hidden  w-fit lg:flex lg:items-center lg:gap-2 font-medium text-xs text-primer-60 group hover:bg-primer-20 px-4 py-2 rounded-full">                                                                         
+                <button class="lihat-semua hidden w-fit lg:flex lg:items-center lg:gap-2 font-medium text-xs text-primer-60 group hover:bg-primer-20 px-4 py-2 rounded-full">                                                                         
                     Lihat semua
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                         <path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
@@ -138,7 +138,7 @@
                             <span class="text-sm text-slate-500">12 Oktober 2023</span>
                             <h1 class="font-semibold text-lg">Hari Batik Nasional 2023</h1>
                         </div>
-                        <a href="#" class="w-fit flex items-center gap-2 pb-1 border-b border-b-primer-60 text-primer-60 hover:text-primer-40">
+                        <a href="#" class="infos w-fit flex items-center gap-2 pb-1 border-b border-b-primer-60 text-primer-60 hover:text-primer-40">
                             <span class="font-semibold text-xs uppercase">Baca lebih lanjut</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                                 <path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
@@ -157,7 +157,7 @@
                             <span class="text-sm text-slate-500">12 Oktober 2023</span>
                             <h1 class="font-semibold text-lg">Hari Batik Nasional 2023</h1>
                         </div>
-                        <a href="#" class="w-fit flex items-center gap-2 pb-1 border-b border-b-primer-60 text-primer-60 hover:text-primer-40">
+                        <a href="#" class="infos w-fit flex items-center gap-2 pb-1 border-b border-b-primer-60 text-primer-60 hover:text-primer-40">
                             <span class="font-semibold text-xs uppercase">Baca lebih lanjut</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                                 <path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
@@ -176,7 +176,7 @@
                             <span class="text-sm text-slate-500">12 Oktober 2023</span>
                             <h1 class="font-semibold text-lg">Hari Batik Nasional 2023</h1>
                         </div>
-                        <a href="#" class="w-fit flex items-center gap-2 pb-1 border-b border-b-primer-60 text-primer-60 hover:text-primer-40">
+                        <a href="#" class="infos w-fit flex items-center gap-2 pb-1 border-b border-b-primer-60 text-primer-60 hover:text-primer-40">
                             <span class="font-semibold text-xs uppercase">Baca lebih lanjut</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                                 <path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
@@ -186,7 +186,7 @@
                 </div>
             </div>
             <div class="w-full flex items-center justify-center mt-6 lg:hidden">
-                <a href="#" class="px-4 py-3 rounded-full border border-sekunder-60 text-sekunder-60 hover:border-sekunder-60 hover:bg-sekunder-60 hover:text-slate-50 font-medium text-sm w-fit">                         
+                <a href="#" class="lihat-semua px-4 py-3 rounded-full border border-sekunder-60 text-sekunder-60 hover:border-sekunder-60 hover:bg-sekunder-60 hover:text-slate-50 font-medium text-sm w-fit">                         
                     Lihat semua
                 </a>
             </div>
@@ -201,6 +201,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var id_karyawan = '{{ session('username') }}';
+            var username = localStorage.getItem('username');
 
             if (id_karyawan) {
                 $.ajax({
@@ -208,7 +209,6 @@
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
-                            console.log(response);
                             var tanggal = response.summaryKehadiran.tanggal;
                             var absenTerakhir = response.summaryKehadiran.jam_kehadiran_karyawan;
                             var absenSelanjutnya = response.summaryKehadiran.jam_pulang;
@@ -232,6 +232,48 @@
             } else{
                 alert('ID Karywawan tidak tersedia');
             }
+
+            $.ajax({
+                url:'http://192.168.0.75:8099/api/get_komplemen?id_karyawan='+username+'&tahun=2023',
+                type: 'GET',
+                success: function(response){
+                    if (response.status === 'success') {
+                        var tiketNormal = response.data[0];
+                        var tiketSetengah = response.data[1];
+                        $('#komplemen100').text(tiketNormal.sisa_komplement);
+                        $('#komplemen50').text(tiketSetengah.sisa_komplement);
+                    }else{
+                        alert('Gagal mengambil data dari API');
+                    }
+                },
+                error: function(){
+                    alert('Response Tidak Terdeteksi');
+                }
+            });
+
+            $.ajax({
+                url: 'http://192.168.0.75:8099/api/get_cuti?id_karyawan='+username+'&tahun=2023',
+                type: 'GET',
+                success: function (response) {
+                    console.log(response);
+                    var sisaCutiTahunan = response.data[0];
+                    $('#sisa-cuti-tahunan').text(sisaCutiTahunan.sisa_cuti);
+                },
+                error: function () {
+                    alert('Response Tidak Terdeteksi');
+                }
+            });
+
+            $('.lihat-semua').click(function(e) {
+                e.preventDefault();
+                window.location.href = "{{ url('/seputar-info') }}";
+            });
+
+            $('.infos').click(function(e) {
+                e.preventDefault();
+                window.location.href = "{{ url('/detail-info') }}";
+            });
         });
+
     </script>
 @endsection

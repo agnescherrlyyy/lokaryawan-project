@@ -73,7 +73,7 @@
 
             $('.btn-back').click(function (e) {
                 e.preventDefault();
-                window.location.href = "/dashboard";
+                history.back();
             });
 
             $('.approved-cuti').click(function (e) {

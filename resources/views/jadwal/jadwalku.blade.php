@@ -130,7 +130,10 @@
         </div>
         <div class="w-full bg-white dark:bg-slate-800 rounded-lg mt-9">
             <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-                <span class="inline-block font-semibold text-sm">Jadwalku Priode September - Oktober 2023</span>
+                <span class="inline-block font-semibold text-sm">
+                    Jadwalku Priode
+                    <span id="nama_periode" class="font-semibold text-sm">{{$periode_now->periode}}</span>
+                </span>
                 <div class="flex items-center relative">
                     <input type="text" name="" id="" placeholder="Serach" class=" w-full px-10 py-3 border border-slate-300 bg-white dark:bg-slate-600 rounded-full focus:outline-none focus:border-primer-80 text-slate-700 dark:text-slate-50 text-xs focus:ring-2 focus:ring-primer-40">
                     <button type="submit" class="absolute left-3 group opacity-30">
@@ -191,7 +194,7 @@
                             var totalIzin = response.summary[0].tot_izin;
                             var totalSakit = response.summary[0].tot_sakit;
                             var totalAlfa = response.summary[0].tot_alfa;
-                            var totalHariPriode = totalHari + totalLibur;
+                            var totalHariPriode = response.summary[0].tot_hari;
                             var totdalCuti = response.summary[0].tot_cuti;
 
                             $('#total-hari-priode').text(totalHariPriode);

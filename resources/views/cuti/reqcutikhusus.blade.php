@@ -5,7 +5,7 @@
     <div class="max-w-full w-full px-5 lg:pl-10 lg:pr-16 lg:flex lg:items-start lg:justify-between py-4 bg-white dark:bg-slate-800">
         <div class="w-full">
             <h1 class="font-semibold text-lg mb-2">Cuti</h1>
-            <h4 class="font-medium text-slate-600 dark:text-slate-400">Cuti Tahunan</h4>
+            <h4 class="font-medium text-slate-600 dark:text-slate-400">Cuti Khusus</h4>
         </div>
     </div>
     <!-- Heading End -->
@@ -26,20 +26,21 @@
                 Permintaan Cuti
             </button>
         </div>
-        <div class="w-full flex flex-col items-center justify-center rounded-lg">
-            <div class="w-full grid grid-cols-1 md:grid-cols-3">
-                <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
-                    <div class="w-10 h-10 md:w-12 md:h-12">
-                        <img 
-                            src="{{ asset('img/cuti-svg.svg') }}"
-                            alt="icon"
-                            class="w-full h-full"
-                            >
+        <div class="w-full rounded-lg">
+            <div class="w-full lg:w-2/5">
+                <div class="w-full relative select-box">
+                    <div class="show-menu w-full flex items-center justify-between border border-sekunder-40 px-4 py-3 rounded-lg cursor-pointer bg-white dark:bg-slate-700">
+                        <input class="w-full text-box focus:outline-none active:outline-none text-sm placeholder:text-slate-950 dark:placeholder:text-slate-50 bg-transparent font-medium" type="text" name="" placeholder="Pilih Tipe Cuti" id="so-value" readonly>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 font-semibold transition-transform duration-150 ease-in-out">
+                            <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
+                        </svg>                                  
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <span id="cuti-tahunan" class="font-semibold">0</span>
-                        <span class="text-sm text-slate-400">Total Cuti Tahunan (Hari)</span>
-                    </div>
+                    <ul class="menu-list w-full h-80 overflow-y-auto mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
+                        <li class="px-4" ><input class="w-full item-input" type="text" name="" id="option-search" placeholder="Search"></li>
+                        @foreach ($tipe_cuti as $tipe_cuti)
+                            <li><a id-cuti="{{ $tipe_cuti->id_cuti }}" tipe-cuti="{{ $tipe_cuti->tipe_cuti }}" cuti="{{ $tipe_cuti->cuti }}" href="#" id="item-list" class="item-list block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm  cursor-pointer">{{ $tipe_cuti->cuti }}</a></li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
@@ -78,11 +79,20 @@
 
 @section('script')
 <script src="{{ asset('js/calender.js') }}"></script>
+<script src="{{ asset('js/selectinput.js') }}"></script>
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script>
     $(document).ready(function () {
         var username = localStorage.getItem('username');
-        console.log('Username:', username);
+        var idCuti;
+        var tipeCuti;
+        var namaCuti;
+
+        $('.item-list').on('click', function () {
+            idCuti = $(this).attr('id-cuti');
+            tipeCuti = $(this).attr('tipe-cuti');
+            namaCuti = $(this).attr('cuti');
+        });
 
         $('#permintaan-cuti').click(function (e) {
             e.preventDefault();
@@ -124,9 +134,9 @@
             }
             var fromData = {
                 id_karyawan: username,
-                id_cuti: id_cuti,
-                tipe_cuti: tipe_cuti,
-                cuti: cuti,
+                id_cuti: idCuti,
+                tipe_cuti: tipeCuti,
+                cuti: namaCuti,
                 tanggal: dateSelected,
                 total_cuti: 1,
                 keterangan: alasanCuti,
@@ -184,11 +194,10 @@
 
         if (username) {
             $.ajax({
-                url: 'https://servicelokaryawan.salokapark.app/api/get_cuti?id_karyawan='+username+'&tahun=2023',
+                url: 'https://servicelokaryawan.salokapark.app/api/get_cuti?id_karyawan=' + username,
                 get:'GET',
                 success: function (response) {
                     const cutiTahunan = response.data[0];
-                    console.log(cutiTahunan);
                     $('#cuti-tahunan').text(cutiTahunan.sisa_cuti);
                 },
                 error: function () {

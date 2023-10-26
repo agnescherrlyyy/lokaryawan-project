@@ -103,19 +103,27 @@
         $(document).ready(function () {
             $(".btn-dashboard").click(function (e) {
                 e.preventDefault();
-                window.location.href = "/dashboard";
+                window.location.href = "{{ url('/dashboard') }}";
             });
 
             $('.btn-back').click(function (e) {
                 e.preventDefault();
-                window.location.href = "/notification";
+                history.back();
             });
 
             $("#submit-reject").click(function (e) {
                 e.preventDefault();
+                var currentDate = new Date();
+                var day = currentDate.getDate();
+                var month = currentDate.getMonth() + 1;
+                var year = currentDate.getFullYear();
+
+                var formattedDate = day + "-" + (month < 10 ? "0" : "") + month + "-" + year;
+                var successMessage = `Successfully rejected Agnes Cherrly leave request on ${formattedDate}.`;
+
                 Swal.fire({
                     title: 'Success',
-                    text: 'Successfully rejected Agnes Cherrly leave request on 12-10-2023.',
+                    text: successMessage,
                     imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
                     imageWidth: 150,
                     imageHeight: 150,
@@ -123,6 +131,7 @@
                     showConfirmButton: false,
                     timer: 1200,
                 });
+                
                 $("#keterangan").css("display", "inline");
                 $("#alasan-reject").css("display", "flex");
                 
@@ -132,21 +141,22 @@
                 $("#reject").prop("disabled", true);
                 $("#approve").prop("disabled", true);
 
+                $("#tgl-keterangan").text(formattedDate);
+            });
+
+            $('#approve').click(function (e) {
+                e.preventDefault();
                 var currentDate = new Date();
                 var day = currentDate.getDate();
                 var month = currentDate.getMonth() + 1;
                 var year = currentDate.getFullYear();
 
                 var formattedDate = day + "-" + (month < 10 ? "0" : "") + month + "-" + year;
+                var successMessage = `Successfully approved Agnes Cherrly leave request on ${formattedDate}.`;
 
-                $("#tgl-keterangan").text(formattedDate);
-            });
-
-            $('#approve').click(function (e) {
-                e.preventDefault();
                 Swal.fire({
                     title: 'Success',
-                    text: 'Successfully approved Agnes Cherrly leave request on 12-10-2023.',
+                    text: successMessage,
                     imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
                     imageWidth: 150,
                     imageHeight: 150,
@@ -159,12 +169,6 @@
                 $('#text-keterangan').css("color", "#059669");
                 $('#text-keterangan').text('*Perimintaan Cuti di Approved pada tanggal');
 
-                var currentDate = new Date();
-                var day = currentDate.getDate();
-                var month = currentDate.getMonth() + 1;
-                var year = currentDate.getFullYear();
-
-                var formattedDate = day + "-" + (month < 10 ? "0" : "") + month + "-" + year;
                 $('#tgl-keterangan').css("color", "#059669");
                 $("#tgl-keterangan").text(formattedDate);
 

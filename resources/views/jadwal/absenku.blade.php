@@ -245,7 +245,8 @@
                             if((response.summary).length > 0){
                                 summary = response.summary[0];
                                 absenData = response.jadwal;
-                                $('#total-hari-priode').text(summary.tot_masuk + summary.tot_libur + summary.tot_ph + summary.tot_izin + summary.tot_alfa + summary.tot_sakit);
+                                console.log(summary);
+                                $('#total-hari-priode').text(summary.tot_hari);
                                 $('#total-berangkat').text(summary.tot_masuk);
                                 $('#total-libur').text(summary.tot_libur);
                                 $('#total-ph').text(summary.tot_ph);

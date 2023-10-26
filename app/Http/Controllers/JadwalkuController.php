@@ -12,11 +12,22 @@ class JadwalkuController extends Controller
      */
     public function index()
     {   
+        $url     = 'https://lokahr.salokapark.app/api/get_periode';
+        $client = new \GuzzleHttp\Client(['verify' => false]);
+        $request = $client->get($url);
+        $response = $request->getBody()->getContents();
+        $periodes = json_decode($response)->periode;
+        $periode_now = collect($periodes)->where('tgl_awal', '<=', date('Y-m-d'))->where('tgl_akhir', '>=', date('Y-m-d'))->first();
+        
         $title = 'Jadwal';
         $subtitle = 'Jadwalku';
-        return view('jadwal.jadwalku', [
-            'title' => $title,
-            'subtitle' => $subtitle],
+        return view('jadwal.jadwalku', 
+            [
+                'title' => $title,
+                'subtitle' => $subtitle,
+                'periodes' => $periodes,
+                'periode_now' => $periode_now,
+            ],
         );
     }
 

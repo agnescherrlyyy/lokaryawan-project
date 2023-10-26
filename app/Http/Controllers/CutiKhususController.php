@@ -4,18 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class KodeBookingkuController extends Controller
+class CutiKhususController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $title = 'Kode Bookingku';
-        return view('komplemen.codebookingku',
+    {   
+        $url     = 'https://servicelokaryawan.salokapark.app/api/get_master_cuti';
+        $client = new \GuzzleHttp\Client(['verify' => false]);
+        $request = $client->get($url);
+        $response = $request->getBody()->getContents();
+        $master_data = json_decode($response)->data;
+
+        $title = 'Cuti';
+        $subtitle = 'Cuti Khusus';
+
+        $tipe_cuti = [];
+        foreach ($master_data as $entry) {
+            if ($entry->tipe_cuti === "CK") {
+                $tipe_cuti[] = $entry;
+            }
+        }
+        return view('cuti.reqcutikhusus', 
             [
                 'title' => $title,
-            ]
+                'subtitle' => $subtitle,
+                'master_data' => $master_data,
+                'tipe_cuti' => $tipe_cuti,
+            ],
         );
     }
 

@@ -102,7 +102,7 @@
 
             $('.btn-back').click(function (e) {
                 e.preventDefault();
-                window.location.href = '{{url("/dashboard")}}';
+                history.back();
             });
 
             $('#btn-up-password').click(function (e) {

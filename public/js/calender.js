@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             renderCalendar();
             updatePrevMonthButton();
         });
-
+    
     calendar.addEventListener("click", function (event) {
         if (
             event.target.classList.contains("calendar-day") &&
@@ -59,10 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.target.textContent
             );
 
-            selectedDateElement.textContent = selectedDate.toLocaleDateString(
+            const utcDate = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000));
+
+            selectedDateElement.textContent = utcDate.toLocaleDateString(
                 "id-ID",
                 options
             );
+            const formattedDate = utcDate.toISOString().split('T')[0];
+            localStorage.setItem("selectedDate", formattedDate);
+            // console.log("Tanggal yang pilih: " + formattedDate);
         }
     });
 

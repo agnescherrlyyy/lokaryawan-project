@@ -11,7 +11,7 @@ class SlipTiketKonfirmasiController extends Controller
      */
     public function index()
     {
-        $title = 'Komplemen';
+        $title = 'Konfirmasi Pembayaran';
         $subtitle = 'Slip Tiket';
         return view('komplemen.slip-nota-ticket', 
             [

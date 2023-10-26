@@ -10,8 +10,13 @@ class ProfileUserController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('profile.profile-user');
+    {   
+        $title = 'Profile User';
+        return view('profile.profile-user',
+            [
+                'title' => $title,
+            ]
+        );
     }
 
     /**

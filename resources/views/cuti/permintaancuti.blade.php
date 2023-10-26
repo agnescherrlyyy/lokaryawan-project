@@ -21,7 +21,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-slate-400 dark:text-slate-500">
                 <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
             </svg>
-            <a href="{{ url('/cutitahunan') }}" class="font-medium text-sm text-slate-400 dark:text-slate-500">Cuti Tahunan</a>
+            <button id="back-cuti" class="font-medium text-sm text-slate-400 dark:text-slate-500">Cuti Tahunan</button>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-primer-60">
                 <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
             </svg>
@@ -87,4 +87,16 @@
         </section>
     </section>
     <!-- Permintaan Cuti Content End -->
+@endsection
+
+@section('script')
+<script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#back-cuti").click(function(e){
+            e.preventDefault();
+            window.history.back();
+        })
+    });
+</script>
 @endsection

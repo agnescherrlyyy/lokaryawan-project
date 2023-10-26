@@ -10,8 +10,13 @@ class ApprovedCutiController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('approved-cuti.approved-cuti');
+    {   
+        $title = 'Approved Cuti';
+        return view('approved-cuti.approved-cuti',
+            [
+                'title' => $title,
+            ]
+        );
     }
 
     /**

@@ -4,6 +4,7 @@ use App\Http\Controllers\AbsenkuController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\ApprovedCutiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CutiKhususController;
 use App\Http\Controllers\CutiTahunanController;
 use App\Http\Controllers\DashboardLokaryawan;
 use App\Http\Controllers\GajikuController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\KodeBookingkuController;
 use App\Http\Controllers\LemburkuController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileUserController;
+use App\Http\Controllers\SeputarInfoController;
 use App\Http\Controllers\SlipTiketKonfirmasiController;
 use App\Http\Controllers\TiketkuController;
 use Illuminate\Support\Facades\Route;
@@ -41,10 +43,15 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/cuti/permintaan-cutitahunan', [CutiTahunanController::class, 'permintaanCuti']);
     Route::get('/cuti/riwayat-cutitahunan', [CutiTahunanController::class, 'riwayatCuti']);
 
+    Route::get('/cutikhusus', [CutiKhususController::class, 'index']);
+
     Route::get('/profile-user', [ProfileUserController::class, 'index']);
 
     Route::get('/notification', [NotificationController::class, 'index']);
     Route::get('/approved-cuti', [ApprovedCutiController::class, 'index']);
+
+    Route::get('/seputar-info', [SeputarInfoController::class, 'index']);
+    Route::get('/detail-info', [SeputarInfoController::class, 'detailList']);
 });
 
 Route::get('/login-admin', [AdminAuthController::class, 'index']);

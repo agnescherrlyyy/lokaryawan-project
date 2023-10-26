@@ -1,4 +1,4 @@
-<div class="fixed left-0 top-0 max-w-full w-full px-5 xl:px-16 bg-white dark:bg-slate-800 shadow-sm">
+<div class="fixed left-0 top-0 max-w-full w-full px-5 xl:px-16 bg-white dark:bg-slate-800 shadow-sm z-50">
     <div class="max-w-7xl w-full mx-auto h-16 flex items-center justify-between py-6">
         <button class="btn-dashboard">
             <div class="w-28">

@@ -31,7 +31,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span id="komplemen100" class="font-semibold">5</span>
+                        <span id="komplemen100" class="font-semibold">0</span>
                         <span class="text-sm text-slate-400">Tiket Komplemen 100%</span>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             >
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span id="komplemen50" class="font-semibold">5</span>
+                        <span id="komplemen50" class="font-semibold">0</span>
                         <span class="text-sm text-slate-400">Tiket Komplemen 50%</span>
                     </div>
                 </div>
@@ -89,13 +89,13 @@
                         <div class="w-full flex flex-col gap-3">
                             <div class="w-full flex flex-col items-center justify-center lg:flex-row lg:items-center lg:justify-between gap-4">
                                 <div class=" flex items-center gap-4">
-                                    <button class="minus-ticket w-8 h-8 xl:w-6 xl:h-6 flex items-center justify-center rounded-full border-2 border-primer-60 cursor-pointer">
+                                    <button id="minus-ticket-normal" class="w-8 h-8 xl:w-6 xl:h-6 flex items-center justify-center rounded-full border-2 border-primer-60 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primer-60">
                                             <path fill-rule="evenodd" d="M5.25 12a.75.75 0 01.75-.75h12a.75.75 0 010 1.5H6a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
                                         </svg>
                                     </button>
-                                    <span class="value-ticket font-semibold">0</span>
-                                    <button class="plus-ticket w-8 h-8 xl:w-6 xl:h-6 flex items-center justify-center rounded-full border-2 border-primer-60 cursor-pointer">
+                                    <span id="value-ticket-normal" class="font-semibold">0</span>
+                                    <button id="plus-ticket-normal" class="w-8 h-8 xl:w-6 xl:h-6 flex items-center justify-center rounded-full border-2 border-primer-60 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primer-60">
                                             <path fill-rule="evenodd" d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" clip-rule="evenodd" />
                                         </svg>
@@ -125,13 +125,13 @@
                         <div class="w-full flex flex-col gap-3">
                             <div class="w-full flex flex-col items-center justify-center lg:flex-row lg:items-center lg:justify-between gap-4">
                                 <div class=" flex items-center gap-4">
-                                    <button class="minus-ticket w-8 h-8 xl:w-6 xl:h-6 flex items-center justify-center rounded-full border-2 border-primer-60 cursor-pointer">
+                                    <button id="minus-ticket-setengah" class=" w-8 h-8 xl:w-6 xl:h-6 flex items-center justify-center rounded-full border-2 border-primer-60 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primer-60">
                                             <path fill-rule="evenodd" d="M5.25 12a.75.75 0 01.75-.75h12a.75.75 0 010 1.5H6a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
                                         </svg>
                                     </button>
-                                    <span class="value-ticket font-semibold">0</span>
-                                    <button class="plus-ticket w-8 h-8 xl:w-6 xl:h-6 flex items-center justify-center rounded-full border-2 border-primer-60 cursor-pointer">
+                                    <span id="value-ticket-setengah" class="font-semibold">0</span>
+                                    <button id="plus-ticket-setengah" class="w-8 h-8 xl:w-6 xl:h-6 flex items-center justify-center rounded-full border-2 border-primer-60 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primer-60">
                                             <path fill-rule="evenodd" d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" clip-rule="evenodd" />
                                         </svg>
@@ -199,27 +199,7 @@
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            const minusButtons = $(".minus-ticket");
-            const plusButtons = $(".plus-ticket");
-            const valueTickets = $(".value-ticket");
-
-            minusButtons.click(function () {
-                const valueTicket = $(this).siblings(".value-ticket");
-                let ticketValue = parseInt(valueTicket.text());
-                if (ticketValue > 0) {
-                    ticketValue--;
-                    valueTicket.text(ticketValue);
-                }
-            });
-
-            plusButtons.click(function () {
-                const valueTicket = $(this).siblings(".value-ticket");
-                let ticketValue = parseInt(valueTicket.text());
-                if (ticketValue < 5) {
-                    ticketValue++;
-                    valueTicket.text(ticketValue);
-                }
-            });
+            var username = localStorage.getItem('username');
 
             $("#btn-checkout").click(function (e) {
                 e.preventDefault();
@@ -230,6 +210,81 @@
                 e.preventDefault();
                 window.location.href = "/tiket/kodebookingku";
             });
+
+            if (username) {
+                $.ajax({
+                    url:'https://servicelokaryawan.salokapark.app/api/get_komplemen?id_karyawan='+username+'&tahun=2023',
+                    type: 'GET',
+                    success: function(response){
+                        if(response.status === 'success'){
+                            console.log(response);
+                            const minusButtons = $(".minus-ticket");
+                            const plusButtons = $(".plus-ticket");
+                            const valueTickets = $(".value-ticket");
+
+                            const minusButtonNormal = $("#minus-ticket-normal");
+                            const plusButtonNormal = $("#plus-ticket-normal");
+                            const valueTicketNormal = $("#value-ticket-normal");
+
+                            const minusButtonSetengah = $("#minus-ticket-setengah");
+                            const plusButtonSetengah = $("#plus-ticket-setengah");
+                            const valueTicketSetengah = $("#value-ticket-setengah");
+
+                            var tiketNormal = response.data[0];
+                            var tiketSetengah = response.data[1];
+
+                            $('#komplemen100').text(tiketNormal.sisa_komplement);
+                            $('#komplemen50').text(tiketSetengah.sisa_komplement);
+                            // valueTicketNormal.text(tiketNormal.sisa_komplement);
+
+                            minusButtonNormal.click(function () {
+                                const sisaTiketNormal = parseInt(tiketNormal.sisa_komplement);
+                                const currentTicketValue = parseInt(valueTicketNormal.text());
+
+                                if (currentTicketValue > 0) {
+                                    const newTicketValue = currentTicketValue - 1;
+                                    valueTicketNormal.text(newTicketValue);
+                                }
+                            });
+
+                            plusButtonNormal.click(function () {
+                                const sisaTiketNormal = parseInt(tiketNormal.sisa_komplement);
+                                const currentTicketValue = parseInt(valueTicketNormal.text());
+
+                                if (currentTicketValue < sisaTiketNormal) {
+                                    const newTicketValue = currentTicketValue + 1;
+                                    valueTicketNormal.text(newTicketValue);
+                                }
+                            });
+
+                            minusButtonSetengah.click(function () {
+                                const sisaTiketSetengah = parseInt(tiketSetengah.sisa_komplement);
+                                const currentTicketValue = parseInt(valueTicketSetengah.text());
+
+                                if (currentTicketValue > 0) {
+                                    const newTicketValue = currentTicketValue - 1;
+                                    valueTicketSetengah.text(newTicketValue);
+                                }
+                            });
+
+                            plusButtonSetengah.click(function () {
+                                const sisaTiketSetengah = parseInt(tiketSetengah.sisa_komplement);
+                                const currentTicketValue = parseInt(valueTicketSetengah.text());
+
+                                if (currentTicketValue < sisaTiketSetengah) {
+                                    const newTicketValue = currentTicketValue + 1;
+                                    valueTicketSetengah.text(newTicketValue);
+                                }
+                            })
+                        }
+                    },
+                    error: function () {
+                        alert('Terjadi kesalahan saat mengambil data dari API');
+                    },
+                })
+            } else {
+                alert('ID Karywawan tidak tersedia');
+            }
         });
     </script>
 @endsection

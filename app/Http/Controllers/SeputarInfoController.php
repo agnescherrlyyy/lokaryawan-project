@@ -4,15 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class KodeBookingkuController extends Controller
+class SeputarInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $title = 'Kode Bookingku';
-        return view('komplemen.codebookingku',
+    {   
+        $title = 'Seputar Info';
+        return view('seputar-info.info-list',
+            [
+                'title' => $title,
+            ]
+        );
+    }
+
+
+    public function detailList()
+    {   
+        $title = 'Detail Info';
+        return view('seputar-info.detail-info',
             [
                 'title' => $title,
             ]

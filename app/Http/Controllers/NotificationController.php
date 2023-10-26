@@ -10,8 +10,13 @@ class NotificationController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('notification.notification');
+    {   
+        $title = 'Notification';
+        return view('notification.notification',
+            [
+                'title' => $title,
+            ]
+        );
     }
 
     /**
