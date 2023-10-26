@@ -234,8 +234,8 @@
             }
 
             $.ajax({
-                url:'http://192.168.0.75:8099/api/get_komplemen?id_karyawan='+username+'&tahun=2023',
-                type: 'GET',
+                url:'{{ env('APP_SERVICE') }}get_komplemen?id_karyawan='+username+'&tahun=2023',
+                type: "GET",
                 success: function(response){
                     if (response.status === 'success') {
                         var tiketNormal = response.data[0];
@@ -252,8 +252,8 @@
             });
 
             $.ajax({
-                url: 'http://192.168.0.75:8099/api/get_cuti?id_karyawan='+username+'&tahun=2023',
-                type: 'GET',
+                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun=2023',
+                type: "GET",
                 success: function (response) {
                     console.log(response);
                     var sisaCutiTahunan = response.data[0];

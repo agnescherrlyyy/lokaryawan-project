@@ -108,7 +108,7 @@
         let cuti;
 
         $.ajax({
-            url: 'https://servicelokaryawan.salokapark.app/api/get_master_cuti',
+            url: '{{ env('APP_SERVICE') }}get_master_cuti',
             type: 'GET',
             success: function (response) {
                 if (response.status === 'success') {
@@ -150,7 +150,7 @@
                 },
             })
             $.ajax({
-                url: 'https://servicelokaryawan.salokapark.app/api/request_cuti',
+                url: '{{ env('APP_SERVICE') }}request_cuti',
                 type: 'POST',
                 data: fromData,
                 success: function (response) {
@@ -194,7 +194,7 @@
 
         if (username) {
             $.ajax({
-                url: 'https://servicelokaryawan.salokapark.app/api/get_cuti?id_karyawan=' + username,
+                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan=' + username,
                 get:'GET',
                 success: function (response) {
                     const cutiTahunan = response.data[0];

@@ -213,7 +213,7 @@
 
             if (username) {
                 $.ajax({
-                    url:'https://servicelokaryawan.salokapark.app/api/get_komplemen?id_karyawan='+username+'&tahun=2023',
+                    url:'{{ env('APP_SERVICE') }}get_komplemen?id_karyawan='+username+'&tahun=2023',
                     type: 'GET',
                     success: function(response){
                         if(response.status === 'success'){
