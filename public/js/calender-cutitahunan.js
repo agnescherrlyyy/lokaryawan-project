@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentMonthElement = document.getElementById("current-month");
     const selectedDateElement = document.getElementById("selected-date-value");
     const prevMonthButton = document.getElementById("prev-month");
+    var dateWeek = new Date();
+    dateWeek.setDate(dateWeek.getDate() + 6);
+    // console.log(dateWeek.getDate());
 
     const options = {
         weekday: "long",
@@ -42,8 +45,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document
         .getElementById("next-month")
         .addEventListener("click", function () {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-
+            if (currentDate.getDate() > 25) {
+                currentDate.setDate(currentDate.getDate() + 6);
+            }else{
+                currentDate.setMonth(currentDate.getMonth() + 1);
+            }
             calendar.innerHTML = "";
             renderCalendar();
             updatePrevMonthButton();
@@ -160,18 +166,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 dayElement.classList.add("selected");
             }
 
-            if (
-                (currentDate.getFullYear() === today.getFullYear() &&
-                    currentDate.getMonth() === today.getMonth() &&
-                    i < today.getDate()) ||
-                (currentDate > today && 
-                (i >= currentDate.getDate() && i < currentDate.getDate() + 6))
-            ) {
+            // Disabled pada tanggal 
+            var date_select = new Date((currentDate.getMonth()+1)+"/"+i+"/"+currentDate.getFullYear());
+            if (date_select < dateWeek)
+            {
                 dayElement.classList.add("disabled");
             }
-
             
-
             if (
                 currentDate.getFullYear() === today.getFullYear() &&
                 currentDate.getMonth() === today.getMonth() &&
