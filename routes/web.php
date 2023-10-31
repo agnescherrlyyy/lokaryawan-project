@@ -12,8 +12,10 @@ use App\Http\Controllers\JadwalkuController;
 use App\Http\Controllers\KodeBookingkuController;
 use App\Http\Controllers\LemburkuController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\SeputarInfoController;
+use App\Http\Controllers\SlipGajiPDFController;
 use App\Http\Controllers\SlipTiketKonfirmasiController;
 use App\Http\Controllers\TiketkuController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +54,9 @@ Route::middleware(['check_login'])->group(function () {
 
     Route::get('/seputar-info', [SeputarInfoController::class, 'index']);
     Route::get('/detail-info', [SeputarInfoController::class, 'detailList']);
+
+    Route::get('/generate-pdf', [SlipGajiPDFController::class, 'generatePDF']);
+    Route::get('/slip-gaji-pdf', [PDFController::class, 'generatePDF']);
 });
 
 Route::get('/login-admin', [AdminAuthController::class, 'index']);

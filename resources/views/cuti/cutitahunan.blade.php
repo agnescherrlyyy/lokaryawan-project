@@ -27,7 +27,7 @@
             </button>
         </div>
         <div class="w-full flex flex-col items-center justify-center rounded-lg">
-            <div class="w-full grid grid-cols-1 md:grid-cols-3">
+            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
                     <div class="w-10 h-10 md:w-12 md:h-12">
                         <img 
@@ -39,6 +39,32 @@
                     <div class="flex flex-col gap-1">
                         <span id="cuti-tahunan" class="font-semibold">0</span>
                         <span class="text-sm text-slate-400">Total Cuti Tahunan (Hari)</span>
+                    </div>
+                </div>
+                <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
+                    <div class="w-10 h-10 md:w-12 md:h-12">
+                        <img 
+                            src="{{ asset('img/periode.svg') }}"
+                            alt="icon"
+                            class="w-full h-full"
+                            >
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span id="periode" class="font-semibold">{{$periode_now->periode}}</span>
+                        <span class="text-sm text-slate-400">Periode</span>
+                    </div>
+                </div>
+                <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
+                    <div class="w-10 h-10 md:w-12 md:h-12">
+                        <img 
+                            src="{{ asset('img/masa-berlaku.svg') }}"
+                            alt="icon"
+                            class="w-full h-full"
+                            >
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span id="masa-berlaku" class="font-semibold text-sm"></span>
+                        <span class="text-sm text-slate-400">Masa Berlaku</span>
                     </div>
                 </div>
             </div>
@@ -77,7 +103,7 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('js/calender.js') }}"></script>
+<script src="{{ asset('js/calender-cutitahunan.js') }}"></script>
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script>
     $(document).ready(function () {
@@ -111,25 +137,31 @@
 
         $('#btn-cuti').click(function (e) {
             e.preventDefault();
-            let dateSelected = localStorage.getItem("selectedDate");
+
+            const storedDatesJSON = localStorage.getItem("selectedDates");
+            const storedDates = JSON.parse(storedDatesJSON);
+            
+            console.log("Tanggal yang disimpan: ", storedDates);
+
             var alasanCuti = $('#alasan-cuti').val();
     
-            if (alasanCuti.trim() === "") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Harap isi alasan cuti terlebih dahulu',
-                });
-                return;
-            }
             var fromData = {
                 id_karyawan: username,
                 id_cuti: id_cuti,
                 tipe_cuti: tipe_cuti,
                 cuti: cuti,
-                tanggal: dateSelected,
-                total_cuti: 1,
+                tanggal: storedDates,
+                total_cuti: storedDates.length,
                 keterangan: alasanCuti,
+            }
+
+            if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !storedDates || !alasanCuti) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Harap isi semua field terlebih dahulu',
+                });
+                return;
             }
             Swal.fire({
                 title: 'Loading!',
@@ -158,6 +190,7 @@
                             timer: 1500,
                         });
                         $('#alasan-cuti').val('');
+                        // window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
                     }else {
                         Swal.fire({
                             position: 'center',
@@ -190,6 +223,8 @@
                     const cutiTahunan = response.data[0];
                     console.log(cutiTahunan);
                     $('#cuti-tahunan').text(cutiTahunan.sisa_cuti);
+                    $('#masa-berlaku').text(cutiTahunan.date_start + ' s/d ' + cutiTahunan.date_end);
+                    localStorage.setItem('sisa_cuti', cutiTahunan.sisa_cuti);
                 },
                 error: function () {
                     alert('Terjadi kesalahan saat mengambil data dari API');

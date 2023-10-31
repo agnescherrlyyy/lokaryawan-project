@@ -20,6 +20,10 @@
                 <div class="w-full flex flex-col gap-2 pb-4 border-b-2 border-dashed border-gray-200">
                     <strong class="text-sm tracking-widest">Detail Kode Booking</strong>
                     <div class="w-full flex items-center justify-between">
+                        <span class="text-sm">Qty</span>
+                        <span class="text-sm whitespace-nowrap">2</span>
+                    </div>
+                    <div class="w-full flex items-center justify-between">
                         <span class="text-sm">Tgl kedatangan</span>
                         <span class="text-sm whitespace-nowrap">Senin, 9 Oktober 2023</span>
                     </div>

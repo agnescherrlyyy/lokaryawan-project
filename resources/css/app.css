@@ -795,3 +795,4 @@ tbody tr[data-kehadiran="PH"] {
 #approve:disabled{
     @apply opacity-50 cursor-not-allowed;
 }
+

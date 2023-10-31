@@ -20,12 +20,61 @@
                 </svg>
                 Lihat nominal
             </button>
-            <button id="unduh-slip" class="px-4 py-3 rounded-full bg-sekunder-60 text-slate-50 font-medium text-xs hover:bg-sekunder-40 w-fit flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                    <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-                </svg>
-                Unduh Slip
-            </button>
+            <form>
+                <button id="unduh-slip" class="px-4 py-3 rounded-full bg-sekunder-60 text-slate-50 font-medium text-xs hover:bg-sekunder-40 w-fit flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                    </svg>
+                    Unduh Slip
+                </button>
+            </form>
+        </div>
+        <div class="w-full xl:w-1/2 mb-6">
+            <div class="w-full relative select-box">
+                <div class="show-menu w-full flex items-center justify-between border border-sekunder-40 px-4 py-3 rounded-lg cursor-pointer bg-white dark:bg-slate-700">
+                    <input class="w-full text-box focus:outline-none active:outline-none text-sm placeholder:text-slate-950 dark:placeholder:text-slate-50 bg-transparent font-medium" type="text" name="" placeholder="Pilih priode" id="so-value" readonly>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 font-semibold transition-transform duration-150 ease-in-out">
+                        <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
+                    </svg>                                  
+                </div>
+                <ul class="menu-list w-full h-64 overflow-x-auto mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
+                    <li class="px-4" >
+                        <input class="w-full item-input" type="text" name="" id="option-search" placeholder="Search">
+                    </li>
+                    @foreach ($periodes as $periode)
+                        <li><a data-id_periode="{{$periode->id_periode}}" data-periode="{{$periode->periode}}" id="item-list" class="block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm cursor-pointer item-list">{{$periode->periode}}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <div class="w-full xl:w-1/2 p-4 bg-white dark:bg-slate-800 rounded-lg mb-6">
+            <span class="block font-semibold text-sm">Catatan (Lain - lainnya)</span>
+            <div class="w-full flex flex-col gap-2 mt-2">
+                <div class="w-full flex gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
+                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                    </svg>
+                    <p id="bpjs" class="text-xs">BPJS (JHT, JKK, JKM) yang dibayarkan perusahaan : Rp 000.000</p>
+                </div>
+                <div class="w-full flex gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 lg:w-5 lg:h-5 text-sekunder-60">
+                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                    </svg>
+                    <p id="bpjs-jp" class="text-xs">Jaminan Pensiun yang dibayarkan : Rp 00.000</p>
+                </div>
+                <div class="w-full flex gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
+                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                    </svg>
+                    <p id="bpjs-kes" class="text-xs">BPJS Kesehatan yang dibayarkan perusahaan : Rp 000.000</p>
+                </div>
+                <div class="w-full flex gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 lg:w-5 lg:h-5 text-sekunder-60">
+                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                    </svg>
+                    <p id="pph-perusahaan" class="text-xs">PPH21 yang dibayarkan : Rp 0</p>
+                </div>
+            </div>
         </div>
         <div class="w-full flex flex-col items-center justify-center p-4 lg:py-4 lg:px-8 rounded-xl bg-white dark:bg-slate-800">
             <div class="w-32 h-32 rounded-full overflow-hidden">
@@ -182,7 +231,7 @@
                         <span id="thr" class="text-sm text-slate-500 dark:text-slate-400">Rp 0</span>
                     </div>
                     <div class="w-full flex items-center gap-4 justify-between">
-                        <span class="text-sm text-slate-500 dark:text-slate-400">Komisi</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-400">Tunjangan lainnya</span>
                         <span id="komisi" class="text-sm text-slate-500 dark:text-slate-400">Rp 0</span>
                     </div>
                     <div class="w-full flex items-center gap-4 justify-between">
@@ -242,35 +291,6 @@
             </div>
             <!-- Salary Content End -->
         </div>
-        <div class="w-full mt-6">
-            <span class="block font-semibold text-sm">Catatan (Lain - lainnya)</span>
-            <div class="w-full flex flex-col gap-2 mt-2">
-                <div class="w-full flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
-                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <p id="bpjs" class="text-xs">BPJS (JHT, JKK, JKM) yang dibayarkan perusahaan : Rp 000.000</p>
-                </div>
-                <div class="w-full flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 lg:w-5 lg:h-5 text-sekunder-60">
-                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <p id="bpjs-jp" class="text-xs">Jaminan Pensiun yang dibayarkan : Rp 00.000</p>
-                </div>
-                <div class="w-full flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
-                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <p id="bpjs-kes" class="text-xs">BPJS Kesehatan yang dibayarkan perusahaan : Rp 000.000</p>
-                </div>
-                <div class="w-full flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 lg:w-5 lg:h-5 text-sekunder-60">
-                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <p id="pph-perusahaan" class="text-xs">PPH21 yang dibayarkan : Rp 0</p>
-                </div>
-            </div>
-        </div>
     </section>
     <!-- Gajiku Content End -->
 
@@ -312,6 +332,7 @@
 @section('script')
     <script src="{{ asset('js/scriptModal.js') }}"></script>
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('js/selectinput.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('#submit-password').click(function(e){
@@ -332,8 +353,6 @@
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
-                            console.log(response);
-
                             summaryProfile = response.gajiku.karyawan;
                             summaryKehadiran = response.gajiku.kehadiran_karyawan;
                             summaryGaji = response.gajiku.karyawan_gaji;
@@ -390,17 +409,9 @@
                     }
                 });
             });
-            $("#unduh-slip").on("click", function() {
-                // URL ke file PDF slip gaji (ganti dengan URL yang benar)
-                var pdfUrl = "url_ke_slip_gaji.pdf";
-
-                // Buat elemen anchor untuk memicu unduhan
-                var a = $("<a>");
-                a.attr("href", pdfUrl);
-                a.attr("download", "slip_gaji.pdf");
-
-                // Simulasikan klik pada elemen anchor
-                a[0].click();
+            $('#unduh-slip').click(function (e) {
+                e.preventDefault();
+                window.location.href = "{{ url('/generate-pdf') }}";
             });
         });
     </script>

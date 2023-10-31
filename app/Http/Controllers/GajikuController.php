@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use PDF;
 use Illuminate\Http\Request;
 
 class GajikuController extends Controller
@@ -29,7 +32,6 @@ class GajikuController extends Controller
             ]
         );
     }
-
     /**
      * Show the form for creating a new resource.
      */

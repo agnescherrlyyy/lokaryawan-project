@@ -209,6 +209,7 @@
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
+                            console.log(response);
                             var tanggal = response.summaryKehadiran.tanggal;
                             var absenTerakhir = response.summaryKehadiran.jam_kehadiran_karyawan;
                             var absenSelanjutnya = response.summaryKehadiran.jam_pulang;
@@ -216,6 +217,7 @@
                             if (terlambat.indexOf('-') === -1) {
                                 terlambat = '00.00';
                             }
+                            console.log(tanggal);
     
                             $('.tanggal').text(tanggal);
                             $('#absen-terakhir').text(absenTerakhir);

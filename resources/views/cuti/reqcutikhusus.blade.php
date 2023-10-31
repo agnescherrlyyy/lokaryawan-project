@@ -78,7 +78,7 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('js/calender.js') }}"></script>
+<script src="{{ asset('js/calender-cuti.js') }}"></script>
 <script src="{{ asset('js/selectinput.js') }}"></script>
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script>
@@ -121,25 +121,27 @@
 
         $('#btn-cuti').click(function (e) {
             e.preventDefault();
-            let dateSelected = localStorage.getItem("selectedDate");
+            const storedDatesJSON = localStorage.getItem("selectedDates");
+            const storedDates = JSON.parse(storedDatesJSON);
+
             var alasanCuti = $('#alasan-cuti').val();
-    
-            if (alasanCuti.trim() === "") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Harap isi alasan cuti terlebih dahulu',
-                });
-                return;
-            }
+
             var fromData = {
                 id_karyawan: username,
                 id_cuti: idCuti,
                 tipe_cuti: tipeCuti,
                 cuti: namaCuti,
-                tanggal: dateSelected,
-                total_cuti: 1,
+                tanggal: storedDates,
+                total_cuti: storedDates.length,
                 keterangan: alasanCuti,
+            }
+            if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !storedDates || !alasanCuti) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Harap Isi Semua Form Permintaan Cuti!',
+                });
+                return;
             }
             Swal.fire({
                 title: 'Loading!',
