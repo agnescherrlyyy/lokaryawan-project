@@ -38,7 +38,7 @@
                     <ul class="menu-list w-full h-80 overflow-y-auto mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
                         <li class="px-4" ><input class="w-full item-input" type="text" name="" id="option-search" placeholder="Search"></li>
                         @foreach ($tipe_cuti as $tipe_cuti)
-                            <li><a id-cuti="{{ $tipe_cuti->id_cuti }}" tipe-cuti="{{ $tipe_cuti->tipe_cuti }}" cuti="{{ $tipe_cuti->cuti }}" href="#" id="item-list" class="item-list block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm  cursor-pointer">{{ $tipe_cuti->cuti }}</a></li>
+                            <li><a id-cuti="{{ $tipe_cuti->id_cuti }}" tipe-cuti="{{ $tipe_cuti->tipe_cuti }}" cuti="{{ $tipe_cuti->cuti }}" jml-hari="{{ $tipe_cuti->jml_hari }}" href="#" id="item-list" class="item-list block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm  cursor-pointer">{{ $tipe_cuti->cuti }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -87,12 +87,17 @@
         var idCuti;
         var tipeCuti;
         var namaCuti;
+        var jumlahHari;
 
-        $('.item-list').on('click', function () {
+        $('.item-list').on('click', function (e) {
             idCuti = $(this).attr('id-cuti');
             tipeCuti = $(this).attr('tipe-cuti');
             namaCuti = $(this).attr('cuti');
+            jumlahHari = $(this).attr('jml-hari');
+            console.log(idCuti, tipeCuti, namaCuti, jumlahHari);
+            localStorage.setItem('jumlah_hari', jumlahHari);
         });
+        
 
         $('#permintaan-cuti').click(function (e) {
             e.preventDefault();
@@ -135,6 +140,9 @@
                 total_cuti: storedDates.length,
                 keterangan: alasanCuti,
             }
+
+            console.log('Username:', namaCuti);
+
             if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !storedDates || !alasanCuti) {
                 Swal.fire({
                     icon: 'error',

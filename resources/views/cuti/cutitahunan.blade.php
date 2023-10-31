@@ -159,7 +159,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Error!',
-                    text: 'Harap isi semua field terlebih dahulu',
+                    text: 'Harap Isi Semua Form Permintaan Cuti!',
                 });
                 return;
             }

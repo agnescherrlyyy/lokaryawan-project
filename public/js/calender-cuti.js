@@ -40,33 +40,51 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     calendar.addEventListener("click", function (event) {
-        if (event.target.classList.contains("calendar-day") && !event.target.classList.contains("disabled")) {
+        if (
+            event.target.classList.contains("calendar-day") && 
+            !event.target.classList.contains("disabled")
+        ) {
+            const sisaCuti = parseInt(localStorage.getItem("jumlah_hari"), 10);
+            console.log(sisaCuti);
+
             const clickedDate = new Date(
                 currentDate.getFullYear(),
                 currentDate.getMonth(),
-                event.target.textContent
+                parseInt(event.target.textContent, 10)
             );
 
-            const index = selectedDates.findIndex((date) => date.getTime() === clickedDate.getTime());
+            const index = selectedDates.findIndex(
+                (date) => date.getTime() === clickedDate.getTime()
+            );
+
             if (index !== -1) {
                 selectedDates.splice(index, 1);
                 event.target.classList.remove("selected");
             } else {
-                selectedDates.push(clickedDate);
-                event.target.classList.add("selected");
+                if (selectedDates.length < sisaCuti) {
+                    selectedDates.push(clickedDate);
+                    event.target.classList.add("selected");
+                } else {
+                    return;
+                }
             }
 
-            const formattedDates = selectedDates.map((date) => date.toLocaleDateString("id-ID", options));
+            const formattedDates = selectedDates.map((date) =>
+                date.toLocaleDateString("id-ID", options)
+            );
             selectedDateElement.textContent = formattedDates.join(", ");
-    
+
             const formattedDatesISO = selectedDates.map((date) => {
                 const year = date.getFullYear();
-                const month = (date.getMonth() + 1).toString().padStart(2, '0');
-                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, "0");
+                const day = date.getDate().toString().padStart(2, "0");
                 return `${year}-${month}-${day}`;
             });
-    
-            localStorage.setItem("selectedDates", JSON.stringify(formattedDatesISO));
+
+            localStorage.setItem(
+                "selectedDates",
+                JSON.stringify(formattedDatesISO)
+            );
         }
     });
 

@@ -99,8 +99,8 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead width="100%">
                     <tr align="center" style="width=100%; background-color: #169870;">
-                        <td style="padding: .5rem; color: #fff; font-size:.8rem; font-weight:600;">
-                            Absensi
+                        <td style="padding: .5rem; color: #fff; font-size:.8rem;">
+                            <strong>Absensi</strong>
                         </td>
                     </tr>
                 </thead>
@@ -164,8 +164,8 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead width="100%">
                     <tr align="center" style="width=100%; background-color: #169870;">
-                        <td style="padding: .5rem; color: #fff; font-size:.8rem; font-weight:600;">
-                            GAJI POKOK & TUNJANGAN TETAP
+                        <td style="padding: .5rem; color: #fff; font-size:.8rem;">
+                            <strong>GAJI POKOK & TUNJANGAN TETAP</strong>
                         </td>
                     </tr>
                 </thead>
@@ -207,8 +207,8 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead width="100%">
                     <tr align="center" style="width=100%; background-color: #169870;">
-                        <td style="padding: .5rem; color: #fff; font-size:.8rem; font-weight:600;">
-                            TUNJANGAN LAINNYA
+                        <td style="padding: .5rem; color: #fff; font-size:.8rem;">
+                            <strong>TUNJANGAN LAINNYA</strong>
                         </td>
                     </tr>
                 </thead>
@@ -266,8 +266,8 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead width="100%">
                     <tr align="center" style="width=100%; background-color: #169870;">
-                        <td style="padding: .5rem; color: #fff; font-size:.8rem; font-weight:600;">
-                            POTONGAN
+                        <td style="padding: .5rem; color: #fff; font-size:.8rem;">
+                            <strong>POTONGAN</strong>
                         </td>
                     </tr>
                 </thead>

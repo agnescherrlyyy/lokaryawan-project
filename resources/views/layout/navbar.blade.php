@@ -56,6 +56,12 @@
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script type="text/javascript">
     function logout(){
+        localStorage.removeItem('username');
+        localStorage.removeItem('selectedDate');
+        localStorage.removeItem('sisa_cuti');
+        localStorage.removeItem('selectedDates');
+        localStorage.removeItem('jumlah_hari');
+
         Swal.fire({
             title: 'Berhasil Logout!',
             text: 'Sampai jumpa lagi👋.',
