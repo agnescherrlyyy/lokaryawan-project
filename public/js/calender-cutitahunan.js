@@ -2,16 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentDate = new Date();
     const selectedDates = [];
 
-    // let oneWeekFromNow = new Date();
-    // oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
-
     const calendar = document.getElementById("calendar");
     const currentMonthElement = document.getElementById("current-month");
     const selectedDateElement = document.getElementById("selected-date-value");
     const prevMonthButton = document.getElementById("prev-month");
     var dateWeek = new Date();
     dateWeek.setDate(dateWeek.getDate() + 6);
-    // console.log(dateWeek.getDate());
 
     const options = {
         weekday: "long",
@@ -103,14 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    function isDateWithinOneWeekFromNow(date) {
-        const today = new Date();
-        const oneWeekFromNow = new Date();
-        oneWeekFromNow.setDate(today.getDate() + 7);
-
-        return date >= today && date <= oneWeekFromNow;
-    }
-
     function renderCalendar() {
         const today = new Date();
 
@@ -166,7 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 dayElement.classList.add("selected");
             }
 
-            // Disabled pada tanggal 
             var date_select = new Date((currentDate.getMonth()+1)+"/"+i+"/"+currentDate.getFullYear());
             if (date_select < dateWeek)
             {

@@ -178,14 +178,12 @@
             var jadwalData = [];
             var itemsPerPage = 10;
             var username = localStorage.getItem('username');
-            console.log('Username:', username);
             if (id_karyawan) {
                 $.ajax({
                     url: '{{ env('APP_API') }}jadwalku?id_karyawan=' + id_karyawan,
                     type: 'GET',
                     success: function (response) {
                         if (response.status === 'success') {
-                            console.log(response);
                             jadwalData = response.jadwal;
                             var totalHari = response.summary[0].tot_hari;
                             var totalMasuk = response.summary[0].tot_masuk;

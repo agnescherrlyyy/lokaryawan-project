@@ -202,6 +202,7 @@
         $(document).ready(function() {
             var id_karyawan = '{{ session('username') }}';
             var username = localStorage.getItem('username');
+            const nowYears = new Date().getFullYear();
 
             if (id_karyawan) {
                 $.ajax({
@@ -209,7 +210,6 @@
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
-                            console.log(response);
                             var tanggal = response.summaryKehadiran.tanggal;
                             var absenTerakhir = response.summaryKehadiran.jam_kehadiran_karyawan;
                             var absenSelanjutnya = response.summaryKehadiran.jam_pulang;
@@ -217,7 +217,6 @@
                             if (terlambat.indexOf('-') === -1) {
                                 terlambat = '00.00';
                             }
-                            console.log(tanggal);
     
                             $('.tanggal').text(tanggal);
                             $('#absen-terakhir').text(absenTerakhir);
@@ -236,7 +235,7 @@
             }
 
             $.ajax({
-                url:'{{ env('APP_SERVICE') }}get_komplemen?id_karyawan='+username+'&tahun=2023',
+                url:'{{ env('APP_SERVICE') }}get_komplemen?id_karyawan='+username+'&tahun=' +nowYears,
                 type: "GET",
                 success: function(response){
                     if (response.status === 'success') {
@@ -254,10 +253,9 @@
             });
 
             $.ajax({
-                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun=2023',
+                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun=' +nowYears,
                 type: "GET",
                 success: function (response) {
-                    console.log(response);
                     var sisaCutiTahunan = response.data[0];
                     $('#sisa-cuti-tahunan').text(sisaCutiTahunan.sisa_cuti);
                 },

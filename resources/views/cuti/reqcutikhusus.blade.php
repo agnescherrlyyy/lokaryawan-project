@@ -65,6 +65,19 @@
                     <span class="block text-sm">Tanggal yang dipilih :</span>
                     <span id="selected-date-value"></span>
                     <form action="" method="POST">
+                        <div class="w-full flex flex-col gap-2 my-3">
+                            <label for="" class="block font-medium text-sm mb-1">Lampirkan File</label>
+                            <div class="w-full">
+                                <input type="file" class="block w-full text-sm text-slate-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-primer-20 file:text-primer-60
+                                hover:file:bg-primer-60
+                                hover:file:text-primer-20
+                                "/>
+                            </div>
+                        </div>
                         <textarea name="alasan-cuti" id="alasan-cuti" cols="10" rows="3" class="item-input" placeholder="Masukan alasan mengambil cuti"></textarea>
                     </form>
                 </div>
@@ -217,6 +230,9 @@
         }else {
             alert('ID Karywawan tidak tersedia');
         }
+        window.addEventListener('beforeunload', function() {
+            localStorage.removeItem('selectedDates');
+        });
     });
 </script>
 @endsection

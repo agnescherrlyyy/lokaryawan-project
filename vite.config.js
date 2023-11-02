@@ -5,6 +5,9 @@ export default defineConfig({
     server: {
         host: "127.0.0.1",
     },
+    // server: {
+    //     host: "192.168.0.170",
+    // },
     plugins: [
         laravel({
             input: ["resources/css/app.css", "resources/js/app.js"],

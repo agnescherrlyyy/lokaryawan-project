@@ -88,10 +88,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    selectedDateElement.textContent = currentDate.toLocaleDateString(
-        "id-ID",
-        options
-    );
+    $('.item-list').on('click', function () {
+    
+        selectedDates.length = 0;
+    
+        const calendarDays = document.querySelectorAll(".calendar-day");
+        calendarDays.forEach((day) => day.classList.remove("selected"));
+    
+        selectedDateElement.textContent = "";
+    
+        localStorage.removeItem("selectedDates");
+    
+        renderCalendar();
+    });
+
+    $('#btn-cuti').on('click', function () {
+        selectedDates.length = 0;
+    
+        const calendarDays = document.querySelectorAll(".calendar-day");
+        calendarDays.forEach((day) => day.classList.remove("selected"));
+    
+        selectedDateElement.textContent = "";
+
+        renderCalendar();
+    });
 
     function renderCalendar() {
         currentMonthElement.textContent = currentDate.toLocaleDateString(
@@ -163,4 +183,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     renderCalendar();
+
 });

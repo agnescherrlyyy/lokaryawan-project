@@ -12,7 +12,7 @@ class SlipGajiPDFController extends Controller
     {
         $data = ['title' => 'My PDF'];
         $pdf = PDF::loadView('gaji.slip-gaji', $data)->setPaper([0, 0, 612, 936]);
-        return $pdf->download('my-pdf.pdf');
+        return $pdf->stream('Slip Gaji.pdf');
         // return view('gaji.slip-gaji', $data);
     }
 }

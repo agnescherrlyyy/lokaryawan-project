@@ -245,7 +245,6 @@
                             if((response.summary).length > 0){
                                 summary = response.summary[0];
                                 absenData = response.jadwal;
-                                console.log(summary);
                                 $('#total-hari-priode').text(summary.tot_hari);
                                 $('#total-berangkat').text(summary.tot_masuk);
                                 $('#total-libur').text(summary.tot_libur);

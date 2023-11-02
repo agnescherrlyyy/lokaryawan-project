@@ -37,14 +37,14 @@
                         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
                     </svg>                                  
                 </div>
-                <ul class="menu-list w-full h-64 overflow-x-auto mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
+                {{-- <ul class="menu-list w-full h-64 overflow-x-auto mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
                     <li class="px-4" >
                         <input class="w-full item-input" type="text" name="" id="option-search" placeholder="Search">
                     </li>
                     @foreach ($periodes as $periode)
                         <li><a data-id_periode="{{$periode->id_periode}}" data-periode="{{$periode->periode}}" id="item-list" class="block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm cursor-pointer item-list">{{$periode->periode}}</a></li>
                     @endforeach
-                </ul>
+                </ul> --}}
             </div>
         </div>
         <div class="w-full xl:w-1/2 p-4 bg-white dark:bg-slate-800 rounded-lg mb-6">
@@ -411,8 +411,9 @@
             });
             $('#unduh-slip').click(function (e) {
                 e.preventDefault();
-                window.location.href = "{{ url('/generate-pdf') }}";
+                window.open("{{ url('/generate-pdf') }}", "_blank");
             });
+
         });
     </script>
 @endsection
