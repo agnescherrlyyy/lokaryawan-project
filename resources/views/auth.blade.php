@@ -9,6 +9,7 @@
     <title>Login &mdash; LOKARYAWAN</title>
     @vite('resources/css/app.css')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/crypto-js.js') }}"></script>
 </head>
 <body class="font-Poppins">
     <section id="bg-auth" class="max-w-full w-full min-h-screen h-full flex flex-col items-center justify-center px-5 lg:px-16">
@@ -76,7 +77,8 @@
                     success: function (data) {
                         console.log(data)
                         if (data.status == "success") {
-                            localStorage.setItem('username', formData.username);
+                            const encryptedFromData = CryptoJS.AES.encrypt(JSON.stringify(formData), '{{ env('APP_KEY') }}').toString();
+                            localStorage.setItem('encryptedFromData', encryptedFromData);
                             Swal.fire({
                                 title: 'Login Berhasil',
                                 text: 'Selamat Datang di LOKARYAWAN👋',

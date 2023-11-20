@@ -201,7 +201,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var id_karyawan = '{{ session('username') }}';
-            var username = localStorage.getItem('username');
+
+            const encryptedFromData = localStorage.getItem('encryptedFromData');
+            const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
+            const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
+
+            var username = decryptedFromData.username;
             const nowYears = new Date().getFullYear();
 
             if (id_karyawan) {
@@ -256,7 +261,7 @@
                 url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun=' +nowYears,
                 type: "GET",
                 success: function (response) {
-                    var sisaCutiTahunan = response.data[0];
+                    var sisaCutiTahunan = response.data;
                     $('#sisa-cuti-tahunan').text(sisaCutiTahunan.sisa_cuti);
                 },
                 error: function () {

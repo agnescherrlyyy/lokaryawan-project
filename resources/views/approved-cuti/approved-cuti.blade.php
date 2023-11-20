@@ -16,32 +16,36 @@
                 <div class="w-full flex flex-col gap-1">
                     <strong class="w-full xl:w-1/2 block text-lg py-4 border-b">Permintaan Cuti</strong>
                     <div class="w-full pt-4">
-                        <span class="inline-block font-semibold text-sm">
-                            Permintaan Cuti 12-10-2023
+                        <span id="judul-cuti" class="inline-block font-semibold text-sm"> 
+                            {{-- @foreach (explode(",", $request['tanggal']); as $tgl)
+                                {{ date('d/m/Y', strtotime($tgl)) }}
+                            @endforeach --}}
                         </span>
                     </div>
                     <div class="w-full flex flex-wrap items-center gap-2">
-                        <span class="inline-block font-medium py-2 text-sm">
-                            Agnes Cherrly
+                        <span id="name" class="inline-block font-medium py-2 text-sm">
+                            {{-- {{ $request['name'] }} --}}
                         </span>
-                        <span class="block w-fit px-3 py-2 bg-blue-50 text-blue-600 rounded-full font-semibold text-xs">
-                            Cuti Tahunan
+                        <span id="cuti" class="block w-fit px-3 py-2 bg-blue-50 text-blue-600 rounded-full font-semibold text-xs">
+                            
                         </span>
                     </div>
                     <div class="w-full flex items-center gap-2">
                         <svg class="h-5 w-5 text-slate-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="5" width="16" height="16" rx="2" />  <line x1="16" y1="3" x2="16" y2="7" />  <line x1="8" y1="3" x2="8" y2="7" />  <line x1="4" y1="11" x2="20" y2="11" />  <line x1="11" y1="15" x2="12" y2="15" />  <line x1="12" y1="15" x2="12" y2="18" /></svg>
-                        <span class="font-medium text-sm text-slate-500">12-10-2023</span>
+                        <span id="tgl-pengajuan" class="font-medium text-sm text-slate-500"></span>
                     </div>
                     <div class="w-full flex items-center gap-2 mt-1">
                         <svg class="h-5 w-5 text-slate-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="5" width="16" height="16" rx="2" />  <line x1="16" y1="3" x2="16" y2="7" />  <line x1="8" y1="3" x2="8" y2="7" />  <line x1="4" y1="11" x2="20" y2="11" />  <rect x="8" y="15" width="2" height="2" /></svg>
-                        <span class="font-medium text-sm text-slate-500">10-10-2023</span>
+                        <span id="tgl-cuti" class="font-medium text-sm text-slate-500">
+                            
+                        </span>
                     </div>
                     <div id="keterangan" class="w-full hidden">
                         <span id="text-keterangan" class="text-sm text-rose-600">
-                            *Perimintaan Cuti di Reject pada tanggal
+                            *Perimintaan Cuti di Reject
                         </span>
                         <span id="tgl-keterangan" class="text-sm text-rose-600">
-                            11-10-2023
+                            
                         </span>
                     </div>
                     <div id="alasan-reject" class="hidden w-full xl:w-1/2 flex-col">
@@ -49,14 +53,14 @@
                             Alasan
                         </span>
                         <span id="text-alasan" class="inline-block text-sm">
-                            Dikarekan masih banyak pekerjaan yang belum selesai
+                            
                         </span>
                     </div>
                 </div>
             </div>
             <div class="w-full lg:w-1/2 lg:flex-row flex flex-col gap-2 px-6 mt-6">
                 <button id="reject" type="submit" class="btn-modal text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-rose-600 hover:bg-rose-800 transition-all duration-200 ease-in-out uppercase">rejected</button>
-                <button id="approve" type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Approved</button>
+                <button id="approve" type="submit" value="1" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Approved</button>
             </div>
         </div>
     </div>
@@ -87,7 +91,7 @@
                     <button class="close-modal px-4 py-3 rounded-lg bg-slate-300 text-slate-950 text-xs hover:bg-slate-200 w-fit">                         
                         Batal
                     </button>
-                    <button id="submit-reject" type="submit" form="form_add" class="close-modal px-4 py-3 rounded-lg text-slate-50 text-xs bg-primer-60 hover:bg-primer-80 transition-colors duration-200 ease-in-out w-fit">                         
+                    <button value="2" id="submit-reject" type="submit" form="form_add" class="close-modal px-4 py-3 rounded-lg text-slate-50 text-xs bg-primer-60 hover:bg-primer-80 transition-colors duration-200 ease-in-out w-fit">                         
                         Submit
                     </button>
                 </div>
@@ -97,85 +101,279 @@
 @endsection
 
 @section('main-script')
-    <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('js/scriptModal.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".btn-dashboard").click(function (e) {
-                e.preventDefault();
-                window.location.href = "{{ url('/dashboard') }}";
-            });
+<script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('js/scriptModal.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Username sementara
+        // var username = 6741;
+        const encryptedFromData = localStorage.getItem('encryptedFromData');
+        const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
+        const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
 
-            $('.btn-back').click(function (e) {
-                e.preventDefault();
-                history.back();
-            });
+        var username = decryptedFromData.username;
+        
+        var statusApproved = $('#approve').val();
+        var statusReject = $('#submit-reject').val();
+        var idCutiTrn = "{{ $request['id_cuti_trn'] }}";
+        var noteApprove = '';
 
-            $("#submit-reject").click(function (e) {
-                e.preventDefault();
-                var currentDate = new Date();
-                var day = currentDate.getDate();
-                var month = currentDate.getMonth() + 1;
-                var year = currentDate.getFullYear();
+        $.ajax({
+            url: '{{ env('APP_SERVICE') }}get_request_cuti_ByID?id_cuti_trn=' + idCutiTrn,
+            type: 'GET',
+            success:function (response) {
+                if (response.status === 'success') {
+                    console.log(response);
+                    var tanggalCuti = response.data.tanggal;
+                    tanggalCuti = tanggalCuti.replace(/["[\]]/g, '');
+                    var tanggalArray = tanggalCuti.split(',');
+                    var tanggalFormatted = tanggalArray.join(',  ');
+                    var statusAction = response.data.status;
 
-                var formattedDate = day + "-" + (month < 10 ? "0" : "") + month + "-" + year;
-                var successMessage = `Successfully rejected Agnes Cherrly leave request on ${formattedDate}.`;
+                    if (statusAction === "0"){
+                        console.log('Belum ada Action');
 
-                Swal.fire({
-                    title: 'Success',
-                    text: successMessage,
-                    imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
-                    imageWidth: 150,
-                    imageHeight: 150,
-                    imageAlt: 'Custom image',
-                    showConfirmButton: false,
-                    timer: 1200,
-                });
-                
-                $("#keterangan").css("display", "inline");
-                $("#alasan-reject").css("display", "flex");
-                
-                var alasanValue = $("#alasan").val();
-                $("#text-alasan").text(alasanValue);
-                
-                $("#reject").prop("disabled", true);
-                $("#approve").prop("disabled", true);
+                        $("#submit-reject").click(function (e) {
+                            e.preventDefault();
+                            var noteReject = $('#alasan').val();
 
-                $("#tgl-keterangan").text(formattedDate);
-            });
+                            var dataRejected = {
+                                id_cuti_trn: idCutiTrn,
+                                status: statusReject,
+                                note: noteReject,
+                                reff: username,
+                            };
 
-            $('#approve').click(function (e) {
-                e.preventDefault();
-                var currentDate = new Date();
-                var day = currentDate.getDate();
-                var month = currentDate.getMonth() + 1;
-                var year = currentDate.getFullYear();
+                            Swal.fire({
+                                title: 'Loading!',
+                                text: 'Process Approved Cuti',
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                },
+                            });
 
-                var formattedDate = day + "-" + (month < 10 ? "0" : "") + month + "-" + year;
-                var successMessage = `Successfully approved Agnes Cherrly leave request on ${formattedDate}.`;
+                            $.ajax({
+                                url: '{{ env('APP_SERVICE') }}update_action_cuti',
+                                type: 'POST',
+                                data: dataRejected,
+                                success:function (response) {
+                                    Swal.close();
+                                    console.log(dataRejected);
+                                    if (response.status == "success") {
+                                        Swal.fire({
+                                            title: response.status,
+                                            text: response.message,
+                                            imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                            imageWidth: 200,
+                                            imageHeight: 200,
+                                            imageAlt: 'Custom image',
+                                            showConfirmButton: false,
+                                            timer: 1500,
+                                        });
 
-                Swal.fire({
-                    title: 'Success',
-                    text: successMessage,
-                    imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
-                    imageWidth: 150,
-                    imageHeight: 150,
-                    imageAlt: 'Custom image',
-                    showConfirmButton: false,
-                    timer: 1200,
-                });
+                                    }else {
+                                        Swal.fire({
+                                            position: 'center',
+                                            title: 'Request Cuti Karyawan Unsuccessfuly',
+                                            showConfirmButton: false,
+                                            timer: 1700,
+                                            showCloseButton: true
+                                        });
+                                    }
+                                },
+                                error: function () {
+                                    Swal.close();
+                                    console.log('Tidak Berhasil');
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'Error!',
+                                        title: 'API BAD REQUEST',
+                                        showConfirmButton: false,
+                                        timer: 1700,
+                                        showCloseButton: true
+                                    });
+                                }
+                            });
+                        });
 
-                $("#keterangan").css("display", "inline");
-                $('#text-keterangan').css("color", "#059669");
-                $('#text-keterangan').text('*Perimintaan Cuti di Approved pada tanggal');
+                        $('#approve').click(function (e) {
+                            e.preventDefault();
+                            var currentDate = new Date();
+                            var day = currentDate.getDate();
+                            var month = currentDate.getMonth() + 1;
+                            var year = currentDate.getFullYear();
 
-                $('#tgl-keterangan').css("color", "#059669");
-                $("#tgl-keterangan").text(formattedDate);
+                            var formattedDate = day + "-" + (month < 10 ? "0" : "") + month + "-" + year;
+                            var successMessage = `Successfully approved Agnes Cherrly leave request on ${formattedDate}.`;
 
-                $("#reject").prop("disabled", true);
-                $("#approve").prop("disabled", true);
-            });
+                            var dataApproved = {
+                                id_cuti_trn: idCutiTrn,
+                                status: statusApproved,
+                                note: noteApprove,
+                                reff: username,
+                            };
+
+                            Swal.fire({
+                                title: 'Loading!',
+                                text: 'Process Approved Cuti',
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                },
+                            });
+
+                            $.ajax({
+                                url: '{{ env('APP_SERVICE') }}update_action_cuti',
+                                type: 'POST',
+                                data: dataApproved,
+                                success:function (response) {
+                                    Swal.close();
+                                    console.log(dataApproved);
+                                    if (response.status == "success") {
+                                        Swal.fire({
+                                            title: response.status,
+                                            text: response.message,
+                                            imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                            imageWidth: 200,
+                                            imageHeight: 200,
+                                            imageAlt: 'Custom image',
+                                            showConfirmButton: false,
+                                            timer: 1500,
+                                        });
+                                    }else {
+                                        Swal.fire({
+                                            position: 'center',
+                                            title: 'Request Cuti Karyawan Unsuccessfuly',
+                                            showConfirmButton: false,
+                                            timer: 1700,
+                                            showCloseButton: true
+                                        });
+                                    }
+                                },
+                                error: function () {
+                                    Swal.close();
+                                    console.log('Tidak Berhasil');
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'Error!',
+                                        title: 'API BAD REQUEST',
+                                        showConfirmButton: false,
+                                        timer: 1700,
+                                        showCloseButton: true
+                                    });
+                                }
+                            });
+                        });
+                    } else if (statusAction === "1") {
+                        console.log('Approved');
+                        $('#reject').click(function (e) {
+                            e.preventDefault();
+                            $('.modal-container').removeClass('flex');
+                            $('.modal-container').addClass('hidden');
+                            $('.show-modal').removeClass('active');
+                            Swal.fire({
+                                title: 'Approved',
+                                text: 'Cuti ini sudah di Approved',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                imageWidth: 200,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        });
+                        $('#approve').click(function (e) {
+                            e.preventDefault();
+                            Swal.fire({
+                                title: 'Approved',
+                                text: 'Cuti ini sudah di Approved',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                imageWidth: 200,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        });
+                        $("#keterangan").css("display", "inline");
+                        $('#text-keterangan').css("color", "#059669");
+                        $('#text-keterangan').text('*Perimintaan Cuti di Approved');
+
+                        $("#reject").prop("disabled", true);
+                        $("#approve").prop("disabled", true);
+
+                    } else if (statusAction === "2") {
+                        console.log('Rejected');
+                        $('#reject').click(function (e) {
+                            e.preventDefault();
+                            $('.modal-container').removeClass('flex');
+                            $('.modal-container').addClass('hidden');
+                            $('.show-modal').removeClass('active');
+                            Swal.fire({
+                                title: 'Rejected',
+                                text: 'Cuti ini sudah di Rejected',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                imageWidth: 200,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        });
+                        $('#approve').click(function (e) {
+                            e.preventDefault();
+                            Swal.fire({
+                                title: 'Rejected',
+                                text: 'Cuti ini sudah di Rejected',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                imageWidth: 200,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        });
+
+                        $("#keterangan").css("display", "inline");
+                        $("#alasan-reject").css("display", "flex");
+                        $("#text-alasan").text(response.data.note);
+                        
+                        $("#reject").prop("disabled", true);
+                        $("#approve").prop("disabled", true);
+                    }
+
+                    $('#name').text(response.data.name);
+                    $('#cuti').text(response.data.cuti);
+                    $('#judul-cuti').text('Permintaan Cuti ' + tanggalFormatted);
+                    $('#tgl-pengajuan').text(response.data.tgl_pengajuan);
+                    $('#tgl-cuti').text(tanggalFormatted);
+                }else {
+                    Swal.fire({
+                        position: 'center',
+                        title: 'Mengambil Data Tidak Berhasil',
+                        showConfirmButton: false,
+                        timer: 1700,
+                        showCloseButton: true
+                    });
+                }
+            },
+            error: function () {
+                alert('Maaf API Mengalami Masalah!');
+            }
         });
-    </script>
+
+        $(".btn-dashboard").click(function (e) {
+            e.preventDefault();
+            window.location.href = "{{ url('/dashboard') }}";
+        });
+
+        $('.btn-back').click(function (e) {
+            e.preventDefault();
+            history.back();
+        });
+
+    });
+</script>
 @endsection
 

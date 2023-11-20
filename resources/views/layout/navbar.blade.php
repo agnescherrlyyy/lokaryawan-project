@@ -56,11 +56,14 @@
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script type="text/javascript">
     function logout(){
-        localStorage.removeItem('username');
+        localStorage.removeItem('encryptedFromData');
+        localStorage.removeItem('encryptedDataUser');
         localStorage.removeItem('selectedDate');
-        localStorage.removeItem('sisa_cuti');
-        localStorage.removeItem('selectedDates');
-        localStorage.removeItem('jumlah_hari');
+        localStorage.removeItem('encryptedSisaCuti');
+        localStorage.removeItem('encryptedSelectedDates');
+        localStorage.removeItem('encryptedJumlahHari');
+        localStorage.removeItem('encryptedDateCutiKhusus');
+        localStorage.removeItem('encryptedData');
 
         Swal.fire({
             title: 'Berhasil Logout!',

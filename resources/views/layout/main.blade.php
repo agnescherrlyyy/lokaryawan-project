@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @yield('meta')
     <link rel="shortcut icon" href="{{ asset('/img/favicon.png') }}" type="image/x-icon">
     <title>{{ $subtitle }} &mdash; LOKARYAWAN</title>
+    <script src="{{ asset('js/crypto-js.js') }}"></script>
     @vite('resources/css/app.css')
 </head>
 <body class="font-Poppins bg-slate-100 text-slate-950 dark:bg-slate-900 dark:text-slate-50 transition-colors duration-300 ease-in-out">
@@ -19,6 +21,7 @@
             </div>
         </div>
     </section>
+    @yield('modal')
     @yield('script')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/scriptModal.js') }}"></script>

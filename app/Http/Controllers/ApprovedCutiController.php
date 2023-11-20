@@ -9,12 +9,13 @@ class ApprovedCutiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {   
         $title = 'Approved Cuti';
         return view('approved-cuti.approved-cuti',
             [
                 'title' => $title,
+                'request' => $request->all()
             ]
         );
     }

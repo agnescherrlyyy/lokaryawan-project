@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class GajikuController extends Controller
@@ -32,6 +30,17 @@ class GajikuController extends Controller
             ]
         );
     }
+
+    // public function generatePDF(Request $request)
+    // {
+    //     try {
+    //         $dataAPI = $request->input('dataAPI');
+    //         // dd($dataAPI);
+    //         return response()->json(['status' => 'success', 'data' => $dataAPI]);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+    //     }
+    // }
     /**
      * Show the form for creating a new resource.
      */

@@ -41,49 +41,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
     calendar.addEventListener("click", function (event) {
         if (
-            event.target.classList.contains("calendar-day") && 
+            event.target.classList.contains("calendar-day") &&
             !event.target.classList.contains("disabled")
         ) {
-            const sisaCuti = parseInt(localStorage.getItem("jumlah_hari"), 10);
-            console.log(sisaCuti);
-
+            const encryptedJumlahHari = localStorage.getItem(
+                "encryptedJumlahHari"
+            );
+            const decryptedBytesJumlahHari = CryptoJS.AES.decrypt(
+                encryptedJumlahHari,
+                'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A='
+            );
+            const decryptedJumlahHari = JSON.parse(
+                decryptedBytesJumlahHari.toString(CryptoJS.enc.Utf8)
+            );
+    
+            const sisaCuti = parseInt(decryptedJumlahHari, 10);
             const clickedDate = new Date(
                 currentDate.getFullYear(),
                 currentDate.getMonth(),
                 parseInt(event.target.textContent, 10)
             );
-
-            const index = selectedDates.findIndex(
-                (date) => date.getTime() === clickedDate.getTime()
-            );
-
-            if (index !== -1) {
-                selectedDates.splice(index, 1);
-                event.target.classList.remove("selected");
-            } else {
-                if (selectedDates.length < sisaCuti) {
-                    selectedDates.push(clickedDate);
-                    event.target.classList.add("selected");
-                } else {
-                    return;
-                }
+    
+            selectedDates.length = 0;
+    
+            for (let i = 0; i < sisaCuti; i++) {
+                const nextDate = new Date(clickedDate);
+                nextDate.setDate(clickedDate.getDate() + i);
+                selectedDates.push(nextDate);
             }
-
+    
+            const calendarDays = document.querySelectorAll(".calendar-day");
+            calendarDays.forEach((day) => day.classList.remove("selected"));
+    
+            selectedDates.forEach((date) => {
+                const dateString = `${date.getDate()}`;
+                const dayElements = Array.from(calendarDays).filter(
+                    (day) =>
+                        !day.classList.contains("disabled") &&
+                        !day.classList.contains("empty") &&
+                        !day.classList.contains("day-name") &&
+                        !day.classList.contains("today") &&
+                        day.textContent.trim() === dateString
+                );
+    
+                dayElements.forEach((dayElement) =>
+                    dayElement.classList.add("selected")
+                );
+            });
+    
             const formattedDates = selectedDates.map((date) =>
                 date.toLocaleDateString("id-ID", options)
             );
             selectedDateElement.textContent = formattedDates.join(", ");
-
+    
             const formattedDatesISO = selectedDates.map((date) => {
                 const year = date.getFullYear();
                 const month = (date.getMonth() + 1).toString().padStart(2, "0");
                 const day = date.getDate().toString().padStart(2, "0");
                 return `${year}-${month}-${day}`;
             });
-
+    
+            const encryptedDateCutiKhusus = CryptoJS.AES.encrypt(
+                JSON.stringify(formattedDatesISO),
+                'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A='
+            ).toString();
             localStorage.setItem(
-                "selectedDates",
-                JSON.stringify(formattedDatesISO)
+                "encryptedDateCutiKhusus",
+                encryptedDateCutiKhusus
             );
         }
     });

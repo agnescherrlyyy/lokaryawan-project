@@ -107,8 +107,12 @@
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-        var username = localStorage.getItem('username');
-        console.log('Username:', username);
+        const encryptedFromData = localStorage.getItem('encryptedFromData');
+        const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
+        const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
+
+        var username = decryptedFromData.username;
+        const nowYears = new Date().getFullYear();
 
         $('#permintaan-cuti').click(function (e) {
             e.preventDefault();
@@ -122,6 +126,9 @@
         let id_cuti;
         let tipe_cuti;
         let cuti;
+        let tanggal = '2023-12-25';
+        let panjang = 1;
+        let sisaCuti;
 
         $.ajax({
             url: '{{ env('APP_SERVICE') }}get_master_cuti',
@@ -138,24 +145,34 @@
         $('#btn-cuti').click(function (e) {
             e.preventDefault();
 
-            const storedDatesJSON = localStorage.getItem("selectedDates");
-            const storedDates = JSON.parse(storedDatesJSON);
-            
-            console.log("Tanggal yang disimpan: ", storedDates);
+            const encryptedSelectedDates = localStorage.getItem('encryptedSelectedDates');
+            const decryptedBytes = CryptoJS.AES.decrypt(encryptedSelectedDates, '{{ env('APP_KEY') }}');
+            const decryptedSelectedDates = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
+            // console.log("Selected Dates: ", decryptedSelectedDates);
 
             var alasanCuti = $('#alasan-cuti').val();
-    
+
+            // Periksa apakah decryptedSelectedDates tidak ada isi atau panjangnya 0
+            if (!decryptedSelectedDates || decryptedSelectedDates.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Harap Pilih Setidaknya Satu Tanggal Cuti!',
+                });
+                return;
+            }
+
             var fromData = {
                 id_karyawan: username,
                 id_cuti: id_cuti,
                 tipe_cuti: tipe_cuti,
                 cuti: cuti,
-                tanggal: storedDates,
-                total_cuti: storedDates.length,
+                tanggal: decryptedSelectedDates,
+                total_cuti: decryptedSelectedDates.length,
                 keterangan: alasanCuti,
             }
 
-            if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !storedDates || !alasanCuti) {
+            if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !alasanCuti) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error!',
@@ -163,25 +180,27 @@
                 });
                 return;
             }
+
             Swal.fire({
                 title: 'Loading!',
-                text : 'Process Request',
+                text: 'Process Request',
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
                 },
             })
+
             $.ajax({
                 url: '{{ env('APP_SERVICE') }}request_cuti',
                 type: 'POST',
                 data: fromData,
                 success: function (response) {
+                    console.log(fromData);
                     Swal.close();
                     if (response.status == "success") {
-                        console.log(fromData);
                         Swal.fire({
                             title: 'Success!',
-                            text: 'Request Cuti Karyawan Successfuly',
+                            text: 'Request Cuti Karyawan Successfully',
                             imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
                             imageWidth: 200,
                             imageHeight: 200,
@@ -191,10 +210,9 @@
                         });
                         $('#alasan-cuti').val('');
                         // window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
-                    }else {
+                    } else {
                         Swal.fire({
                             position: 'center',
-                            icon: 'Error!',
                             title: 'Request Cuti Karyawan Unsuccessfuly',
                             showConfirmButton: false,
                             timer: 1700,
@@ -217,14 +235,16 @@
 
         if (username) {
             $.ajax({
-                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun=2023',
+                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun='+nowYears,
                 get:'GET',
                 success: function (response) {
-                    const cutiTahunan = response.data[0];
-                    console.log(cutiTahunan);
+                    const cutiTahunan = response.data;
                     $('#cuti-tahunan').text(cutiTahunan.sisa_cuti);
                     $('#masa-berlaku').text(cutiTahunan.date_start + ' s/d ' + cutiTahunan.date_end);
-                    localStorage.setItem('sisa_cuti', cutiTahunan.sisa_cuti);
+                    sisaCuti = cutiTahunan.sisa_cuti;
+                    
+                    const encryptedSisaCuti = CryptoJS.AES.encrypt(JSON.stringify(sisaCuti), 'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A=').toString();
+                    localStorage.setItem('encryptedSisaCuti', encryptedSisaCuti);
                 },
                 error: function () {
                     alert('Terjadi kesalahan saat mengambil data dari API');

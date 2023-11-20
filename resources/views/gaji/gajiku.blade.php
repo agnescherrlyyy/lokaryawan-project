@@ -12,67 +12,66 @@
 
     <!-- Gajiku Content Start -->
     <section class="block mt-9 px-5 lg:pl-10 lg:pr-16">
-        <div class="w-full flex items-center gap-2 mb-4 px-3">
-            <button id="view-nominal" class="btn-modal px-4 py-3 rounded-full bg-primer-60 text-slate-50 font-medium text-xs hover:bg-primer-40 w-fit flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                    <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
-                </svg>
-                Lihat nominal
-            </button>
-            <form>
-                <button id="unduh-slip" class="px-4 py-3 rounded-full bg-sekunder-60 text-slate-50 font-medium text-xs hover:bg-sekunder-40 w-fit flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                        <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-                    </svg>
-                    Unduh Slip
-                </button>
-            </form>
-        </div>
-        <div class="w-full xl:w-1/2 mb-6">
-            <div class="w-full relative select-box">
-                <div class="show-menu w-full flex items-center justify-between border border-sekunder-40 px-4 py-3 rounded-lg cursor-pointer bg-white dark:bg-slate-700">
-                    <input class="w-full text-box focus:outline-none active:outline-none text-sm placeholder:text-slate-950 dark:placeholder:text-slate-50 bg-transparent font-medium" type="text" name="" placeholder="Pilih priode" id="so-value" readonly>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 font-semibold transition-transform duration-150 ease-in-out">
-                        <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
-                    </svg>                                  
+        <div class="w-full flex flex-col gap-4 px-6 py-4 rounded-lg bg-white dark:bg-slate-800 mb-6">
+            <div class="w-full flex items-center justify-between">
+                <strong class="text-sm">Setting</strong>
+                <div class="relative">
+                    <button class="dropdown-button" button-target="dropdown-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M10.5 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 6a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <ul class="dropdown-menu min-w-max w-full absolute top-full right-0 bg-white dark:bg-slate-600 shadow-md rounded-lg py-3 mt-2 hidden pointer-events-none transition-all duration-150 ease-linear z-10" data-target="dropdown-primary">
+                        <li><a id="item-dropdown" href="#" class="unduh-slip flex items-center gap-2 w-full px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-500 active:bg-sekunder-60 dark:active:bg-sekunder-60 font-semibold text-xs text-slate-600 dark:text-slate-300" data-name="import-data">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                            </svg>
+                            Download Slip
+                        </a></li>
+                    </ul>
                 </div>
-                {{-- <ul class="menu-list w-full h-64 overflow-x-auto mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
-                    <li class="px-4" >
-                        <input class="w-full item-input" type="text" name="" id="option-search" placeholder="Search">
-                    </li>
-                    @foreach ($periodes as $periode)
-                        <li><a data-id_periode="{{$periode->id_periode}}" data-periode="{{$periode->periode}}" id="item-list" class="block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm cursor-pointer item-list">{{$periode->periode}}</a></li>
-                    @endforeach
-                </ul> --}}
             </div>
-        </div>
-        <div class="w-full xl:w-1/2 p-4 bg-white dark:bg-slate-800 rounded-lg mb-6">
-            <span class="block font-semibold text-sm">Catatan (Lain - lainnya)</span>
-            <div class="w-full flex flex-col gap-2 mt-2">
-                <div class="w-full flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
-                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <p id="bpjs" class="text-xs">BPJS (JHT, JKK, JKM) yang dibayarkan perusahaan : Rp 000.000</p>
+            <div class="w-full flex flex-col lg:flex-row gap-4 xl:gap-10">
+                <div class="w-full">
+                    <div class="w-full relative select-box">
+                        <div class="show-menu w-full flex items-center justify-between border border-sekunder-40 px-4 py-3 rounded-lg cursor-pointer bg-white dark:bg-slate-700">
+                            <input class="w-full text-box focus:outline-none active:outline-none text-sm placeholder:text-slate-950 dark:placeholder:text-slate-50 bg-transparent font-medium" type="text" name="" placeholder="Pilih priode" id="so-value" readonly>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 font-semibold transition-transform duration-150 ease-in-out">
+                                <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
+                            </svg>                                  
+                        </div>
+                        <ul class="menu-list w-full h-64 overflow-x-auto mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
+                            <li class="px-4" >
+                                <input class="w-full item-input" type="text" name="" id="option-search" placeholder="Search">
+                            </li>
+                            @foreach ($periodes as $periode)
+                                <li><a data-id_periode="{{$periode->id_periode}}" data-periode="{{$periode->periode}}" id="item-list" class="btn-modal block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm cursor-pointer item-list" data-name="modal-password">{{$periode->periode}}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-                <div class="w-full flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 lg:w-5 lg:h-5 text-sekunder-60">
-                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <p id="bpjs-jp" class="text-xs">Jaminan Pensiun yang dibayarkan : Rp 00.000</p>
-                </div>
-                <div class="w-full flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
-                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <p id="bpjs-kes" class="text-xs">BPJS Kesehatan yang dibayarkan perusahaan : Rp 000.000</p>
-                </div>
-                <div class="w-full flex gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 lg:w-5 lg:h-5 text-sekunder-60">
-                        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                    </svg>
-                    <p id="pph-perusahaan" class="text-xs">PPH21 yang dibayarkan : Rp 0</p>
+                <div class="w-full">
+                    <span class="block font-semibold text-sm">Catatan (Lain - lainnya)</span>
+                    <div class="w-full flex flex-col gap-2 mt-2">
+                        <div class="w-full flex gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
+                                <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                            </svg>
+                            <p id="bpjs" class="text-xs">BPJS (JHT, JKK, JKM) yang dibayarkan perusahaan : Rp 000.000</p>
+                        </div>
+                        <div class="w-full flex gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 lg:w-5 lg:h-5 text-sekunder-60">
+                                <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                            </svg>
+                            <p id="bpjs-jp" class="text-xs">Jaminan Pensiun yang dibayarkan : Rp 00.000</p>
+                        </div>
+                        <div class="w-full flex gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
+                                <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                            </svg>
+                            <p id="bpjs-kes" class="text-xs">BPJS Kesehatan yang dibayarkan perusahaan : Rp 000.000</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -293,127 +292,202 @@
         </div>
     </section>
     <!-- Gajiku Content End -->
+@endsection
 
-    <!-- Modal Start-->
-    <section id="modalAdd" class="modal-container hidden max-w-full w-full max-h-screen h-full fixed top-0 left-0 z-[100]">
-        <div class="w-full h-full flex items-center justify-center px-5">
-            <div id="view-nominal" class="show-modal w-full max-w-full md:max-w-lg rounded-lg bg-white dark:bg-slate-700 p-4">
-                <div class="w-full flex items-center justify-between relative pb-6 border-b border-slate-100">
-                    <strong>Lihat Nominal</strong>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-modal w-8 h-8 absolute top-0 right-0 cursor-pointer">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>                                            
-                </div>
-                <div class="w-full pt-6">
-                    <form id="form_add" class="w-full flex flex-col items-center justify-center gap-4">
-                        @csrf
-                        <div class="w-full flex flex-col justify-center items-start gap-2 px-4">
-                            <label for="password" class="block font-semibold text-xs">Password</label>
-                            <div class="w-full">
-                                <input type="password" name="password" id="password" value="" placeholder="Masukan password" class="item-input" required>
-                            </div>
+@section('modal')
+    <section class="modal-container hidden items-center justify-center max-w-full w-full max-h-screen h-full fixed top-0 left-0 z-[9999] px-5">
+        <div class="show-modal w-full max-w-full md:max-w-lg rounded-lg bg-white dark:bg-slate-700 p-4" data-target="modal-password">
+            <div class="w-full flex items-center justify-between relative pb-6 border-b border-slate-100">
+                <strong>Generate</strong>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-modal w-8 h-8 absolute top-0 right-0 cursor-pointer">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>                                            
+            </div>
+            <div class="w-full pt-6">
+                <form id="form_data" class="w-full flex flex-col items-center justify-center gap-4">
+                    @csrf
+                    <div class="w-full flex flex-col justify-center items-start gap-2 px-4">
+                        <label for="password" class="block font-semibold text-xs"></label>
+                        <div class="w-full">
+                            <input type="password" name="password" id="password" value="" placeholder="Masukan password" class="item-input" required>
                         </div>
-                    </form>
-                </div>
-                <div class="w-full flex item-center justify-end gap-3 mt-6">
-                    <button class="close-modal px-4 py-3 rounded-lg bg-slate-300 text-slate-950 text-xs hover:bg-slate-200 w-fit">                         
-                        Batal
-                    </button>
-                    <button id="submit-password" type="submit" form="form_add" class="close-modal px-4 py-3 rounded-lg text-slate-50 text-xs bg-primer-60 hover:bg-primer-80 transition-colors duration-200 ease-in-out w-fit">                         
-                        Submit Password
-                    </button>
-                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="w-full flex item-center justify-end gap-3 mt-6">
+                <button class="close-modal px-4 py-3 rounded-lg bg-slate-300 text-slate-950 text-xs hover:bg-slate-200 w-fit">                         
+                    Batal
+                </button>
+                <button id="submit-password" type="submit" form="form_data" class="close-modal px-4 py-3 rounded-lg text-slate-50 text-xs bg-primer-60 hover:bg-primer-80 transition-colors duration-200 ease-in-out w-fit">                         
+                    Submit
+                </button>
             </div>
         </div>
     </section>
-    <!-- Modal End-->
 @endsection
 
 @section('script')
+    <script src="{{ asset('js/crypto-js.js') }}"></script>
     <script src="{{ asset('js/scriptModal.js') }}"></script>
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('js/selectinput.js') }}"></script>
+    <script src="{{ asset('js/dropdown.js') }}"></script>
     <script>
         $(document).ready(function(){
+            const encryptedFromData = localStorage.getItem('encryptedFromData');
+            const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
+            const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
+            
+            var username = decryptedFromData.username;
+            // var username = 1151;
+            let id_periode;
+            var id_karyawan = '{{ session('username') }}';
+            // var id_karyawan = "02-0521-035";
+            let passwordK;
+
+            $('.item-list').on('click', function(){
+                id_periode = $(this).data('id_periode');
+            });
+            
+
             $('#submit-password').click(function(e){
                 e.preventDefault();
                 var formData = {
                     password: $('#password').val(),
                 };
-                var username = localStorage.getItem('username');
                 var passwordKaryawan = formData.password;
-                var id_karyawan = '{{ session('username') }}';
-                let id_periode = '{{$periode_now->id_periode}}';
-                console.log(username);
-                console.log(passwordKaryawan);
-                console.log(id_periode);
-                console.log(id_karyawan);
+                passwordK = passwordKaryawan;
+
+                const dataAPI = {
+                    username: username,
+                    password: passwordK,
+                    id_periode: id_periode,
+                    id_karyawan: id_karyawan,
+                };
+
+                const encryptedDataUser = CryptoJS.AES.encrypt(JSON.stringify(dataAPI), '{{ env('APP_KEY') }}').toString();
+                localStorage.setItem('encryptedDataUser', encryptedDataUser);
+
+                // Swal.fire({
+                //     title: 'Loading!',
+                //     text: 'Data Update Process',
+                //     imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                //     imageWidth: 100,
+                //     imageHeight: 100,
+                //     imageAlt: 'Custom image',
+                //     timerProgressBar: true,
+                //     didOpen: () => {
+                //         Swal.showLoading()
+                //     },
+                // });
+
+                // $.ajax({
+                //     url: 'http://192.168.0.75:8099/api/gajiku?username='+username+'&password='+passwordKaryawan+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
+                //     type: 'POST',
+                //     success: function(response) {
+                //         if (response.status === 'success') {
+                //             Swal.close();
+                //             $('#password').val('');
+                //             Swal.fire({
+                //                     title: response.status,
+                //                     text: response.message,
+                //                     imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
+                //                     imageWidth: 200,
+                //                     imageHeight: 200,
+                //                     imageAlt: 'Custom image',
+                //                     showConfirmButton: false,
+                //                     timer: 1200,
+                //             });
+                //             dataGaji = response.gajiku;
+                //             summaryProfile = response.gajiku.karyawan;
+                //             summaryKehadiran = response.gajiku.kehadiran_karyawan;
+                //             summaryGaji = response.gajiku.karyawan_gaji;
+
+                //             $('#nama-karyawan').text(summaryProfile.nama);
+                //             $('#nik-karyawan').text(summaryProfile.nik);
+                //             $('#dept').text(summaryProfile.departemen + ' - ' + summaryProfile.subDepartemen);
+                //             $('#rekening-karyawan').text(summaryProfile.noRekening);
+                //             $('#priode').text(summaryProfile.periode);
+
+                //             $('#total-masuk').text(summaryKehadiran.totMasuk);
+                //             $('#total-libur').text(summaryKehadiran.totLibur);
+                //             $('#total-ph').text(summaryKehadiran.totPh);
+                //             $('#total-alfa').text(summaryKehadiran.totAlfa);
+                //             $('#total-sakit').text(summaryKehadiran.totSakit);
+                //             $('#total-cuti').text(summaryKehadiran.totCuti);
+
+                //             $('#gaji-pokok').text('Rp ' + parseInt(summaryGaji[0].nominal));
+                //             $('#tunj-jabatan').text('Rp ' + parseInt(summaryGaji[1].nominal));
+                //             $('#tunj-keahlian').text('Rp ' + parseInt(summaryGaji[2].nominal));
+                //             var totalGajiPokok = parseInt(summaryGaji[0].nominal) + parseInt(summaryGaji[1].nominal) + parseInt(summaryGaji[2].nominal);
+                //             $('#tot-gaji-pokok').text('Rp ' + totalGajiPokok);
+
+                //             $('#tunj-transport').text('Rp ' + parseInt(summaryGaji[3].nominal));
+                //             $('#tunj-komunikasi').text('Rp' + parseInt(summaryGaji[4].nominal));
+                //             $('#lembur').text('Rp ' + parseInt(summaryGaji[5].nominal));
+                //             $('#komisi').text('Rp ' + parseInt(summaryGaji[6].nominal));
+                //             var gajiKotor = totalGajiPokok + parseInt(summaryGaji[3].nominal) + parseInt(summaryGaji[4].nominal) + parseInt(summaryGaji[5].nominal) + parseInt(summaryGaji[6].nominal);
+                //             $('#upah-kotor').text('Rp ' + gajiKotor)
+
+                //             $('#bpjs-kesehatan').text('Rp ' + parseInt(summaryGaji[17].nominal));
+                //             $('#bpjs-tenaga-kerja').text('Rp ' + parseInt(summaryGaji[13].nominal));
+                //             $('#jaminan-pensiun').text('Rp ' + parseInt(summaryGaji[15].nominal));
+                //             $('#alfa').text('Rp ' + parseInt(summaryGaji[9].nominal));
+                //             $('#iuran-koperasi').text('Rp ' + parseInt(summaryGaji[7].nominal));
+                //             $('#pinjaman').text('Rp ' + parseInt(summaryGaji[8].nominal));
+                //             $('#potongan-lain').text('Rp ' + parseInt(summaryGaji[11].nominal));
+                //             var totalPotongan = parseInt(summaryGaji[17].nominal) + parseInt(summaryGaji[13].nominal) + parseInt(summaryGaji[15].nominal) + parseInt(summaryGaji[9].nominal) + parseInt(summaryGaji[7].nominal) + parseInt(summaryGaji[8].nominal) + parseInt(summaryGaji[11].nominal);
+                //             $('#total-potongan').text('Rp ' + totalPotongan);
+
+                //             var totalTerima = gajiKotor - totalPotongan;
+                //             $('#total-terima').text('Rp ' + totalTerima);
+
+                //             $('#bpjs').text('BPJS TK Perusahaan yang dibayarkan : Rp ' + parseInt(summaryGaji[12].nominal));
+                //             $('#bpjs-jp').text('BPJS JP Perusahaan yang dibayarkan : Rp ' + parseInt(summaryGaji[14].nominal));
+                //             $('#bpjs-kes').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[16].nominal));
+
+                //         } else {
+                //             Swal.close();
+                //             alert('Get Data Payroll Unsuccessfuly');
+                //         }
+                //     },
+                //     error: function () {
+                //         alert('Terjadi kesalahan saat mengambil data dari API');
+                //     }
+                // });
+            });
+
+            $('.unduh-slip').click(function (e) {
+                e.preventDefault();
+
+                if (!username || !passwordK || !id_periode || !id_karyawan) {
+                    Swal.fire({
+                            title: 'Penting!',
+                            text: 'Harap masukan password dan pilih periode terlebih dahulu',
+                            imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                            imageWidth: 200,
+                            imageHeight: 200,
+                            imageAlt: 'Custom image',
+                            showConfirmButton: false,
+                            timer: 1200,
+                    });
+                    return;
+                }
+
                 $.ajax({
-                    url: 'http://192.168.0.75:8099/api/gajiku?username='+username+'&password='+passwordKaryawan+'&id_periode=230012&id_karyawan='+id_karyawan,
-                    type: 'GET',
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            summaryProfile = response.gajiku.karyawan;
-                            summaryKehadiran = response.gajiku.kehadiran_karyawan;
-                            summaryGaji = response.gajiku.karyawan_gaji;
-
-                            $('#nama-karyawan').text(summaryProfile.nama);
-                            $('#nik-karyawan').text(summaryProfile.nik);
-                            $('#dept').text(summaryProfile.departemen + ' - ' + summaryProfile.subDepartemen);
-                            $('#rekening-karyawan').text(summaryProfile.noRekening);
-                            $('#priode').text(summaryProfile.periode);
-
-                            $('#total-masuk').text(summaryKehadiran.totMasuk);
-                            $('#total-libur').text(summaryKehadiran.totLibur);
-                            $('#total-ph').text(summaryKehadiran.totPh);
-                            $('#total-alfa').text(summaryKehadiran.totAlfa);
-                            $('#total-sakit').text(summaryKehadiran.totSakit);
-                            $('#total-cuti').text(summaryKehadiran.totCuti);
-
-                            $('#gaji-pokok').text('Rp ' + parseInt(summaryGaji[0].nominal));
-                            $('#tunj-jabatan').text('Rp ' + parseInt(summaryGaji[1].nominal));
-                            $('#tunj-keahlian').text('Rp ' + parseInt(summaryGaji[2].nominal));
-                            var totalGajiPokok = parseInt(summaryGaji[0].nominal) + parseInt(summaryGaji[1].nominal) + parseInt(summaryGaji[2].nominal);
-                            $('#tot-gaji-pokok').text('Rp ' + totalGajiPokok);
-
-                            $('#tunj-transport').text('Rp ' + parseInt(summaryGaji[3].nominal));
-                            $('#tunj-komunikasi').text('Rp' + parseInt(summaryGaji[4].nominal));
-                            $('#lembur').text('Rp ' + parseInt(summaryGaji[5].nominal));
-                            $('#komisi').text('Rp ' + parseInt(summaryGaji[6].nominal));
-                            var gajiKotor = totalGajiPokok + parseInt(summaryGaji[3].nominal) + parseInt(summaryGaji[4].nominal) + parseInt(summaryGaji[5].nominal) + parseInt(summaryGaji[6].nominal);
-                            $('#upah-kotor').text('Rp ' + gajiKotor)
-
-                            $('#bpjs-kesehatan').text('Rp ' + parseInt(summaryGaji[17].nominal));
-                            $('#bpjs-tenaga-kerja').text('Rp ' + parseInt(summaryGaji[13].nominal));
-                            $('#jaminan-pensiun').text('Rp ' + parseInt(summaryGaji[15].nominal));
-                            $('#alfa').text('Rp ' + parseInt(summaryGaji[9].nominal));
-                            $('#iuran-koperasi').text('Rp ' + parseInt(summaryGaji[7].nominal));
-                            $('#pinjaman').text('Rp ' + parseInt(summaryGaji[8].nominal));
-                            $('#potongan-lain').text('Rp ' + parseInt(summaryGaji[11].nominal));
-                            var totalPotongan = parseInt(summaryGaji[17].nominal) + parseInt(summaryGaji[13].nominal) + parseInt(summaryGaji[15].nominal) + parseInt(summaryGaji[9].nominal) + parseInt(summaryGaji[7].nominal) + parseInt(summaryGaji[8].nominal) + parseInt(summaryGaji[11].nominal);
-                            $('#total-potongan').text('Rp ' + totalPotongan);
-
-                            var totalTerima = gajiKotor - totalPotongan;
-                            $('#total-terima').text('Rp ' + totalTerima);
-
-                            $('#bpjs').text('BPJS (JHT, JKK, JKM) yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[12].nominal));
-                            $('#bpjs-jp').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[14].nominal));
-                            $('#bpjs-kes').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[16].nominal));
-
-                        } else {
-                            alert('Terjadi kesalaham menampilkan nominal gaji');
-                        }
+                    url: '{{ url("encrypt-password") }}',
+                    method: 'POST',
+                    data: { passwordK: passwordK, "_token": "{{ csrf_token() }}" },
+                    success: function (encryptedData) {
+                        // console.log(encryptedData)
+                        window.open(`{{ url('/generate-pdf') }}?username=${username}&key=${encryptedData}&periode=${id_periode}&karyawan=${id_karyawan}`, '_blank');
                     },
-                    error: function () {
-                        alert('Terjadi kesalahan saat mengambil data dari API');
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching encrypted data:', error);
                     }
                 });
             });
-            $('#unduh-slip').click(function (e) {
-                e.preventDefault();
-                window.open("{{ url('/generate-pdf') }}", "_blank");
-            });
-
         });
+        
     </script>
 @endsection

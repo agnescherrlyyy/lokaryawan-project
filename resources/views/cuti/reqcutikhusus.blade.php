@@ -96,7 +96,12 @@
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-        var username = localStorage.getItem('username');
+        const encryptedFromData = localStorage.getItem('encryptedFromData');
+        const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
+        const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
+
+        var username = decryptedFromData.username;
+        const nowYears = new Date().getFullYear();
         var idCuti;
         var tipeCuti;
         var namaCuti;
@@ -107,8 +112,9 @@
             tipeCuti = $(this).attr('tipe-cuti');
             namaCuti = $(this).attr('cuti');
             jumlahHari = $(this).attr('jml-hari');
-            console.log(idCuti, tipeCuti, namaCuti, jumlahHari);
-            localStorage.setItem('jumlah_hari', jumlahHari);
+
+            const encryptedJumlahHari = CryptoJS.AES.encrypt(JSON.stringify(jumlahHari), 'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A=').toString();
+            localStorage.setItem('encryptedJumlahHari', encryptedJumlahHari);
         });
         
 
@@ -121,26 +127,22 @@
             window.location.href = "{{ url('/cuti/riwayat-cutitahunan') }}";
         })
 
-        let id_cuti;
-        let tipe_cuti;
-        let cuti;
-
-        $.ajax({
-            url: '{{ env('APP_SERVICE') }}get_master_cuti',
-            type: 'GET',
-            success: function (response) {
-                if (response.status === 'success') {
-                    id_cuti = response.data[0].id_cuti;
-                    tipe_cuti = response.data[0].tipe_cuti;
-                    cuti = response.data[0].cuti;
-                }
-            }
-        });
-
         $('#btn-cuti').click(function (e) {
             e.preventDefault();
-            const storedDatesJSON = localStorage.getItem("selectedDates");
-            const storedDates = JSON.parse(storedDatesJSON);
+
+            const encryptedDateCutiKhusus = localStorage.getItem('encryptedDateCutiKhusus');
+            const decryptedBytesCutiKhusus = CryptoJS.AES.decrypt(encryptedDateCutiKhusus, '{{ env('APP_KEY') }}');
+            const decryptedDateCutiKhusus = JSON.parse(decryptedBytesCutiKhusus.toString(CryptoJS.enc.Utf8));
+            console.log("Selected Dates: ", decryptedDateCutiKhusus);
+
+            if (!decryptedDateCutiKhusus || decryptedDateCutiKhusus.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Harap Pilih Setidaknya Satu Tanggal Cuti!',
+                });
+                return;
+            }
 
             var alasanCuti = $('#alasan-cuti').val();
 
@@ -149,14 +151,14 @@
                 id_cuti: idCuti,
                 tipe_cuti: tipeCuti,
                 cuti: namaCuti,
-                tanggal: storedDates,
-                total_cuti: storedDates.length,
+                tanggal: decryptedDateCutiKhusus,
+                total_cuti: decryptedDateCutiKhusus.length,
                 keterangan: alasanCuti,
             }
 
-            console.log('Username:', namaCuti);
+            console.log(fromData);
 
-            if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !storedDates || !alasanCuti) {
+            if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !decryptedDateCutiKhusus || !alasanCuti) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error!',
@@ -164,6 +166,7 @@
                 });
                 return;
             }
+            
             Swal.fire({
                 title: 'Loading!',
                 text : 'Process Request',
@@ -171,7 +174,8 @@
                 didOpen: () => {
                     Swal.showLoading()
                 },
-            })
+            });
+
             $.ajax({
                 url: '{{ env('APP_SERVICE') }}request_cuti',
                 type: 'POST',
@@ -203,6 +207,7 @@
                     }
                 },
                 error: function () {
+                    console.log(error);
                     Swal.fire({
                         position: 'center',
                         icon: 'Error!',

@@ -199,7 +199,11 @@
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            var username = localStorage.getItem('username');
+            const encryptedFromData = localStorage.getItem('encryptedFromData');
+            const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
+            const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
+
+            var username = decryptedFromData.username;
 
             $("#btn-checkout").click(function (e) {
                 e.preventDefault();

@@ -1,28 +1,24 @@
-btnShowModal = document.querySelectorAll(".btn-modal");
-showModal = document.querySelectorAll(".show-modal");
-modalContainer = document.querySelector(".modal-container");
-closeModal = document.querySelectorAll(".close-modal");
+let modalContainer = document.querySelector('.modal-container');
+let modalBox = document.querySelectorAll('.show-modal');
 
-btnShowModal.forEach((item) => {
-    item.addEventListener("click", () => {
-        modalContainer.classList.remove("hidden");
-        let idBtnModal = item.getAttribute("id");
-        showModal.forEach((modal) => {
-            let idShowModal = modal.getAttribute("id");
-            if (idBtnModal === idShowModal) {
-                modal.classList.add("active");
-            } else {
-                modal.classList.remove("active");
+document.querySelectorAll('.w-full .btn-modal').forEach((btn) => {
+    btn.onclick = () => {
+        modalContainer.classList.replace('hidden', 'flex');
+        let nameButton = btn.getAttribute('data-name');
+        modalBox.forEach((modal) => {
+            let itemModal = modal.getAttribute('data-target');
+            if (nameButton === itemModal) {
+                modal.classList.add('active');
             }
         });
-    });
+    }
 });
 
-closeModal.forEach((item) => {
-    item.addEventListener("click", () => {
-        modalContainer.classList.add("hidden");
-        showModal.forEach((modal) => {
-            modal.classList.remove("active");
+document.querySelectorAll('.close-modal').forEach((btn) => {
+    btn.onclick = () => {
+        modalContainer.classList.replace('flex', 'hidden');
+        modalBox.forEach((modal) => {
+            modal.classList.remove('active');
         });
-    });
+    }
 });

@@ -56,7 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
             event.target.classList.contains("calendar-day") &&
             !event.target.classList.contains("disabled")
         ) {
-            const sisaCuti = parseInt(localStorage.getItem("sisa_cuti"), 10);
+            
+
+            const encryptedSisaCuti = localStorage.getItem('encryptedSisaCuti');
+            const decryptedBytesSisaCuti = CryptoJS.AES.decrypt(encryptedSisaCuti, 'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A=');
+            const decryptedSisaCuti = JSON.parse(decryptedBytesSisaCuti.toString(CryptoJS.enc.Utf8));
+
+            const sisaCuti = parseInt(decryptedSisaCuti, 10);
+
 
             const clickedDate = new Date(
                 currentDate.getFullYear(),
@@ -92,10 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 return `${year}-${month}-${day}`;
             });
 
-            localStorage.setItem(
-                "selectedDates",
-                JSON.stringify(formattedDatesISO)
-            );
+            // localStorage.setItem(
+            //     "selectedDates",
+            //     JSON.stringify(formattedDatesISO)
+            // );
+            const encryptedSelectedDates = CryptoJS.AES.encrypt(JSON.stringify(formattedDatesISO), 'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A=').toString();
+            localStorage.setItem('encryptedSelectedDates', encryptedSelectedDates);
         }
     });
 

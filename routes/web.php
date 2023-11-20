@@ -51,10 +51,12 @@ Route::middleware(['check_login'])->group(function () {
 
     Route::get('/notification', [NotificationController::class, 'index']);
     Route::get('/approved-cuti', [ApprovedCutiController::class, 'index']);
+    Route::get('/approved-cuti/{$id}', [ApprovedCutiController::class, 'show']);
 
     Route::get('/seputar-info', [SeputarInfoController::class, 'index']);
     Route::get('/detail-info', [SeputarInfoController::class, 'detailList']);
 
+    Route::post('/encrypt-password', [SlipGajiPDFController::class, 'encryptPassword']);
     Route::get('/generate-pdf', [SlipGajiPDFController::class, 'generatePDF']);
     Route::get('/slip-gaji-pdf', [PDFController::class, 'generatePDF']);
 });

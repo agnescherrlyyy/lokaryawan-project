@@ -21,7 +21,7 @@
                             <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
                         </svg>                                  
                     </div>
-                    <ul id="list-periode" class="menu-list w-full mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
+                    <ul id="list-periode" class="menu-list w-full h-64 overflow-x-auto mt-4 py-3 opacity-0 pointer-events-none bg-white dark:bg-slate-600 shadow-md rounded-lg transition-all duration-200 ease-linear absolute top-full right-0 z-50">
                         <li class="px-4" ><input class="w-full item-input" type="text" name="" id="option-search" placeholder="Search"></li>
                         @foreach ($periodes as $periode)
                             <li><a data-id_periode="{{$periode->id_periode}}" data-periode="{{$periode->periode}}" id="item-list" class="block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm cursor-pointer item-list">{{$periode->periode}}</a></li>
@@ -37,7 +37,11 @@
             <div class="w-full flex flex-col items-center justify-center gap-1">
                 <strong class="text-lg">{{session('name')}}</strong>
                 <span class="text-sm">{{session('username')}}</span>
-                <span class="text-sm font-medium text-slate-500 dark:text-slate-400">IT &mdash; Aplikasi dan Sytem</span>
+                <div class="w-full flex items-center justify-center gap-2">
+                    <span id="departemen" class="text-sm font-medium text-slate-500 dark:text-slate-400"></span>
+                    <span class="text-sm font-medium text-slate-500 dark:text-slate-400">&mdash;</span>
+                    <span id="sub-departemen" class="text-sm font-medium text-slate-500 dark:text-slate-400"></span>
+                </div>
             </div>
             <div class="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-y-6 mt-6 bg-white dark:bg-slate-800 rounded-lg">
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -224,6 +228,12 @@
         let nama_periode = '{{$periode_now->periode}}';
         let datas = [];
 
+        const encryptedFromData = localStorage.getItem('encryptedFromData');
+        const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
+        const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
+
+        var username = decryptedFromData.username;
+
         $(document).ready(function() {
             var id_karyawan = '{{ session('username') }}';
 
@@ -335,5 +345,25 @@
             $('#nama_periode').text(nama_periode);
             get_data();
         });
+
+        if(username){
+            $.ajax({
+                url:'{{ env('APP_API') }}get_karyawan_byID?id_karyawan='+username,
+                type: "GET",
+                success: function(response){
+                    if(response.status === 'success'){
+                        var data = response.data[0];
+                        console.log(data);
+                        $('#departemen').text(data.departemen);
+                        $('#sub-departemen').text(data.sub_departemen);
+                    }
+                },
+                error: function(){
+                    alert('Gagal Mengambil Data');
+                }
+            });
+        }else{
+            alert('ID Karywawan tidak tersedia');
+        }
     </script>
 @endsection
