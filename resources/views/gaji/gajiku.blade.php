@@ -380,7 +380,7 @@
                 });
 
                 $.ajax({
-                    url: 'http://192.168.0.75:8099/api/gajiku?username='+username+'&password='+passwordK+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
+                    url: 'http://103.164.114.22:8096/api/gajiku?username='+username+'&password='+passwordK+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
                     type: 'POST',
                     success: function(response) {
                         if (response.status === 'success') {
@@ -506,6 +506,19 @@
                     error: function () {
                         alert('Terjadi kesalahan saat mengambil data dari API');
                     }
+                });
+            });
+
+            $('.unduh-slip').click(function (e){
+                Swal.fire({
+                    title: 'Penting',
+                    text: 'Masukan PIN dan pilih periode terlebih dahulu.',
+                    imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    timer: 1500,
                 });
             });
         });
