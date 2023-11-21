@@ -64,8 +64,8 @@
                         >
                 </div>
                 <div class="flex flex-col gap-2">
-                    <span class="tanggal font-medium text-sm">30/09/2023</span>
-                    <span class="font-semibold">09:22</span>
+                    <span class="tanggal font-medium text-sm">00/00/0000</span>
+                    <span class="font-semibold">00:00</span>
                     <span class="text-sm text-slate-500">Kedatangan Komplemen</span>
                 </div>
             </div>

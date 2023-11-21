@@ -57,13 +57,13 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
                                 <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
                             </svg>
-                            <p id="bpjs" class="text-xs">BPJS (JHT, JKK, JKM) yang dibayarkan perusahaan : Rp 000.000</p>
+                            <p id="bpjs" class="text-xs">BPJS TK Perusahaan yang dibayarkan : Rp 000.000</p>
                         </div>
                         <div class="w-full flex gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 lg:w-5 lg:h-5 text-sekunder-60">
                                 <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
                             </svg>
-                            <p id="bpjs-jp" class="text-xs">Jaminan Pensiun yang dibayarkan : Rp 00.000</p>
+                            <p id="bpjs-jp" class="text-xs">BPJS JP Perusahaan yang dibayarkan : Rp 00.000</p>
                         </div>
                         <div class="w-full flex gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sekunder-60">
@@ -339,10 +339,8 @@
             const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
             
             var username = decryptedFromData.username;
-            // var username = 1151;
             let id_periode;
             var id_karyawan = '{{ session('username') }}';
-            // var id_karyawan = "02-0521-035";
             let passwordK;
 
             $('.item-list').on('click', function(){
@@ -368,99 +366,100 @@
                 const encryptedDataUser = CryptoJS.AES.encrypt(JSON.stringify(dataAPI), '{{ env('APP_KEY') }}').toString();
                 localStorage.setItem('encryptedDataUser', encryptedDataUser);
 
-                // Swal.fire({
-                //     title: 'Loading!',
-                //     text: 'Data Update Process',
-                //     imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
-                //     imageWidth: 100,
-                //     imageHeight: 100,
-                //     imageAlt: 'Custom image',
-                //     timerProgressBar: true,
-                //     didOpen: () => {
-                //         Swal.showLoading()
-                //     },
-                // });
+                Swal.fire({
+                    title: 'Loading!',
+                    text: 'Data Update Process',
+                    imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                    imageWidth: 100,
+                    imageHeight: 100,
+                    imageAlt: 'Custom image',
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
 
-                // $.ajax({
-                //     url: 'http://192.168.0.75:8099/api/gajiku?username='+username+'&password='+passwordKaryawan+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
-                //     type: 'POST',
-                //     success: function(response) {
-                //         if (response.status === 'success') {
-                //             Swal.close();
-                //             $('#password').val('');
-                //             Swal.fire({
-                //                     title: response.status,
-                //                     text: response.message,
-                //                     imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
-                //                     imageWidth: 200,
-                //                     imageHeight: 200,
-                //                     imageAlt: 'Custom image',
-                //                     showConfirmButton: false,
-                //                     timer: 1200,
-                //             });
-                //             dataGaji = response.gajiku;
-                //             summaryProfile = response.gajiku.karyawan;
-                //             summaryKehadiran = response.gajiku.kehadiran_karyawan;
-                //             summaryGaji = response.gajiku.karyawan_gaji;
+                $.ajax({
+                    url: 'http://192.168.0.75:8099/api/gajiku?username='+username+'&password='+passwordK+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            Swal.close();
+                            $('#password').val('');
+                            Swal.fire({
+                                    title: response.status,
+                                    text: response.message,
+                                    imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
+                                    imageWidth: 200,
+                                    imageHeight: 200,
+                                    imageAlt: 'Custom image',
+                                    showConfirmButton: false,
+                                    timer: 1200,
+                            });
+                            dataGaji = response.gajiku;
+                            summaryProfile = response.gajiku.karyawan;
+                            summaryKehadiran = response.gajiku.kehadiran_karyawan;
+                            summaryGaji = response.gajiku.karyawan_gaji;
 
-                //             $('#nama-karyawan').text(summaryProfile.nama);
-                //             $('#nik-karyawan').text(summaryProfile.nik);
-                //             $('#dept').text(summaryProfile.departemen + ' - ' + summaryProfile.subDepartemen);
-                //             $('#rekening-karyawan').text(summaryProfile.noRekening);
-                //             $('#priode').text(summaryProfile.periode);
+                            $('#nama-karyawan').text(summaryProfile.nama);
+                            $('#nik-karyawan').text(summaryProfile.nik);
+                            $('#dept').text(summaryProfile.departemen + ' - ' + summaryProfile.subDepartemen);
+                            $('#rekening-karyawan').text(summaryProfile.noRekening);
+                            $('#priode').text(summaryProfile.periode);
 
-                //             $('#total-masuk').text(summaryKehadiran.totMasuk);
-                //             $('#total-libur').text(summaryKehadiran.totLibur);
-                //             $('#total-ph').text(summaryKehadiran.totPh);
-                //             $('#total-alfa').text(summaryKehadiran.totAlfa);
-                //             $('#total-sakit').text(summaryKehadiran.totSakit);
-                //             $('#total-cuti').text(summaryKehadiran.totCuti);
+                            $('#total-masuk').text(summaryKehadiran.totMasuk);
+                            $('#total-libur').text(summaryKehadiran.totLibur);
+                            $('#total-ph').text(summaryKehadiran.totPh);
+                            $('#total-alfa').text(summaryKehadiran.totAlfa);
+                            $('#total-sakit').text(summaryKehadiran.totSakit);
+                            $('#total-cuti').text(summaryKehadiran.totCuti);
 
-                //             $('#gaji-pokok').text('Rp ' + parseInt(summaryGaji[0].nominal));
-                //             $('#tunj-jabatan').text('Rp ' + parseInt(summaryGaji[1].nominal));
-                //             $('#tunj-keahlian').text('Rp ' + parseInt(summaryGaji[2].nominal));
-                //             var totalGajiPokok = parseInt(summaryGaji[0].nominal) + parseInt(summaryGaji[1].nominal) + parseInt(summaryGaji[2].nominal);
-                //             $('#tot-gaji-pokok').text('Rp ' + totalGajiPokok);
+                            $('#gaji-pokok').text('Rp ' + parseInt(summaryGaji[0].nominal));
+                            $('#tunj-jabatan').text('Rp ' + parseInt(summaryGaji[1].nominal));
+                            $('#tunj-keahlian').text('Rp ' + parseInt(summaryGaji[2].nominal));
+                            var totalGajiPokok = parseInt(summaryGaji[0].nominal) + parseInt(summaryGaji[1].nominal) + parseInt(summaryGaji[2].nominal);
+                            $('#tot-gaji-pokok').text('Rp ' + totalGajiPokok);
 
-                //             $('#tunj-transport').text('Rp ' + parseInt(summaryGaji[3].nominal));
-                //             $('#tunj-komunikasi').text('Rp' + parseInt(summaryGaji[4].nominal));
-                //             $('#lembur').text('Rp ' + parseInt(summaryGaji[5].nominal));
-                //             $('#komisi').text('Rp ' + parseInt(summaryGaji[6].nominal));
-                //             var gajiKotor = totalGajiPokok + parseInt(summaryGaji[3].nominal) + parseInt(summaryGaji[4].nominal) + parseInt(summaryGaji[5].nominal) + parseInt(summaryGaji[6].nominal);
-                //             $('#upah-kotor').text('Rp ' + gajiKotor)
+                            $('#tunj-transport').text('Rp ' + parseInt(summaryGaji[3].nominal));
+                            $('#tunj-komunikasi').text('Rp' + parseInt(summaryGaji[4].nominal));
+                            $('#lembur').text('Rp ' + parseInt(summaryGaji[5].nominal));
+                            $('#komisi').text('Rp ' + parseInt(summaryGaji[6].nominal));
+                            var gajiKotor = totalGajiPokok + parseInt(summaryGaji[3].nominal) + parseInt(summaryGaji[4].nominal) + parseInt(summaryGaji[5].nominal) + parseInt(summaryGaji[6].nominal);
+                            $('#upah-kotor').text('Rp ' + gajiKotor)
 
-                //             $('#bpjs-kesehatan').text('Rp ' + parseInt(summaryGaji[17].nominal));
-                //             $('#bpjs-tenaga-kerja').text('Rp ' + parseInt(summaryGaji[13].nominal));
-                //             $('#jaminan-pensiun').text('Rp ' + parseInt(summaryGaji[15].nominal));
-                //             $('#alfa').text('Rp ' + parseInt(summaryGaji[9].nominal));
-                //             $('#iuran-koperasi').text('Rp ' + parseInt(summaryGaji[7].nominal));
-                //             $('#pinjaman').text('Rp ' + parseInt(summaryGaji[8].nominal));
-                //             $('#potongan-lain').text('Rp ' + parseInt(summaryGaji[11].nominal));
-                //             var totalPotongan = parseInt(summaryGaji[17].nominal) + parseInt(summaryGaji[13].nominal) + parseInt(summaryGaji[15].nominal) + parseInt(summaryGaji[9].nominal) + parseInt(summaryGaji[7].nominal) + parseInt(summaryGaji[8].nominal) + parseInt(summaryGaji[11].nominal);
-                //             $('#total-potongan').text('Rp ' + totalPotongan);
+                            $('#bpjs-kesehatan').text('Rp ' + parseInt(summaryGaji[17].nominal));
+                            $('#bpjs-tenaga-kerja').text('Rp ' + parseInt(summaryGaji[13].nominal));
+                            $('#jaminan-pensiun').text('Rp ' + parseInt(summaryGaji[15].nominal));
+                            $('#alfa').text('Rp ' + parseInt(summaryGaji[9].nominal));
+                            $('#iuran-koperasi').text('Rp ' + parseInt(summaryGaji[7].nominal));
+                            $('#pinjaman').text('Rp ' + parseInt(summaryGaji[8].nominal));
+                            $('#potongan-lain').text('Rp ' + parseInt(summaryGaji[11].nominal));
+                            var totalPotongan = parseInt(summaryGaji[17].nominal) + parseInt(summaryGaji[13].nominal) + parseInt(summaryGaji[15].nominal) + parseInt(summaryGaji[9].nominal) + parseInt(summaryGaji[7].nominal) + parseInt(summaryGaji[8].nominal) + parseInt(summaryGaji[11].nominal);
+                            $('#total-potongan').text('Rp ' + totalPotongan);
 
-                //             var totalTerima = gajiKotor - totalPotongan;
-                //             $('#total-terima').text('Rp ' + totalTerima);
+                            var totalTerima = gajiKotor - totalPotongan;
+                            $('#total-terima').text('Rp ' + totalTerima);
 
-                //             $('#bpjs').text('BPJS TK Perusahaan yang dibayarkan : Rp ' + parseInt(summaryGaji[12].nominal));
-                //             $('#bpjs-jp').text('BPJS JP Perusahaan yang dibayarkan : Rp ' + parseInt(summaryGaji[14].nominal));
-                //             $('#bpjs-kes').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[16].nominal));
+                            $('#bpjs').text('BPJS TK Perusahaan yang dibayarkan : Rp ' + parseInt(summaryGaji[12].nominal));
+                            $('#bpjs-jp').text('BPJS JP Perusahaan yang dibayarkan : Rp ' + parseInt(summaryGaji[14].nominal));
+                            $('#bpjs-kes').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[16].nominal));
 
-                //         } else {
-                //             Swal.close();
-                //             alert('Get Data Payroll Unsuccessfuly');
-                //         }
-                //     },
-                //     error: function () {
-                //         alert('Terjadi kesalahan saat mengambil data dari API');
-                //     }
-                // });
+                        } else {
+                            Swal.close();
+                            alert('Get Data Payroll Unsuccessfuly');
+                        }
+                    },
+                    error: function () {
+                        alert('Terjadi kesalahan saat mengambil data dari API');
+                    }
+                });
             });
 
             $('.unduh-slip').click(function (e) {
                 e.preventDefault();
 
                 if (!username || !passwordK || !id_periode || !id_karyawan) {
+                    console.log(username, passwordK, id_periode, id_karyawan);
                     Swal.fire({
                             title: 'Penting!',
                             text: 'Harap masukan password dan pilih periode terlebih dahulu',
@@ -479,7 +478,6 @@
                     method: 'POST',
                     data: { passwordK: passwordK, "_token": "{{ csrf_token() }}" },
                     success: function (encryptedData) {
-                        // console.log(encryptedData)
                         window.open(`{{ url('/generate-pdf') }}?username=${username}&key=${encryptedData}&periode=${id_periode}&karyawan=${id_karyawan}`, '_blank');
                     },
                     error: function (xhr, status, error) {

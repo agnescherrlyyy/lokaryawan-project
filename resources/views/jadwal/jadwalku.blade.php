@@ -274,7 +274,6 @@
                     success: function(response){
                         if(response.status === 'success'){
                             var data = response.data[0];
-                            console.log(data);
                             $('#departemen').text(data.departemen);
                             $('#sub-departemen').text(data.sub_departemen);
                         }

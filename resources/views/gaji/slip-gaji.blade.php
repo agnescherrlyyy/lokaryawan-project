@@ -68,17 +68,17 @@
                                                         <tr align="left">
                                                             <td style="padding: .1rem; font-size:.8rem;"><strong>Peridode</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td style="padding: .1rem; font-size:.8rem;"><strong id="periode"></strong></td>
+                                                            <td style="padding: .1rem; font-size:.8rem;"><strong id="periode">{{ $detail_karyawan->periode }}</strong></td>
                                                         </tr>
                                                         <tr align="left">
                                                             <td style="padding: .1rem; font-size:.8rem;"><strong>NIP</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="nip"></span>{{ $karyawan->username }}</td>
+                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="nip"></span>{{ $detail_karyawan->nik }}</td>
                                                         </tr>
                                                         <tr align="left">
                                                             <td style="padding: .1rem; font-size:.8rem;"><strong>Nama</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="nama">{{ $karyawan->name }}</span></td>
+                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="nama">{{ $detail_karyawan->nama }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -91,12 +91,12 @@
                                                         <tr align="left" style="padding-top:12px; padding-right:12px; padding-bottom:12px padding-left:0;">
                                                             <td style="padding: .1rem; font-size:.8rem;"><strong>Departement</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="departemen">{{ $karyawan->departemen }}</span></td>
+                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="departemen">{{ $detail_karyawan->departemen }}</span></td>
                                                         </tr>
                                                         <tr align="left" style="padding-top:12px; padding-right:12px; padding-bottom:12px padding-left:0;">
                                                             <td style="padding: .1rem; font-size:.8rem;"><strong>Sub Departemen</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="sub-dep">{{ $karyawan->sub_departemen }}</span></td>
+                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="sub-dep">{{ $detail_karyawan->subDepartemen }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -109,12 +109,12 @@
                                                         <tr align="right" style="padding-top:12px; padding-right:12px; padding-bottom:12px padding-left:0;">
                                                             <td style="padding: .1rem; font-size:.8rem;"><strong>Jabatan</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="jabatan">{{ $karyawan->grade }}</span></td>
+                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="jabatan">{{ $detail_karyawan->jabatan }}</span></td>
                                                         </tr>
                                                         <tr align="right" style="padding-top:12px; padding-right:12px; padding-bottom:12px padding-left:0;">
                                                             <td style="padding: .1rem; font-size:.8rem;"><strong>Nomor Rekening</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="no-rek"></span></td>
+                                                            <td style="padding: .1rem; font-size:.8rem;"><span id="no-rek">{{ $detail_karyawan->noRekening }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -146,12 +146,12 @@
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Masuk</strong></td>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-masuk"></span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-masuk">{{ $absensi_karyawan->totMasuk }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Libur</strong></td>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-libur"></span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-libur">{{ $absensi_karyawan->totLibur }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -164,12 +164,12 @@
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Izin</strong></td>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-izin"></span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-izin">{{ $absensi_karyawan->totIzin }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total PH</strong></td>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-ph"></span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-ph">{{ $absensi_karyawan->totPh }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -182,12 +182,12 @@
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Sakit</strong></td>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-sakit"></span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-sakit">{{ $absensi_karyawan->totSakit }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Alfa</strong></td>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-alfa"></span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-alfa">{{ $absensi_karyawan->totAlfa }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -200,7 +200,7 @@
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Cuti</strong></td>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">:</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-cuti"></span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="total-cuti">{{ $absensi_karyawan->totCuti }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -231,15 +231,15 @@
                                                     <thead>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Gaji Pokok</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="gaji-pokok">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="gaji-pokok">{{ $detail_gaji[0]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tunjangan Jabatan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-jabatan">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-jabatan">{{ $detail_gaji[1]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tunjangan Keahlian</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-keahlian">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-keahlian">{{ $detail_gaji[2]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"></td>
@@ -261,7 +261,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Gaji Pokok + Tunjangan</strong></td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-gaji-pokok">Rp 0.000.000</strong></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-gaji-pokok">Rp {{ $detail_gaji[0]->nominal + $detail_gaji[1]->nominal + $detail_gaji[2]->nominal }}.00</strong></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -292,19 +292,19 @@
                                                     <thead>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tunjangan Transport Atau Kehadiran</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-transport">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-transport">{{ $detail_gaji[3]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tunjangan Komunikasi</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-komunikasi">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-komunikasi">{{ $detail_gaji[4]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Lembur</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="lembur">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="lembur">{{ $detail_gaji[5]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tambahan Lainnya</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tamb-lainnya">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tamb-lainnya">{{ $detail_gaji[6]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"></td>
@@ -326,7 +326,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Bruto</strong></td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-bruto">Rp 0.000.000</strong></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-bruto">Rp {{ $detail_gaji[3]->nominal + $detail_gaji[4]->nominal + $detail_gaji[5]->nominal + $detail_gaji[6]->nominal }}.00</strong></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -357,27 +357,27 @@
                                                     <thead>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Alfa</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-alfa">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-alfa">{{ $detail_gaji[9]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Ijin</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-ijin">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-ijin">{{ $detail_gaji[10]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Potongan Lainnya</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-lainnya">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-lainnya">{{ $detail_gaji[11]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS TK Karyawan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-tk">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-tk">{{ $detail_gaji[13]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS JP Karyawan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-jp">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-jp">{{ $detail_gaji[15]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS Kesehatan Karyawan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-kesehatan">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-kesehatan">{{ $detail_gaji[17]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"></td>
@@ -399,7 +399,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Potongan</strong></td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-potongan">Rp 0.000.000</strong></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-potongan">Rp {{ $detail_gaji[9]->nominal + $detail_gaji[10]->nominal + $detail_gaji[11]->nominal + $detail_gaji[13]->nominal + $detail_gaji[15]->nominal + $detail_gaji[17]->nominal }}.00</strong></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -417,7 +417,7 @@
                                             <strong>TOTAL YANG DI TERIMA KARYAWAN</strong>
                                         </td>
                                         <td align="right" style="padding: .5rem; color: #fff; font-size:.8rem;">
-                                            <strong id="total-yang-di-terima">Rp 0.000.000</strong>
+                                            <strong id="total-yang-di-terima">Rp {{ ($detail_gaji[0]->nominal + $detail_gaji[1]->nominal + $detail_gaji[2]->nominal + $detail_gaji[3]->nominal + $detail_gaji[4]->nominal + $detail_gaji[5]->nominal + $detail_gaji[6]->nominal) - ($detail_gaji[9]->nominal + $detail_gaji[10]->nominal + $detail_gaji[11]->nominal + $detail_gaji[13]->nominal + $detail_gaji[15]->nominal + $detail_gaji[17]->nominal) }}.00</strong>
                                         </td>
                                     </tr>
                                 </thead>
@@ -438,15 +438,15 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS TK Perusahaan yang dibayarkan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-tk">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-tk">Rp {{ $detail_gaji[12]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS JP Perusahaan yang dibayarkan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-jp">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-jp">Rp {{ $detail_gaji[14]->nominal }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS Kesehatan yang dibayarkan perusahaan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-bpjs">Rp 0.000.000</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-bpjs">Rp {{ $detail_gaji[16]->nominal }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -472,120 +472,5 @@
             </thead>
         </table>
     </div>
-    <script src="{{ asset('js/crypto-js.js') }}"></script>
-    <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-            const encryptedDataUser = localStorage.getItem('encryptedDataUser');
-            const decryptedBytes = CryptoJS.AES.decrypt(encryptedDataUser, '{{ env('APP_KEY') }}');
-            const decryptedDataUser = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
-            var username = decryptedDataUser.username;
-            var password = decryptedDataUser.password;
-            var idPeriode = decryptedDataUser.id_periode;
-            var idKarywan = decryptedDataUser.id_karyawan;
-
-            const dataAPI = {
-                username: username,
-                password: password,
-                id_periode: idPeriode,
-                id_karyawan: idKarywan
-            };
-
-            $.ajax({
-                url: 'https://lokahr.salokapark.app/api/get_karyawan_byID?id_karyawan='+username,
-                type: 'GET',
-                success: function(response){
-                    if(response.status == 'success'){
-                        console.log(response);
-                        $('#nip').text(response.data[0].username);
-                        $('#nama').text(response.data[0].name);
-                        $('#departemen').text(response.data[0].departemen);
-                        $('#sub-dep').text(response.data[0].sub_departemen);
-                        $('#jabatan').text(response.data[0].grade);
-                    }
-                }
-            });
-
-            // $.ajax({
-            //     url: 'http://192.168.0.75:8099/api/gajiku?username='+username+'&password='+password+'&id_periode='+idPeriode+'&id_karyawan='+idKarywan,
-            //     type: 'POST',
-            //     success: function(response){
-            //         if(response.status == 'success'){
-            //             console.log(response.status);
-            //             console.log(response.message);
-
-            //             const dataKaryawan = response.gajiku.karyawan;
-            //             const dataAbsensi = response.gajiku.kehadiran_karyawan;
-            //             const detailGaji = response.gajiku.karyawan_gaji;
-
-            //             dataGaji = response.gajiku;
-
-            //             $('#periode').text(dataKaryawan.periode);
-            //             $('#nip').text(dataKaryawan.nik);
-            //             $('#nama').text(dataKaryawan.nama);
-            //             $('#departemen').text(dataKaryawan.departemen);
-            //             $('#sub-dep').text(dataKaryawan.subDepartemen);
-            //             $('#jabatan').text(dataKaryawan.jabatan);
-            //             $('#no-rek').text(dataKaryawan.noRekening);
-
-            //             $('#total-masuk').text(dataAbsensi.totMasuk);
-            //             $('#total-libur').text(dataAbsensi.totLibur);
-            //             $('#total-izin').text(dataAbsensi.totIzin);
-            //             $('#total-ph').text(dataAbsensi.totPh);
-            //             $('#total-sakit').text(dataAbsensi.totSakit);
-            //             $('#total-alfa').text(dataAbsensi.totAlfa);
-            //             $('#total-cuti').text(dataAbsensi.totCuti);
-
-            //             $('#gaji-pokok').text('Rp ' + parseInt(detailGaji[0].nominal));
-            //             $('#tunj-jabatan').text('Rp ' + parseInt(detailGaji[1].nominal));
-            //             $('#tunj-keahlian').text('Rp ' + parseInt(detailGaji[2].nominal));
-            //             var totGajiPokok = parseInt(detailGaji[0].nominal) + parseInt(detailGaji[1].nominal) + parseInt(detailGaji[2].nominal);
-            //             $('#total-gaji-pokok').text('Rp ' + totGajiPokok);
-
-            //             $('#tunj-transport').text('Rp ' + parseInt(detailGaji[3].nominal));
-            //             $('#tunj-komunikasi').text('Rp '+ parseInt(detailGaji[4].nominal));
-            //             $('#lembur').text('Rp ' + parseInt(detailGaji[5].nominal));
-            //             $('#tamb-lainnya').text('Rp '+ parseInt(detailGaji[6].nominal));
-            //             var totalTambahan = parseInt(detailGaji[3].nominal) + parseInt(detailGaji[4].nominal) + parseInt(detailGaji[5].nominal) + parseInt(detailGaji[6].nominal);
-            //             $('#total-bruto').text('Rp ' + totalTambahan);
-
-            //             $('#pot-alfa').text('Rp ' + parseInt(detailGaji[9].nominal));
-            //             $('#pot-ijin').text('Rp ' + parseInt(detailGaji[10].nominal));
-            //             $('#pot-lainnya').text('Rp ' + parseInt(detailGaji[11].nominal));
-            //             $('#pot-bpjs-tk').text('Rp ' + parseInt(detailGaji[13].nominal));
-            //             $('#pot-bpjs-jp').text('Rp ' + parseInt(detailGaji[15].nominal));
-            //             $('#pot-bpjs-kesehatan').text('Rp ' + parseInt(detailGaji[17].nominal));
-            //             var totalPotongan = parseInt(detailGaji[9].nominal) + parseInt(detailGaji[10].nominal) + parseInt(detailGaji[11].nominal) + parseInt(detailGaji[13].nominal) + parseInt(detailGaji[15].nominal) + parseInt(detailGaji[17].nominal);
-            //             $('#total-potongan').text('Rp ' + totalPotongan);
-            //             var totalBruto = totGajiPokok + totalTambahan;
-            //             var totalNetto = totalBruto - totalPotongan;
-            //             $('#total-yang-di-terima').text('Rp ' + totalNetto);
-            //             $('#perusahaan-tk').text('Rp ' + parseInt(detailGaji[12].nominal));
-            //             $('#perusahaan-jp').text('Rp ' + parseInt(detailGaji[14].nominal));
-            //             $('#perusahaan-bpjs').text('Rp '+ parseInt(detailGaji[16].nominal));
-            //         }
-            //     },
-            //     error : function(){
-            //         alert('Terjadi kesalahan saat mengambil data dari API');
-            //     }
-            // });
-
-            if(dataAPI){
-                $.ajax({
-                    type: 'POST',
-                    url: '/generate-pdf',
-                    data: { data: dataAPI },
-                    success: function(response) {
-                        console.log('Server response:', response);
-                    },
-                    error: function(error) {
-                        console.error('Error:', error);
-                    }
-                });
-            }else{
-                console.log('Tidak Mempunyai Data');
-            }
-        });
-    </script>
 </body>
 </html>

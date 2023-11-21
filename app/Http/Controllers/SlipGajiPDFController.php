@@ -13,18 +13,21 @@ class SlipGajiPDFController extends Controller
     public function generatePDF(Request $request)
     {
         $decrypted = Crypt::decryptString($request->key);
-        $url     = env('APP_API')."get_karyawan_byID?id_karyawan=".$request->username;
+        $url     = "http://192.168.0.75:8099/api/gajiku?username=".$request->username."&password=".$decrypted."&id_periode=".$request->periode."&id_karyawan=".$request->karyawan;
         $client = new \GuzzleHttp\Client(['verify' => false]);
-        $request = $client->get($url);
+        $request = $client->post($url);
         $response = $request->getBody()->getContents();
-        $karyawan = json_decode($response)->data;
-        $karyawan = $karyawan[0];
+        $karyawan = json_decode($response);
+        $detail_karyawan = $karyawan->gajiku->karyawan;
+        $absensi_karyawan = $karyawan->gajiku->kehadiran_karyawan;
+        $detail_gaji = $karyawan->gajiku->karyawan_gaji;
+        // dd($detail_gaji);
 
-        $data = ['title' => 'My PDF', 'karyawan' => $karyawan];
+        $data = ['title' => 'My PDF', 'detail_karyawan' => $detail_karyawan, 'absensi_karyawan' => $absensi_karyawan, 'detail_gaji' => $detail_gaji];
         
         $pdf = PDF::loadView('gaji.slip-gaji', $data)->setPaper([0, 0, 612, 936]);
         
-        return $pdf->stream('Slip Gaji '.$karyawan->name.'.pdf');
+        return $pdf->stream('Slip Gaji '.$detail_karyawan->nama.'.pdf');
     }
 
     public function encryptPassword(Request $request){
