@@ -446,7 +446,17 @@
 
                         } else {
                             Swal.close();
-                            alert('Get Data Payroll Unsuccessfuly');
+                            $('#password').val('');
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Maaf, PIN yang dimasukan salah.',
+                                imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                imageWidth: 250,
+                                imageHeight: 250,
+                                imageAlt: 'Custom image',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
                         }
                     },
                     error: function () {
