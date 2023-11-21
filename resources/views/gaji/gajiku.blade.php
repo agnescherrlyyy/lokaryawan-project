@@ -380,9 +380,17 @@
                 });
 
                 $.ajax({
-                    url: 'http://103.164.114.22:8096/api/gajiku?username='+username+'&password='+passwordK+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
-                    type: 'POST',
+                    url: '{{url("gajiku/get_gajiku")}}',
+                    method: 'POST',
+                    data: { 
+                            username: username,
+                            password: passwordK,
+                            id_periode: id_periode,
+                            id_karyawan: id_karyawan,
+                            "_token": "{{ csrf_token() }}" 
+                    },
                     success: function(response) {
+                        console.log(response)
                         if (response.status === 'success') {
                             Swal.close();
                             $('#password').val('');
@@ -467,6 +475,7 @@
                                     method: 'POST',
                                     data: { passwordK: passwordK, "_token": "{{ csrf_token() }}" },
                                     success: function (encryptedData) {
+                                        console.log(passwordK)
                                         window.open(`{{ url('/generate-pdf') }}?username=${username}&key=${encryptedData}&periode=${id_periode}&karyawan=${id_karyawan}`, '_blank');
                                     },
                                     error: function (xhr, status, error) {

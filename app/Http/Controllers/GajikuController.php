@@ -18,7 +18,7 @@ class GajikuController extends Controller
         $response = $request->getBody()->getContents();
         $periodes = json_decode($response)->periode;
         $periode_now = collect($periodes)->where('tgl_awal', '<=', date('Y-m-d'))->where('tgl_akhir', '>=', date('Y-m-d'))->first();
-
+        
         $title = 'Penggajian';
         $subtitle = 'Gajiku';
         return view('gaji.gajiku',
@@ -29,6 +29,16 @@ class GajikuController extends Controller
                 'periode_now' => $periode_now,
             ]
         );
+    }
+    
+    public function get_gajiku(Request $request){
+        $url = "http://103.164.114.22:8096/api/gajiku?username=".$request->username."&password=".$request->password."&id_periode=".$request->id_periode."&id_karyawan=".$request->id_karyawan;
+        $client = new \GuzzleHttp\Client(['verify' => false]);
+        $request = $client->post($url);
+        $response = $request->getBody()->getContents();
+        $gaji = json_decode($response);
+        
+        return response()->json($gaji);
     }
 
     // public function generatePDF(Request $request)
