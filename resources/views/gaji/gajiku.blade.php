@@ -380,7 +380,7 @@
                 });
 
                 $.ajax({
-                    url: 'http://103.164.114.22:8096/api/gajiku?username='+username+'&password='+passwordK+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
+                    url: 'http://192.168.0.75:8099/api/gajiku?username='+username+'&password='+passwordK+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
                     type: 'POST',
                     success: function(response) {
                         if (response.status === 'success') {
