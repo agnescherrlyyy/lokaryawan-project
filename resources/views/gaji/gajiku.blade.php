@@ -387,14 +387,14 @@
                             Swal.close();
                             $('#password').val('');
                             Swal.fire({
-                                    title: response.status,
-                                    text: response.message,
-                                    imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
-                                    imageWidth: 200,
-                                    imageHeight: 200,
-                                    imageAlt: 'Custom image',
-                                    showConfirmButton: false,
-                                    timer: 1200,
+                                title: response.status,
+                                text: response.message,
+                                imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
+                                imageWidth: 250,
+                                imageHeight: 250,
+                                imageAlt: 'Custom image',
+                                showConfirmButton: false,
+                                timer: 1200,
                             });
                             dataGaji = response.gajiku;
                             summaryProfile = response.gajiku.karyawan;
@@ -444,6 +444,37 @@
                             $('#bpjs-jp').text('BPJS JP Perusahaan yang dibayarkan : Rp ' + parseInt(summaryGaji[14].nominal));
                             $('#bpjs-kes').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[16].nominal));
 
+                            $('.unduh-slip').click(function (e) {
+                                e.preventDefault();
+
+                                if (!username || !passwordK || !id_periode || !id_karyawan) {
+                                    console.log(username, passwordK, id_periode, id_karyawan);
+                                    Swal.fire({
+                                            title: 'Penting!',
+                                            text: 'Harap masukan password dan pilih periode terlebih dahulu',
+                                            imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                            imageWidth: 200,
+                                            imageHeight: 200,
+                                            imageAlt: 'Custom image',
+                                            showConfirmButton: false,
+                                            timer: 1200,
+                                    });
+                                    return;
+                                }
+
+                                $.ajax({
+                                    url: '{{ url("encrypt-password") }}',
+                                    method: 'POST',
+                                    data: { passwordK: passwordK, "_token": "{{ csrf_token() }}" },
+                                    success: function (encryptedData) {
+                                        window.open(`{{ url('/generate-pdf') }}?username=${username}&key=${encryptedData}&periode=${id_periode}&karyawan=${id_karyawan}`, '_blank');
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error fetching encrypted data:', error);
+                                    }
+                                });
+                            });
+
                         } else {
                             Swal.close();
                             $('#password').val('');
@@ -457,41 +488,23 @@
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
+
+                            $('.unduh-slip').click(function (e){
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Maaf, PIN yang dimasukan salah.',
+                                    imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                    imageWidth: 250,
+                                    imageHeight: 250,
+                                    imageAlt: 'Custom image',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            });
                         }
                     },
                     error: function () {
                         alert('Terjadi kesalahan saat mengambil data dari API');
-                    }
-                });
-            });
-
-            $('.unduh-slip').click(function (e) {
-                e.preventDefault();
-
-                if (!username || !passwordK || !id_periode || !id_karyawan) {
-                    console.log(username, passwordK, id_periode, id_karyawan);
-                    Swal.fire({
-                            title: 'Penting!',
-                            text: 'Harap masukan password dan pilih periode terlebih dahulu',
-                            imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
-                            imageWidth: 200,
-                            imageHeight: 200,
-                            imageAlt: 'Custom image',
-                            showConfirmButton: false,
-                            timer: 1200,
-                    });
-                    return;
-                }
-
-                $.ajax({
-                    url: '{{ url("encrypt-password") }}',
-                    method: 'POST',
-                    data: { passwordK: passwordK, "_token": "{{ csrf_token() }}" },
-                    success: function (encryptedData) {
-                        window.open(`{{ url('/generate-pdf') }}?username=${username}&key=${encryptedData}&periode=${id_periode}&karyawan=${id_karyawan}`, '_blank');
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error fetching encrypted data:', error);
                     }
                 });
             });
