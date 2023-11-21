@@ -36,6 +36,7 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/lemburku', [LemburkuController::class, 'index']);
 
     Route::get('/gajiku', [GajikuController::class, 'index']);
+    Route::post('/gajiku/get_gajiku', [GajikuController::class, 'get_gajiku']);
 
     Route::get('/tiket', [TiketkuController::class, 'index']);
     Route::get('/tiket/konfirmasi-pembayaran', [SlipTiketKonfirmasiController::class, 'index']);

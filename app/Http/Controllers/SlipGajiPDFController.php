@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -18,10 +17,10 @@ class SlipGajiPDFController extends Controller
         $request = $client->post($url);
         $response = $request->getBody()->getContents();
         $karyawan = json_decode($response);
+        
         $detail_karyawan = $karyawan->gajiku->karyawan;
         $absensi_karyawan = $karyawan->gajiku->kehadiran_karyawan;
         $detail_gaji = $karyawan->gajiku->karyawan_gaji;
-        // dd($detail_gaji);
 
         $data = ['title' => 'My PDF', 'detail_karyawan' => $detail_karyawan, 'absensi_karyawan' => $absensi_karyawan, 'detail_gaji' => $detail_gaji];
         
@@ -36,5 +35,4 @@ class SlipGajiPDFController extends Controller
 
         return response()->json($encryptedData);
     }
-
 }
