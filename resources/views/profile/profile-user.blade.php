@@ -405,7 +405,6 @@
                                     }
 
                                     const nomoWAUpdated = nomoWA.replace(/^0/, '62');
-                                    console.log(nomoWAUpdated);
                                     const dataUbahWA = {
                                         id_karyawan : username,
                                         no_hp: nomoWAUpdated
@@ -427,7 +426,6 @@
                                         success: function (response) {
                                             if (response.status === "success") {
                                                 Swal.close();
-                                                console.log(dataUbahWA);
                                                 Swal.fire({
                                                     title: response.status,
                                                     text: response.message,
@@ -478,9 +476,8 @@
                                     }
 
                                     const nomoWAUpdated = nomoWA.replace(/^0/, '62');
-                                    console.log(nomoWAUpdated);
                                     const dataUbahWA = {
-                                        id_karyawan : username,
+                                        id_karyawan : data.username,
                                         no_hp: nomoWAUpdated
                                     }
 
@@ -500,7 +497,7 @@
                                         success: function (response) {
                                             if (response.status === "success") {
                                                 Swal.close();
-                                                console.log(dataUbahWA);
+                                                $('#nomorwa').text(nomoWAUpdated);
                                                 Swal.fire({
                                                     title: response.status,
                                                     text: response.message,
