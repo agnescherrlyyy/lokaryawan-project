@@ -406,7 +406,7 @@
 
                                     const nomoWAUpdated = nomoWA.replace(/^0/, '62');
                                     const dataUbahWA = {
-                                        id_karyawan : username,
+                                        id_karyawan : data.username,
                                         no_hp: nomoWAUpdated
                                     }
 
