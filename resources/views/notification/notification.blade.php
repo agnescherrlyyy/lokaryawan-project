@@ -18,30 +18,14 @@
             </div>
             <div class="w-full flex flex-col gap-2 mt-6 px-4">
                 <span class="font-semibold text-xs text-slate-500 uppercase">Permintaan Komplemen</span>
-                <button class="w-full flex flex-col gap-2 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
+                {{-- <button class="w-full flex flex-col gap-2 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
                     <span class="font-semibold text-sm">Komplemen Tiket 100%</span>
                     <span class="block w-fit px-3 py-2 bg-indigo-50 text-indigo-500 rounded-full font-semibold text-xs">
                         Komplemen
                     </span>
                     <span class="text-sm">Yanto</span>
                     <span class="text-xs text-slate-500">17-10-2023 08:00</span>
-                </button>
-                <button class="w-full flex flex-col gap-2 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
-                    <span class="font-semibold text-sm">Komplemen Tiket 100%</span>
-                    <span class="block w-fit px-3 py-2 bg-indigo-50 text-indigo-500 rounded-full font-semibold text-xs">
-                        Komplemen
-                    </span>
-                    <span class="text-sm">Reza</span>
-                    <span class="text-xs text-slate-500">17-10-2023 08:00</span>
-                </button>
-                <button class="w-full flex flex-col gap-2 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
-                    <span class="font-semibold text-sm">Komplemen Tiket 100%</span>
-                    <span class="block w-fit px-3 py-2 bg-indigo-50 text-indigo-500 rounded-full font-semibold text-xs">
-                        Komplemen
-                    </span>
-                    <span class="text-sm">Reza</span>
-                    <span class="text-xs text-slate-500">17-10-2023 08:00</span>
-                </button>
+                </button> --}}
             </div>
         </div>
     </div>

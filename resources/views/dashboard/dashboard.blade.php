@@ -81,7 +81,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <span id="komplemen100" class="font-semibold text-2xl">5</span>
-                    <span class="text-sm text-slate-500">Sisa komplemen 100%</span>
+                    <span class="text-sm text-slate-500">Sisa Komplemen 100%</span>
                 </div>
             </div>
             <div class="w-full flex flex-col md:flex-row md:items-center md:gap-5 gap-3 px-4 md:py-4 bg-white dark:bg-slate-800 md:border-r md:border-r-slate-100 dark:md:border-r-slate-700">
@@ -94,7 +94,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <span id="komplemen50" class="font-semibold text-2xl">5</span>
-                    <span class="text-sm text-slate-500">Sisa komplemen 50%</span>
+                    <span class="text-sm text-slate-500">Sisa Komplemen 50%</span>
                 </div>
             </div>
             <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -117,7 +117,7 @@
             <div class="w-full flex items-center justify-between">
                 <div class="flex flex-col gap-1">
                     <span class="font-semibold text-xl">Informasi Terbaru</span>
-                    <span class="font-medium text-sm">Ragam Informasi terbaru seputar Saloka Theme Park</span>
+                    <span class="font-medium text-sm">Ragam Informasi Terbaru Seputar Saloka Theme Park</span>
                 </div>
                 <button class="lihat-semua hidden w-fit lg:flex lg:items-center lg:gap-2 font-medium text-xs text-primer-60 group hover:bg-primer-20 px-4 py-2 rounded-full">                                                                         
                     Lihat semua
@@ -215,14 +215,28 @@
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
+                            console.log(response);
                             var tanggal = response.summaryKehadiran.tanggal;
+                            console.log(tanggal);
                             var absenTerakhir = response.summaryKehadiran.jam_kehadiran_karyawan;
-                            var absenSelanjutnya = response.summaryKehadiran.jam_pulang;
-                            var terlambat = response.summaryTerlambat.status;
+                            var absenSelanjutnya = '';
+                            var terlambat = '';
+                            if (response.summaryTerlambat === null) {
+                                terlambat = '00.00';
+                            } else if (response.summaryTerlambat !== null) {
+                                terlambat = response.summaryTerlambat.status;
+                            }
+
                             if (terlambat.indexOf('-') === -1) {
                                 terlambat = '00.00';
                             }
-    
+
+                            if (response.summaryKehadiran.jam_kehadiran_karyawan === '00:00'){
+                                absenSelanjutnya = response.summaryKehadiran.jam_kehadiran;
+                            } else if (response.summaryKehadiran.jam_kehadiran_karyawan !== '00:00'){
+                                absenSelanjutnya = response.summaryKehadiran.jam_pulang;
+                            }
+
                             $('.tanggal').text(tanggal);
                             $('#absen-terakhir').text(absenTerakhir);
                             $('#absen-selanjutnya').text(absenSelanjutnya);

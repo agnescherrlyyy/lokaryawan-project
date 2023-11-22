@@ -54,7 +54,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-hari-priode" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total hari priode</span>
+                        <span class="text-xs text-slate-500">Total Hari Periode</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:items-center md:gap-5 gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-berangkat" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total hari berangkat</span>
+                        <span class="text-xs text-slate-500">Total Hari Berangkat</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-libur" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total hari libur</span>
+                        <span class="text-xs text-slate-500">Total Hari Libur</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -171,16 +171,16 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-terlambat-form" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Terlambat dgn Form</span>
+                        <span class="text-xs text-slate-500">Total Terlambat dengan Form</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="w-full bg-white dark:bg-slate-800 rounded-lg mt-9">
             <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-                <span class="inline-block font-semibold text-sm">Jadwalku Priode <span id="nama_periode">{{$periode_now->periode}}</span></span>
+                <span class="inline-block font-semibold text-sm">Jadwalku Periode <span id="nama_periode">{{$periode_now->periode}}</span></span>
                 <div class="flex items-center relative">
-                    <input type="text" name="" id="" placeholder="Serach" class=" w-full px-10 py-3 border border-slate-300 bg-white dark:bg-slate-600 rounded-full focus:outline-none focus:border-primer-80 text-slate-700 dark:text-slate-50 text-xs focus:ring-2 focus:ring-primer-40">
+                    <input type="text" name="" id="searchInput" placeholder="Serach" class=" w-full px-10 py-3 border border-slate-300 bg-white dark:bg-slate-600 rounded-full focus:outline-none focus:border-primer-80 text-slate-700 dark:text-slate-50 text-xs focus:ring-2 focus:ring-primer-40">
                     <button type="submit" class="absolute left-3 group opacity-30">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                             <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
@@ -199,6 +199,7 @@
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Pulang</th>
+                                <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Aktual Absen</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Event</th>
                                 <th class="pr-6 pl-3 py-3 text-sm font-semibold tracking-wide text-left">Keterangan</th>
                             </tr>
@@ -234,6 +235,12 @@
 
         var username = decryptedFromData.username;
 
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2); 
+        var day = ('0' + today.getDate()).slice(-2);
+        var formattedDate = year + '-' + month + '-' + day;
+
         $(document).ready(function() {
             var id_karyawan = '{{ session('username') }}';
 
@@ -243,7 +250,27 @@
                 alert('ID Karywawan tidak tersedia');
             }
 
+            $('#searchInput').on('input', function () {
+                var searchText = $(this).val().toLowerCase();
+                if (searchText.length >= 4) {
+                    filterTable(searchText);
+                } else {
+                    $('.w-full tbody tr').show();
+                }
+            });
+
         });
+
+        function filterTable(searchText) {
+            $('.w-full tbody tr').each(function () {
+                var rowText = $(this).text().toLowerCase();
+                if (rowText.indexOf(searchText) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        }
 
         function get_data(){
             try {
@@ -302,9 +329,9 @@
 
             $.each(datas, function(index, absen) {
                 var row = $('<tr class="bg-white dark:bg-slate-800"></tr>');
-                row.append('<td class="pl-6 pr-3 py-3 text-sm tracking-wide text-left">' + (index + 1) + '</td>');
-                row.append('<td class="sticky left-0 bg-white dark:bg-slate-800 p-3 text-sm tracking-wide text-left ">' + absen.hari + '</td>');
-                row.append('<td class="sticky left-16 p-3 bg-white dark:bg-slate-800 text-sm tracking-wide text-left whitespace-nowrap">' + absen.tanggal + '</td>');
+                row.append('<td class="pl-6 pr-3 py-3 text-sm tracking-wide hari-ini text-left">' + (index + 1) + '</td>');
+                row.append('<td class="sticky left-0 bg-white dark:bg-slate-800 p-3 text-sm tracking-wide hari-ini text-left ">' + absen.hari + '</td>');
+                row.append('<td class="sticky left-16 p-3 bg-white dark:bg-slate-800 text-sm tracking-wide hari-ini text-left whitespace-nowrap">' + absen.tanggal + '</td>');
                 var textKehadiran = '';
                 if (absen.kehadiran === 0) {
                     textKehadiran = 'Berangkat';
@@ -329,11 +356,25 @@
                 } else {
                     textKehadiran = 'Tanpa Status';
                 }
-                row.append('<td class="p-3 text-sm tracking-wide text-left">' + textKehadiran + '</td>');
-                row.append('<td class="p-3 text-sm tracking-wide text-left">' + absen.jam_kehadiran + '</td>');
-                row.append('<td class="p-3 text-sm tracking-wide text-left">' + absen.jam_pulang + '</td>');
-                row.append('<td class="p-3 text-sm tracking-wide text-left">' + (absen.status || '') + '</td>');
-                row.append('<td class="pr-6 pl-3 py-3 text-sm tracking-wide text-left">' + absen.keterangan + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + textKehadiran + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + absen.jam_kehadiran + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + absen.jam_pulang + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + (absen.jam_kehadiran_karyawan) + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + (absen.status || '') + '</td>');
+                row.append('<td class="pr-6 pl-3 py-3 text-sm tracking-wide hari-ini text-left">' + absen.keterangan + '</td>');
+
+                var absenDate = new Date(absen.tanggal);
+
+                if (today.toDateString() === absenDate.toDateString() && absen.kehadiran === 0) {
+                    row.find('.hari-ini').addClass('bg-primer-60 dark:bg-primer-60 text-white font-semibold');
+                    row.find('.hari-ini').removeClass('bg-white dark:bg-slate-800');
+                } else if (today.toDateString() === absenDate.toDateString() && absen.kehadiran === 1) {
+                    row.find('.hari-ini').addClass('bg-rose-600 dark:bg-rose-600 text-white font-semibold');
+                    row.find('.hari-ini').removeClass('bg-white dark:bg-slate-800');
+                } else if (today.toDateString() === absenDate.toDateString() && absen.kehadiran === 2) {
+                    row.find('.hari-ini').addClass('bg-purple-600 text-white font-semibold');
+                    row.find('.hari-ini').removeClass('bg-white dark:bg-slate-800');
+                }
 
                 tableBody.append(row);
             });
