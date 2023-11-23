@@ -796,3 +796,20 @@ tbody tr[data-kehadiran="PH"] {
     @apply opacity-50 cursor-not-allowed;
 }
 
+/* Sweet Alert Edit */
+
+div:where(.swal2-container) h2:where(.swal2-title){
+    font-family: 'Poppins' !important;
+    font-weight: 600 !important;
+    font-size: 1.4rem !important;
+    padding: 0 2rem !important;
+}
+
+div:where(.swal2-container) .swal2-html-container{
+    font-family: 'Poppins' !important;
+    font-weight: 400 !important;
+    font-size: 1rem !important;
+    padding: .5rem 1rem !important;
+    margin: 0rem !important;
+}
+

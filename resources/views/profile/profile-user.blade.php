@@ -2,7 +2,7 @@
 
 @section('main-content')
     <div class="max-w-7xl w-full mx-auto flex justify-center pt-16">
-        <div class="w-full lg:max-w-lg lg:w-full p-4">
+        <div class="w-full lg:max-w-lg lg:w-full p-4 mt-2">
             <div class="w-full flex items-center justify-between gap-3 px-0 xl:px-10">
                 <button class="btn-back">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
@@ -12,7 +12,7 @@
                 <span class="font-semibold text-sm">Profile User</span>
                 <span class="font-semibold"></span>
             </div>
-            <div class="w-full flex flex-row items-center justify-center px-4 pt-4 mt-4">
+            <div class="w-full flex flex-row items-center justify-center px-4 mt-4">
                 <div class="max-w-sm w-full flex items-center gap-3 px-4">
                     <div class="w-24 h-24 flex items-center justify-center rounded-full overflow-hidden">
                         <img src="{{ asset('img/STK-20230906-WA0007.png') }}" alt="" class="">
@@ -28,20 +28,22 @@
                 </div>
             </div>
             <div class="w-full flex flex-col items-center justify-center gap-6 mt-2">
-                <div class="max-w-sm w-full flex flex-col it justify-center p-4 bg-white dark:bg-slate-900 border rounded-md">
-                    <span class="font-semibold text-xs mb-2 text-slate-500">Detail Profile</span>
-                    <div class="w-full flex flex-col gap-3">
-                        <div class="w-full flex flex-col gap-2">
-                            <span class="text-xs text-slate-600 dark:text-slate-400">ID Absen</span>
-                            <strong id="id-absen" class="text-xs"></strong>
-                        </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <span class="text-xs text-slate-600 dark:text-slate-400">NIK</span>
-                            <strong id="nik" class="text-xs"></strong>
-                        </div>
-                        <div class="w-full flex flex-col gap-2">
-                            <span class="text-xs text-slate-600 dark:text-slate-400">Nomor WhatsApp</span>
-                            <strong id="nomorwa" class="text-xs"></strong>
+                <div class="max-w-sm w-full flex flex-col items-center px-4">
+                    <div class="max-w-sm w-full flex flex-col p-4 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-600 rounded-lg">
+                        <span class="font-semibold text-xs mb-2 text-slate-500">Detail Profile</span>
+                        <div class="w-full flex flex-col gap-3">
+                            <div class="w-full flex flex-col gap-2">
+                                <span class="text-xs text-slate-600 dark:text-slate-400">ID Absen</span>
+                                <strong id="id-absen" class="text-xs"></strong>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <span class="text-xs text-slate-600 dark:text-slate-400">NIK</span>
+                                <strong id="nik" class="text-xs"></strong>
+                            </div>
+                            <div class="w-full flex flex-col gap-2">
+                                <span class="text-xs text-slate-600 dark:text-slate-400">Nomor WhatsApp</span>
+                                <strong id="nomorwa" class="text-xs"></strong>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,11 +73,11 @@
                             </svg>
                         </button>
                         <button class="btn-modal w-full px-4 py-4 font-medium text-xs flex items-center justify-between gap-2 rounded-lg bg-blue-50 hover:bg-blue-100 dark:bg-blue-400 hover:dark:bg-blue-500" data-name="modal-whatsapp">
-                            <span id="tambah-wa" class="w-full flex items-center gap-2">
+                            <span class="w-full flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
                                     <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
                                 </svg>
-                                Tambahkan Nomor WhatsApp
+                                <span id="tambah-wa">Tambahkan Nomor</span>
                             </span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                                 <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
@@ -155,7 +157,7 @@
                 <button class="close-modal px-4 py-3 rounded-lg bg-slate-300 text-slate-950 text-xs hover:bg-slate-200 w-fit">                         
                     Batal
                 </button>
-                <button id="btn-password" type="submit" form="from-password" class="close-modal px-4 py-3 rounded-lg text-slate-50 text-xs bg-primer-60 hover:bg-primer-80 transition-colors duration-200 ease-in-out w-fit">                         
+                <button id="btn-ganti-PIN" type="submit" form="from-password" class="close-modal px-4 py-3 rounded-lg text-slate-50 text-xs bg-primer-60 hover:bg-primer-80 transition-colors duration-200 ease-in-out w-fit">                         
                     Perbaharui PIN
                 </button>
             </div>
@@ -234,7 +236,7 @@
                     Swal.fire({
                         title: 'Penting!',
                         text: 'Password lama dan password baru wajib diisi.',
-                        imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                        imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                         imageWidth: 200,
                         imageHeight: 200,
                         imageAlt: 'Custom image',
@@ -276,9 +278,9 @@
                         } else {
                             Swal.close();
                             Swal.fire({
-                                title: 'Error',
-                                text: 'Data Unsuccessfully Updated.',
-                                imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                                title: 'Oops!',
+                                text: 'Password Lama Salah.',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
                                 imageAlt: 'Custom image',
@@ -293,7 +295,7 @@
                 });
             });
 
-            $('#btn-password').click(function (e) {
+            $('#btn-ganti-PIN').click(function (e) {
                 e.preventDefault();
 
                 const pwLama = $('#pw-lama-gaji').val();
@@ -312,7 +314,7 @@
                     Swal.fire({
                         title: 'Penting!',
                         text: 'PIN lama dan PIN baru wajib diisi.',
-                        imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                        imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                         imageWidth: 200,
                         imageHeight: 200,
                         imageAlt: 'Custom image',
@@ -325,10 +327,6 @@
                 Swal.fire({
                     title: 'Loading!',
                     text: 'Data Update Process',
-                    imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
-                    imageWidth: 100,
-                    imageHeight: 100,
-                    imageAlt: 'Custom image',
                     timerProgressBar: true,
                     didOpen: () => {
                         Swal.showLoading()
@@ -358,9 +356,9 @@
                         } else {
                             Swal.close();
                             Swal.fire({
-                                title: 'Error',
-                                text: 'Update Password User Unsuccessfuly',
-                                imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                                title: 'Oops!',
+                                text: 'PIN Lama Salah',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
                                 imageAlt: 'Custom image',
@@ -396,7 +394,7 @@
                                         Swal.fire({
                                             title: 'Penting!',
                                             text: 'Nomor WhatsApp wajib diisi.',
-                                            imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                            imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 200,
                                             imageHeight: 200,
                                             imageAlt: 'Custom image',
@@ -444,9 +442,9 @@
                                             }else {
                                                 Swal.close();
                                                 Swal.fire({
-                                                    title: 'Error',
-                                                    text: 'Update Nomor WhatsApp Unsuccessfuly',
-                                                    imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                                                    title: 'Oops!',
+                                                    text: 'Gagal Update Nomor WhatsApp',
+                                                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                                     imageWidth: 200,
                                                     imageHeight: 200,
                                                     imageAlt: 'Custom image',
@@ -461,14 +459,17 @@
                                     })
                                 });
                             } else if (data.no_hp !== '') {
+                                $('#tambah-wa').text('Edit Nomor');
                                 $('#btn-up-whatsapp').click(function (e) {
                                     e.preventDefault();
+                                    
                                     var nomoWA = $('#nomor-whatsapp').val();
+                                    
                                     if (!nomoWA) {
                                         Swal.fire({
                                             title: 'Penting!',
                                             text: 'Nomor WhatsApp wajib diisi.',
-                                            imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                            imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 200,
                                             imageHeight: 200,
                                             imageAlt: 'Custom image',
@@ -516,9 +517,9 @@
                                             }else {
                                                 Swal.close();
                                                 Swal.fire({
-                                                    title: 'Error',
-                                                    text: 'Update Nomor WhatsApp Unsuccessfuly',
-                                                    imageUrl: '{{asset('/img/STK-20230906-WA0027.webp')}}',
+                                                    title: 'Oops!',
+                                                    text: 'Gagal Update Nomor WhatsApp',
+                                                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                                     imageWidth: 200,
                                                     imageHeight: 200,
                                                     imageAlt: 'Custom image',
