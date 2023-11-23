@@ -231,15 +231,15 @@
                                                     <thead>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Gaji Pokok</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="gaji-pokok">{{ $detail_gaji[0]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="gaji-pokok">{{ number_format($detail_gaji[0]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tunjangan Jabatan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-jabatan">{{ $detail_gaji[1]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-jabatan">{{ number_format($detail_gaji[1]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tunjangan Keahlian</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-keahlian">{{ $detail_gaji[2]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-keahlian">{{ number_format($detail_gaji[2]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"></td>
@@ -261,7 +261,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Gaji Pokok + Tunjangan</strong></td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-gaji-pokok">Rp {{ $detail_gaji[0]->nominal + $detail_gaji[1]->nominal + $detail_gaji[2]->nominal }}.00</strong></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-gaji-pokok">Rp {{ number_format($detail_gaji[0]->nominal + $detail_gaji[1]->nominal + $detail_gaji[2]->nominal, 2, ',', '.') }}</strong></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -292,19 +292,19 @@
                                                     <thead>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tunjangan Transport Atau Kehadiran</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-transport">{{ $detail_gaji[3]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-transport">{{ number_format($detail_gaji[3]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tunjangan Komunikasi</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-komunikasi">{{ $detail_gaji[4]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tunj-komunikasi">{{ number_format($detail_gaji[4]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Lembur</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="lembur">{{ $detail_gaji[5]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="lembur">{{ number_format($detail_gaji[5]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Tambahan Lainnya</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tamb-lainnya">{{ $detail_gaji[6]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="tamb-lainnya">{{ number_format($detail_gaji[6]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"></td>
@@ -326,7 +326,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Bruto</strong></td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-bruto">Rp {{ $detail_gaji[3]->nominal + $detail_gaji[4]->nominal + $detail_gaji[5]->nominal + $detail_gaji[6]->nominal }}.00</strong></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-bruto">Rp {{ number_format($detail_gaji[3]->nominal + $detail_gaji[4]->nominal + $detail_gaji[5]->nominal + $detail_gaji[6]->nominal, 2, ',', '.') }}</strong></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -357,27 +357,27 @@
                                                     <thead>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Alfa</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-alfa">{{ $detail_gaji[9]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-alfa">{{ number_format($detail_gaji[9]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Ijin</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-ijin">{{ $detail_gaji[10]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-ijin">{{ number_format($detail_gaji[10]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">Potongan Lainnya</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-lainnya">{{ $detail_gaji[11]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-lainnya">{{ number_format($detail_gaji[11]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS TK Karyawan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-tk">{{ $detail_gaji[13]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-tk">{{ number_format($detail_gaji[13]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS JP Karyawan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-jp">{{ $detail_gaji[15]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-jp">{{ number_format($detail_gaji[15]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS Kesehatan Karyawan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-kesehatan">{{ $detail_gaji[17]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="pot-bpjs-kesehatan">{{ number_format($detail_gaji[17]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"></td>
@@ -399,7 +399,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;"><strong>Total Potongan</strong></td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-potongan">Rp {{ $detail_gaji[9]->nominal + $detail_gaji[10]->nominal + $detail_gaji[11]->nominal + $detail_gaji[13]->nominal + $detail_gaji[15]->nominal + $detail_gaji[17]->nominal }}.00</strong></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><strong id="total-potongan">Rp {{ number_format($detail_gaji[9]->nominal + $detail_gaji[10]->nominal + $detail_gaji[11]->nominal + $detail_gaji[13]->nominal + $detail_gaji[15]->nominal + $detail_gaji[17]->nominal, 2, ',', '.') }}</strong></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -417,7 +417,7 @@
                                             <strong>TOTAL YANG DI TERIMA KARYAWAN</strong>
                                         </td>
                                         <td align="right" style="padding: .5rem; color: #fff; font-size:.8rem;">
-                                            <strong id="total-yang-di-terima">Rp {{ ($detail_gaji[0]->nominal + $detail_gaji[1]->nominal + $detail_gaji[2]->nominal + $detail_gaji[3]->nominal + $detail_gaji[4]->nominal + $detail_gaji[5]->nominal + $detail_gaji[6]->nominal) - ($detail_gaji[9]->nominal + $detail_gaji[10]->nominal + $detail_gaji[11]->nominal + $detail_gaji[13]->nominal + $detail_gaji[15]->nominal + $detail_gaji[17]->nominal) }}.00</strong>
+                                            <strong id="total-yang-di-terima">Rp {{ number_format(($detail_gaji[0]->nominal + $detail_gaji[1]->nominal + $detail_gaji[2]->nominal + $detail_gaji[3]->nominal + $detail_gaji[4]->nominal + $detail_gaji[5]->nominal + $detail_gaji[6]->nominal) - ($detail_gaji[9]->nominal + $detail_gaji[10]->nominal + $detail_gaji[11]->nominal + $detail_gaji[13]->nominal + $detail_gaji[15]->nominal + $detail_gaji[17]->nominal), 2, ',', '.') }}</strong>
                                         </td>
                                     </tr>
                                 </thead>
@@ -438,15 +438,15 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS TK Perusahaan yang dibayarkan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-tk">Rp {{ $detail_gaji[12]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-tk">Rp {{ number_format($detail_gaji[12]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS JP Perusahaan yang dibayarkan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-jp">Rp {{ $detail_gaji[14]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-jp">Rp {{ number_format($detail_gaji[14]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS Kesehatan yang dibayarkan perusahaan</td>
-                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-bpjs">Rp {{ $detail_gaji[16]->nominal }}</span></td>
+                                                            <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-bpjs">Rp {{ number_format($detail_gaji[16]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -456,12 +456,12 @@
                                 </thead>
                             </table>
                         </div>
-                        <div style="width: 100%; margin-bottom: 3.5rem;">
+                        <div style="width: 100%; margin-bottom: 2rem;">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <thead width="100%">
-                                    <tr align="center" style="width=100%;">
-                                        <td style="padding: .5rem; color: #fff; font-size:.8rem;">
-                                            <strong></strong>
+                                    <tr align="left" style="width=100%;">
+                                        <td style="padding: .5rem; color: #000; font-size:.8rem;">
+                                            <span class="">{{ $title }}</span>
                                         </td>
                                     </tr>
                                 </thead>

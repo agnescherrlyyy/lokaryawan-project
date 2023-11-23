@@ -3,7 +3,7 @@
 @section('main-content')
     <div class="max-w-7xl w-full mx-auto flex justify-center pt-16">
         <div class="w-full lg:max-w-lg lg:w-full p-4">
-            <div class="w-full flex items-center justify-between gap-3">
+            <div class="w-full flex items-center justify-between gap-3 px-0 xl:px-10">
                 <button class="btn-back">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                         <path fill-rule="evenodd" d="M20.25 12a.75.75 0 01-.75.75H6.31l5.47 5.47a.75.75 0 11-1.06 1.06l-6.75-6.75a.75.75 0 010-1.06l6.75-6.75a.75.75 0 111.06 1.06l-5.47 5.47H19.5a.75.75 0 01.75.75z" clip-rule="evenodd" />
@@ -12,21 +12,23 @@
                 <span class="font-semibold text-sm">Profile User</span>
                 <span class="font-semibold"></span>
             </div>
-            <div class="w-full flex flex-col items-center justify-center p-4 mt-4">
-                <div class="w-32 h-32 rounded-full overflow-hidden">
-                    <img src="{{ asset('img/STK-20230906-WA0007.png') }}" alt="" class="w-full h-full">
-                </div>
-                <div class="w-full flex flex-col items-center justify-center gap-1">
-                    <strong class="">{{ session('name') }}</strong>
-                    <div class="w-full flex items-center justify-center gap-2">
-                        <span id="departemen" class="text-sm font-medium text-slate-500 dark:text-slate-400"></span>
-                        <span class="text-sm font-medium text-slate-500 dark:text-slate-400">&mdash;</span>
-                        <span id="sub-departemen" class="text-sm font-medium text-slate-500 dark:text-slate-400"></span>
+            <div class="w-full flex flex-row items-center justify-center px-4 pt-4 mt-4">
+                <div class="max-w-sm w-full flex items-center gap-3 px-4">
+                    <div class="w-24 h-24 flex items-center justify-center rounded-full overflow-hidden">
+                        <img src="{{ asset('img/STK-20230906-WA0007.png') }}" alt="" class="">
+                    </div>
+                    <div class="w-full flex flex-col gap-1 pb-2">
+                        <strong class="">{{ session('name') }}</strong>
+                        <div class="w-full flex gap-2">
+                            <span id="departemen" class="text-sm font-medium text-slate-500 dark:text-slate-400"></span>
+                            <span class="text-sm font-medium text-slate-500 dark:text-slate-400">&mdash;</span>
+                            <span id="sub-departemen" class="text-sm font-medium text-slate-500 dark:text-slate-400"></span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="w-full flex flex-col items-center justify-center gap-6 mt-4">
-                <div class="max-w-sm w-full flex flex-col it justify-center px-4 bg-white dark:bg-slate-900">
+            <div class="w-full flex flex-col items-center justify-center gap-6 mt-2">
+                <div class="max-w-sm w-full flex flex-col it justify-center p-4 bg-white dark:bg-slate-900 border rounded-md">
                     <span class="font-semibold text-xs mb-2 text-slate-500">Detail Profile</span>
                     <div class="w-full flex flex-col gap-3">
                         <div class="w-full flex flex-col gap-2">

@@ -22,7 +22,7 @@ class SlipGajiPDFController extends Controller
         $absensi_karyawan = $karyawan->gajiku->kehadiran_karyawan;
         $detail_gaji = $karyawan->gajiku->karyawan_gaji;
 
-        $data = ['title' => 'My PDF', 'detail_karyawan' => $detail_karyawan, 'absensi_karyawan' => $absensi_karyawan, 'detail_gaji' => $detail_gaji];
+        $data = ['title' => 'Generate by Sistem', 'detail_karyawan' => $detail_karyawan, 'absensi_karyawan' => $absensi_karyawan, 'detail_gaji' => $detail_gaji];
         
         $pdf = PDF::loadView('gaji.slip-gaji', $data)->setPaper([0, 0, 612, 936]);
         
