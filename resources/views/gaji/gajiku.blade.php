@@ -389,7 +389,7 @@
                             if (summaryProfile === null) {
                                 Swal.fire({
                                     title: 'Penting',
-                                    text: 'Gaji periode bulan ini belum ada.',
+                                    text: 'Gaji Periode Bulan Ini Belum Ada.',
                                     imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                     imageWidth: 150,
                                     imageHeight: 150,
@@ -483,7 +483,7 @@
                                     if (!summaryProfile) {
                                         Swal.fire({
                                             title: 'Penting',
-                                            text: 'Gaji periode bulan ini belum ada.',
+                                            text: 'Gaji Periode Bulan Ini Belum Ada.',
                                             imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 150,
                                             imageHeight: 150,
@@ -495,7 +495,7 @@
                                     if (!username || !passwordK || !id_periode || !id_karyawan) {
                                         Swal.fire({
                                             title: 'Penting!',
-                                            text: 'Harap masukan PIN dan pilih periode terlebih dahulu',
+                                            text: 'Harap masukan PIN dan Pilih Periode Terlebih Dahulu',
                                             imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 200,
                                             imageHeight: 200,
@@ -524,7 +524,7 @@
                             $('#password').val('');
                             Swal.fire({
                                 title: 'Oops!',
-                                text: 'Maaf, PIN yang dimasukan salah.',
+                                text: 'Maaf, PIN yang Dimasukan Salah.',
                                 imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 150,
                                 imageHeight: 150,
@@ -534,9 +534,10 @@
                             });
 
                             $('.unduh-slip').click(function (e){
+                                e.preventDefault();
                                 Swal.fire({
                                     title: 'Oops!',
-                                    text: 'Maaf, PIN yang dimasukan salah.',
+                                    text: 'Maaf, PIN yang Dimasukan Salah.',
                                     imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                     imageWidth: 150,
                                     imageHeight: 150,
@@ -554,9 +555,10 @@
             });
 
             $('.unduh-slip').click(function (e){
+                e.preventDefault();
                 Swal.fire({
                     title: 'Penting',
-                    text: 'Masukan PIN dan pilih periode terlebih dahulu.',
+                    text: 'Masukan PIN dan Pilih Periode Terlebih Dahulu.',
                     imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                     imageWidth: 200,
                     imageHeight: 200,

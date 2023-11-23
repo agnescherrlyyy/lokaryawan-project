@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class ProfileUserController extends Controller
 {
@@ -19,15 +20,33 @@ class ProfileUserController extends Controller
         );
     }
 
-    public function post_pin(Request $request){
-        // $url = "https://lokahr.salokapark.app/api/update_nohandphone?id_karyawan=".$request->id_karyawan."&no_hp=".$request->no_wa;
-        $url = "http://103.164.114.22:8096/api/edit_password";
-        $client = new \GuzzleHttp\Client(['verify' => false]);
-        $request = $client->post($url);
-        $response = $request->getBody()->getContents();
-        $status = json_decode($response);
+    // public function post_pin(Request $request){
+    //     $url = "http://103.164.114.22:8096/api/edit_password?id_karyawan=".$request->id_karyawan."&no_hp=".$request->no_wa;
+    //     // $url = "http://103.164.114.22:8096/api/edit_password";
+    //     $client = new \GuzzleHttp\Client(['verify' => false]);
+    //     $request = $client->post($url);
+    //     $response = $request->getBody()->getContents();
+    //     $status = json_decode($response);
 
-        return response()->json($status);
+    //     return response()->json($status);
+    // }
+
+    public function post_pin(Request $request){
+        $url = "http://103.164.114.22:8096/api/edit_password";
+        $data = $request->all();
+        $client = new Client();
+    
+        try {
+            $response = $client->post($url, [
+                'verify' => false,
+                'json' => $data,
+            ]);
+            $status = json_decode($response->getBody()->getContents(), true);
+    
+            return response()->json($status);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**

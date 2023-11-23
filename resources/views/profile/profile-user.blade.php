@@ -346,8 +346,8 @@
                         if (response.status === "success") {
                             Swal.close();
                             Swal.fire({
-                                title: response.status,
-                                text: response.message,
+                                title: 'Sukses',
+                                text: 'PIN Berhasil Diganti',
                                 imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
                                 imageWidth: 200,
                                 imageHeight: 200,
@@ -398,7 +398,7 @@
                                     if (!nomoWA) {
                                         Swal.fire({
                                             title: 'Penting!',
-                                            text: 'Nomor WhatsApp wajib diisi.',
+                                            text: 'Nomor WhatsApp Wajib Diisi.',
                                             imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 200,
                                             imageHeight: 200,
