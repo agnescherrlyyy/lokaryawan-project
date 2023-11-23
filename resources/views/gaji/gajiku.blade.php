@@ -357,8 +357,15 @@
                 });
 
                 $.ajax({
-                    url: 'http://103.164.114.22:8096/api/gajiku?username='+username+'&password='+passwordK+'&id_periode='+id_periode+'&id_karyawan='+id_karyawan,
-                    type: 'POST',
+                    url: '{{url("gajiku/get_gajiku")}}',
+                    method: 'POST',
+                    data: {
+                        username : username,
+                        password : passwordK,
+                        id_periode : id_periode, 
+                        id_karyawan : id_karyawan,
+                        "_token": "{{ csrf_token() }}"
+                    },
                     success: function(response) {
                         if (response.status === 'success') {
                             console.log(response);
