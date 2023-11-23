@@ -49,6 +49,7 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/cutikhusus', [CutiKhususController::class, 'index']);
 
     Route::get('/profile-user', [ProfileUserController::class, 'index']);
+    Route::post('/profile-user/update-pin', [ProfileUserController::class, 'post_pin']);
 
     Route::get('/notification', [NotificationController::class, 'index']);
     Route::get('/approved-cuti', [ApprovedCutiController::class, 'index']);

@@ -19,6 +19,17 @@ class ProfileUserController extends Controller
         );
     }
 
+    public function post_pin(Request $request){
+        // $url = "https://lokahr.salokapark.app/api/update_nohandphone?id_karyawan=".$request->id_karyawan."&no_hp=".$request->no_wa;
+        $url = "http://103.164.114.22:8096/api/edit_password";
+        $client = new \GuzzleHttp\Client(['verify' => false]);
+        $request = $client->post($url);
+        $response = $request->getBody()->getContents();
+        $status = json_decode($response);
+
+        return response()->json($status);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

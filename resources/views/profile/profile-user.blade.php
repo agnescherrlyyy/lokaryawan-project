@@ -301,11 +301,11 @@
                 const pwLama = $('#pw-lama-gaji').val();
                 const pwBaru = $('#pw-baru-gaji').val();
 
-                const data = {
-                    username: username,
-                    password_lama: pwLama,
-                    password_baru: pwBaru
-                }
+                // const data = {
+                //     username: username,
+                //     password_lama: pwLama,
+                //     password_baru: pwBaru
+                // }
 
                 $('#pw-lama-gaji').val('');
                 $('#pw-baru-gaji').val(''); 
@@ -334,9 +334,14 @@
                 });
 
                 $.ajax({
-                    url: 'http://103.164.114.22:8096/api/edit_password',
+                    url: '{{ url("/profile-user/update-pin") }}',
                     type: 'POST',
-                    data: data,
+                    data: {
+                        username: username,
+                        password_lama: pwLama,
+                        password_baru: pwBaru,
+                        "_token": "{{ csrf_token() }}"
+                    },
                     success: function (response) {
                         if (response.status === "success") {
                             Swal.close();

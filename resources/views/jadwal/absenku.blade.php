@@ -199,7 +199,8 @@
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Kehadiran</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Pulang</th>
-                                <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Aktual Absen</th>
+                                <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Aktual Kehadiran</th>
+                                <th class="p-3 text-sm font-semibold tracking-wide text-left">Jam Aktual Pulang</th>
                                 <th class="p-3 text-sm font-semibold tracking-wide text-left">Event</th>
                                 <th class="pr-6 pl-3 py-3 text-sm font-semibold tracking-wide text-left">Keterangan</th>
                             </tr>
@@ -360,6 +361,7 @@
                 row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + absen.jam_kehadiran + '</td>');
                 row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + absen.jam_pulang + '</td>');
                 row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + (absen.jam_kehadiran_karyawan) + '</td>');
+                row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + (absen.jam_pulang_karyawan) + '</td>');
                 row.append('<td class="p-3 text-sm tracking-wide hari-ini text-left">' + (absen.status || '') + '</td>');
                 row.append('<td class="pr-6 pl-3 py-3 text-sm tracking-wide hari-ini text-left">' + absen.keterangan + '</td>');
 

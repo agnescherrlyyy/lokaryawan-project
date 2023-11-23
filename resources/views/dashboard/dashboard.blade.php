@@ -215,9 +215,7 @@
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'success') {
-                            console.log(response);
                             var tanggal = response.summaryKehadiran.tanggal;
-                            console.log(tanggal);
                             var absenTerakhir = response.summaryKehadiran.jam_kehadiran_karyawan;
                             var absenSelanjutnya = '';
                             var terlambat = '';

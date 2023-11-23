@@ -368,7 +368,6 @@
                     },
                     success: function(response) {
                         if (response.status === 'success') {
-                            console.log(response);
                             Swal.close();
                             $('#password').val('');
                             Swal.fire({
@@ -391,7 +390,7 @@
                                 Swal.fire({
                                     title: 'Penting',
                                     text: 'Gaji periode bulan ini belum ada.',
-                                    imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                     imageWidth: 150,
                                     imageHeight: 150,
                                     imageAlt: 'Custom image',
@@ -475,9 +474,9 @@
                                 var totalTerima = gajiKotor - totalPotongan;
                                 $('#total-terima').text(formatRupiah(totalTerima));
 
-                                $('#bpjs-tk-perusahaan').text('BPJS TK yang dibayarkan Perusahaan: Rp ' + parseInt(summaryGaji[12].nominal));
-                                $('#bpjs-jp-perusahaan').text('BPJS JP yang dibayarkan Perusahaan: Rp ' + parseInt(summaryGaji[14].nominal));
-                                $('#bpjs-kesehatan-perusahaan').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + parseInt(summaryGaji[16].nominal));
+                                $('#bpjs-tk-perusahaan').text('BPJS TK yang dibayarkan Perusahaan: Rp ' + formatRupiah(summaryGaji[12].nominal));
+                                $('#bpjs-jp-perusahaan').text('BPJS JP yang dibayarkan Perusahaan: Rp ' + formatRupiah(summaryGaji[14].nominal));
+                                $('#bpjs-kesehatan-perusahaan').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + formatRupiah(summaryGaji[16].nominal));
 
                                 $('.unduh-slip').click(function (e) {
                                     e.preventDefault();
@@ -485,7 +484,7 @@
                                         Swal.fire({
                                             title: 'Penting',
                                             text: 'Gaji periode bulan ini belum ada.',
-                                            imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                            imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 150,
                                             imageHeight: 150,
                                             imageAlt: 'Custom image',
@@ -494,11 +493,10 @@
                                     }
 
                                     if (!username || !passwordK || !id_periode || !id_karyawan) {
-                                        console.log(username, passwordK, id_periode, id_karyawan);
                                         Swal.fire({
                                             title: 'Penting!',
                                             text: 'Harap masukan PIN dan pilih periode terlebih dahulu',
-                                            imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                            imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 200,
                                             imageHeight: 200,
                                             imageAlt: 'Custom image',
@@ -513,7 +511,6 @@
                                         method: 'POST',
                                         data: { passwordK: passwordK, "_token": "{{ csrf_token() }}" },
                                         success: function (encryptedData) {
-                                            console.log(passwordK)
                                             window.open(`{{ url('/generate-pdf') }}?username=${username}&key=${encryptedData}&periode=${id_periode}&karyawan=${id_karyawan}`, '_blank');
                                         },
                                         error: function (xhr, status, error) {
@@ -528,7 +525,7 @@
                             Swal.fire({
                                 title: 'Oops!',
                                 text: 'Maaf, PIN yang dimasukan salah.',
-                                imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 150,
                                 imageHeight: 150,
                                 imageAlt: 'Custom image',
@@ -540,7 +537,7 @@
                                 Swal.fire({
                                     title: 'Oops!',
                                     text: 'Maaf, PIN yang dimasukan salah.',
-                                    imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                     imageWidth: 150,
                                     imageHeight: 150,
                                     imageAlt: 'Custom image',
@@ -560,7 +557,7 @@
                 Swal.fire({
                     title: 'Penting',
                     text: 'Masukan PIN dan pilih periode terlebih dahulu.',
-                    imageUrl: '{{asset('/img/STK-20230906-WA0031.webp')}}',
+                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                     imageWidth: 200,
                     imageHeight: 200,
                     imageAlt: 'Custom image',
