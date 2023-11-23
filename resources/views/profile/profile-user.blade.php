@@ -428,6 +428,7 @@
                                         success: function (response) {
                                             if (response.status === "success") {
                                                 Swal.close();
+                                                $('#nomorwa').text(nomoWAUpdated);
                                                 Swal.fire({
                                                     title: response.status,
                                                     text: response.message,
