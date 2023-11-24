@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @yield('meta')
     <link rel="shortcut icon" href="{{ asset('/img/favicon.png') }}" type="image/x-icon">
+    @yield('css')
+    @yield('js')
     <title>{{ $subtitle }} &mdash; LOKARYAWAN</title>
     <script src="{{ asset('js/crypto-js.js') }}"></script>
     @vite('resources/css/app.css')
@@ -17,7 +19,7 @@
             @include('layout.navbar')
             @yield('content')
             <div class="px-10 lg:pl-10 lg:pr-16 mt-12 py-4 border-t-2 border-t-slate-200 dark:border-t-slate-700">
-                <p class="text-sm text-slate-400">Copyright © 2023  Design By IT SALOKA</p>
+                <p class="text-sm text-slate-400">Copyright © 2023 APP by IT SALOKA</p>
             </div>
         </div>
     </section>

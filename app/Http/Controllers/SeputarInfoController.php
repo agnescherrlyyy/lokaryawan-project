@@ -30,6 +30,18 @@ class SeputarInfoController extends Controller
         );
     }
 
+    public function manualbook()
+    {
+        $title = 'Manual Booking';
+        $subtitle = 'Manial Book';
+        return view('seputar-info.manual-book', 
+            [
+                'title' => $title,
+                'subtitle' => $subtitle
+            ]
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      */

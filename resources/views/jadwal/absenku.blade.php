@@ -5,7 +5,7 @@
     <div class="max-w-full w-full px-10 lg:pl-10 lg:pr-16 lg:flex lg:items-start lg:justify-between py-4 bg-white dark:bg-slate-800">
         <div class="w-full">
             <h1 class="font-semibold text-xl mb-2">Jadwal</h1>
-            <h4 class="font-medium text-slate-600 dark:text-slate-400">Absenku</h4>
+            <h4 class="font-medium text-slate-600 dark:text-slate-300">Absenku</h4>
         </div>
     </div>
     <!-- Heading End -->
@@ -54,7 +54,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-hari-priode" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Hari Periode</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Hari Periode</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:items-center md:gap-5 gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-berangkat" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Hari Berangkat</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Hari Berangkat</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-libur" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Hari Libur</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Hari Libur</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-ph" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total PH</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total PH</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -106,7 +106,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-izin" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Izin</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Izin</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -119,7 +119,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-alfa" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Alfa</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Alfa</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -132,7 +132,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-sakit" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Sakit</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Sakit</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -145,7 +145,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-cuti" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Cuti</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Cuti</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -158,7 +158,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-terlambat" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Terlambat</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Terlambat</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -171,7 +171,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="total-terlambat-form" class="font-semibold"></span>
-                        <span class="text-xs text-slate-500">Total Terlambat dengan Form</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total Terlambat dengan Form</span>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
     <div class="max-w-full w-full px-10 lg:pl-10 lg:pr-16 lg:flex lg:items-start lg:justify-between py-4 bg-white dark:bg-slate-800">
         <div class="w-full">
             <h1 class="font-semibold text-lg mb-2">Penggajian</h1>
-            <h4 class="font-medium text-slate-600 dark:text-slate-400">Gajiku</h4>
+            <h4 class="font-medium text-slate-600 dark:text-slate-300">Gajiku</h4>
         </div>
     </div>
     <!-- Heading End -->
@@ -102,7 +102,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <span id="total-masuk" class="font-semibold"></span>
-                                <span class="text-xs text-slate-500">Total Hari Masuk</span>
+                                <span class="text-xs text-slate-600 dark:text-slate-300">Total Hari Masuk</span>
                             </div>
                         </div>
                         <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -115,7 +115,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <span id="total-libur" class="font-semibold"></span>
-                                <span class="text-xs text-slate-500">Total Hari Libur</span>
+                                <span class="text-xs text-slate-600 dark:text-slate-300">Total Hari Libur</span>
                             </div>
                         </div>
                         <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -128,7 +128,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <span id="total-izin" class="font-semibold"></span>
-                                <span class="text-xs text-slate-500">Total Izin</span>
+                                <span class="text-xs text-slate-600 dark:text-slate-300">Total Izin</span>
                             </div>
                         </div>
                         <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -141,7 +141,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <span id="total-ph" class="font-semibold"></span>
-                                <span class="text-xs text-slate-500">Total PH</span>
+                                <span class="text-xs text-slate-600 dark:text-slate-300">Total PH</span>
                             </div>
                         </div>
                         <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -154,7 +154,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <span id="total-alfa" class="font-semibold"></span>
-                                <span class="text-xs text-slate-500">Total Alfa</span>
+                                <span class="text-xs text-slate-600 dark:text-slate-300">Total Alfa</span>
                             </div>
                         </div>
                         <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -167,7 +167,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <span id="total-sakit" class="font-semibold"></span>
-                                <span class="text-xs text-slate-500">Total Sakit</span>
+                                <span class="text-xs text-slate-600 dark:text-slate-300">Total Sakit</span>
                             </div>
                         </div>
                         <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -180,7 +180,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <span id="total-cuti" class="font-semibold"></span>
-                                <span class="text-xs text-slate-500">Total Cuti</span>
+                                <span class="text-xs text-slate-600 dark:text-slate-300">Total Cuti</span>
                             </div>
                         </div>
                     </div>
@@ -283,11 +283,18 @@
             <div class="w-full pt-6">
                 <form id="form_data" class="w-full flex flex-col items-center justify-center gap-4">
                     @csrf
-                    <div class="w-full flex flex-col justify-center items-start gap-2 px-4">
+                    <div class="w-full flex flex-col justify-center items-start gap-2 px-4 relative">
                         <label for="password" class="block font-semibold text-xs"></label>
                         <div class="w-full">
                             <input type="password" name="password" id="password" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6)" value="" placeholder="Masukan PIN" class="item-input" maxlength="6" required>
                         </div>
+                        <button id="show-pin" class="absolute right-6 top-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-slate-700 dark:text-slate-50">
+                                <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
+                                <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z" />
+                                <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z" />
+                            </svg>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -319,6 +326,16 @@
             let id_periode;
             var id_karyawan = '{{ session('username') }}';
             let passwordK;
+            
+            const iconShowPW = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-slate-700 dark:text-slate-50">
+            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+            </svg>`;
+            const iconHidePW = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-slate-700 dark:text-slate-50">
+            <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
+            <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z" />
+            <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z" />
+            </svg>`;
 
             function formatRupiah(nominal) {
                 return 'Rp ' + parseFloat(nominal).toLocaleString('id-ID');
@@ -327,7 +344,20 @@
             $('.item-list').on('click', function(){
                 id_periode = $(this).data('id_periode');
             });
-            
+
+            $('.unduh-slip').click(function (e){
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Penting',
+                    text: 'Masukan PIN dan Pilih Periode Terlebih Dahulu.',
+                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            });
 
             $('#submit-password').click(function(e){
                 e.preventDefault();
@@ -554,18 +584,17 @@
                 });
             });
 
-            $('.unduh-slip').click(function (e){
+            $('#show-pin').click(function (e) {
                 e.preventDefault();
-                Swal.fire({
-                    title: 'Penting',
-                    text: 'Masukan PIN dan Pilih Periode Terlebih Dahulu.',
-                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
-                    imageWidth: 200,
-                    imageHeight: 200,
-                    imageAlt: 'Custom image',
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
+                var showPW = $('#password');
+                var icon = $('#show-pin');
+                if (showPW.attr('type') === 'password') {
+                    showPW.attr('type', 'text');
+                    icon.html(iconShowPW);
+                } else {
+                    showPW.attr('type', 'password');
+                    icon.html(iconHidePW);
+                }
             });
         });
     </script>

@@ -5,7 +5,7 @@
     <div class="max-w-full w-full px-10 lg:pl-10 lg:pr-16 lg:flex lg:items-start lg:justify-between py-4 bg-white dark:bg-slate-800">
         <div class="w-full">
             <h1 class="font-semibold text-xl mb-2">Jadwal</h1>
-            <h4 class="font-medium text-slate-600 dark:text-slate-400">Lemburku</h4>
+            <h4 class="font-medium text-slate-600 dark:text-slate-300">Lemburku</h4>
         </div>
     </div>
 
@@ -30,7 +30,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span class="font-semibold">6</span>
-                        <span class="text-xs text-slate-500">Total lembur</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total lembur</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:items-center md:gap-5 gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -43,7 +43,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span class="font-semibold">11</span>
-                        <span class="text-xs text-slate-500">Total jam lembur</span>
+                        <span class="text-xs text-slate-600 dark:text-slate-300">Total jam lembur</span>
                     </div>
                 </div>
             </div>

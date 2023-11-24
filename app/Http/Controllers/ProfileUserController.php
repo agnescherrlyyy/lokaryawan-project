@@ -13,17 +13,19 @@ class ProfileUserController extends Controller
     public function index()
     {   
         $title = 'Profile User';
-        return view('profile.profile-user',
+        $subtitle = 'Profile User';
+        return view('profile.profile-user1',
             [
                 'title' => $title,
+                'subtitle' => $subtitle
             ]
         );
     }
 
     // public function post_pin(Request $request){
-    //     $url = "http://103.164.114.22:8096/api/edit_password?id_karyawan=".$request->id_karyawan."&no_hp=".$request->no_wa;
-    //     // $url = "http://103.164.114.22:8096/api/edit_password";
-    //     $client = new \GuzzleHttp\Client(['verify' => false]);
+    //     $url = "http://103.164.114.22:8096/api/edit_password";
+    //     $data = $request->all();
+    //     $client = new \GuzzleHttp\Client(['verify' => false, 'json' => $data,]);
     //     $request = $client->post($url);
     //     $response = $request->getBody()->getContents();
     //     $status = json_decode($response);

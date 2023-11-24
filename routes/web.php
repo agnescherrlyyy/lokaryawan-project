@@ -57,6 +57,7 @@ Route::middleware(['check_login'])->group(function () {
 
     Route::get('/seputar-info', [SeputarInfoController::class, 'index']);
     Route::get('/detail-info', [SeputarInfoController::class, 'detailList']);
+    Route::get('/manual-book', [SeputarInfoController::class, 'manualbook']);
 
     Route::post('/encrypt-password', [SlipGajiPDFController::class, 'encryptPassword']);
     Route::get('/generate-pdf', [SlipGajiPDFController::class, 'generatePDF']);

@@ -813,3 +813,8 @@ div:where(.swal2-container) .swal2-html-container{
     margin: 0rem !important;
 }
 
+.swiper-pagination-bullet-active {
+    opacity: var(--swiper-pagination-bullet-opacity, 1);
+    background: #169870 !important;
+}
+
