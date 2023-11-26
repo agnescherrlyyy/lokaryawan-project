@@ -32,8 +32,8 @@ class SeputarInfoController extends Controller
 
     public function manualbook()
     {
-        $title = 'Manual Booking';
-        $subtitle = 'Manial Book';
+        $title = 'Manual Book';
+        $subtitle = 'Manual Book';
         return view('seputar-info.manual-book', 
             [
                 'title' => $title,

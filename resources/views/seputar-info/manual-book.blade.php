@@ -18,27 +18,87 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="swiper-zoom-container">
-                            <img src="{{ asset('img/15 Lokaryawan_page-0001.jpg') }}" alt="" class="w-full xl:w-96 h-full rounded-md overflow-hidden">
+                            <img src="{{ asset('img/15 Lokaryawan_page-0001.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="swiper-zoom-container">
-                            <img src="{{ asset('img/15 Lokaryawan_page-0002.jpg') }}" alt="" class="w-full xl:w-96 h-full rounded-md overflow-hidden">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0001.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="swiper-zoom-container">
-                            <img src="{{ asset('img/15 Lokaryawan_page-0003.jpg') }}" alt="" class="w-full xl:w-96 h-full rounded-md overflow-hidden">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0002.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="swiper-zoom-container">
-                            <img src="{{ asset('img/15 Lokaryawan_page-0004.jpg') }}" alt="" class="w-full xl:w-96 h-full rounded-md overflow-hidden">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0003.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="swiper-zoom-container">
-                            <img src="{{ asset('img/15 Lokaryawan_page-0005.jpg') }}" alt="" class="w-full xl:w-96 h-full rounded-md overflow-hidden">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0004.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0005.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0006.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0007.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0008.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0009.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0010.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0011.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0012.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0013.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0014.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0015.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
+                            <img src="{{ asset('img/16 LokaryawanV2_page-0016.jpg') }}" alt="" class="w-full xl:w-2/5 h-full rounded-md overflow-hidden">
                         </div>
                     </div>
                 </div>
@@ -65,7 +125,7 @@
             prevEl: ".swiper-button-prev",
         },
         zoom: {
-            maxRatio: 3,
+            maxRatio: 2,
             minRatio: 1
         },
     });
