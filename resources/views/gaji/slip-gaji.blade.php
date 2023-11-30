@@ -437,15 +437,15 @@
                                                             <td align="right" style="padding: .1rem; font-size:.8rem;"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS TK Perusahaan yang dibayarkan</td>
+                                                            <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS TK yang dibayarkan Perusahaan</td>
                                                             <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-tk">Rp {{ number_format($detail_gaji[12]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS JP Perusahaan yang dibayarkan</td>
+                                                            <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS JP yang dibayarkan Perusahaan</td>
                                                             <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-jp">Rp {{ number_format($detail_gaji[14]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS Kesehatan yang dibayarkan perusahaan</td>
+                                                            <td align="left" style="padding: .1rem; font-size:.8rem;">BPJS Kesehatan yang dibayarkan Perusahaan</td>
                                                             <td align="right" style="padding: .1rem; font-size:.8rem;"><span id="perusahaan-bpjs">Rp {{ number_format($detail_gaji[16]->nominal, 2, ',', '.') }}</span></td>
                                                         </tr>
                                                     </thead>
@@ -461,7 +461,7 @@
                                 <thead width="100%">
                                     <tr align="left" style="width=100%;">
                                         <td style="padding: .5rem; color: #000; font-size:.8rem;">
-                                            <span class="">{{ $title }}</span>
+                                            <span style="font-style: italics;">{{ $title }}</span>
                                         </td>
                                     </tr>
                                 </thead>

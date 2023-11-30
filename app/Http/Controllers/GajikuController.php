@@ -12,7 +12,7 @@ class GajikuController extends Controller
      */
     public function index()
     {   
-        $url     = 'https://lokahr.salokapark.app/api/get_periode';
+        $url     = 'http://103.164.114.22:8096/api/get_periode';
         $client = new \GuzzleHttp\Client(['verify' => false]);
         $request = $client->get($url);
         $response = $request->getBody()->getContents();

@@ -59,11 +59,10 @@ document.addEventListener("DOMContentLoaded", function () {
             
 
             const encryptedSisaCuti = localStorage.getItem('encryptedSisaCuti');
-            const decryptedBytesSisaCuti = CryptoJS.AES.decrypt(encryptedSisaCuti, 'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A=');
+            const decryptedBytesSisaCuti = CryptoJS.AES.decrypt(encryptedSisaCuti, 'base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ=');
             const decryptedSisaCuti = JSON.parse(decryptedBytesSisaCuti.toString(CryptoJS.enc.Utf8));
 
             const sisaCuti = parseInt(decryptedSisaCuti, 10);
-
 
             const clickedDate = new Date(
                 currentDate.getFullYear(),
@@ -103,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
             //     "selectedDates",
             //     JSON.stringify(formattedDatesISO)
             // );
-            const encryptedSelectedDates = CryptoJS.AES.encrypt(JSON.stringify(formattedDatesISO), 'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A=').toString();
+            const encryptedSelectedDates = CryptoJS.AES.encrypt(JSON.stringify(formattedDatesISO), 'base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ=').toString();
             localStorage.setItem('encryptedSelectedDates', encryptedSelectedDates);
         }
     });

@@ -12,9 +12,11 @@ class NotificationController extends Controller
     public function index()
     {   
         $title = 'Notification';
-        return view('notification.notification',
+        $subtitle = 'Notification';
+        return view('notification.notification-new',
             [
                 'title' => $title,
+                'subtitle' => $subtitle
             ]
         );
     }

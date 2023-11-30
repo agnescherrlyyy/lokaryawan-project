@@ -36,13 +36,13 @@
     <script src="{{ asset('js/crypto-js.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            // var username = 6741;
+            var username = 6741;
 
             const encryptedFromData = localStorage.getItem('encryptedFromData');
             const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
             const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
 
-            var username = decryptedFromData.username;
+            // var username = decryptedFromData.username;
 
             $(".btn-dashboard").click(function (e) {
                 e.preventDefault();
@@ -59,24 +59,31 @@
                 type: 'GET',
                 success: function (response) {
                     if (response.status === 'success') {
+                        console.log(response);
                         const dataCuti = response.dataCuti;
                         const container = document.querySelector('.w-full.flex.flex-col.gap-2.mt-6.px-4');
 
                         dataCuti.forEach(function(cutiData) {
-                            const tanggalArray = cutiData.tanggal.split(',');
-                            const tanggalFormatted = tanggalArray.join(', ').replace(/["\[\]]/g, '');
+                            const rangeTanggal = getTanggalRange(cutiData.tanggal);
+                            const tipeCuti = cutiData.cuti;
+                            let colorTextCuti;
+                            if (tipeCuti === 'Cuti Tahunan'){
+                                colorTextCuti = `bg-blue-50 text-blue-600`;
+                            } else if (tipeCuti !== 'Cuti Tahunan'){
+                                colorTextCuti = `bg-sekunder-20 text-sekunder-60`;
+                            }
 
                             const button = document.createElement('button');
-                            button.className = 'approved-cuti w-full flex flex-col gap-2 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800';
+                            button.className = 'approved-cuti w-full flex flex-col gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800';
                             button.setAttribute('data-id', cutiData.id);
                             button.setAttribute('data-id_cuti_trn', cutiData.id_cuti_trn);
                             button.innerHTML = `
-                                <span class="font-semibold text-sm">Pengajuan Cuti ${tanggalFormatted}</span>
-                                <span class="block w-fit px-3 py-2 bg-blue-50 text-blue-600 rounded-full font-semibold text-xs">
+                                <span class="font-semibold text-sm">Pengajuan Cuti ${rangeTanggal}</span>
+                                <span class="block w-fit px-3 py-2 ${colorTextCuti} rounded-full font-semibold text-xs">
                                     ${cutiData.cuti}
                                 </span>
                                 <span class="text-sm">${cutiData.name}</span>
-                                <span class="text-xs text-slate-500">${cutiData.tgl_pengajuan}</span>
+                                <span class="text-xs text-slate-600 dark:text-slate-300">${cutiData.tgl_pengajuan}</span>
                             `;
                             container.appendChild(button);
                         });
@@ -86,6 +93,28 @@
                     alert('Response Tidak Terdeteksi');
                 }
             });
+
+            function getTanggalRange(tanggalCuti) {
+            const cleanedString = tanggalCuti.replace(/[\["\]]/g, '');
+            const dateArray = cleanedString.split(',');
+            const sortedDates = dateArray.sort();
+
+            const startDateFormatted = formatTanggal(sortedDates[0]);
+            const endDateFormatted = formatTanggal(sortedDates[sortedDates.length - 1]);
+
+            return `${startDateFormatted} s/d ${endDateFormatted}`;
+            }
+
+            function formatTanggal(tanggal) {
+                const [year, month, day] = tanggal.split('-');
+                const monthNames = [
+                    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                ];
+                const monthName = monthNames[parseInt(month, 10) - 1];
+
+                return `${day} ${monthName} ${year}`;
+            }
 
             $('.w-full.flex.flex-col.gap-2.px-4').on('click', '.approved-cuti', function (e) {
                 e.preventDefault();

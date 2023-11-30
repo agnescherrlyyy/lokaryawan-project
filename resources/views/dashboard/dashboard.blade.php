@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Heading Start -->
-    <div class="max-w-full w-full px-10 lg:pl-10 lg:pr-16 lg:flex lg:items-start lg:justify-between py-4 bg-white dark:bg-slate-800">
+    <div class="max-w-full w-full px-10 lg:pl-10 lg:pr-10 lg:flex lg:items-start lg:justify-between py-4 bg-white dark:bg-slate-800">
         <div class="w-full">
             <h1 class="font-semibold text-xl mb-2">Dashboard</h1>
             <h4 class="font-medium text-slate-600 dark:text-slate-300">Analisis Dashboard LOKARYAWAN</h4>
@@ -11,7 +11,7 @@
     <!-- Heading End -->
 
     <!-- Dashboard Content Start -->
-    <section class="block mt-9 px-5 lg:pl-10 lg:pr-16">
+    <section class="block mt-9 px-5 lg:pl-10 lg:pr-10">
         <div class="w-full grid grid-cols-1 gap-x-4 gap-y-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <div class="w-full flex gap-5 px-6 py-4 bg-white dark:bg-slate-800 rounded-lg">
                 <div class="w-10 h-10">

@@ -11,7 +11,7 @@
     <!-- Heading End -->
 
     <!-- Cuti Tahun Content Start -->
-    <section class="block mt-9 px-2 lg:pl-10 lg:pr-16">
+    <section class="block mt-9 px-2 lg:pl-10 lg:pr-10">
         <div class="w-full mb-4 px-3 flex items-center gap-4">
             <button id="riwayat-cuti" class="btn-modal px-4 py-3 rounded-full bg-primer-60 text-slate-50 font-medium text-xs hover:bg-primer-40 w-fit flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
@@ -112,6 +112,7 @@
         const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
 
         var username = decryptedFromData.username;
+        
         const nowYears = new Date().getFullYear();
 
         $('#permintaan-cuti').click(function (e) {
@@ -126,8 +127,6 @@
         let id_cuti;
         let tipe_cuti;
         let cuti;
-        let tanggal = '2023-12-25';
-        let panjang = 1;
         let sisaCuti;
 
         $.ajax({
@@ -148,11 +147,10 @@
             const encryptedSelectedDates = localStorage.getItem('encryptedSelectedDates');
             const decryptedBytes = CryptoJS.AES.decrypt(encryptedSelectedDates, '{{ env('APP_KEY') }}');
             const decryptedSelectedDates = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
-            // console.log("Selected Dates: ", decryptedSelectedDates);
+            const dateCutiKhusus = JSON.stringify(decryptedSelectedDates);
 
             var alasanCuti = $('#alasan-cuti').val();
 
-            // Periksa apakah decryptedSelectedDates tidak ada isi atau panjangnya 0
             if (!decryptedSelectedDates || decryptedSelectedDates.length === 0) {
                 Swal.fire({
                     icon: 'error',
@@ -167,7 +165,7 @@
                 id_cuti: id_cuti,
                 tipe_cuti: tipe_cuti,
                 cuti: cuti,
-                tanggal: decryptedSelectedDates,
+                tanggal: dateCutiKhusus,
                 total_cuti: decryptedSelectedDates.length,
                 keterangan: alasanCuti,
             }
@@ -188,7 +186,7 @@
                 didOpen: () => {
                     Swal.showLoading()
                 },
-            })
+            });
 
             $.ajax({
                 url: '{{ env('APP_SERVICE') }}request_cuti',
@@ -209,7 +207,7 @@
                             timer: 1500,
                         });
                         $('#alasan-cuti').val('');
-                        // window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
+                        window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
                     } else {
                         Swal.fire({
                             position: 'center',
@@ -221,11 +219,12 @@
                     }
                 },
                 error: function () {
+                    Swal.close();
                     Swal.fire({
                         position: 'center',
-                        icon: 'Error!',
+                        icon: 'error',
                         title: 'API BAD REQUEST',
-                        showConfirmButton: false,
+                        showConfirmButton: true,
                         timer: 1700,
                         showCloseButton: true
                     });
@@ -238,12 +237,13 @@
                 url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun='+nowYears,
                 get:'GET',
                 success: function (response) {
-                    const cutiTahunan = response.data;
+                    const cutiTahunan = response.data[0];
+                    console.log(cutiTahunan);
                     $('#cuti-tahunan').text(cutiTahunan.sisa_cuti);
                     $('#masa-berlaku').text(cutiTahunan.date_start + ' s/d ' + cutiTahunan.date_end);
                     sisaCuti = cutiTahunan.sisa_cuti;
                     
-                    const encryptedSisaCuti = CryptoJS.AES.encrypt(JSON.stringify(sisaCuti), 'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A=').toString();
+                    const encryptedSisaCuti = CryptoJS.AES.encrypt(JSON.stringify(sisaCuti), '{{ env('APP_KEY') }}').toString();
                     localStorage.setItem('encryptedSisaCuti', encryptedSisaCuti);
                 },
                 error: function () {

@@ -11,7 +11,7 @@
     <!-- Heading End --> 
 
     <!-- Permintaan Cuti Content Start -->
-    <section class="block mt-9 px-5 lg:pl-10 lg:pr-16">
+    <section class="block mt-9 px-5 lg:pl-10 lg:pr-10">
         <div class="w-full flex items-center gap-1">
             <a href="{{ url('/dashboard') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-slate-400 dark:text-slate-500">
@@ -29,16 +29,33 @@
         <section class="w-full flex flex-col lg:flex-row gap-4">
             <div class="w-full h-fit bg-white dark:bg-slate-800 rounded-lg mt-9">
                 <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-                    <span class="inline-block font-semibold text-sm">Permintaan Cuti</span>
+                    <span id="permintaan-cuti" class="inline-block font-semibold text-sm">Permintaan Cuti</span>
                 </div>
-                <div class="w-full flex flex-col gap-2 p-4">
-                    <div class="w-full flex items-center justify-between">
-                        <span class="text-sm">Tgl pengajuan</span>
-                        <span class="text-sm whitespace-nowrap">06/10/2023</span>
+                <div class="px-4 pt-4 pb-2">
+                    <span id="nama-cuti" class="block w-fit px-3 py-2 text-center text-blue-600 bg-blue-50 rounded-full font-semibold text-xs">
+                        
+                    </span>
+                </div>
+                <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 px-5 pb-6 pt-2">
+                    <div class="w-full flex flex-col gap-2">
+                        <span class="text-[13px] font-semibold text-slate-600 dark:text-slate-400">Tanggal Pengajuan</span>
+                        <span id="tgl-pengajuan" class="text-[13px] whitespace-nowrap">06/10/2023</span>
                     </div>
-                    <div class="w-full flex items-center justify-between">
-                        <span class="text-sm">Tgl permintaan cuti</span>
-                        <span class="text-sm whitespace-nowrap">12/10/2023</span>
+                    <div class="w-full flex flex-col gap-2">
+                        <span class="text-[13px] font-semibold text-slate-600 dark:text-slate-400">Keterangan</span>
+                        <span id="keterangan" class="text-[13px] whitespace-nowrap">06/10/2023</span>
+                    </div>
+                    <div class="w-full flex flex-col gap-2">
+                        <span class="text-[13px] font-semibold text-slate-600 dark:text-slate-400 whitespace-nowrap">Tgl Permintaan Cuti</span>
+                        <span id="tgl-permintaan" class="text-[13px] ">12/10/2023</span>
+                    </div>
+                    <div class="w-full flex flex-col gap-2">
+                        <span class="text-[13px] font-semibold text-slate-600 dark:text-slate-400 whitespace-nowrap">Status</span>
+                        <span id="status" class="text-[13px] ">12/10/2023</span>
+                    </div>
+                    <div class="w-full flex flex-col gap-2">
+                        <span class="text-[13px] font-semibold text-slate-600 dark:text-slate-400 whitespace-nowrap">Note</span>
+                        <span id="note" class="text-[13px] ">12/10/2023</span>
                     </div>
                 </div>
             </div>
@@ -91,12 +108,78 @@
 
 @section('script')
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('js/crypto-js.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        const encryptedFromData = localStorage.getItem('encryptedFromData');
+        const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
+        const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
+
+        var username = decryptedFromData.username;
+        console.log(username);
+
         $("#back-cuti").click(function(e){
             e.preventDefault();
             window.history.back();
         })
+
+        $.ajax({
+            url: '{{ env('APP_SERVICE') }}get_request_cuti?id_karyawan='+username,
+            type: 'GET',
+            success: function(response){
+                if (response.status === 'success') {
+                    var data = response.data;
+                    var lastIndex = data.length - 1;
+                    var lastElement = data[lastIndex];
+                    console.log(lastElement);
+                    let range = getTanggalRange(lastElement.tanggal);
+                    let textStatus;
+
+                    if(lastElement.status === '2'){
+                        textStatus = 'Ditolak';
+                    } else if(lastElement.status === '1'){
+                        textStatus = 'Disetujui';
+                    } else if(lastElement.status === '0'){
+                        textStatus = 'Pandding';
+                    }
+
+                    $('#permintaan-cuti').text('Permintaan Cuti '+ range);
+                    $('#nama-cuti').text(lastElement.cuti);
+                    $('#tgl-pengajuan').text(lastElement.tgl_pengajuan);
+                    $('#keterangan').text(lastElement.keterangan);
+                    $('#tgl-permintaan').text(range);
+                    $('#status').text(textStatus);
+                    $('#note').text(lastElement.note);
+                }else{
+                    alert('Tidak Berhasil Mengambil Data Dari API');
+                }
+            },
+            error: function(){
+                alert('Response Dari API Tidak Terdeteksi');
+            }
+        });
+
+        function getTanggalRange(tanggalCuti) {
+            const cleanedString = tanggalCuti.replace(/[\["\]]/g, '');
+            const dateArray = cleanedString.split(',');
+            const sortedDates = dateArray.sort();
+
+            const startDateFormatted = formatTanggal(sortedDates[0]);
+            const endDateFormatted = formatTanggal(sortedDates[sortedDates.length - 1]);
+
+            return `${startDateFormatted} s/d ${endDateFormatted}`;
+        }
+
+        function formatTanggal(tanggal) {
+            const [year, month, day] = tanggal.split('-');
+            const monthNames = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+            const monthName = monthNames[parseInt(month, 10) - 1];
+
+            return `${day} ${monthName} ${year}`;
+        }
     });
 </script>
 @endsection

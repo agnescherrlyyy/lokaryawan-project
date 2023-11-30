@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <section class="block mt-9 px-5 lg:pl-10 lg:pr-16">
+    <section class="block mt-9 px-5 lg:pl-10 lg:pr-10">
         <div class="w-full flex flex-col items-center justify-center p-4 rounded-lg bg-white dark:bg-slate-800">
             <div class="w-32 h-32 rounded-full overflow-hidden">
                 <img src="{{ asset('img/STK-20230906-WA0007.png') }}" alt="" class="w-full h-full">

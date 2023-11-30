@@ -11,7 +11,7 @@
     <!-- Heading End -->
 
     <!-- Cuti Tahun Content Start -->
-    <section class="block mt-9 px-2 lg:pl-10 lg:pr-16">
+    <section class="block mt-9 px-2 lg:pl-10 lg:pr-10">
         <div class="w-full mb-4 px-3 flex items-center gap-4">
             <button id="riwayat-cuti" class="btn-modal px-4 py-3 rounded-full bg-primer-60 text-slate-50 font-medium text-xs hover:bg-primer-40 w-fit flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
@@ -63,20 +63,23 @@
                 <span class="block mb-4 font-semibold text-sm uppercase tracking-wide">PENGAJUAN CUTI</span>
                 <div class="w-full flex flex-col gap-2">
                     <span class="block text-sm">Tanggal yang dipilih :</span>
-                    <span id="selected-date-value"></span>
+                    <div class="flex flex-col gap-2">
+                        <span id="selected-date-value"></span>
+                    </div>
                     <form action="" method="POST">
-                        <div class="w-full flex flex-col gap-2 my-3">
+                        <div class="w-full flex flex-col gap-3 my-3">
                             <label for="" class="block font-medium text-sm mb-1">Lampirkan File</label>
                             <div class="w-full">
-                                <input type="file" class="block w-full text-sm text-slate-500
+                                <input id="input-file" type="file" accept="image/*" class="block w-full text-sm text-slate-500
                                 file:mr-4 file:py-2 file:px-4
                                 file:rounded-full file:border-0
                                 file:text-sm file:font-semibold
                                 file:bg-primer-20 file:text-primer-60
                                 hover:file:bg-primer-60
-                                hover:file:text-primer-20
+                                hover:file:text-primer-20 cursor-pointer
                                 "/>
                             </div>
+                            <span class="text-sm text-blue-500">* File Harus Berekstensi .jpg atau .png dan Ukuran Maksimal 500kb</span>
                         </div>
                         <textarea name="alasan-cuti" id="alasan-cuti" cols="10" rows="3" class="item-input" placeholder="Masukan alasan mengambil cuti"></textarea>
                     </form>
@@ -94,6 +97,7 @@
 <script src="{{ asset('js/calender-cuti.js') }}"></script>
 <script src="{{ asset('js/selectinput.js') }}"></script>
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('js/crypto-js.js') }}"></script>
 <script>
     $(document).ready(function () {
         const encryptedFromData = localStorage.getItem('encryptedFromData');
@@ -106,62 +110,71 @@
         var tipeCuti;
         var namaCuti;
         var jumlahHari;
+        let lampiranFile;
 
         $('.item-list').on('click', function (e) {
             idCuti = $(this).attr('id-cuti');
             tipeCuti = $(this).attr('tipe-cuti');
             namaCuti = $(this).attr('cuti');
             jumlahHari = $(this).attr('jml-hari');
-
-            const encryptedJumlahHari = CryptoJS.AES.encrypt(JSON.stringify(jumlahHari), 'base64:qZa6MmMtCLVaKKfGZIMBNVDheAkEWh6qlCB7ANFLa2A=').toString();
+            const encryptedJumlahHari = CryptoJS.AES.encrypt(JSON.stringify(jumlahHari), '{{ env('APP_KEY') }}').toString();
             localStorage.setItem('encryptedJumlahHari', encryptedJumlahHari);
         });
-        
 
-        $('#permintaan-cuti').click(function (e) {
-            e.preventDefault();
-            window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
-        })
-        $('#riwayat-cuti').click(function (e) {
-            e.preventDefault();
-            window.location.href = "{{ url('/cuti/riwayat-cutitahunan') }}";
-        })
+        $('#input-file').change(function () {
+            var maxFileSizeInBytes = 500 * 1024;
+            var selectedFile = this.files[0];
+
+            if (selectedFile && selectedFile.size > maxFileSizeInBytes) {
+                Swal.fire({
+                    title: 'Penting',
+                    text: 'File harus berekstensi .jpg atau .png dan ukuran maksimal 500kb',
+                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                    imageWidth: 150,
+                    imageHeight: 150,
+                    imageAlt: 'Custom image',
+                });
+                $('#input-file').val(null);
+                return;
+            }
+        });
 
         $('#btn-cuti').click(function (e) {
             e.preventDefault();
 
-            const encryptedDateCutiKhusus = localStorage.getItem('encryptedDateCutiKhusus');
-            const decryptedBytesCutiKhusus = CryptoJS.AES.decrypt(encryptedDateCutiKhusus, '{{ env('APP_KEY') }}');
-            const decryptedDateCutiKhusus = JSON.parse(decryptedBytesCutiKhusus.toString(CryptoJS.enc.Utf8));
-            console.log("Selected Dates: ", decryptedDateCutiKhusus);
+            const encryptedDataCutiKhusus = localStorage.getItem('encryptedDateCutiKhusus');
+            const decryptedBytesCutiKhusus = CryptoJS.AES.decrypt(encryptedDataCutiKhusus, "{{ env('APP_KEY') }}");
+            const decryptedDataCutiKhusus = JSON.parse(decryptedBytesCutiKhusus.toString(CryptoJS.enc.Utf8));
+        
+            const tanggalCutiKhusus = JSON.stringify(decryptedDataCutiKhusus);
+            console.log(tanggalCutiKhusus);
 
-            if (!decryptedDateCutiKhusus || decryptedDateCutiKhusus.length === 0) {
+            if (!tanggalCutiKhusus || tanggalCutiKhusus.length === 0) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error!',
+                    title: 'Oops!',
                     text: 'Harap Pilih Setidaknya Satu Tanggal Cuti!',
                 });
                 return;
             }
 
             var alasanCuti = $('#alasan-cuti').val();
+            lampiranFile = $('#input-file').prop('files')[0];
 
-            var fromData = {
-                id_karyawan: username,
-                id_cuti: idCuti,
-                tipe_cuti: tipeCuti,
-                cuti: namaCuti,
-                tanggal: decryptedDateCutiKhusus,
-                total_cuti: decryptedDateCutiKhusus.length,
-                keterangan: alasanCuti,
-            }
+            var fromData = new FormData();
+            fromData.append('id_karyawan', username);
+            fromData.append('id_cuti', idCuti);
+            fromData.append('tipe_cuti', tipeCuti);
+            fromData.append('cuti', namaCuti);
+            fromData.append('tanggal', tanggalCutiKhusus);
+            fromData.append('total_cuti', decryptedDataCutiKhusus.length);
+            fromData.append('keterangan', alasanCuti);
+            fromData.append('lampiran', lampiranFile);
 
-            console.log(fromData);
-
-            if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !decryptedDateCutiKhusus || !alasanCuti) {
+            if (!fromData.get('id_karyawan') || !fromData.get('id_cuti') || !fromData.get('tipe_cuti') || !fromData.get('cuti') || !decryptedDataCutiKhusus || !alasanCuti || !lampiranFile || !tanggalCutiKhusus) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error!',
+                    title: 'Oops!',
                     text: 'Harap Isi Semua Form Permintaan Cuti!',
                 });
                 return;
@@ -177,16 +190,19 @@
             });
 
             $.ajax({
-                url: '{{ env('APP_SERVICE') }}request_cuti',
+                url: '{{ env('APP_SERVICE') }}request_cuti_khusus',
                 type: 'POST',
                 data: fromData,
+                processData: false,
+                contentType: false,
                 success: function (response) {
                     Swal.close();
-                    if (response.status == "success") {
+                    if (response.status === "success") {
+                        console.log(response);
                         console.log(fromData);
                         Swal.fire({
-                            title: 'Success!',
-                            text: 'Request Cuti Karyawan Successfuly',
+                            title: response.status,
+                            text: response.message,
                             imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
                             imageWidth: 200,
                             imageHeight: 200,
@@ -195,22 +211,27 @@
                             timer: 1500,
                         });
                         $('#alasan-cuti').val('');
+                        $('#input-file').val('');
                     }else {
+                        console.log(response);
+                        Swal.close();
                         Swal.fire({
-                            position: 'center',
-                            icon: 'Error!',
-                            title: 'Request Cuti Karyawan Unsuccessfuly',
+                            title: 'Oops!',
+                            text: 'Request Cuti Karyawan Unsuccessfuly',
+                            imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                            imageWidth: 200,
+                            imageHeight: 200,
+                            imageAlt: 'Custom image',
                             showConfirmButton: false,
-                            timer: 1700,
-                            showCloseButton: true
+                            timer: 1500,
                         });
                     }
                 },
                 error: function () {
-                    console.log(error);
+                    Swal.close();
                     Swal.fire({
                         position: 'center',
-                        icon: 'Error!',
+                        icon: 'error',
                         title: 'API BAD REQUEST',
                         showConfirmButton: false,
                         timer: 1700,
@@ -235,8 +256,18 @@
         }else {
             alert('ID Karywawan tidak tersedia');
         }
+
+        $('#permintaan-cuti').click(function (e) {
+            e.preventDefault();
+            window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
+        });
+        $('#riwayat-cuti').click(function (e) {
+            e.preventDefault();
+            window.location.href = "{{ url('/cuti/riwayat-cutitahunan') }}";
+        });
+
         window.addEventListener('beforeunload', function() {
-            localStorage.removeItem('selectedDates');
+            localStorage.removeItem('encryptedDateCutiKhusus');
         });
     });
 </script>

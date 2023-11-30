@@ -11,7 +11,7 @@
     <!-- Heading End -->
 
     <!-- Absenku Content Start -->
-    <section class="block mt-9 px-5 lg:pl-10 lg:pr-16">
+    <section class="block mt-9 px-5 lg:pl-10 lg:pr-10">
         <div class="max-w-full lg:w-full mx-auto lg:flex lg:items-center pb-6">
             <div class="w-full lg:w-1/2">
                 <div class="w-full relative select-box">

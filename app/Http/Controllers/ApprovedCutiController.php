@@ -12,9 +12,11 @@ class ApprovedCutiController extends Controller
     public function index(Request $request)
     {   
         $title = 'Approved Cuti';
-        return view('approved-cuti.approved-cuti',
+        $subtitle = 'Approved Cuti';
+        return view('approved-cuti.approved-cuti-new',
             [
                 'title' => $title,
+                'subtitle' => $subtitle,
                 'request' => $request->all()
             ]
         );

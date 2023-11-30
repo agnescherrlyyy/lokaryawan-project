@@ -11,7 +11,7 @@
     <!-- Heading End -->
 
     <!-- Tiket Content Start -->
-    <section class="block mt-9 px-2 lg:pl-10 lg:pr-16">
+    <section class="block mt-9 px-2 lg:pl-10 lg:pr-10">
         <div class="w-full mb-4 px-3">
             <button id="kode-booking" class=" px-4 py-3 rounded-full bg-primer-60 text-slate-50 font-medium text-xs hover:bg-primer-40 w-fit flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
