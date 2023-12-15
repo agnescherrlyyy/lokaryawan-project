@@ -169,7 +169,7 @@
             fromData.append('tanggal', tanggalCutiKhusus);
             fromData.append('total_cuti', decryptedDataCutiKhusus.length);
             fromData.append('keterangan', alasanCuti);
-            fromData.append('lampiran', lampiranFile);
+            fromData.append('lampiran_file', lampiranFile);
             console.log(fromData);
 
             if (!fromData.get('id_karyawan') || !fromData.get('id_cuti') || !fromData.get('tipe_cuti') || !fromData.get('cuti') || !decryptedDataCutiKhusus || !alasanCuti || !lampiranFile || !tanggalCutiKhusus) {
