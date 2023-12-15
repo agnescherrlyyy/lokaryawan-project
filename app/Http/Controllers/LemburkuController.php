@@ -12,18 +12,27 @@ class LemburkuController extends Controller
      */
     public function index()
     {   
-        $lemburku_table = Lemburku::all();
         $title = 'Jadwal';
         $subtitle = 'Lemburku';
-        return view('jadwal.lemburku',
+        return view('jadwal.lembur.lemburku',
             [
                 'title' => $title,
                 'subtitle' => $subtitle
-            ],
-            compact('lemburku_table')
+            ]
         );
     }
 
+    public function reqLembur()
+    {
+        $title = 'Jadwal';
+        $subtitle = 'Lemburku';
+        return view('jadwal.lembur.req-lembur',
+            [
+                'title' => $title,
+                'subtitle' => $subtitle
+            ]
+        );
+    }
     /**
      * Show the form for creating a new resource.
      */

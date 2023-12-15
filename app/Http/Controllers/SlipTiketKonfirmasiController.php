@@ -9,14 +9,15 @@ class SlipTiketKonfirmasiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Konfirmasi Pembayaran';
         $subtitle = 'Slip Tiket';
         return view('komplemen.slip-nota-ticket', 
             [
                 'title' => $title,
-                'subtitle' => $subtitle
+                'subtitle' => $subtitle,
+                'request' => $request->all()
             ],
         );
     }

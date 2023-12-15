@@ -1,10 +1,10 @@
 @extends('layout.main')
 
 @section('content')
-    <section class="block pt-0 px-5 lg:pl-10 lg:pr-16 bg-slate-100 dark:bg-slate-900">
-        <div class="max-w-7xl w-full mx-auto flex justify-center">
-            <div class="w-full lg:max-w-lg lg:w-full mt-2">
-                <div class="w-full flex flex-row items-center justify-center mt-4">
+    <section class="block pt-0 px-5 lg:pl-10 lg:pr-16">
+        <div class="max-w-7xl w-full mx-auto flex justify-center bg-white dark:bg-slate-800 mt-4 py-6 rounded-xl">
+            <div class="w-full lg:max-w-lg lg:w-full">
+                <div class="w-full flex flex-row items-center justify-center">
                     <div class="max-w-sm w-full flex items-center gap-3 px-4">
                         <div class="w-24 h-24 flex items-center justify-center rounded-full overflow-hidden">
                             <img src="{{ asset('img/STK-20230906-WA0007.png') }}" alt="" class="">
@@ -22,7 +22,7 @@
                 <div class="w-full flex flex-col items-center justify-center gap-6 mt-2">
                     <div class="max-w-sm w-full flex flex-col items-center px-4">
                         <div class="max-w-sm w-full flex flex-col p-4 border border-gray-300 dark:border-gray-600 rounded-lg">
-                            <span class="font-semibold text-xs mb-2 text-slate-500">Detail Profile</span>
+                            <span class="font-semibold text-xs mb-2 text-slate-500 dark:text-slate-400">Detail Profile</span>
                             <div class="w-full flex flex-col gap-3">
                                 <div class="w-full flex flex-col gap-2">
                                     <span class="text-xs text-slate-600 dark:text-slate-300">ID Absen</span>
@@ -39,8 +39,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="max-w-sm w-full flex flex-col it justify-center px-4 dark:bg-slate-900">
-                        <span class="font-semibold text-xs mb-2 text-slate-500">Setting Profile</span>
+                    <div class="max-w-sm w-full flex flex-col it justify-center px-4">
+                        <span class="font-semibold text-xs mb-2 text-slate-500 dark:text-slate-400">Setting Profile</span>
                         <div class="w-full flex flex-col gap-4">
                             <button class="btn-modal w-full px-4 py-4 font-medium text-xs flex items-center justify-between gap-2 rounded-lg bg-blue-100 hover:bg-blue-200 dark:bg-blue-400 hover:dark:bg-blue-500" data-name="modal-password">
                                 <span class="w-full flex items-center gap-2">

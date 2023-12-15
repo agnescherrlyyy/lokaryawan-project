@@ -6,6 +6,7 @@ export default {
     "./resources/js/**/*.js",
     "./resources/js/**/*.jsx",
     "./resources/js/**/*.vue",
+    "./node_modules/flowbite/**/*.js"
   ],
   darkMode: 'class',
     theme: {
@@ -62,6 +63,8 @@ export default {
             },
         },
     },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 }
 

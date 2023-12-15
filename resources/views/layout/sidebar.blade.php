@@ -69,9 +69,8 @@
                 </svg>                          
             </button>
             <ul class="sub-menu">
-                <li><a href="#" class="title-subMenu">Cuti</a></li>
+                <li><a href="#" class="title-subMenu">Komplemen</a></li>
                 <li><a href="{{ url('/tiket') }}" class="{{ $subtitle === 'Tiket' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Tiket</a></li>
-                <li><a href="{{ url('/tiket') }}" class="{{ $subtitle === 'Inpark Revenue' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Inpark Revenue</a></li>
             </ul>
         </li>
         <li class="w-full mt-2 relative">

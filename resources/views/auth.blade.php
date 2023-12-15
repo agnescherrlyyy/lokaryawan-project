@@ -30,7 +30,7 @@
                                 type="text"
                                 id="username"
                                 name="username"
-                                class="w-full text-sm border rounded-md py-3 pl-10 pr-4 text-slate-700 focus:outline-none  focus:border-sekunder-60 focus:ring-2 focus:ring-sekunder-40 placeholder:opacity-50 transition-all duration-200 ease-in-out"
+                                class="w-full text-sm border border-slate-300 rounded-md py-3 pl-10 pr-4 text-slate-700 focus:outline-none  focus:border-sekunder-60 focus:ring-2 focus:ring-sekunder-40 placeholder:opacity-50 transition-all duration-200 ease-in-out"
                                 placeholder="Masukan username"
                                 required
                             />
@@ -44,7 +44,7 @@
                                 type="password"
                                 id="password"
                                 name="password"
-                                class="w-full text-sm border rounded-md py-3 pl-10 pr-4 text-slate-700 focus:outline-none focus:border-sekunder-60 focus:ring-2 focus:ring-sekunder-40 placeholder:opacity-50 transition-all duration-200 ease-in-out"
+                                class="w-full text-sm border border-slate-300 rounded-md py-3 pl-10 pr-4 text-slate-700 focus:outline-none focus:border-sekunder-60 focus:ring-2 focus:ring-sekunder-40 placeholder:opacity-50 transition-all duration-200 ease-in-out"
                                 placeholder="Masukan password"
                                 required
                             >
@@ -101,7 +101,7 @@
                             Swal.fire({
                                 title: 'Login Gagal',
                                 text: data.message,
-                                imageUrl: '{{ asset('img/STK-20230906-WA0027.webp') }}',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
                                 imageAlt: 'Custom image',
@@ -114,7 +114,7 @@
                         Swal.fire({
                             title: 'Login Gagal',
                             text: 'Username atau password salah.',
-                            imageUrl: '{{ asset('img/STK-20230906-WA0027.webp') }}',
+                            imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                             imageWidth: 200,
                             imageHeight: 200,
                             imageAlt: 'Custom image',

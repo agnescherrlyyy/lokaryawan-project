@@ -94,7 +94,7 @@
                     </form>
                 </div>
                 <div class="w-full pt-2">
-                    <button id="btn-cuti" type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out">Ajukan Cuti</button>
+                    <button id="btn-cuti" type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">AJUKAN CUTI</button>
                 </div>
             </div>
         </div>
@@ -103,8 +103,9 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('js/calender-cutitahunan.js') }}"></script>
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('js/crypto-js.js') }}"></script>
+<script src="{{ asset('js/calender-cutitahunan.js') }}"></script>
 <script>
     $(document).ready(function () {
         const encryptedFromData = localStorage.getItem('encryptedFromData');
@@ -153,9 +154,13 @@
 
             if (!decryptedSelectedDates || decryptedSelectedDates.length === 0) {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Harap Pilih Setidaknya Satu Tanggal Cuti!',
+                    title: 'Oops!',
+                    text: 'Harap Lengkapi Data Pengajuan Cuti Terlebih Dahulu',
+                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: true,
                 });
                 return;
             }
@@ -172,16 +177,20 @@
 
             if (!fromData.id_karyawan || !fromData.id_cuti || !fromData.tipe_cuti || !fromData.cuti || !alasanCuti) {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Harap Isi Semua Form Permintaan Cuti!',
+                    title: 'Oops!',
+                    text: 'Harap Lengkapi Data Pengajuan Cuti Terlebih Dahulu',
+                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: true,
                 });
                 return;
             }
 
             Swal.fire({
                 title: 'Loading!',
-                text: 'Process Request',
+                text: 'Proses Pengajuan Cuti Tahunan',
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
@@ -197,8 +206,8 @@
                     Swal.close();
                     if (response.status == "success") {
                         Swal.fire({
-                            title: 'Success!',
-                            text: 'Request Cuti Karyawan Successfully',
+                            title: 'Sukses',
+                            text: 'Permintaan Cuti Karyawan Berhasil',
                             imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
                             imageWidth: 200,
                             imageHeight: 200,
@@ -208,25 +217,29 @@
                         });
                         $('#alasan-cuti').val('');
                         window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
+                        console.log(response);
                     } else {
                         Swal.fire({
-                            position: 'center',
-                            title: 'Request Cuti Karyawan Unsuccessfuly',
+                            title: 'Oops!',
+                            text: 'Permintaan Cuti Karyawan Gagal, Silahkan Coba Lagi',
+                            imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                            imageWidth: 200,
+                            imageHeight: 200,
+                            imageAlt: 'Custom image',
                             showConfirmButton: false,
-                            timer: 1700,
-                            showCloseButton: true
+                            timer: 1500,
                         });
                     }
                 },
                 error: function () {
                     Swal.close();
+                    console.log('Tidak Berhasil');
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
-                        title: 'API BAD REQUEST',
+                        title: 'Terjadi Kesalahan',
+                        text: 'Harap Hubungi Developer',
                         showConfirmButton: true,
-                        timer: 1700,
-                        showCloseButton: true
                     });
                 }
             });
@@ -238,7 +251,6 @@
                 get:'GET',
                 success: function (response) {
                     const cutiTahunan = response.data[0];
-                    console.log(cutiTahunan);
                     $('#cuti-tahunan').text(cutiTahunan.sisa_cuti);
                     $('#masa-berlaku').text(cutiTahunan.date_start + ' s/d ' + cutiTahunan.date_end);
                     sisaCuti = cutiTahunan.sisa_cuti;

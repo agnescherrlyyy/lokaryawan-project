@@ -64,6 +64,8 @@
         localStorage.removeItem('encryptedJumlahHari');
         localStorage.removeItem('encryptedDateCutiKhusus');
         localStorage.removeItem('encryptedData');
+        localStorage.removeItem('encryptedDateCalender');
+        localStorage.removeItem('encryptedDateLembur');
 
         Swal.fire({
             title: 'Berhasil Logout!',
