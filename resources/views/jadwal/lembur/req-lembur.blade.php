@@ -113,7 +113,7 @@
             } else if ($('#labels-range-input').val() === '7') {
                 $('#jml-jam-lembur').text('3.5 Jam');
             } else if ($('#labels-range-input').val() === '8') {
-                $('#jml-jam-lembur').text('3.5 Jam');
+                $('#jml-jam-lembur').text('4 Jam');
             }
         });
 
