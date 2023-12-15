@@ -30,7 +30,7 @@
             <div class="w-full lg:w-2/5">
                 <div class="w-full relative select-box">
                     <div class="show-menu w-full flex items-center justify-between border border-sekunder-40 px-4 py-3 rounded-lg cursor-pointer bg-white dark:bg-slate-700">
-                        <input class="w-full text-box focus:outline-none active:outline-none text-sm placeholder:text-slate-950 dark:placeholder:text-slate-50 bg-transparent font-medium" type="text" name="" placeholder="Pilih Tipe Cuti" id="so-value" readonly>
+                        <input class="w-full text-box border-none focus:ring-0 active:ring-0 p-0 focus:outline-none active:outline-none text-sm placeholder:text-slate-950 dark:placeholder:text-slate-50 bg-transparent font-medium" type="text" name="" placeholder="Pilih Tipe Cuti" id="so-value" readonly>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 font-semibold transition-transform duration-150 ease-in-out">
                             <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
                         </svg>                                  
@@ -85,7 +85,7 @@
                     </form>
                 </div>
                 <div class="w-full pt-2">
-                    <button id="btn-cuti" type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out">Ajukan Cuti</button>
+                    <button id="btn-cuti" type="submit" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Ajukan Cuti</button>
                 </div>
             </div>
         </div>
@@ -94,10 +94,10 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('js/calender-cuti.js') }}"></script>
-<script src="{{ asset('js/selectinput.js') }}"></script>
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('js/crypto-js.js') }}"></script>
+<script src="{{ asset('js/calender-cuti.js') }}"></script>
+<script src="{{ asset('js/selectinput.js') }}"></script>
 <script>
     $(document).ready(function () {
         const encryptedFromData = localStorage.getItem('encryptedFromData');
@@ -170,19 +170,24 @@
             fromData.append('total_cuti', decryptedDataCutiKhusus.length);
             fromData.append('keterangan', alasanCuti);
             fromData.append('lampiran', lampiranFile);
+            console.log(fromData);
 
             if (!fromData.get('id_karyawan') || !fromData.get('id_cuti') || !fromData.get('tipe_cuti') || !fromData.get('cuti') || !decryptedDataCutiKhusus || !alasanCuti || !lampiranFile || !tanggalCutiKhusus) {
                 Swal.fire({
-                    icon: 'error',
                     title: 'Oops!',
-                    text: 'Harap Isi Semua Form Permintaan Cuti!',
+                    text: 'Harap Lengkapi Data Pengajuan Cuti Terlebih Dahulu',
+                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: true,
                 });
                 return;
             }
             
             Swal.fire({
                 title: 'Loading!',
-                text : 'Process Request',
+                text : 'Proses Pengajuan Cuti Khusus',
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
@@ -201,8 +206,8 @@
                         console.log(response);
                         console.log(fromData);
                         Swal.fire({
-                            title: response.status,
-                            text: response.message,
+                            title: 'Sukses',
+                            text: 'Permintaan Cuti Karyawan Berhasil',
                             imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
                             imageWidth: 200,
                             imageHeight: 200,
@@ -212,13 +217,14 @@
                         });
                         $('#alasan-cuti').val('');
                         $('#input-file').val('');
+                        window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
                     }else {
                         console.log(response);
                         Swal.close();
                         Swal.fire({
                             title: 'Oops!',
-                            text: 'Request Cuti Karyawan Unsuccessfuly',
-                            imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                            text: 'Permintaan Cuti Karyawan Gagal, Silahkan Coba Lagi',
+                            imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                             imageWidth: 200,
                             imageHeight: 200,
                             imageAlt: 'Custom image',
@@ -229,13 +235,13 @@
                 },
                 error: function () {
                     Swal.close();
+                    console.log('Tidak Berhasil');
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
-                        title: 'API BAD REQUEST',
-                        showConfirmButton: false,
-                        timer: 1700,
-                        showCloseButton: true
+                        title: 'Terjadi Kesalahan',
+                        text: 'Harap Hubungi Developer',
+                        showConfirmButton: true,
                     });
                 }
             });

@@ -21,6 +21,19 @@ class TiketkuController extends Controller
         );
     }
 
+    public function pengajuanKomplemen(Request $request)
+    {
+        $title = 'Komplemen';
+        $subtitle = 'Pengajuan Komplemen';
+        return view('komplemen.list-komplemen',
+            [
+                'title' => $title,
+                'subtitle' => $subtitle,
+                'request' => $request->all()
+            ],
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      */

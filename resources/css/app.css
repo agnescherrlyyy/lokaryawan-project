@@ -801,14 +801,14 @@ tbody tr[data-kehadiran="PH"] {
 div:where(.swal2-container) h2:where(.swal2-title){
     font-family: 'Poppins' !important;
     font-weight: 600 !important;
-    font-size: 1.4rem !important;
+    font-size: 1.2rem !important;
     padding: 0 2rem !important;
 }
 
 div:where(.swal2-container) .swal2-html-container{
     font-family: 'Poppins' !important;
     font-weight: 400 !important;
-    font-size: 1rem !important;
+    font-size: .9rem !important;
     padding: .5rem 1rem !important;
     margin: 0rem !important;
 }
@@ -816,5 +816,9 @@ div:where(.swal2-container) .swal2-html-container{
 .swiper-pagination-bullet-active {
     opacity: var(--swiper-pagination-bullet-opacity, 1);
     background: #169870 !important;
+}
+
+#labels-range-input::-webkit-slider-thumb {
+    background-color: #169870 !important;
 }
 

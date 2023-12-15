@@ -22,6 +22,19 @@ class ApprovedCutiController extends Controller
         );
     }
 
+    public function approvedLembur(Request $request)
+    {
+        $title = 'Approved Lembur';
+        $subtitle = 'Approved Lembur';
+        return view('approved-lembur.approved-lembur',
+            [
+                'title' => $title,
+                'subtitle' => $subtitle,
+                'request' => $request->all()
+            ]
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      */

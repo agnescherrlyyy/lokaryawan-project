@@ -34,6 +34,7 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/jadwalku', [JadwalkuController::class, 'index']);
     Route::get('/absenku', [AbsenkuController::class, 'index']);
     Route::get('/lemburku', [LemburkuController::class, 'index']);
+    Route::get('/req-lembur', [LemburkuController::class, 'reqLembur']);
 
     Route::get('/gajiku', [GajikuController::class, 'index']);
     Route::post('/gajiku/get_gajiku', [GajikuController::class, 'get_gajiku']);
@@ -41,6 +42,7 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/tiket', [TiketkuController::class, 'index']);
     Route::get('/tiket/konfirmasi-pembayaran', [SlipTiketKonfirmasiController::class, 'index']);
     Route::get('/tiket/kodebookingku', [KodeBookingkuController::class, 'index']);
+    Route::get('/tiket/pengajuan-komplemen', [TiketkuController::class, 'pengajuanKomplemen']);
 
     Route::get('/cutitahunan', [CutiTahunanController::class, 'index']);
     Route::get('/cuti/permintaan-cutitahunan', [CutiTahunanController::class, 'permintaanCuti']);
@@ -54,6 +56,7 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/notification', [NotificationController::class, 'index']);
     Route::get('/approved-cuti', [ApprovedCutiController::class, 'index']);
     Route::get('/approved-cuti/{$id}', [ApprovedCutiController::class, 'show']);
+    Route::get('/approved-lembur', [ApprovedCutiController::class, 'approvedLembur']);
 
     Route::get('/seputar-info', [SeputarInfoController::class, 'index']);
     Route::get('/detail-info', [SeputarInfoController::class, 'detailList']);

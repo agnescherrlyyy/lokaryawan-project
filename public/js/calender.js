@@ -66,15 +66,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 options
             );
             const formattedDate = utcDate.toISOString().split('T')[0];
-            localStorage.setItem("selectedDate", formattedDate);
-            // console.log("Tanggal yang pilih: " + formattedDate);
+            const encryptedDateCalender = CryptoJS.AES.encrypt(JSON.stringify(formattedDate), 'base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ=').toString();
+            localStorage.setItem('encryptedDateCalender', encryptedDateCalender);
         }
     });
 
-    selectedDateElement.textContent = currentDate.toLocaleDateString(
-        "id-ID",
-        options
-    );
+    const formattedDate = currentDate.toISOString().split("T")[0];
+    const encryptedDateCalender = CryptoJS.AES.encrypt(
+        JSON.stringify(formattedDate),
+        'base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ='
+    ).toString();
+    localStorage.setItem("encryptedDateCalender", encryptedDateCalender);
+
+    selectedDateElement.textContent = currentDate.toLocaleDateString("id-ID", options);
 
     function renderCalendar() {
         currentMonthElement.textContent = currentDate.toLocaleDateString(

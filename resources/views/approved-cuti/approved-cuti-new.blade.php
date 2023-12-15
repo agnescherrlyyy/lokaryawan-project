@@ -124,11 +124,9 @@
     <script type="text/javascript">
         $('.btn-back').click(function (e) {
             e.preventDefault();
-            history.back();
+            window.location.href = "{{ url('/notification') }}";
         });
 
-        //Username sementara
-        // var username = 6741;
         const encryptedFromData = localStorage.getItem('encryptedFromData');
         const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
         const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
@@ -138,55 +136,37 @@
         var statusApproved = $('#approve').val();
         var statusReject = $('#submit-reject').val();
         var idCutiTrn = "{{ $request['id_cuti_trn'] }}";
-        var noteApprove = '';
+        var noteApprove = '-';
 
         $.ajax({
             url: '{{ env('APP_SERVICE') }}get_request_cuti_ByID?id_cuti_trn=' + idCutiTrn,
             type: 'GET',
             success:function (response) {
                 if (response.status === 'success') {
-                    console.log(response);
                     var tanggalCuti = response.data.tanggal;
-                    // tanggalCuti = tanggalCuti.replace(/["[\]]/g, '');
-                    // var tanggalArray = tanggalCuti.split(',');
-                    // var tanggalFormatted = tanggalArray.join(',  ');
                     var rangeTanggal = getTanggalRange(tanggalCuti);
                     var statusAction = response.data.status;
 
                     if (statusAction === "0"){
                         console.log('Belum ada Action');
 
-                        $("#submit-reject").click(function (e) {
-                            e.preventDefault();
-                            var noteReject = $('#alasan').val();
-
-                            var dataRejected = {
-                                id_cuti_trn: idCutiTrn,
-                                status: statusReject,
-                                note: noteReject,
-                                reff: username,
-                            };
-
-                            Swal.fire({
-                                title: 'Loading!',
-                                text: 'Process Approved Cuti',
-                                timerProgressBar: true,
-                                didOpen: () => {
-                                    Swal.showLoading()
-                                },
-                            });
-
+                        function actionCuti(idCutiTrn, statusApproved, noteApprove, username, textError, textSuccess) {
                             $.ajax({
                                 url: '{{ env('APP_SERVICE') }}update_action_cuti',
                                 type: 'POST',
-                                data: dataRejected,
+                                data: {
+                                    id_cuti_trn: idCutiTrn,
+                                    status: statusApproved,
+                                    note: noteApprove,
+                                    id_karyawan_approve: username,
+                                },
                                 success:function (response) {
+                                    console.log(response);
                                     Swal.close();
-                                    console.log(dataRejected);
                                     if (response.status == "success") {
                                         Swal.fire({
-                                            title: response.status,
-                                            text: response.message,
+                                            title: 'Sukses',
+                                            text: textSuccess,
                                             imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
                                             imageWidth: 200,
                                             imageHeight: 200,
@@ -194,30 +174,64 @@
                                             showConfirmButton: false,
                                             timer: 1500,
                                         });
-                                        location.reload();
                                     }else {
                                         Swal.fire({
-                                            position: 'center',
-                                            title: 'Request Cuti Karyawan Unsuccessfuly',
+                                            title: 'Opps!',
+                                            text: textError,
+                                            imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                                            imageWidth: 200,
+                                            imageHeight: 200,
+                                            imageAlt: 'Custom image',
                                             showConfirmButton: false,
-                                            timer: 1700,
-                                            showCloseButton: true
+                                            timer: 1500,
                                         });
                                     }
                                 },
                                 error: function () {
                                     Swal.close();
-                                    console.log('Tidak Berhasil');
+                                    console.log(response);
                                     Swal.fire({
                                         position: 'center',
-                                        icon: 'Error!',
-                                        title: 'API BAD REQUEST',
-                                        showConfirmButton: false,
-                                        timer: 1700,
-                                        showCloseButton: true
+                                        icon: 'error',
+                                        title: 'Terjadi Kesalahan',
+                                        text: 'Harap Hubungi Developer',
+                                        showConfirmButton: true,
                                     });
                                 }
                             });
+                        }
+
+                        $("#submit-reject").click(function (e) {
+                            e.preventDefault();
+                            var noteReject = $('#alasan').val();
+                            var textError = 'Menolak Cuti Karyawan Gagal, Silahkan Coba Lagi';
+                            var textSuccess = 'Menolak Cuti Karyawan Berhasil';
+
+                            if(!idCutiTrn || !statusReject || !noteReject || !username) {
+                                Swal.fire({
+                                    title: 'Oops!',
+                                    text: 'Harap Lengkapi Alasan Menolak Cuti Terlebih Dahulu',
+                                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                                    imageWidth: 200,
+                                    imageHeight: 200,
+                                    imageAlt: 'Custom image',
+                                    showConfirmButton: true,
+                                });
+                                return;
+                            }
+
+                            Swal.fire({
+                                title: 'Loading!',
+                                text: 'Proses Menolak Cuti',
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                },
+                            });
+                            actionCuti(idCutiTrn, statusReject, noteReject, username, textError, textSuccess);
+                            $("#reject").prop("disabled", true);
+                            $("#approve").prop("disabled", true);
+                            window.location.reload();
                         });
 
                         $('#approve').click(function (e) {
@@ -228,65 +242,24 @@
                             var year = currentDate.getFullYear();
 
                             var formattedDate = day + "-" + (month < 10 ? "0" : "") + month + "-" + year;
-                            var successMessage = `Successfully approved Agnes Cherrly leave request on ${formattedDate}.`;
+                            var successMessage = `Successfully approved leave request on ${formattedDate}.`;
 
-                            var dataApproved = {
-                                id_cuti_trn: idCutiTrn,
-                                status: statusApproved,
-                                note: noteApprove,
-                                reff: username,
-                            };
+                            var textError = 'Menyetujui Cuti Karyawan Gagal, Silahkan Coba Lagi';
+                            var textSuccess = 'Menyetujui Cuti Karyawan Berhasil';
+                            console.log(idCutiTrn, statusApproved, noteApprove, username, textError, textSuccess);
 
                             Swal.fire({
                                 title: 'Loading!',
-                                text: 'Process Approved Cuti',
+                                text: 'Proses Menyetujui Cuti',
                                 timerProgressBar: true,
                                 didOpen: () => {
                                     Swal.showLoading()
                                 },
                             });
 
-                            $.ajax({
-                                url: '{{ env('APP_SERVICE') }}update_action_cuti',
-                                type: 'POST',
-                                data: dataApproved,
-                                success:function (response) {
-                                    Swal.close();
-                                    console.log(dataApproved);
-                                    if (response.status == "success") {
-                                        Swal.fire({
-                                            title: response.status,
-                                            text: response.message,
-                                            imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
-                                            imageWidth: 200,
-                                            imageHeight: 200,
-                                            imageAlt: 'Custom image',
-                                            showConfirmButton: false,
-                                            timer: 1500,
-                                        });
-                                    }else {
-                                        Swal.fire({
-                                            position: 'center',
-                                            title: 'Request Cuti Karyawan Unsuccessfuly',
-                                            showConfirmButton: false,
-                                            timer: 1700,
-                                            showCloseButton: true
-                                        });
-                                    }
-                                },
-                                error: function () {
-                                    Swal.close();
-                                    console.log('Tidak Berhasil');
-                                    Swal.fire({
-                                        position: 'center',
-                                        icon: 'Error!',
-                                        title: 'API BAD REQUEST',
-                                        showConfirmButton: false,
-                                        timer: 1700,
-                                        showCloseButton: true
-                                    });
-                                }
-                            });
+                            actionCuti(idCutiTrn, statusApproved, noteApprove, username, textError, textSuccess);
+                            $("#reject").prop("disabled", true);
+                            $("#approve").prop("disabled", true);
                         });
                     } else if (statusAction === "1") {
                         console.log('Approved');
@@ -298,7 +271,7 @@
                             Swal.fire({
                                 title: 'Approved',
                                 text: 'Cuti ini sudah di Approved',
-                                imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
                                 imageAlt: 'Custom image',
@@ -311,7 +284,7 @@
                             Swal.fire({
                                 title: 'Approved',
                                 text: 'Cuti ini sudah di Approved',
-                                imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
                                 imageAlt: 'Custom image',
@@ -336,7 +309,7 @@
                             Swal.fire({
                                 title: 'Rejected',
                                 text: 'Cuti ini sudah di Rejected',
-                                imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
                                 imageAlt: 'Custom image',
@@ -349,7 +322,7 @@
                             Swal.fire({
                                 title: 'Rejected',
                                 text: 'Cuti ini sudah di Rejected',
-                                imageUrl: '{{ asset('img/STK-20230906-WA0025.webp') }}',
+                                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
                                 imageAlt: 'Custom image',
@@ -391,10 +364,13 @@
             const dateArray = cleanedString.split(',');
             const sortedDates = dateArray.sort();
 
-            const startDateFormatted = formatTanggal(sortedDates[0]);
-            const endDateFormatted = formatTanggal(sortedDates[sortedDates.length - 1]);
-
-            return `${startDateFormatted} s/d ${endDateFormatted}`;
+            if (sortedDates.length === 1) {
+                return formatTanggal(sortedDates[0]);
+            } else {
+                const startDateFormatted = formatTanggal(sortedDates[0]);
+                const endDateFormatted = formatTanggal(sortedDates[sortedDates.length - 1]);
+                return `${startDateFormatted} s/d ${endDateFormatted}`;
+            }
         }
 
         function formatTanggal(tanggal) {
@@ -406,6 +382,5 @@
             const monthName = monthNames[parseInt(month, 10) - 1];
             return `${day} ${monthName} ${year}`;
         }
-
     </script>
 @endsection

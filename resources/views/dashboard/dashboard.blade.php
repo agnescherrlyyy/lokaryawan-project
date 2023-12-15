@@ -65,7 +65,7 @@
                 </div>
                 <div class="flex flex-col gap-2">
                     <span class="text-xs text-slate-600 dark:text-slate-300">Kedatangan Komplemen</span>
-                    <span class="font-semibold text-sm">00/00/0000</span>
+                    <span class="font-semibold text-sm">--/--/----</span>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                         >
                 </div>
                 <div class="flex flex-col gap-1">
-                    <span id="komplemen100" class="font-semibold text-2xl">5</span>
+                    <span id="komplemen100" class="font-semibold text-2xl"></span>
                     <span class="text-sm text-slate-600 dark:text-slate-300">Sisa Komplemen 100%</span>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                         >
                 </div>
                 <div class="flex flex-col gap-1">
-                    <span id="komplemen50" class="font-semibold text-2xl">5</span>
+                    <span id="komplemen50" class="font-semibold text-2xl"></span>
                     <span class="text-sm text-slate-600 dark:text-slate-300">Sisa Komplemen 50%</span>
                 </div>
             </div>
@@ -226,8 +226,8 @@
                 type: "GET",
                 success: function(response){
                     if (response.status === 'success') {
-                        var tiketNormal = response.data[0];
-                        var tiketSetengah = response.data[1];
+                        var tiketNormal = response.data[1];
+                        var tiketSetengah = response.data[0];
                         $('#komplemen100').text(tiketNormal.sisa_komplement);
                         $('#komplemen50').text(tiketSetengah.sisa_komplement);
                     }else{
@@ -240,10 +240,10 @@
             });
 
             $.ajax({
-                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun=' +nowYears,
+                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun='+nowYears,
                 type: "GET",
                 success: function (response) {
-                    var sisaCutiTahunan = response.data;
+                    var sisaCutiTahunan = response.data[0];
                     $('#sisa-cuti-tahunan').text(sisaCutiTahunan.sisa_cuti);
                 },
                 error: function () {

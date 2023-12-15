@@ -28,7 +28,15 @@
                 <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 px-6 py-6 border-b border-slate-200 dark:border-slate-700">
                     <span class="inline-block font-semibold text-sm">Notification List</span>
                 </div>
-                <div id="container-notification" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 py-6 px-4 xl:px-6 bg-white dark:bg-slate-800 rounded-b-2xl">
+                <div class="w-full flex flex-col gap-4 py-4 px-4 xl:px-6">
+                    <span class="inline-block font-semibold text-sm">Notification Cuti</span>
+                    <div id="container-notification" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 bg-white dark:bg-slate-800 rounded-b-2xl">
+                    </div>
+                </div>
+                <div class="w-full flex flex-col gap-4 py-4 px-4 xl:px-6">
+                    <span class="inline-block font-semibold text-sm">Notification Lembur</span>
+                    <div id="container-lembur" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 bg-white dark:bg-slate-800 rounded-b-2xl">
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,7 +49,6 @@
     <script src="{{ asset('js/crypto-js.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function (){
-            // var username = 6741;
 
             const encryptedFromData = localStorage.getItem('encryptedFromData');
             const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
@@ -54,38 +61,64 @@
                 type: 'GET',
                 success: function (response) {
                     if (response.status === 'success') {
-                        console.log(response);
                         const dataCuti = response.dataCuti;
+                        const dataLembur = response.dataLembur;
                         const cardContainer = document.getElementById('container-notification');
+                        const cardContainerLembur = document.getElementById('container-lembur');
 
-                        dataCuti.forEach(function(cutiData){
-                            const rangeTanggal = getTanggalRange(cutiData.tanggal);
-                            const tipeCuti = cutiData.cuti;
-                            let colorTextCuti;
-                            if (tipeCuti === 'Cuti Tahunan'){
-                                colorTextCuti = `bg-blue-50 text-blue-600`;
-                            } else if (tipeCuti !== 'Cuti Tahunan'){
-                                colorTextCuti = `bg-sekunder-20 text-sekunder-60`;
-                            }
+                        if (Array.isArray(dataCuti)){
+                            dataCuti.forEach(function(cutiData){
+                                const rangeTanggal = getTanggalRange(cutiData.tanggal);
+                                const tipeCuti = cutiData.cuti;
+                                let colorTextCuti;
+                                if (tipeCuti === 'Cuti Tahunan'){
+                                    colorTextCuti = `bg-blue-50 text-blue-600`;
+                                } else if (tipeCuti !== 'Cuti Tahunan'){
+                                    colorTextCuti = `bg-sekunder-20 text-sekunder-60`;
+                                }
+    
+                                const button = document.createElement('button');
+                                button.className = 'approved-cuti w-full flex flex-col gap-2 px-4 py-3 rounded-lg border border-slate-100 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700';
+    
+                                button.setAttribute('data-id', cutiData.id);
+                                button.setAttribute('data-id_cuti_trn', cutiData.id_cuti_trn);
+                                button.innerHTML = `
+                                    <span class="block text-left font-semibold text-xs">Pengajuan Cuti ${rangeTanggal}</span>
+                                    <span class="block w-fit px-3 py-2 ${colorTextCuti} rounded-full font-semibold text-xs">
+                                        ${cutiData.cuti}
+                                    </span>
+                                    <span class="text-sm">${cutiData.name}</span>
+                                    <span class="text-xs">${cutiData.keterangan}</span>
+                                    <span class="text-xs text-slate-600 dark:text-slate-300">${cutiData.tgl_pengajuan}</span>
+                                `;
+    
+                                cardContainer.appendChild(button);
+                            });
+                        }
 
-                            const button = document.createElement('button');
-                            button.className = 'approved-cuti w-full flex flex-col gap-2 px-4 py-3 rounded-lg border border-slate-100 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700';
-
-                            button.setAttribute('data-id', cutiData.id);
-                            button.setAttribute('data-id_cuti_trn', cutiData.id_cuti_trn);
-                            button.innerHTML = `
-                                <span class="block text-left font-semibold text-xs">Pengajuan Cuti ${rangeTanggal}</span>
-                                <span class="block w-fit px-3 py-2 ${colorTextCuti} rounded-full font-semibold text-xs">
-                                    ${cutiData.cuti}
-                                </span>
-                                <span class="text-sm">${cutiData.name}</span>
-                                <span class="text-xs">${cutiData.keterangan}</span>
-                                <span class="text-xs text-slate-600 dark:text-slate-300">${cutiData.tgl_pengajuan}</span>
-                            `;
-
-                            cardContainer.appendChild(button);
-
-                        });
+                        if (Array.isArray(dataLembur)){
+                            dataLembur.forEach(function(lemburData){
+                                const tanggalLembur = formatTanggal(lemburData.tgl_lembur);
+                                const button = document.createElement('button');
+    
+                                button.className = 'approved-lembur w-full flex flex-row gap-4 px-4 py-3 rounded-lg border border-slate-100 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700';
+                                button.setAttribute('data-id', lemburData.id);
+                                button.setAttribute('data-id_overtime', lemburData.id_overtime);
+    
+                                button.innerHTML = `<div class= "w-12 h-12 overflow-hidden rounded-full">
+                                    <img src="{{ asset('img/lembur.svg') }}" alt="avatar" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col items-start gap-2">
+                                    <span class="block text-left font-semibold text-xs">Pengajuan Lembur ${tanggalLembur}</span>
+                                    <span class="text-sm">${lemburData.name}</span>
+                                    <span class="text-xs">${tanggalLembur}</span>
+                                    <span class="text-xs text-slate-600 dark:text-slate-300">${lemburData.tgl_pengajuan}</span>
+                                </div>
+                                `;
+    
+                                cardContainerLembur.appendChild(button);
+                            });
+                        }
 
                     }else{
                         alet('Tidak Berhasil Mengambil Data Dari API');
@@ -97,14 +130,17 @@
             });
 
             function getTanggalRange(tanggalCuti) {
-                const cleanedString = tanggalCuti.replace(/[\["\]]/g, '');
-                const dateArray = cleanedString.split(',');
-                const sortedDates = dateArray.sort();
+            const cleanedString = tanggalCuti.replace(/[\["\]]/g, '');
+            const dateArray = cleanedString.split(',');
+            const sortedDates = dateArray.sort();
 
-                const startDateFormatted = formatTanggal(sortedDates[0]);
-                const endDateFormatted = formatTanggal(sortedDates[sortedDates.length - 1]);
-
-                return `${startDateFormatted} s/d ${endDateFormatted}`;
+                if (sortedDates.length === 1) {
+                    return formatTanggal(sortedDates[0]);
+                } else {
+                    const startDateFormatted = formatTanggal(sortedDates[0]);
+                    const endDateFormatted = formatTanggal(sortedDates[sortedDates.length - 1]);
+                    return `${startDateFormatted} s/d ${endDateFormatted}`;
+                }
             }
 
             function formatTanggal(tanggal) {
@@ -124,6 +160,15 @@
                 var id = $(this).data('id');
                 var id_cuti_trn = $(this).data('id_cuti_trn');
                 window.location.href = `{{ url('/approved-cuti') }}?id=${id}&id_cuti_trn=${id_cuti_trn}`;
+            });
+
+            $('#container-lembur').on('click', '.approved-lembur', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var id_overtime = $(this).data('id_overtime');
+                console.log(id);
+                console.log(id_overtime);
+                window.location.href = `{{ url('/approved-lembur') }}?id=${id}&id_overtime=${id_overtime}`;
             });
         });
     </script>
