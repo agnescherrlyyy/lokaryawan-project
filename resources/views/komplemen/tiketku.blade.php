@@ -270,7 +270,7 @@
 
             $('#kode-booking').click(function(e){
                 e.preventDefault();
-                window.location.href = "/tiket/kodebookingku";
+                window.location.href = "{{ url('/tiket/kodebookingku') }}";
             });
 
             if (username) {
