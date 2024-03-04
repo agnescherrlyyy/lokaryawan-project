@@ -34,7 +34,7 @@
         console.log(usernameEmpatDigit);
 
         $.ajax({
-        url:'https://lokahr.salokapark.app/api/get_karyawan_byID?id_karyawan='+usernameEmpatDigit,
+        url:'{{ env('APP_API') }}get_karyawan_byID?id_karyawan='+usernameEmpatDigit,
         type: "GET",
         success: function(response){
             if(response.status === 'success'){

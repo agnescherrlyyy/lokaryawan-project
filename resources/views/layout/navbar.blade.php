@@ -81,7 +81,7 @@
     updateHaveNotifaction(haveNotifaction);
 
     $.ajax({
-        url: 'https://servicelokaryawan.salokapark.app/api/get_notif_approve?id_karyawan='+ usernameEmpatDigit,
+        url: '{{ env('APP_SERVICE') }}get_notif_approve?id_karyawan='+ usernameEmpatDigit,
         type: 'GET',
         success: function (response) {
             if (response.status === 'success') {

@@ -398,6 +398,7 @@
                     },
                     success: function(response) {
                         if (response.status === 'success') {
+                            console.log(response);
                             Swal.close();
                             $('#password').val('');
                             Swal.fire({
@@ -416,7 +417,7 @@
                             summaryKehadiran = response.gajiku.kehadiran_karyawan;
                             summaryGaji = response.gajiku.karyawan_gaji;
 
-                            if (summaryProfile === null) {
+                            if (summaryProfile === null || summaryKehadiran === null || summaryGaji.length === 0) {
                                 Swal.fire({
                                     title: 'Penting',
                                     text: 'Gaji Periode Bulan Ini Belum Ada.',
@@ -465,48 +466,67 @@
                                 $('#bpjs-jp-perusahaan').text('BPJS JP yang dibayarkan Perusahaan: Rp 0');
                                 $('#bpjs-kesehatan-perusahaan').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp 0');
                             } else {
-                                $('#nama-karyawan').text(summaryProfile.nama);
-                                $('#nik-karyawan').text(summaryProfile.nik);
-                                $('#dept').text(summaryProfile.departemen + ' - ' + summaryProfile.subDepartemen);
-                                $('#rekening-karyawan').text(summaryProfile.noRekening);
-                                $('#priode').text(summaryProfile.periode);
+                                $('#nama-karyawan').text(summaryProfile.nama !== null ? summaryProfile.nama : '-');
+                                $('#nik-karyawan').text(summaryProfile.nik !== null ? summaryProfile.nik : '-');
+                                $('#dept').text(summaryProfile.departemen !== null && summaryProfile.subDepartemen !== null ? summaryProfile.departemen + ' - ' + summaryProfile.subDepartemen : "-" + "-");
+                                $('#rekening-karyawan').text(summaryProfile.noRekening !== null ? summaryProfile.noRekening : '-');
+                                $('#priode').text(summaryProfile.periode !== null ? summaryProfile.periode : '-');
 
-                                $('#total-masuk').text(summaryKehadiran.totMasuk);
-                                $('#total-libur').text(summaryKehadiran.totLibur);
-                                $('#total-ph').text(summaryKehadiran.totPh);
-                                $('#total-alfa').text(summaryKehadiran.totAlfa);
-                                $('#total-izin').text(summaryKehadiran.totIzin);
-                                $('#total-sakit').text(summaryKehadiran.totSakit);
-                                $('#total-cuti').text(summaryKehadiran.totCuti);
+                                $('#total-masuk').text(summaryKehadiran.totMasuk !== null ? summaryKehadiran.totMasuk : '-');
+                                $('#total-libur').text(summaryKehadiran.totLibur !== null ? summaryKehadiran.totLibur : '-');
+                                $('#total-ph').text(summaryKehadiran.totPh !== null ? summaryKehadiran.totPh : '-');
+                                $('#total-alfa').text(summaryKehadiran.totAlfa !== null ? summaryKehadiran.totAlfa : '-');
+                                $('#total-izin').text(summaryKehadiran.totIzin !== null ? summaryKehadiran.totIzin : '-');
+                                $('#total-sakit').text(summaryKehadiran.totSakit !== null ? summaryKehadiran.totSakit : '-');
+                                $('#total-cuti').text(summaryKehadiran.totCuti !== null ? summaryKehadiran.totCuti : '-');
 
-                                $('#gaji-pokok').text(formatRupiah(summaryGaji[0].nominal));
-                                $('#tunj-jabatan').text(formatRupiah(summaryGaji[1].nominal));
-                                $('#tunj-keahlian').text(formatRupiah(summaryGaji[2].nominal));
-                                var totalGajiPokok = parseInt(summaryGaji[0].nominal) + parseInt(summaryGaji[1].nominal) + parseInt(summaryGaji[2].nominal);
+                                $('#gaji-pokok').text(summaryGaji[0].nominal !== null ? formatRupiah(summaryGaji[0].nominal) : formatRupiah(0));
+                                $('#tunj-jabatan').text(summaryGaji[1].nominal !== null ? formatRupiah(summaryGaji[1].nominal) : formatRupiah(0));
+                                $('#tunj-keahlian').text(summaryGaji[2].nominal !== null ? formatRupiah(summaryGaji[2].nominal) : formatRupiah(0));
+
+                                var gajiPokok = summaryGaji[0].nominal !== null ? parseInt(summaryGaji[0].nominal) : 0;
+                                var tunjJabatan = summaryGaji[1].nominal !== null ? parseInt(summaryGaji[1].nominal) : 0;
+                                var tunjKeahlian = summaryGaji[2].nominal !== null ? parseInt(summaryGaji[2].nominal) : 0;
+                                var totalGajiPokok = gajiPokok + tunjJabatan + tunjKeahlian;
                                 $('#tot-gaji-pokok').text(formatRupiah(totalGajiPokok));
 
-                                $('#tunj-transport').text(formatRupiah(summaryGaji[3].nominal));
-                                $('#tunj-komunikasi').text(formatRupiah(summaryGaji[4].nominal));
-                                $('#lembur').text(formatRupiah(summaryGaji[5].nominal));
-                                $('#tambahan-lainnya').text(formatRupiah(summaryGaji[6].nominal));
-                                var gajiKotor = totalGajiPokok + parseInt(summaryGaji[3].nominal) + parseInt(summaryGaji[4].nominal) + parseInt(summaryGaji[5].nominal) + parseInt(summaryGaji[6].nominal);
+                                $('#tunj-transport').text(summaryGaji[3].nominal !== null ? formatRupiah(summaryGaji[3].nominal) : formatRupiah(0));
+                                $('#tunj-komunikasi').text(summaryGaji[4].nominal !== null ? formatRupiah(summaryGaji[4].nominal) : formatRupiah(0));
+                                $('#lembur').text(summaryGaji[5].nominal !== null ? formatRupiah(summaryGaji[5].nominal) : formatRupiah(0));
+                                $('#tambahan-lainnya').text(summaryGaji[6].nominal !== null ? formatRupiah(summaryGaji[6].nominal) : formatRupiah(0));
+
+                                var tunjTransport = summaryGaji[3].nominal !== null ? parseInt(summaryGaji[3].nominal) : 0;
+                                var tunjKomunikasi = summaryGaji[4].nominal !== null ? parseInt(summaryGaji[4].nominal) : 0;
+                                var upahLembur = summaryGaji[5].nominal !== null ? parseInt(summaryGaji[5].nominal) : 0;
+                                var upahTambahan = summaryGaji[6].nominal !== null ? parseInt(summaryGaji[6].nominal) : 0;
+
+                                var gajiKotor = totalGajiPokok + tunjTransport + tunjKomunikasi + upahLembur + upahTambahan;
                                 $('#upah-kotor').text(formatRupiah(gajiKotor));
 
-                                $('#alfa').text(formatRupiah(summaryGaji[9].nominal));
-                                $('#ijin').text(formatRupiah(summaryGaji[10].nominal));
-                                $('#potongan-lain').text(formatRupiah(summaryGaji[11].nominal));
-                                $('#bpjs-tk').text(formatRupiah(summaryGaji[13].nominal));
-                                $('#bpjs-jp').text(formatRupiah(summaryGaji[15].nominal));
-                                $('#bpjs-kesehatan').text(formatRupiah(summaryGaji[17].nominal));
-                                var totalPotongan = parseInt(summaryGaji[9].nominal) + parseInt(summaryGaji[10].nominal) + parseInt(summaryGaji[11].nominal) + parseInt(summaryGaji[13].nominal) + parseInt(summaryGaji[15].nominal) + parseInt(summaryGaji[17].nominal);
+                                $('#alfa').text(summaryGaji[9].nominal !== null ? formatRupiah(summaryGaji[9].nominal) : formatRupiah(0));
+                                $('#ijin').text(summaryGaji[10].nominal !== null ? formatRupiah(summaryGaji[10].nominal) : formatRupiah(0));
+                                $('#potongan-lain').text(summaryGaji[11].nominal !== null ? formatRupiah(summaryGaji[11].nominal) : formatRupiah(0));
+                                $('#bpjs-tk').text(summaryGaji[13].nominal !== null ? formatRupiah(summaryGaji[13].nominal) : formatRupiah(0));
+                                $('#bpjs-jp').text(summaryGaji[15].nominal !== null ? formatRupiah(summaryGaji[15].nominal) : formatRupiah(0));
+                                $('#bpjs-kesehatan').text(summaryGaji[17].nominal !== null ? formatRupiah(summaryGaji[17].nominal) : formatRupiah(0));
+
+                                var potAlfa = summaryGaji[9].nominal !== null ? parseInt(summaryGaji[9].nominal) : 0;
+                                var potIzin = summaryGaji[10].nominal !== null ? parseInt(summaryGaji[10].nominal) : 0;
+                                var potLainnya = summaryGaji[11].nominal !== null ? parseInt(summaryGaji[11].nominal) : 0;
+                                var potBpjsTk = summaryGaji[13].nominal !== null ? parseInt(summaryGaji[13].nominal) : 0;
+                                var potBpjsJp = summaryGaji[15].nominal !== null ? parseInt(summaryGaji[15].nominal) : 0;
+                                var potBpjsKesehatan = summaryGaji[17].nominal !== null ? parseInt(summaryGaji[17].nominal) : 0;
+
+                                var totalPotongan = potAlfa + potIzin + potLainnya + potBpjsTk + potBpjsJp + potBpjsKesehatan;
                                 $('#total-potongan').text(formatRupiah(totalPotongan));
 
                                 var totalTerima = gajiKotor - totalPotongan;
                                 $('#total-terima').text(formatRupiah(totalTerima));
 
-                                $('#bpjs-tk-perusahaan').text('BPJS TK yang dibayarkan Perusahaan: Rp ' + formatRupiah(summaryGaji[12].nominal));
-                                $('#bpjs-jp-perusahaan').text('BPJS JP yang dibayarkan Perusahaan: Rp ' + formatRupiah(summaryGaji[14].nominal));
-                                $('#bpjs-kesehatan-perusahaan').text('BPJS Kesehatan yang dibayarkan perusahaan : Rp ' + formatRupiah(summaryGaji[16].nominal));
+                                $('#bpjs-tk-perusahaan').text(summaryGaji[12].nominal !== null ? 'BPJS TK yang dibayarkan Perusahaan: Rp ' + formatRupiah(summaryGaji[12].nominal) : 'BPJS TK yang dibayarkan Perusahaan: Rp ' + formatRupiah(0));
+                                
+                                $('#bpjs-jp-perusahaan').text(summaryGaji[14].nominal !== null ? 'BPJS JP yang dibayarkan Perusahaan: Rp ' + formatRupiah(summaryGaji[14].nominal) : 'BPJS JP yang dibayarkan Perusahaan: Rp ' + formatRupiah(0));
+                                $('#bpjs-kesehatan-perusahaan').text(summaryGaji[16].nominal !== null ? 'BPJS Kesehatan yang dibayarkan Perusahaan: Rp ' + formatRupiah(summaryGaji[16].nominal) : 'BPJS Kesehatan yang dibayarkan Per businesses: Rp ' + formatRupiah(0));
 
                                 $('.unduh-slip').click(function (e) {
                                     e.preventDefault();

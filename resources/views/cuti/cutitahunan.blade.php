@@ -267,7 +267,7 @@
 
         if (username) {
             $.ajax({
-                url: 'https://servicelokaryawan.salokapark.app/api/get_cuti?id_karyawan='+username+'&tahun='+nowYears,
+                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun='+nowYears,
                 get:'GET',
                 success: function (response) {
                     console.log(response);

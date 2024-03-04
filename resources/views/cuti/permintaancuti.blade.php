@@ -127,7 +127,7 @@
         })
 
         $.ajax({
-            url: 'https://servicelokaryawan.salokapark.app/api/get_request_cuti?id_karyawan='+username,
+            url: '{{ env('APP_SERVICE') }}get_request_cuti?id_karyawan='+username,
             type: 'GET',
             success: function(response){
                 console.log(response);
@@ -254,8 +254,18 @@
                             }
                         }
                     });
-                }else{
-                    alert('Tidak Berhasil Mengambil Data Dari API');
+                } else if (response.status === 'failed') {
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: 'Data Cuti Tidak Ada, Karena Anda Belum Mengambil Cuti',
+                        imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                        imageWidth: 200,
+                        imageHeight: 200,
+                        imageAlt: 'Custom image',
+                        showConfirmButton: true,
+                    });
+                } else {
+                    alert('Response Dari API Tidak Terdeteksi');
                 }
             },
             error: function(){

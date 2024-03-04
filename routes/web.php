@@ -30,49 +30,49 @@ Route::get('/end-session', [AuthController::class, 'end_session']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['check_login'])->group(function () {
+    Route::get('/dashboard', [DashboardLokaryawan::class, 'index'])->name('dashboard.index');
+    
+    Route::get('/jadwalku', [JadwalkuController::class, 'index']);
+    Route::get('/absenku', [AbsenkuController::class, 'index']);
+    Route::get('/lemburku', [LemburkuController::class, 'index']);
+    Route::get('/req-lembur', [LemburkuController::class, 'reqLembur']);
+    Route::get('/lembur/approved-lembur', [LemburkuController::class, 'approvedLembur']);
+    
+    //Lembur HOD
+    Route::get('/jadwal/pengajuan-lembur-hod', [hodPengajuanLembur::class, 'index']);
+    Route::get('/jadwal/lembur-diajukan', [hodPengajuanLembur::class, 'lemburDiajukan']);
+    
+    Route::get('/gajiku', [GajikuController::class, 'index']);
+    Route::post('/gajiku/get_gajiku', [GajikuController::class, 'get_gajiku']);
+    
+    Route::get('/tiket', [TiketkuController::class, 'index']);
+    Route::get('/tiket/konfirmasi-pembayaran', [SlipTiketKonfirmasiController::class, 'index']);
+    Route::get('/tiket/kodebookingku', [KodeBookingkuController::class, 'index']);
+    Route::get('/tiket/pengajuan-komplemen', [TiketkuController::class, 'pengajuanKomplemen']);
+    
+    Route::get('/cutitahunan', [CutiTahunanController::class, 'index']);
+    Route::get('/cuti/permintaan-cutitahunan', [CutiTahunanController::class, 'permintaanCuti']);
+    Route::get('/cuti/riwayat-cutitahunan', [CutiTahunanController::class, 'riwayatCuti']);
+    
+    Route::get('/cutikhusus', [CutiKhususController::class, 'index']);
+    
+    Route::get('/profile-user', [ProfileUserController::class, 'index']);
+    Route::post('/profile-user/update-pin', [ProfileUserController::class, 'post_pin']);
+    
+    Route::get('/notification', [NotificationController::class, 'index']);
+    Route::get('/approved-cuti', [ApprovedCutiController::class, 'index']);
+    Route::get('/approved-cuti/{$id}', [ApprovedCutiController::class, 'show']);
+    Route::get('/approved-lembur', [ApprovedCutiController::class, 'approvedLembur']);
+    
+    Route::get('/seputar-info', [SeputarInfoController::class, 'index']);
+    Route::get('/detail-info', [SeputarInfoController::class, 'detailList']);
+    Route::get('/manual-book', [SeputarInfoController::class, 'manualbook']);
+    Route::get('/hospitality', [SeputarInfoController::class, 'hospitality']);
+    Route::get('/manual-book-komplemen', [SeputarInfoController::class, 'manualbookKomplemen']);
+    
+    Route::post('/encrypt-password', [SlipGajiPDFController::class, 'encryptPassword']);
+    Route::get('/generate-pdf', [SlipGajiPDFController::class, 'generatePDF']);
+    Route::get('/slip-gaji-pdf', [PDFController::class, 'generatePDF']);
 });
-Route::get('/dashboard', [DashboardLokaryawan::class, 'index'])->name('dashboard.index');
-
-Route::get('/jadwalku', [JadwalkuController::class, 'index']);
-Route::get('/absenku', [AbsenkuController::class, 'index']);
-Route::get('/lemburku', [LemburkuController::class, 'index']);
-Route::get('/req-lembur', [LemburkuController::class, 'reqLembur']);
-Route::get('/lembur/approved-lembur', [LemburkuController::class, 'approvedLembur']);
-
-//Lembur HOD
-Route::get('/jadwal/pengajuan-lembur-hod', [hodPengajuanLembur::class, 'index']);
-Route::get('/jadwal/lembur-diajukan', [hodPengajuanLembur::class, 'lemburDiajukan']);
-
-Route::get('/gajiku', [GajikuController::class, 'index']);
-Route::post('/gajiku/get_gajiku', [GajikuController::class, 'get_gajiku']);
-
-Route::get('/tiket', [TiketkuController::class, 'index']);
-Route::get('/tiket/konfirmasi-pembayaran', [SlipTiketKonfirmasiController::class, 'index']);
-Route::get('/tiket/kodebookingku', [KodeBookingkuController::class, 'index']);
-Route::get('/tiket/pengajuan-komplemen', [TiketkuController::class, 'pengajuanKomplemen']);
-
-Route::get('/cutitahunan', [CutiTahunanController::class, 'index']);
-Route::get('/cuti/permintaan-cutitahunan', [CutiTahunanController::class, 'permintaanCuti']);
-Route::get('/cuti/riwayat-cutitahunan', [CutiTahunanController::class, 'riwayatCuti']);
-
-Route::get('/cutikhusus', [CutiKhususController::class, 'index']);
-
-Route::get('/profile-user', [ProfileUserController::class, 'index']);
-Route::post('/profile-user/update-pin', [ProfileUserController::class, 'post_pin']);
-
-Route::get('/notification', [NotificationController::class, 'index']);
-Route::get('/approved-cuti', [ApprovedCutiController::class, 'index']);
-Route::get('/approved-cuti/{$id}', [ApprovedCutiController::class, 'show']);
-Route::get('/approved-lembur', [ApprovedCutiController::class, 'approvedLembur']);
-
-Route::get('/seputar-info', [SeputarInfoController::class, 'index']);
-Route::get('/detail-info', [SeputarInfoController::class, 'detailList']);
-Route::get('/manual-book', [SeputarInfoController::class, 'manualbook']);
-Route::get('/hospitality', [SeputarInfoController::class, 'hospitality']);
-Route::get('/manual-book-komplemen', [SeputarInfoController::class, 'manualbookKomplemen']);
-
-Route::post('/encrypt-password', [SlipGajiPDFController::class, 'encryptPassword']);
-Route::get('/generate-pdf', [SlipGajiPDFController::class, 'generatePDF']);
-Route::get('/slip-gaji-pdf', [PDFController::class, 'generatePDF']);
 
 Route::get('/login-admin', [AdminAuthController::class, 'index']);

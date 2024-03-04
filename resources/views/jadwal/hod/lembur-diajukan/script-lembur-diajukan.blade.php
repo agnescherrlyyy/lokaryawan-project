@@ -24,11 +24,11 @@
     const decryptedBytes = CryptoJS.AES.decrypt(encryptedFromData, '{{ env('APP_KEY') }}');
     const decryptedFromData = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
 
-    var username = decryptedFromData.username;
-    // var username = 6741;
+    // var username = decryptedFromData.username;
+    var username = 6741;
 
     $.ajax({
-        url: '{{ env('APP_SERVICE') }}get_request_overtime_grouping',
+        url: '{{ env('APP_SERVICE') }}get_request_overtime_grouping?pic='+username,
         type: 'GET',
         async: false,
         success: function (response) {
@@ -40,7 +40,7 @@
                 listDataOvertime.reverse().forEach(item => {
                     const option = document.createElement('li');
                     option.innerHTML = `
-                        <li><a id="item-list" class="btn-modal block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm cursor-pointer item-list" data-tot-lembur="${item.jam_lembur}" data-jam-awal="${item.jam_awal}" data-jam-akhir="${item.jam_akhir}" data-id-overtime="${item.id_request_overtime}" data-ket="${item.keterangan}" data-pic="${item.pic}" data-tgl-lembur="${item.tgl_lembur}">Lembur ${item.tgl_lembur} - ${item.jam_awal} - ${item.jam_akhir}</a></li>
+                        <li><a id="item-list" class="btn-modal block w-full px-5 py-3 mt-2 hover:bg-slate-100 dark:hover:bg-slate-500 text-sm cursor-pointer item-list" data-tot-lembur="${item.jam_lembur}" data-jam-awal="${item.jam_awal}" data-jam-akhir="${item.jam_akhir}" data-id-overtime="${item.id_request_overtime}" data-ket="${item.keterangan}" data-pic="${item.pic}" data-tgl-lembur="${item.tgl_lembur}">Lembur ${item.tgl_lembur} - ${item.jam_awal} - ${item.jam_akhir} (${item.keterangan})</a></li>
                     `
                     containerSelect.appendChild(option);
                 });
