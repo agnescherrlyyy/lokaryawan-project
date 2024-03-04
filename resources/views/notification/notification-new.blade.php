@@ -25,7 +25,7 @@
         </div>
         <div class="w-full">
             <div class="w-full bg-white dark:bg-slate-800 rounded-lg mt-9">
-                <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 px-6 py-6 border-b border-slate-200 dark:border-slate-700">
+                <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 px-4 py-6 border-b border-slate-200 dark:border-slate-700">
                     <span class="inline-block font-semibold text-sm">Notification List</span>
                 </div>
                 <div class="w-full flex flex-col gap-4 py-4 px-4 xl:px-6">
@@ -61,8 +61,10 @@
                 type: 'GET',
                 success: function (response) {
                     if (response.status === 'success') {
+                        console.log(response);
                         const dataCuti = response.dataCuti;
                         const dataLembur = response.dataLembur;
+
                         const cardContainer = document.getElementById('container-notification');
                         const cardContainerLembur = document.getElementById('container-lembur');
 
@@ -78,7 +80,7 @@
                                 }
     
                                 const button = document.createElement('button');
-                                button.className = 'approved-cuti w-full flex flex-col gap-2 px-4 py-3 rounded-lg border border-slate-100 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700';
+                                button.className = 'approved-cuti w-full flex flex-col gap-2 px-4 py-3 rounded-lg border border-slate-100 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700';
     
                                 button.setAttribute('data-id', cutiData.id);
                                 button.setAttribute('data-id_cuti_trn', cutiData.id_cuti_trn);
@@ -101,7 +103,7 @@
                                 const tanggalLembur = formatTanggal(lemburData.tgl_lembur);
                                 const button = document.createElement('button');
     
-                                button.className = 'approved-lembur w-full flex flex-row gap-4 px-4 py-3 rounded-lg border border-slate-100 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700';
+                                button.className = 'approved-lembur w-full flex flex-row gap-4 px-4 py-3 rounded-lg border border-slate-100 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700';
                                 button.setAttribute('data-id', lemburData.id);
                                 button.setAttribute('data-id_overtime', lemburData.id_overtime);
     
@@ -121,11 +123,19 @@
                         }
 
                     }else{
+                        console.log(response);
                         alet('Tidak Berhasil Mengambil Data Dari API');
                     }
                 },
-                error: function () {
-                    alet('URL Dari API Bermasalah!');
+                error: function (error) {
+                    console.log(error);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Terjadi Kesalahan',
+                        text: 'Harap Hubungi Developer',
+                        showConfirmButton: true,
+                    });
                 }
             });
 

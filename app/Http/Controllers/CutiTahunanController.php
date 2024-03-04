@@ -32,7 +32,7 @@ class CutiTahunanController extends Controller
 
     public function permintaanCuti()
     {   
-        $title = 'Cuti Tahunan';
+        $title = 'Cuti';
         $subtitle = 'Permintaan Cuti';
         return view('cuti.permintaancuti',
             [
@@ -44,7 +44,7 @@ class CutiTahunanController extends Controller
 
     public function riwayatCuti()
     {
-        $title = 'Cuti Tahunan';
+        $title = 'Cuti';
         $subtitle = 'Riwayat Cuti';
         return view('cuti.riwayatcuti',
             [

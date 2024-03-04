@@ -6,7 +6,7 @@ export default defineConfig({
     //     host: "127.0.0.1",
     // },
     server: {
-        host: "192.168.1.83",
+        host: "192.168.0.170",
     },
     plugins: [
         laravel({

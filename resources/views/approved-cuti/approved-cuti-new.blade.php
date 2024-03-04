@@ -55,9 +55,13 @@
                                 
                             </span>
                         </div>
+                        <div id="container-lampiran" class="w-full flex flex-col gap-2">
+                            <span class="text-sm">File Lampiran</span>
+                            <a href="#" id="lampiran-cuti" class=""></a>
+                        </div>
                         <div id="keterangan" class="w-full hidden">
                             <span id="text-keterangan" class="text-sm text-rose-600">
-                                *Perimintaan Cuti di Reject
+                                *Permintaan Cuti di Reject
                             </span>
                             <span id="tgl-keterangan" class="text-sm text-rose-600">
                                 
@@ -74,8 +78,8 @@
                     </div>
                 </div>
                 <div class="w-full lg:w-1/2 lg:flex-row flex flex-col gap-4 px-6 mt-6 pb-6">
-                    <button id="reject" type="submit" class="btn-modal text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-rose-600 hover:bg-rose-800 transition-all duration-200 ease-in-out uppercase">rejected</button>
-                    <button id="approve" type="submit" value="1" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Approved</button>
+                    <button id="reject" type="submit" class="btn-modal text-center px-4 py-3 w-full rounded-full font-semibold text-sm text-white mt-2 bg-rose-600 hover:bg-rose-800 transition-all duration-200 ease-in-out uppercase">rejected</button>
+                    <button id="approve" type="submit" value="1" class="text-center px-4 py-3 w-full rounded-full font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Approved</button>
                 </div>
             </div>
         </div>
@@ -98,7 +102,7 @@
                     <div class="w-full flex flex-col justify-center items-start gap-2 px-4">
                         <label for="username" class="block font-semibold text-xs"></label>
                         <div class="w-full">
-                            <textarea name="alasan" id="alasan" class="item-input" cols="30" rows="10" placeholder="Masukan alasan membatalkan cuti"></textarea>
+                            <textarea name="alasan" id="alasan" class="item-input" cols="30" rows="10" placeholder="Masukan Alasan Menolak Cuti"></textarea>
                         </div>
                     </div>
                 </form>
@@ -146,6 +150,7 @@
                     var tanggalCuti = response.data.tanggal;
                     var rangeTanggal = getTanggalRange(tanggalCuti);
                     var statusAction = response.data.status;
+                    var dataLampiran = response.data_lampiran;
 
                     if (statusAction === "0"){
                         console.log('Belum ada Action');
@@ -174,7 +179,9 @@
                                             showConfirmButton: false,
                                             timer: 1500,
                                         });
+                                        window.location.href = "{{ url('/notification') }}";
                                     }else {
+                                        console.log(response);
                                         Swal.fire({
                                             title: 'Opps!',
                                             text: textError,
@@ -187,9 +194,9 @@
                                         });
                                     }
                                 },
-                                error: function () {
+                                error: function (error) {
                                     Swal.close();
-                                    console.log(response);
+                                    console.log(error);
                                     Swal.fire({
                                         position: 'center',
                                         icon: 'error',
@@ -222,16 +229,18 @@
 
                             Swal.fire({
                                 title: 'Loading!',
-                                text: 'Proses Menolak Cuti',
+                                text: 'Proses Menolak Cuti Karyawan',
                                 timerProgressBar: true,
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
                                 didOpen: () => {
-                                    Swal.showLoading()
+                                    Swal.showLoading();
                                 },
                             });
+
                             actionCuti(idCutiTrn, statusReject, noteReject, username, textError, textSuccess);
                             $("#reject").prop("disabled", true);
                             $("#approve").prop("disabled", true);
-                            window.location.reload();
                         });
 
                         $('#approve').click(function (e) {
@@ -250,10 +259,12 @@
 
                             Swal.fire({
                                 title: 'Loading!',
-                                text: 'Proses Menyetujui Cuti',
+                                text: 'Proses Menyetujui Cuti Karyawan',
                                 timerProgressBar: true,
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
                                 didOpen: () => {
-                                    Swal.showLoading()
+                                    Swal.showLoading();
                                 },
                             });
 
@@ -344,6 +355,16 @@
                     $('#judul-cuti').text('Permintaan Cuti ' + rangeTanggal);
                     $('#tgl-pengajuan').text(response.data.tgl_pengajuan);
                     $('#tgl-cuti').text(rangeTanggal);
+
+                    if (dataLampiran === null) {
+                        $('#container-lampiran').addClass('hidden');
+                    } else if (dataLampiran !== null) {
+                        $('#lampiran-cuti')
+                            .addClass('font-semibold text-xs text-blue-600 underline underline-offset-2')
+                            .text('Lihat Lampiran')
+                            .attr('href', dataLampiran[0].url)
+                            .attr('target', '_blank');
+                    }
                 }else {
                     Swal.fire({
                         position: 'center',

@@ -41,7 +41,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="komplemen100" class="font-semibold">0</span>
-                        <span id="type-komplemen-100" class="text-sm text-slate-400"></span>
+                        <span class="text-sm text-slate-400">Sisa Komplemen 100%</span>
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:items-center md:gap-5 gap-3 px-4 md:py-4 bg-white dark:bg-slate-800">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span id="komplemen50" class="font-semibold">0</span>
-                        <span id="type-komplemen-50" class="text-sm text-slate-400"></span>
+                        <span class="text-sm text-slate-400">Sisa Komplemen 50%</span>
                     </div>
                 </div>
             </div>
@@ -74,11 +74,18 @@
                     <div id="calendar"></div>
                 </div>
             </div>
-            <div id="selected-date" class="w-full xl:w-3/5 p-4 lg:py-4 lg:px-6 bg-white dark:bg-slate-800 rounded-lg">
+            <div id="selected-date" class="w-full xl:w-3/5 p-4 lg:py-6 lg:px-6 bg-white dark:bg-slate-800 rounded-lg">
                 <span class="block mb-4 font-semibold text-sm uppercase tracking-wide">AMBIL KOMPLEMEN TIKET</span>
                 <div class="w-full flex flex-col gap-1">
                     <span class="block text-sm">Tanggal yang dipilih :</span>
                     <span id="selected-date-value"></span>
+                </div>
+                <div class="w-full flex items-center gap-4 mt-4 px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-700">
+                    <i class="fa-solid fa-triangle-exclamation text-4xl text-sekunder-60"></i>
+                    <div class="w-full flex flex-col gap-1">
+                        <strong class="text-sm">Peringatan</strong>
+                        <span class="text-sm text-slate-600 dark:text-slate-300">Dilarang Memperjualbelikan Tiket Komplemen. Segala Bentuk Pelanggaran Akan Ditindak Tegas!</span>
+                    </div>
                 </div>
                 <div class="w-full flex flex-col gap-4 my-4">
                     <div class="w-full flex flex-col md:flex-row md:items-center md:gap-5 gap-5 px-4 py-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600">
@@ -116,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full flex flex-col md:flex-row md:items-center md:gap-5 gap-5 px-4 py-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600">
+                    <div class="hidden w-full flex-col md:flex-row md:items-center md:gap-5 gap-5 px-4 py-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600">
                         <div class="w-full flex gap-4">
                             <div class="w-12 h-12 md:w-12 md:h-12">
                                 <img 
@@ -193,7 +200,7 @@
                 </svg>
             </div>
             <div class="w-full flex flex-col items-center justify-center gap-2">
-                {{-- <input type="url" name="url-method" id="url-method" value=""> --}}
+                
             </div>
         </div>
     </section>
@@ -218,6 +225,8 @@
         let pricePerTicketNormal;
         let pricePerTicketSetengah;
         let tanggalModal;
+        var typeTiket100;
+        var typeTiket50;
 
         $(document).ready(function () {
             const encryptedFromData = localStorage.getItem('encryptedFromData');
@@ -236,12 +245,12 @@
 
             function updateTotalQuantity() {
                 const quantityNormal = parseInt(valueTicketNormal.text());
-                const quantitySetengah = parseInt(valueTicketSetengah.text());
+                // const quantitySetengah = parseInt(valueTicketSetengah.text());
                 const priceTicketNormal = pricePerTicketNormal;
-                const priceTicketSetengah = pricePerTicketSetengah;
+                // const priceTicketSetengah = pricePerTicketSetengah;
                 const priceTotalNormal = quantityNormal * priceTicketNormal;
-                const priceTotalSetengah = quantitySetengah * priceTicketSetengah;
-                const allPrice = priceTotalNormal + priceTotalSetengah;
+                // const priceTotalSetengah = quantitySetengah * priceTicketSetengah;
+                const allPrice = priceTotalNormal;
 
                 $('#jumlah-dibayar').text(formatRupiah(allPrice));
             }
@@ -262,11 +271,13 @@
                 $('#price-ticket-setengah').text(formatRupiah('0'));
                 $('#jumlah-dibayar').text(formatRupiah('0'));
 
+                // console.log(tglAmbilKomplemen);
                 getDataKomplemen(tglAmbilKomplemen);
             });
 
             tglAmbilKomplemen = tglAmbilKomplemen.replace(/"/g, '');
             getDataKomplemen(tglAmbilKomplemen);
+            // console.log(tglAmbilKomplemen);
 
             $('#kode-booking').click(function(e){
                 e.preventDefault();
@@ -287,17 +298,17 @@
                             const plusButtonNormal = $("#plus-ticket-normal");
                             valueTicketNormal = $("#value-ticket-normal");
 
-                            const minusButtonSetengah = $("#minus-ticket-setengah");
-                            const plusButtonSetengah = $("#plus-ticket-setengah");
-                            valueTicketSetengah = $("#value-ticket-setengah");
+                            // const minusButtonSetengah = $("#minus-ticket-setengah");
+                            // const plusButtonSetengah = $("#plus-ticket-setengah");
+                            // valueTicketSetengah = $("#value-ticket-setengah");
 
                             var tiketNormal = response.data[1];
-                            var tiketSetengah = response.data[0];
+                            // var tiketSetengah = response.data[0];
 
                             $('#komplemen100').text(tiketNormal.sisa_komplement);
-                            $('#komplemen50').text(tiketSetengah.sisa_komplement);
-                            $('#type-komplemen-100').text(tiketNormal.tipe_komplement);
-                            $('#type-komplemen-50').text(tiketSetengah.tipe_komplement);
+                            // $('#komplemen50').text(tiketSetengah.sisa_komplement);
+                            typeTiket100 = tiketNormal.tipe_komplement;
+                            // typeTiket50 = tiketSetengah.tipe_komplement;
 
                             plusButtonNormal.click(function () {
                                 const sisaTiketNormal = parseInt(tiketNormal.sisa_komplement);
@@ -335,39 +346,39 @@
                                 }
                             });
 
-                            minusButtonSetengah.click(function () {
-                                const sisaTiketSetengah = parseInt(tiketSetengah.sisa_komplement);
-                                const currentTicketValue = parseInt(valueTicketSetengah.text());
+                            // minusButtonSetengah.click(function () {
+                            //     const sisaTiketSetengah = parseInt(tiketSetengah.sisa_komplement);
+                            //     const currentTicketValue = parseInt(valueTicketSetengah.text());
 
-                                if (currentTicketValue > 0) {
-                                    const newTicketValue = currentTicketValue - 1;
-                                    valueTicketSetengah.text(newTicketValue);
-                                    pricePerTicketNormal = priceKomplemen100;
-                                    pricePerTicketSetengah = priceKomplemen50;
+                            //     if (currentTicketValue > 0) {
+                            //         const newTicketValue = currentTicketValue - 1;
+                            //         valueTicketSetengah.text(newTicketValue);
+                            //         pricePerTicketNormal = priceKomplemen100;
+                            //         pricePerTicketSetengah = priceKomplemen50;
 
-                                    qtyTicketSetengah = parseInt(newTicketValue) * parseInt(priceKomplemen50);
-                                    $('#price-ticket-setengah').text(formatRupiah(qtyTicketSetengah));
+                            //         qtyTicketSetengah = parseInt(newTicketValue) * parseInt(priceKomplemen50);
+                            //         $('#price-ticket-setengah').text(formatRupiah(qtyTicketSetengah));
 
-                                    updateTotalQuantity();
-                                }
-                            });
+                            //         updateTotalQuantity();
+                            //     }
+                            // });
 
-                            plusButtonSetengah.click(function () {
-                                const sisaTiketSetengah = parseInt(tiketSetengah.sisa_komplement);
-                                const currentTicketValue = parseInt(valueTicketSetengah.text());
+                            // plusButtonSetengah.click(function () {
+                            //     const sisaTiketSetengah = parseInt(tiketSetengah.sisa_komplement);
+                            //     const currentTicketValue = parseInt(valueTicketSetengah.text());
 
-                                if (currentTicketValue < sisaTiketSetengah) {
-                                    const newTicketValue = currentTicketValue + 1;
-                                    valueTicketSetengah.text(newTicketValue);
-                                    pricePerTicketNormal = priceKomplemen100;
-                                    pricePerTicketSetengah = priceKomplemen50;
+                            //     if (currentTicketValue < sisaTiketSetengah) {
+                            //         const newTicketValue = currentTicketValue + 1;
+                            //         valueTicketSetengah.text(newTicketValue);
+                            //         pricePerTicketNormal = priceKomplemen100;
+                            //         pricePerTicketSetengah = priceKomplemen50;
 
-                                    qtyTicketSetengah = parseInt(newTicketValue) * parseInt(priceKomplemen50);
-                                    $('#price-ticket-setengah').text(formatRupiah(qtyTicketSetengah));
+                            //         qtyTicketSetengah = parseInt(newTicketValue) * parseInt(priceKomplemen50);
+                            //         $('#price-ticket-setengah').text(formatRupiah(qtyTicketSetengah));
 
-                                    updateTotalQuantity();
-                                }
-                            });
+                            //         updateTotalQuantity();
+                            //     }
+                            // });
                         }
                     },
                     error: function () {
@@ -385,31 +396,34 @@
                 var totalKomplemen;
                 var valueTiketNormal = $('#value-ticket-normal').text();
                 var valueTiketSetengah = $('#value-ticket-setengah').text();
+                console.log(typeTiket100);
+                console.log(typeTiket50);
 
-                if (valueTiketNormal !== '0' && valueTiketSetengah !== '0') {
-                    paymentMethod = '2';
-                    tiket = [
-                        {
-                            "ticket_id" : $('#type-ticket').data('id'),
-                            "ticket_price_id" : $('#price-ticket').data('id'),
-                            "quantity" : valueTiketNormal,
-                            "qty_bonus" : "0",
-                            "price_unit" : priceKomplemen100,
-                            "sub_total" : valueTiketNormal * priceKomplemen100,
-                            "product_name" : $('#type-komplemen-100').text()
-                        },
-                        {
-                            "ticket_id" : $('#type-ticket-setengah').data('id'),
-                            "ticket_price_id" : $('#price-ticket-setengah').data('id'),
-                            "quantity" : valueTiketSetengah,
-                            "qty_bonus" : "0",
-                            "price_unit" : priceKomplemen50,
-                            "sub_total" : valueTiketSetengah * priceKomplemen50,
-                            "product_name" : $('#type-komplemen-50').text()
-                        }
-                    ]
-                    totalKomplemen = parseInt(valueTiketNormal) + parseInt(valueTiketSetengah);
-                } else if (valueTiketNormal !== '0' && valueTiketSetengah === '0') {
+                // if (valueTiketNormal !== '0' && valueTiketSetengah !== '0') {
+                //     paymentMethod = '2';
+                //     tiket = [
+                //         {
+                //             "ticket_id" : $('#type-ticket').data('id'),
+                //             "ticket_price_id" : $('#price-ticket').data('id'),
+                //             "quantity" : valueTiketNormal,
+                //             "qty_bonus" : "0",
+                //             "price_unit" : priceKomplemen100,
+                //             "sub_total" : valueTiketNormal * priceKomplemen100,
+                //             "product_name" : typeTiket100,
+                //         },
+                //         {
+                //             "ticket_id" : $('#type-ticket-setengah').data('id'),
+                //             "ticket_price_id" : $('#price-ticket-setengah').data('id'),
+                //             "quantity" : valueTiketSetengah,
+                //             "qty_bonus" : "0",
+                //             "price_unit" : priceKomplemen50,
+                //             "sub_total" : valueTiketSetengah * priceKomplemen50,
+                //             "product_name" : typeTiket50,
+                //         }
+                //     ]
+                //     totalKomplemen = parseInt(valueTiketNormal) + parseInt(valueTiketSetengah);
+                //&& valueTiketSetengah === '0' } 
+                if (valueTiketNormal !== '0') {
                     paymentMethod = '1';
                     tiket = [
                         {
@@ -419,31 +433,32 @@
                             "qty_bonus" : "0",
                             "price_unit" : priceKomplemen100,
                             "sub_total" : valueTiketNormal * priceKomplemen100,
-                            "product_name" : $('#type-komplemen-100').text()
+                            "product_name" : typeTiket100,
                         }
                     ]
                     totalKomplemen = parseInt(valueTiketNormal);
-                } else if (valueTiketNormal === '0' && valueTiketSetengah !== '0') {
-                    paymentMethod = '2';
-                    tiket = [
-                        {
-                            "ticket_id" : $('#type-ticket-setengah').data('id'),
-                            "ticket_price_id" : $('#price-ticket-setengah').data('id'),
-                            "quantity" : valueTiketSetengah,
-                            "qty_bonus" : "0",
-                            "price_unit" : priceKomplemen50,
-                            "sub_total" : valueTiketSetengah * priceKomplemen50,
-                            "product_name" : $('#type-komplemen-50').text()
-                        }
-                    ]
-                    totalKomplemen = parseInt(valueTiketSetengah);
-                }
+                } 
+                // else if (valueTiketNormal === '0' && valueTiketSetengah !== '0') {
+                //     paymentMethod = '2';
+                //     tiket = [
+                //         {
+                //             "ticket_id" : $('#type-ticket-setengah').data('id'),
+                //             "ticket_price_id" : $('#price-ticket-setengah').data('id'),
+                //             "quantity" : valueTiketSetengah,
+                //             "qty_bonus" : "0",
+                //             "price_unit" : priceKomplemen50,
+                //             "sub_total" : valueTiketSetengah * priceKomplemen50,
+                //             "product_name" : typeTiket50,
+                //         }
+                //     ]
+                //     totalKomplemen = parseInt(valueTiketSetengah);
+                // }
 
                 tglAmbilKomplemen = tglAmbilKomplemen.replace(/"/g, '');
 
                 if(!username || !tiket || !tglAmbilKomplemen || !totalKomplemen || !paymentMethod) {
-                    var title = 'Opps!';
-                    var desc = 'Harap Pilih Salah Satu Komplemen dan Jumlah Komplemen Terlebih Dahulu';
+                    var title = 'Oops!';
+                    var desc = 'Silakan Pilih Jenis dan Jumlah Komplemen Terlebih Dahulu';
                     errorSweetAlert(title, desc);
                     return;
                 }
@@ -475,10 +490,9 @@
                                 window.location.href = "{{ url('/tiket/pengajuan-komplemen') }}";
                             }
 
-
                         } else {
-                            var title = 'Opps!';
-                            var desc = 'Pengajuan Komplemen Karywan Gagal, Silahkan Coba Lagi';
+                            var title = 'Oops!';
+                            var desc = 'Pengajuan Komplemen Karyawan Tidak Berhasil, Mohon Coba Kembali';
                             console.log(response);
                             Swal.close();
                             errorSweetAlert(title, desc);
@@ -511,6 +525,7 @@
                 type: 'GET',
                 success: function (response) {
                     if (response.status === 'success') {
+                        console.log(response);
                         var komplemen100 = response.data[0];
                         var komplemen50 = response.data[1];
                         $('#type-ticket').text(komplemen100.komplement);
@@ -536,8 +551,10 @@
                 title: 'Loading!',
                 text: 'Proses Pengajuan Komplemen',
                 timerProgressBar: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
                 didOpen: () => {
-                    Swal.showLoading()
+                    Swal.showLoading();
                 },
             });
         }

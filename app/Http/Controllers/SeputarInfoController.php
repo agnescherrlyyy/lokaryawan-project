@@ -42,6 +42,30 @@ class SeputarInfoController extends Controller
         );
     }
 
+    public function hospitality(){
+
+        $title = 'Hospitality';
+        $subtitle = 'Hospitality';
+        return view('seputar-info.hospitality', 
+            [
+                'title' => $title,
+                'subtitle' => $subtitle
+            ]
+        );
+    }
+
+    public function manualbookKomplemen()
+    {
+        $title = 'Manual Book';
+        $subtitle = 'Manual Book - Komplemen';
+        return view('seputar-info.mb-komplemen', 
+            [
+                'title' => $title,
+                'subtitle' => $subtitle
+            ]
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      */

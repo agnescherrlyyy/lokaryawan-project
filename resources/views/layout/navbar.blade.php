@@ -14,13 +14,13 @@
     </div>                 
     <div class="w-fit flex items-center gap-4">
         <button id="notification" class="w-fit flex">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-slate-800 dark:text-slate-50">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 text-sekunder-60 animate-bounce">
                 <path d="M5.85 3.5a.75.75 0 00-1.117-1 9.719 9.719 0 00-2.348 4.876.75.75 0 001.479.248A8.219 8.219 0 015.85 3.5zM19.267 2.5a.75.75 0 10-1.118 1 8.22 8.22 0 011.987 4.124.75.75 0 001.48-.248A9.72 9.72 0 0019.266 2.5z" />
                 <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 005.25 9v.75a8.217 8.217 0 01-2.119 5.52.75.75 0 00.298 1.206c1.544.57 3.16.99 4.831 1.243a3.75 3.75 0 107.48 0 24.583 24.583 0 004.83-1.244.75.75 0 00.298-1.205 8.217 8.217 0 01-2.118-5.52V9A6.75 6.75 0 0012 2.25zM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 004.496 0l.002.1a2.25 2.25 0 11-4.5 0z" clip-rule="evenodd" />
             </svg>
-            <span class="notifaction-animation relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+            <span class="notifaction-animation relative flex h-4 w-4">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sekunder-60 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-sekunder-60"></span>
             </span>
         </button>
         <div class="relative">
@@ -54,7 +54,65 @@
 <!-- Navbar End -->
 
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('js/crypto-js.js') }}"></script>
 <script type="text/javascript">
+    const encryptedUsername = localStorage.getItem('encryptedFromData');
+    const decryptedBytesUsername = CryptoJS.AES.decrypt(encryptedUsername, '{{ env('APP_KEY') }}');
+    const decryptedUsername = JSON.parse(decryptedBytesUsername.toString(CryptoJS.enc.Utf8));
+
+    var usernameEmpatDigit = decryptedUsername.username;
+    var haveNotifaction = false;
+
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        logout();
+    });
+    
+    $('#profile-user').click(function(e){
+        e.preventDefault();
+        window.location.href = '{{url("/profile-user")}}';
+    });
+
+    $('#notification').click(function(e){
+        e.preventDefault();
+        window.location.href = '{{url("/notification")}}';
+    });
+
+    updateHaveNotifaction(haveNotifaction);
+
+    $.ajax({
+        url: 'https://servicelokaryawan.salokapark.app/api/get_notif_approve?id_karyawan='+ usernameEmpatDigit,
+        type: 'GET',
+        success: function (response) {
+            if (response.status === 'success') {
+                // console.log(response);
+                if(response.dataCuti === "Data Tidak Ditemukan" && response.dataLembur === "Data Tidak Ditemukan"){
+                    haveNotifaction = false;
+                    updateHaveNotifaction(haveNotifaction);
+                } else if (response.dataCuti !== "Data Tidak Ditemukan" || response.dataLembur !== "Data Tidak Ditemukan"){
+                    haveNotifaction = true;
+                    updateHaveNotifaction(haveNotifaction);
+                } else if (response.dataCuti !== "Data Tidak Ditemukan" || response.dataLembur !== "Data Tidak Ditemukan"){
+                    haveNotifaction = true;
+                    updateHaveNotifaction(haveNotifaction);
+                } else if (response.message === "ID Karyawan tidak memiliki Access Approve"){
+                    haveNotifaction = false;
+                    updateHaveNotifaction(haveNotifaction);
+                } else {
+                    haveNotifaction = false;
+                    updateHaveNotifaction(haveNotifaction);
+                }
+            } else {
+                console.log(response);
+                console.log('Tidak Ditemukan Data Notifikasi');
+            }
+        },
+        error: function (error) {
+            console.log(error);
+            console.log('Terjadi Kesalahan, Harap Hubungi Developer');
+        }
+    });
+
     function logout(){
         localStorage.removeItem('encryptedFromData');
         localStorage.removeItem('encryptedDataUser');
@@ -81,39 +139,12 @@
             window.location.href = '{{url("end-session")}}';
         }, 1000);
     }
-    document.getElementById('logout-link').addEventListener('click', function (e) {
-        e.preventDefault();
-        logout();
-    });
-    $('#profile-user').click(function(e){
-        e.preventDefault();
-        window.location.href = '{{url("/profile-user")}}';
-    });
 
-    var haveNotifaction = false;
-    function updateHaveNotifaction(){
-        if (haveNotifaction) {
+    function updateHaveNotifaction(haveNotifaction){
+        if (haveNotifaction === true) {
             $('.notifaction-animation').show();
         }else{
             $('.notifaction-animation').hide();
         }
     }
-    updateHaveNotifaction();
-
-    // $.ajax({
-    //     url: 'url_ke_api_notifikasi',
-    //     method: 'GET',
-    //     success: function(data) {
-    //         hasNotification = data.hasNotification;
-    //         updateNotificationUI();
-    //     },
-    //     error: function() {
-    //         // Handle error
-    //     }
-    // });
-
-    $('#notification').click(function(e){
-        e.preventDefault();
-        window.location.href = '{{url("/notification")}}';
-    });
 </script>

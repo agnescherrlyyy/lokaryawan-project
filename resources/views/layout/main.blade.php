@@ -28,8 +28,30 @@
     <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/crypto-js.js') }}"></script>
-    <script src="{{ asset('js/scriptModal.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/darkmode.js') }}"></script>
+    <script type="text/javascript">
+        console.log(usernameEmpatDigit);
+
+        $.ajax({
+        url:'https://lokahr.salokapark.app/api/get_karyawan_byID?id_karyawan='+usernameEmpatDigit,
+        type: "GET",
+        success: function(response){
+            if(response.status === 'success'){
+                var data = response.data[0];
+                var grade = data.grade;
+                $('#departemen').text(data.departemen);
+                $('#sub-departemen').text(data.sub_departemen);
+
+                if (grade === 'Manager' || grade === 'SPV') {
+                    $('#pengajuan-lembur').removeClass('hidden');
+                }
+            }
+        },
+        error: function(){
+            alert('Gagal Mengambil Data');
+        }
+    });
+    </script>
 </body>
 </html>

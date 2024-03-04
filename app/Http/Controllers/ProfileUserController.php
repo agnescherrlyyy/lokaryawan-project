@@ -44,7 +44,6 @@ class ProfileUserController extends Controller
                 'json' => $data,
             ]);
             $status = json_decode($response->getBody()->getContents(), true);
-    
             return response()->json($status);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

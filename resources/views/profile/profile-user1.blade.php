@@ -197,7 +197,7 @@
                 <div class="w-full flex flex-col justify-center items-start gap-2 px-4">
                     <label for="nomor-whatsapp" class="block font-semibold text-xs">Nomor WhatsApp</label>
                     <div class="w-full">
-                        <input type="number" name="nomor-whatsapp" id="nomor-whatsapp" value="" placeholder="Masukan nomor whatsapp mu disini" class="item-input" required>
+                        <input type="number" name="nomor-whatsapp" id="nomor-whatsapp" value="" placeholder="Masukan Nomor Whatsapp Disini" class="item-input" required>
                     </div>
                 </div>
             </form>
@@ -265,7 +265,7 @@
                 if(!passwordBaru || !passwordLama){
                     Swal.fire({
                         title: 'Penting!',
-                        text: 'Password lama dan password baru wajib diisi.',
+                        text: 'Harap Mengisi Kolom Password Lama dan Password Baru',
                         imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                         imageWidth: 200,
                         imageHeight: 200,
@@ -293,8 +293,8 @@
                         if (response.status === "success") {
                             Swal.close();
                             Swal.fire({
-                                title: 'Success',
-                                text: 'Update Password User Successfuly.',
+                                title: 'Sukses',
+                                text: 'Memperbaharui Password Berhasil',
                                 imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
                                 imageWidth: 200,
                                 imageHeight: 200,
@@ -309,7 +309,7 @@
                             Swal.close();
                             Swal.fire({
                                 title: 'Oops!',
-                                text: 'Password Lama Salah.',
+                                text: 'Pastikan Password Lama Benar',
                                 imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
@@ -337,7 +337,7 @@
                 if(!pwLama || !pwBaru){
                     Swal.fire({
                         title: 'Penting!',
-                        text: 'PIN lama dan PIN baru wajib diisi.',
+                        text: 'Harap Mengisi kolom PIN Lama dan PIN Baru',
                         imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                         imageWidth: 200,
                         imageHeight: 200,
@@ -371,7 +371,7 @@
                             Swal.close();
                             Swal.fire({
                                 title: 'Sukses',
-                                text: 'PIN Berhasil Diganti',
+                                text: 'Memperbaharui PIN Berhasil',
                                 imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
                                 imageWidth: 200,
                                 imageHeight: 200,
@@ -386,7 +386,7 @@
                             Swal.close();
                             Swal.fire({
                                 title: 'Oops!',
-                                text: 'PIN Lama Salah',
+                                text: 'Pastikan PIN Lama Benar',
                                 imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                 imageWidth: 200,
                                 imageHeight: 200,
@@ -422,7 +422,7 @@
                                     if (!nomoWA) {
                                         Swal.fire({
                                             title: 'Penting!',
-                                            text: 'Nomor WhatsApp Wajib Diisi.',
+                                            text: 'Nomor WhatsApp Wajib Diisi',
                                             imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 200,
                                             imageHeight: 200,
@@ -457,8 +457,8 @@
                                                 Swal.close();
                                                 $('#nomorwa').text(nomoWAUpdated);
                                                 Swal.fire({
-                                                    title: response.status,
-                                                    text: response.message,
+                                                    title: 'Sukses',
+                                                    text: 'Memperbaharui Nomor WhatsApp Berhasil',
                                                     imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
                                                     imageWidth: 200,
                                                     imageHeight: 200,
@@ -472,7 +472,7 @@
                                                 Swal.close();
                                                 Swal.fire({
                                                     title: 'Oops!',
-                                                    text: 'Gagal Update Nomor WhatsApp',
+                                                    text: 'Gagal Memperbaharui Nomor WhatsApp, Silahkan Coba Lagi',
                                                     imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                                     imageWidth: 200,
                                                     imageHeight: 200,
@@ -497,7 +497,7 @@
                                     if (!nomoWA) {
                                         Swal.fire({
                                             title: 'Penting!',
-                                            text: 'Nomor WhatsApp wajib diisi.',
+                                            text: 'Nomor WhatsApp Wajib Diisi',
                                             imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                             imageWidth: 200,
                                             imageHeight: 200,
@@ -532,8 +532,8 @@
                                                 Swal.close();
                                                 $('#nomorwa').text(nomoWAUpdated);
                                                 Swal.fire({
-                                                    title: response.status,
-                                                    text: response.message,
+                                                    title: 'Sukses',
+                                                    text: 'Memperbaharui Nomor WhatsApp Berhasil',
                                                     imageUrl: '{{asset('/img/STK-20230906-WA0035.webp')}}',
                                                     imageWidth: 200,
                                                     imageHeight: 200,
@@ -547,7 +547,7 @@
                                                 Swal.close();
                                                 Swal.fire({
                                                     title: 'Oops!',
-                                                    text: 'Gagal Update Nomor WhatsApp',
+                                                    text: 'Gagal Memperbaharui Nomor WhatsApp, Silahkan Coba Lagi',
                                                     imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                                                     imageWidth: 200,
                                                     imageHeight: 200,

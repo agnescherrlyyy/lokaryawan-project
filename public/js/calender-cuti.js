@@ -19,8 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const isCurrentMonth =
             currentDate.getFullYear() === today.getFullYear() &&
             currentDate.getMonth() === today.getMonth();
+        
+        // prevMonthButton.disabled = isCurrentMonth;
 
-        prevMonthButton.disabled = isCurrentMonth;
+        oneWeekFromNow = new Date(currentDate);
+        oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
     }
 
     updatePrevMonthButton();
@@ -34,7 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document
         .getElementById("next-month")
         .addEventListener("click", function () {
-            currentDate.setMonth(currentDate.getMonth() + 1);
+            if (currentDate.getDate() > 25) {
+                currentDate.setDate(currentDate.getDate() - 7);
+            }else{
+                currentDate.setMonth(currentDate.getMonth() + 1);
+            }
+            calendar.innerHTML = "";
             renderCalendar();
             updatePrevMonthButton();
         });
@@ -142,12 +150,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function renderCalendar() {
+        const today = new Date();
+
+        oneWeekFromNow = new Date(currentDate);
+        oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+
         currentMonthElement.textContent = currentDate.toLocaleDateString(
             "id-ID",
             { year: "numeric", month: "long" }
         );
 
-        const today = new Date();
+        // const today = new Date();
         const firstDay = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
@@ -198,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentDate.getMonth() === today.getMonth() &&
                 currentDate.getFullYear() === today.getFullYear()
             ) {
-                dayElement.classList.add("disabled");
+                dayElement.classList.add("enabled");
             }
 
             if (

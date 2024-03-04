@@ -78,7 +78,7 @@
                 };
                 $.ajax({
                     type: 'POST',
-                    url: "{{ env('APP_API') }}login",
+                    url: "https://lokahr.salokapark.app/api/login",
                     data: formData,
                     dataType: 'json',
                     success: function (data) {
@@ -111,9 +111,11 @@
                         }
                     },
                     error: function (xhr, textStatus, errorThrown) {
+                        console.log(xhr);
+                        console.log(textStatus);
                         Swal.fire({
                             title: 'Login Gagal',
-                            text: 'Username atau password salah.',
+                            text: 'Terjadi Kesalahan Harap Hubungi Developer.',
                             imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                             imageWidth: 200,
                             imageHeight: 200,

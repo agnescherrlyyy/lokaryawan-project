@@ -6,7 +6,7 @@
     </div>
     <ul class="mt-10">
         <li class="w-full mt-2 relative">
-            <button type="button" onclick="window.location.href='{{ url('/dashboard') }}'" class="{{ $title === 'Dashboard' ? 'menuActive' : 'hover:bg-slate-100 dark:hover:bg-slate-700' }} menu-sidebar w-full flex items-center justify-between px-6 py-4">
+            <button type="button" onclick="window.location.href='{{ url('/dashboard') }}'" class="{{ $title === 'Dashboard' ? 'menuActive' : 'hover:bg-slate-100 dark:hover:bg-slate-700' }} menu-sidebar w-full flex items-center justify-between px-6 py-4 active:ring-0 active:outline-none focus:outline-none outline-none ring-0 focus:ring-0">
                 <div class="flex items-center ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="{{ $title === 'Dashboard' ? 'item-menuActive' : '' }} w-5 h-5 mr-3">
                         <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z" clip-rule="evenodd" />
@@ -36,6 +36,7 @@
                 <li><a href="{{ url('/jadwalku') }}" class="{{ $subtitle === 'Jadwalku' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Jadwalku</a></li>
                 <li><a href="{{ url('/absenku') }}" class="{{ $subtitle === 'Absenku' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Absenku</a></li>
                 <li><a href="{{ url('/lemburku') }}" class="{{ $subtitle === 'Lemburku' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Lemburku</a></li>
+                <li id="pengajuan-lembur" class="hidden"><a href="{{ url('/jadwal/pengajuan-lembur-hod') }}" class="{{ $subtitle === 'Pengajuan Lembur' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Pengajuan Lembur</a></li>
             </ul>
         </li>
         <li class="w-full mt-2 relative">
@@ -89,7 +90,7 @@
             <ul class="sub-menu">
                 <li><a href="#" class="title-subMenu">Cuti</a></li>
                 <li><a href="{{ url('/cutitahunan') }}" class="{{ $subtitle === 'Cuti Tahunan' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Cuti Tahunan</a></li>
-                <li><a href="{{ url('/cutikhusus') }}" class="{{ $subtitle === 'Cuti Khusus' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Cuti Khusus</a></li>
+                <li><a href="{{ url('/cutikhusus') }}" class=" {{ $subtitle === 'Cuti Khusus' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Cuti Khusus</a></li>
             </ul>
         </li>
     </ul>

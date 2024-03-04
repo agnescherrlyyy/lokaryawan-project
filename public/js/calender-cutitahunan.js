@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 if (selectedDates.length < sisaCuti) {
                     selectedDates.push(clickedDate);
+                    selectedDates.sort((a, b) => a.getTime() - b.getTime());
                     event.target.classList.add("selected");
                 } else {
                     return;
@@ -89,7 +90,17 @@ document.addEventListener("DOMContentLoaded", function () {
             const formattedDates = selectedDates.map((date) =>
                 date.toLocaleDateString("id-ID", options)
             );
-            selectedDateElement.textContent = formattedDates.join(", ");
+
+            let selectedText = "";
+            if (formattedDates.length > 1) {
+                const startDate = formattedDates[0];
+                const endDate = formattedDates[formattedDates.length - 1];
+                selectedText = `${startDate} s/d ${endDate}`;
+            } else {
+                selectedText = formattedDates[0];
+            }
+
+            selectedDateElement.textContent = selectedText;
 
             const formattedDatesISO = selectedDates.map((date) => {
                 const year = date.getFullYear();
@@ -98,12 +109,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 return `${year}-${month}-${day}`;
             });
 
-            // localStorage.setItem(
-            //     "selectedDates",
-            //     JSON.stringify(formattedDatesISO)
-            // );
             const encryptedSelectedDates = CryptoJS.AES.encrypt(JSON.stringify(formattedDatesISO), 'base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ=').toString();
             localStorage.setItem('encryptedSelectedDates', encryptedSelectedDates);
+            // console.log(selectedDates);
+            // console.log(formattedDates);
         }
     });
 

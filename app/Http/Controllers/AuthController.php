@@ -8,7 +8,15 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function index()
-    {
+    {   
+        if (session('already_login')) {
+            return redirect('/dashboard');
+        }
+
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        }
+
         return view('auth');
     }
 

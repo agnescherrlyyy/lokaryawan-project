@@ -29,7 +29,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-slate-400 dark:text-slate-500">
                 <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
             </svg>
-            <button class="font-medium text-sm text-primer-60">Pengajuan Komplemen</button>
+            <button class="font-medium text-sm text-primer-60">Permintaan Komplemen</button>
         </div>
         <div class="w-full">
             <div class="w-full bg-white dark:bg-slate-800 rounded-lg mt-9">
@@ -81,7 +81,7 @@
         <section class="w-full flex flex-col lg:flex-row gap-9 px-0 lg:px-4 pb-4 mt-9">
             <div class="w-full h-fit bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600">
                 <div class="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-                    <span id="permintaan-cuti" class="inline-block font-semibold text-sm">Pengajuan Komplemen</span>
+                    <span id="permintaan-cuti" class="inline-block font-semibold text-sm">Detail </span>
                 </div>
                 <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 px-5 pb-6 pt-4">
                     <div class="w-full flex flex-col gap-2">
@@ -158,6 +158,7 @@
             success: function (response) {
                 if(response.status === 'success'){
                     var listDataKomplemen = response.data;
+                    listDataKomplemen.reverse();
                     const containerCard = document.getElementById('container-komplemen');
 
                     function renderCardsByStatus(status) {
@@ -232,7 +233,6 @@
                         const dataIndex = $(this).data('index').toString();
                         $('#container-list a').removeClass('bg-sekunder-60 hover:bg-sekunder-40 text-white');
                         $(this).addClass('bg-sekunder-60 hover:bg-sekunder-40 text-white font-semibold');
-                        console.log(dataIndex);
                         renderCardsByStatus(dataIndex);
                     });
                     

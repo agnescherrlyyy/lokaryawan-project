@@ -59,6 +59,10 @@
                         <span class="text-sm font-semibold">Keterangan</span>
                         <span id="keterangan" class="font-medium text-sm text-slate-600 dark:text-slate-300"></span>
                     </div>
+                    <div class="w-full flex flex-col items-start gap-2">
+                        <span class="text-sm font-semibold">Jumlah Jam Lembur</span>
+                        <span id="jml-jamLembur" class="font-medium text-sm text-slate-600 dark:text-slate-300"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,31 +74,17 @@
                 <form id="fromData">
                     <div class="px-6 py-4">
                         <input type="hidden" name="status" id="status" value="">
-                        <textarea name="alasan-lembur" id="alasan-lembur" cols="10" rows="5" class="item-input" placeholder="Masukan alasan mengambil cuti"></textarea>
+                        <div class="w-full flex flex-col gap-2 mb-4">
+                            <label for="alasan-lembur" class="text-xs font-semibold">Edit Jumlah Jam Lembur</label>
+                            <input type="number" name="jumlah-lembur" id="jumlah-lembur" class="item-input-readonly" placeholder="Masukan Jumlah Jam Lembur" readonly>
+                        </div>
+                        <textarea name="alasan-lembur" id="alasan-lembur" cols="10" rows="5" class="item-input-readonly" placeholder="Masukan Catatan atau Alasan" readonly>-</textarea>
                     </div>
                 </form>
             </div>
-            {{-- <div class="w-full px-6">
-                <div id="keterangan" class="w-full hidden">
-                    <span id="text-keterangan" class="text-sm text-rose-600">
-                        *Perimintaan Cuti di Reject
-                    </span>
-                    <span id="tgl-keterangan" class="text-sm text-rose-600">
-                        
-                    </span>
-                </div>
-                <div id="alasan-reject" class="hidden w-full xl:w-1/2 flex-col">
-                    <span class="inline-block font-semibold text-sm">
-                        Alasan
-                    </span>
-                    <span id="text-alasan" class="inline-block text-sm">
-                        
-                    </span>
-                </div>
-            </div> --}}
             <div class="w-full lg:w-1/2 lg:flex-row flex flex-col gap-4 px-6 pb-6">
-                <button id="btn-reject" type="submit" data-index="2" form="fromData" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-rose-600 hover:bg-rose-800 transition-all duration-200 ease-in-out uppercase">rejected</button>
-                <button id="btn-approve" type="submit" data-index="1" form="fromData" class="text-center px-4 py-3 w-full rounded-md font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Approved</button>
+                <button id="btn-reject" type="submit" data-index="2" form="fromData" class="text-center px-4 py-3 w-full rounded-full font-semibold text-sm text-white mt-2 bg-rose-600 hover:bg-rose-800 transition-all duration-200 ease-in-out uppercase">rejected</button>
+                <button id="btn-approve" type="submit" data-index="1" form="fromData" class="text-center px-4 py-3 w-full rounded-full font-semibold text-sm text-white mt-2 bg-primer-60 hover:bg-primer-80 transition-all duration-200 ease-in-out uppercase">Approved</button>
             </div>
         </div>
     </div>
@@ -105,7 +95,6 @@
 @section('script')
 <script src="{{ asset('js/code.jquery.com_jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('js/crypto-js.js') }}"></script>
-<script src="{{ asset('js/scriptModal.js') }}"></script>
 <script type="text/javascript">
     $('.btn-back').click(function (e) {
         e.preventDefault();
@@ -135,6 +124,8 @@
                 $('#keterangan').text(detailLembur[0].keterangan);
                 statusApproved = detailLembur[0].status;
                 $('#status').val(statusApproved);
+                $('#jml-jamLembur').text(removeDecimalZeroes(detailLembur[0].jam_lembur));
+                $('#jumlah-lembur').val(removeDecimalZeroes(detailLembur[0].jam_lembur));
             } else {
                 Swal.fire({
                     position: 'center',
@@ -163,130 +154,148 @@
         }
     }
 
-    $('#btn-approve').click(function (e) {
-        e.preventDefault();
-        var noteApproved = $('#alasan-lembur').val();
-        var status = $(this).data('index');
-        var textError = 'Menyetujui Lembur Karyawan Gagal, Silahkan Coba Lagi';
-        var textSuccess = 'Menyetujui Lembur Karyawan Berhasil';
+    $(document).ready(function () {
+        $('#btn-approve').click(function (e) {
+            e.preventDefault();
+            var noteApproved = $('#alasan-lembur').val();
+            var jumlahLembur = $('#jumlah-lembur').val();
+            var status = $(this).data('index');
+            var textError = 'Menyetujui Lembur Karyawan Gagal, Silahkan Coba Lagi';
+            var textSuccess = 'Menyetujui Lembur Karyawan Berhasil';
 
-        if(!idLembur || !status || !noteApproved || !username) {
-            Swal.fire({
-                title: 'Oops!',
-                text: 'Harap Lengkapi Alasan Menyetujui Lembur Terlebih Dahulu',
-                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
-                imageWidth: 200,
-                imageHeight: 200,
-                imageAlt: 'Custom image',
-                showConfirmButton: true,
-            });
-            return;
-        }
-
-        loadingSweetAlert();
-
-        $.ajax({
-            url: '{{ env('APP_SERVICE') }}update_action_overtime',
-            type: 'POST',
-            data: {
-                id_overtime: idLembur,
-                status: status,
-                note: noteApproved,
-                id_karyawan_approve: username
-            },
-            success: function (response) {
-                if (response.status === 'success') {
-                    console.log(response);
-                    $('#alasan-lembur').val('');
-                    Swal.close();
-                    succsessSweetAlert(textSuccess);
-                    actionOvertime("1");
-                } else {
-                    console.log(response);
-                    Swal.close();
-                    errorSweetAlert(textError);
-                }
-            },
-            error: function () {
-                Swal.close();
-                console.log('Tidak Berhasil');
+            if(!idLembur || !status || !noteApproved || !username || !jumlahLembur) {
                 Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Terjadi Kesalahan',
-                    text: 'Harap Hubungi Developer',
+                    title: 'Oops!',
+                    text: 'Harap Lengkapi Alasan Menyetujui Lembur atau Jumlah Jam Lembur Terlebih Dahulu',
+                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
                     showConfirmButton: true,
                 });
+                return;
             }
+
+            loadingSweetAlert();
+
+            $.ajax({
+                url: '{{ env('APP_SERVICE') }}update_action_overtime',
+                type: 'POST',
+                data: {
+                    id_overtime: idLembur,
+                    status: status,
+                    note: noteApproved,
+                    jam_lembur: jumlahLembur,
+                    id_karyawan_approve: username
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        console.log(response);
+                        $('#alasan-lembur').val('');
+                        Swal.close();
+                        succsessSweetAlert(textSuccess);
+                        actionOvertime("1");
+                        window.location.href = "{{ url('/notification') }}";
+                    } else {
+                        console.log(response);
+                        Swal.close();
+                        errorSweetAlert(textError);
+                    }
+                },
+                error: function () {
+                    Swal.close();
+                    console.log('Tidak Berhasil');
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Terjadi Kesalahan',
+                        text: 'Harap Hubungi Developer',
+                        showConfirmButton: true,
+                    });
+                }
+            });
+        });
+
+        $('#btn-reject').click(function (e){
+            e.preventDefault();
+            var noteApproved = $('#alasan-lembur').val();
+            var status = $(this).data('index');
+            var textError = 'Menolak Lembur Karyawan Gagal, Silahkan Coba Lagi';
+            var textSuccess = 'Menolak Lembur Karyawan Berhasil';
+
+            if(!idLembur || !status || !noteApproved || !username) {
+                Swal.fire({
+                    title: 'Oops!',
+                    text: 'Harap Lengkapi Alasan Menolaknpm  Lembur Terlebih Dahulu',
+                    imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    showConfirmButton: true,
+                });
+                return;
+            }
+
+            loadingSweetAlert();
+
+            $.ajax({
+                url: '{{ env('APP_SERVICE') }}update_action_overtime',
+                type: 'POST',
+                data: {
+                    id_overtime: idLembur,
+                    status: status,
+                    note: noteApproved,
+                    id_karyawan_approve: username
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        console.log(response);
+                        $('#alasan-lembur').val('');
+                        Swal.close();
+                        succsessSweetAlert(textSuccess);
+                        actionOvertime("2");
+                        window.location.href = "{{ url('/notification') }}";
+                    } else {
+                        console.log(response);
+                        Swal.close();
+                        errorSweetAlert(textError);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    Swal.close();
+                    console.log('Tidak Berhasil');
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Terjadi Kesalahan',
+                        text: 'Harap Hubungi Developer',
+                        showConfirmButton: true,
+                    });
+                }
+            });
         });
     });
 
-    $('#btn-reject').click(function (e){
-        e.preventDefault();
-        var noteApproved = $('#alasan-lembur').val();
-        var status = $(this).data('index');
-        var textError = 'Menolak Lembur Karyawan Gagal, Silahkan Coba Lagi';
-        var textSuccess = 'Menolak Lembur Karyawan Berhasil';
-
-        if(!idLembur || !status || !noteApproved || !username) {
-            Swal.fire({
-                title: 'Oops!',
-                text: 'Harap Lengkapi Alasan Menolaknpm  Lembur Terlebih Dahulu',
-                imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
-                imageWidth: 200,
-                imageHeight: 200,
-                imageAlt: 'Custom image',
-                showConfirmButton: true,
-            });
-            return;
+    function removeDecimalZeroes(number) {
+        let numberString = number.toString();
+        
+        if (numberString.indexOf('.00') !== -1) {
+            numberString = numberString.replace('.00', '');
         }
 
-        loadingSweetAlert();
-
-        $.ajax({
-            url: '{{ env('APP_SERVICE') }}update_action_overtime',
-            type: 'POST',
-            data: {
-                id_overtime: idLembur,
-                status: status,
-                note: noteApproved,
-                id_karyawan_approve: username
-            },
-            success: function (response) {
-                if (response.status === 'success') {
-                    console.log(response);
-                    $('#alasan-lembur').val('');
-                    Swal.close();
-                    succsessSweetAlert(textSuccess);
-                    actionOvertime("2");
-                    window.location.href = "{{ url('/notification') }}";
-                } else {
-                    console.log(response);
-                    Swal.close();
-                    errorSweetAlert(textError);
-                }
-            },
-            error: function () {
-                Swal.close();
-                console.log('Tidak Berhasil');
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Terjadi Kesalahan',
-                    text: 'Harap Hubungi Developer',
-                    showConfirmButton: true,
-                });
-            }
-        });
-    });
+        return parseFloat(numberString);
+    }
 
     function loadingSweetAlert() {
         Swal.fire({
             title: 'Loading!',
-            text: 'Process Action Lembur',
+            text: 'Proses Menyetujui/Menolak Lembur Karyawan',
             timerProgressBar: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
             didOpen: () => {
-                Swal.showLoading()
+                Swal.showLoading();
             },
         });
     }

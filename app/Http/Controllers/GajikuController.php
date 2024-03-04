@@ -16,6 +16,7 @@ class GajikuController extends Controller
         $client = new \GuzzleHttp\Client(['verify' => false]);
         $request = $client->get($url);
         $response = $request->getBody()->getContents();
+        #dd(json_decode($response)->periode[0]->id_periode);
         $periodes = json_decode($response)->periode;
         $periode_now = collect($periodes)->where('tgl_awal', '<=', date('Y-m-d'))->where('tgl_akhir', '>=', date('Y-m-d'))->first();
         
@@ -40,17 +41,6 @@ class GajikuController extends Controller
         
         return response()->json($gaji);
     }
-
-    // public function generatePDF(Request $request)
-    // {
-    //     try {
-    //         $dataAPI = $request->input('dataAPI');
-    //         // dd($dataAPI);
-    //         return response()->json(['status' => 'success', 'data' => $dataAPI]);
-    //     } catch (\Exception $e) {
-    //         return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
-    //     }
-    // }
     /**
      * Show the form for creating a new resource.
      */

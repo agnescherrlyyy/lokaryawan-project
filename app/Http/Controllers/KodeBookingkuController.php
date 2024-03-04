@@ -11,10 +11,12 @@ class KodeBookingkuController extends Controller
      */
     public function index()
     {
-        $title = 'Kode Bookingku';
+        $title = 'Komplemen';
+        $subtitle = 'Kode Bookingku';
         return view('komplemen.codebookingku',
             [
                 'title' => $title,
+                'subtitle' => $subtitle
             ]
         );
     }

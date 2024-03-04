@@ -68,6 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const formattedDate = utcDate.toISOString().split('T')[0];
             const encryptedDateCalender = CryptoJS.AES.encrypt(JSON.stringify(formattedDate), 'base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ=').toString();
             localStorage.setItem('encryptedDateCalender', encryptedDateCalender);
+            console.log(selectedDate);
+            console.log(formattedDate);
         }
     });
 
@@ -79,6 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("encryptedDateCalender", encryptedDateCalender);
 
     selectedDateElement.textContent = currentDate.toLocaleDateString("id-ID", options);
+    console.log(currentDate);
+    console.log(formattedDate);
 
     function renderCalendar() {
         currentMonthElement.textContent = currentDate.toLocaleDateString(

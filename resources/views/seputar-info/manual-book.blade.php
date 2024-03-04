@@ -12,7 +12,7 @@
         </div>
     </div>
     <!-- Heading End -->
-    <section class="block mt-9 px-5 lg:pl-10 lg:pr-1">
+    <section class="block mt-9 px-5 lg:pl-10 lg:pr-10">
         <div class="w-full bg-white dark:bg-slate-800 px-2 py-2 rounded-xl">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">

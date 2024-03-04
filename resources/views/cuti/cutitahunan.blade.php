@@ -12,14 +12,14 @@
 
     <!-- Cuti Tahun Content Start -->
     <section class="block mt-9 px-2 lg:pl-10 lg:pr-10">
-        <div class="w-full mb-4 px-3 flex items-center gap-4">
-            <button id="riwayat-cuti" class="btn-modal px-4 py-3 rounded-full bg-primer-60 text-slate-50 font-medium text-xs hover:bg-primer-40 w-fit flex items-center gap-2">
+        <div class="w-full mb-4 px-3 flex flex-col md:flex-row md:items-center gap-4">
+            <button id="riwayat-cuti" class="w-full md:w-fit px-4 py-3 rounded-full bg-sekunder-60 text-slate-50 font-medium text-sm hover:bg-sekunder-40 flex items-center justify-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" />
                 </svg>
                 Riwayat Cuti
             </button>
-            <button id="permintaan-cuti" class="btn-modal px-4 py-3 rounded-full bg-sekunder-60 text-slate-50 font-medium text-xs hover:bg-sekunder-40 w-fit flex items-center gap-2">
+            <button id="permintaan-cuti" class="w-full md:w-fit px-4 py-3 rounded-full bg-primer-60 text-slate-50 font-medium text-sm hover:bg-primer-40 flex items-center justify-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l4.5 4.5a.75.75 0 01-1.06 1.06l-3.22-3.22V16.5a.75.75 0 01-1.5 0V4.81L8.03 8.03a.75.75 0 01-1.06-1.06l4.5-4.5zM3 15.75a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
                 </svg>
@@ -27,44 +27,61 @@
             </button>
         </div>
         <div class="w-full flex flex-col items-center justify-center rounded-lg">
-            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
-                    <div class="w-10 h-10 md:w-12 md:h-12">
-                        <img 
-                            src="{{ asset('img/cuti-svg.svg') }}"
-                            alt="icon"
-                            class="w-full h-full"
-                            >
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="w-full flex flex-col gap-4 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
+                    <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3">
+                        <div class="w-10 h-10 md:w-12 md:h-12">
+                            <img 
+                                src="{{ asset('img/cuti-svg.svg') }}"
+                                alt="icon"
+                                class="w-full h-full"
+                                >
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <span id="cuti-tahunan-past" class="font-semibold">0</span>
+                            <span id="tahun-past" class="text-sm text-slate-600 dark:text-slate-300"></span>
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <span id="cuti-tahunan" class="font-semibold">0</span>
-                        <span class="text-sm text-slate-400">Total Cuti Tahunan (Hari)</span>
+                    <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 pt-4 border-t border-t-slate-300 dark:border-t-slate-600">
+                        <div class="w-10 h-10 md:w-12 md:h-12">
+                            <img 
+                                src="{{ asset('img/izin.svg') }}"
+                                alt="icon"
+                                class="w-full h-full"
+                                >
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <span id="expired-past" class="font-semibold text-sm"></span>
+                            <span id="expired-text-past" class="text-sm text-slate-600 dark:text-slate-300"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
-                    <div class="w-10 h-10 md:w-12 md:h-12">
-                        <img 
-                            src="{{ asset('img/periode.svg') }}"
-                            alt="icon"
-                            class="w-full h-full"
-                            >
+                <div class="w-full flex flex-col gap-4 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
+                    <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3">
+                        <div class="w-10 h-10 md:w-12 md:h-12">
+                            <img 
+                                src="{{ asset('img/cuti-svg.svg') }}"
+                                alt="icon"
+                                class="w-full h-full"
+                                >
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <span id="cuti-tahunan-now" class="font-semibold"></span>
+                            <span id="tahun-now" class="text-sm text-slate-600 dark:text-slate-300"></span>
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <span id="periode" class="font-semibold">{{$periode_now->periode}}</span>
-                        <span class="text-sm text-slate-400">Periode</span>
-                    </div>
-                </div>
-                <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 px-6 py-6 bg-white dark:bg-slate-800 rounded-lg">
-                    <div class="w-10 h-10 md:w-12 md:h-12">
-                        <img 
-                            src="{{ asset('img/masa-berlaku.svg') }}"
-                            alt="icon"
-                            class="w-full h-full"
-                            >
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <span id="masa-berlaku" class="font-semibold text-sm"></span>
-                        <span class="text-sm text-slate-400">Masa Berlaku</span>
+                    <div class="w-full flex flex-col md:flex-row md:gap-5 md:items-center gap-3 pt-4 border-t border-t-slate-300 dark:border-t-slate-600">
+                        <div class="w-10 h-10 md:w-12 md:h-12">
+                            <img 
+                                src="{{ asset('img/izin.svg') }}"
+                                alt="icon"
+                                class="w-full h-full"
+                                >
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <span id="expired-now" class="font-semibold text-sm"></span>
+                            <span id="expired-text-now" class="text-sm text-slate-600 dark:text-slate-300"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,7 +107,7 @@
                     <span class="block text-sm">Tanggal yang dipilih :</span>
                     <span id="selected-date-value"></span>
                     <form action="" method="POST">
-                        <textarea name="alasan-cuti" id="alasan-cuti" cols="10" rows="3" class="item-input" placeholder="Masukan alasan mengambil cuti"></textarea>
+                        <textarea name="alasan-cuti" id="alasan-cuti" cols="10" rows="3" class="hidden" placeholder="Masukan Alasan Mengambil Cuti"></textarea>
                     </form>
                 </div>
                 <div class="w-full pt-2">
@@ -148,9 +165,10 @@
             const encryptedSelectedDates = localStorage.getItem('encryptedSelectedDates');
             const decryptedBytes = CryptoJS.AES.decrypt(encryptedSelectedDates, '{{ env('APP_KEY') }}');
             const decryptedSelectedDates = JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
-            const dateCutiKhusus = JSON.stringify(decryptedSelectedDates);
+            const dateCutiTahunan = JSON.stringify(decryptedSelectedDates);
+            console.log(dateCutiTahunan);
 
-            var alasanCuti = $('#alasan-cuti').val();
+            var alasanCuti = '-';
 
             if (!decryptedSelectedDates || decryptedSelectedDates.length === 0) {
                 Swal.fire({
@@ -170,7 +188,7 @@
                 id_cuti: id_cuti,
                 tipe_cuti: tipe_cuti,
                 cuti: cuti,
-                tanggal: dateCutiKhusus,
+                tanggal: dateCutiTahunan,
                 total_cuti: decryptedSelectedDates.length,
                 keterangan: alasanCuti,
             }
@@ -192,8 +210,10 @@
                 title: 'Loading!',
                 text: 'Proses Pengajuan Cuti Tahunan',
                 timerProgressBar: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
                 didOpen: () => {
-                    Swal.showLoading()
+                    Swal.showLoading();
                 },
             });
 
@@ -247,16 +267,59 @@
 
         if (username) {
             $.ajax({
-                url: '{{ env('APP_SERVICE') }}get_cuti?id_karyawan='+username+'&tahun='+nowYears,
+                url: 'https://servicelokaryawan.salokapark.app/api/get_cuti?id_karyawan='+username+'&tahun='+nowYears,
                 get:'GET',
                 success: function (response) {
-                    const cutiTahunan = response.data[0];
-                    $('#cuti-tahunan').text(cutiTahunan.sisa_cuti);
-                    $('#masa-berlaku').text(cutiTahunan.date_start + ' s/d ' + cutiTahunan.date_end);
-                    sisaCuti = cutiTahunan.sisa_cuti;
-                    
-                    const encryptedSisaCuti = CryptoJS.AES.encrypt(JSON.stringify(sisaCuti), '{{ env('APP_KEY') }}').toString();
-                    localStorage.setItem('encryptedSisaCuti', encryptedSisaCuti);
+                    console.log(response);
+                    if(response.data === "ID Karyawan Tidak Ditemukan"){
+                        $('#cuti-tahunan-past').text('0');
+                        $('#tahun-past').text('Sisa Cuti Tahun -');
+                        $('#cuti-tahunan-now').text('0');
+                        $('#tahun-now').text('Sisa Cuti Tahun -');
+                        $('#expired-past').text('----/--/--');
+                        $('#expired-text-past').text('Periode Cuti -');
+                        $('#expired-now').text('----/--/--');
+                        $('#expired-text-now').text('Periode Cuti -');
+                    } else if(response.data.length === 1) {
+                        console.log(response.data);
+                        const cutiTahunan = response.data[0];
+                        $('#cuti-tahunan-past').text(cutiTahunan.sisa_cuti);
+                        $('#tahun-past').text('Sisa Cuti Tahun ' + cutiTahunan.tahun);
+                        $('#expired-past').text(cutiTahunan.date_start + '  s/d  ' + cutiTahunan.date_expired);
+                        $('#expired-text-past').text('Periode Cuti ' + cutiTahunan.tahun);
+                        $('#cuti-tahunan-now').text('0');
+                        $('#tahun-now').text('Sisa Cuti Tahun -');
+                        $('#expired-now').text('----/--/--');
+                        $('#expired-text-now').text('Periode Cuti -');
+                        
+                        sisaCuti = cutiTahunan.sisa_cuti;
+                        
+                        const encryptedSisaCuti = CryptoJS.AES.encrypt(JSON.stringify(sisaCuti), '{{ env('APP_KEY') }}').toString();
+                        localStorage.setItem('encryptedSisaCuti', encryptedSisaCuti);
+                    } else if(response.data.length > 1){
+                        const cutiTahunanPertama = response.data[0];
+                        const cutiTahunanKedua = response.data[1];
+
+                        $('#cuti-tahunan-past').text(cutiTahunanPertama.sisa_cuti);
+                        $('#tahun-past').text('Sisa Cuti Tahun ' + cutiTahunanPertama.tahun);
+                        $('#expired-past').text(cutiTahunanPertama.date_start + '  s/d  ' + cutiTahunanPertama.date_expired);
+                        $('#expired-text-past').text('Periode Cuti ' + cutiTahunanPertama.tahun);
+                        $('#cuti-tahunan-now').text(cutiTahunanKedua.sisa_cuti);
+                        $('#tahun-now').text('Sisa Cuti Tahun ' + cutiTahunanKedua.tahun);
+                        $('#expired-now').text(cutiTahunanKedua.date_start + '  s/d  ' + cutiTahunanKedua.date_expired);
+                        $('#expired-text-now').text('Periode Cuti '+ cutiTahunanKedua.tahun);
+
+                        if (cutiTahunanPertama.sisa_cuti > 0){
+                            sisaCuti = cutiTahunanPertama.sisa_cuti;
+                            console.log('Sisa Cuti Tahun Pertama : ' + sisaCuti);
+                            getSisaCuti(sisaCuti);
+                        } else if (cutiTahunanPertama.sisa_cuti === 0){
+                            sisaCuti = cutiTahunanKedua.sisa_cuti;
+                            console.log('Sisa Cuti Tahun Kedua : ' + sisaCuti);
+                            getSisaCuti(sisaCuti);
+                        }
+
+                    }
                 },
                 error: function () {
                     alert('Terjadi kesalahan saat mengambil data dari API');
@@ -265,6 +328,15 @@
         }else {
             alert('ID Karywawan tidak tersedia');
         }
+
+        window.addEventListener('beforeunload', function() {
+            localStorage.removeItem('encryptedSelectedDates');
+        });
     });
+
+    function getSisaCuti(sisaCutiDisimpan){
+        const encryptedSisaCuti = CryptoJS.AES.encrypt(JSON.stringify(sisaCutiDisimpan), '{{ env('APP_KEY') }}').toString();
+        localStorage.setItem('encryptedSisaCuti', encryptedSisaCuti);
+    }
 </script>
 @endsection

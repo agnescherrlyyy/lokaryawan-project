@@ -25,8 +25,20 @@ class LemburkuController extends Controller
     public function reqLembur()
     {
         $title = 'Jadwal';
-        $subtitle = 'Lemburku';
-        return view('jadwal.lembur.req-lembur',
+        $subtitle = 'Pengajuan Lembur';
+        return view('jadwal.lembur.req-lembur.req-lembur',
+            [
+                'title' => $title,
+                'subtitle' => $subtitle
+            ]
+        );
+    }
+
+    public function approvedLembur()
+    {
+        $title = 'Jadwal';
+        $subtitle = 'Pengajuan Lembur';
+        return view('jadwal.lembur.approved-lembur.index',
             [
                 'title' => $title,
                 'subtitle' => $subtitle

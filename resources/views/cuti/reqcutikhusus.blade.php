@@ -12,14 +12,14 @@
 
     <!-- Cuti Tahun Content Start -->
     <section class="block mt-9 px-2 lg:pl-10 lg:pr-10">
-        <div class="w-full mb-4 px-3 flex items-center gap-4">
-            <button id="riwayat-cuti" class="btn-modal px-4 py-3 rounded-full bg-primer-60 text-slate-50 font-medium text-xs hover:bg-primer-40 w-fit flex items-center gap-2">
+        <div class="w-full mb-4 px-3 flex flex-col md:flex-row md:items-center gap-4">
+            <button id="riwayat-cuti" class="w-full md:w-fit px-4 py-3 rounded-full bg-sekunder-60 text-slate-50 font-medium text-sm hover:bg-sekunder-40 flex items-center justify-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" />
                 </svg>
                 Riwayat Cuti
             </button>
-            <button id="permintaan-cuti" class="btn-modal px-4 py-3 rounded-full bg-sekunder-60 text-slate-50 font-medium text-xs hover:bg-sekunder-40 w-fit flex items-center gap-2">
+            <button id="permintaan-cuti" class="w-full md:w-fit px-4 py-3 rounded-full bg-primer-60 text-slate-50 font-medium text-sm hover:bg-primer-40 flex items-center justify-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l4.5 4.5a.75.75 0 01-1.06 1.06l-3.22-3.22V16.5a.75.75 0 01-1.5 0V4.81L8.03 8.03a.75.75 0 01-1.06-1.06l4.5-4.5zM3 15.75a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
                 </svg>
@@ -68,20 +68,13 @@
                     </div>
                     <form action="" method="POST">
                         <div class="w-full flex flex-col gap-3 my-3">
-                            <label for="" class="block font-medium text-sm mb-1">Lampirkan File</label>
+                            <label for="" class="block font-medium text-sm mb-1">Lampiran File :</label>
                             <div class="w-full">
-                                <input id="input-file" type="file" accept="image/*" class="block w-full text-sm text-slate-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-primer-20 file:text-primer-60
-                                hover:file:bg-primer-60
-                                hover:file:text-primer-20 cursor-pointer
-                                "/>
+                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="input-file" type="file" accept="image/*">
                             </div>
-                            <span class="text-sm text-blue-500">* File Harus Berekstensi .jpg atau .png dan Ukuran Maksimal 500kb</span>
+                            <span class="text-sm text-blue-500">* File Harus Berekstensi .jpg atau .png dan Ukuran Maksimal 1 Mb</span>
                         </div>
-                        <textarea name="alasan-cuti" id="alasan-cuti" cols="10" rows="3" class="item-input" placeholder="Masukan alasan mengambil cuti"></textarea>
+                        <textarea name="alasan-cuti" id="alasan-cuti" cols="10" rows="3" class="hidden" placeholder="Masukan Alasan Mengambil Cuti"></textarea>
                     </form>
                 </div>
                 <div class="w-full pt-2">
@@ -106,6 +99,7 @@
 
         var username = decryptedFromData.username;
         const nowYears = new Date().getFullYear();
+        var sizeFileInput;
         var idCuti;
         var tipeCuti;
         var namaCuti;
@@ -122,19 +116,20 @@
         });
 
         $('#input-file').change(function () {
-            var maxFileSizeInBytes = 500 * 1024;
+            var maxFileSizeInBytes = 1 * 1024 * 1024;
             var selectedFile = this.files[0];
 
             if (selectedFile && selectedFile.size > maxFileSizeInBytes) {
                 Swal.fire({
                     title: 'Penting',
-                    text: 'File harus berekstensi .jpg atau .png dan ukuran maksimal 500kb',
+                    text: 'File Harus Berekstensi .jpg atau .png dan Ukuran Maksimal 1 Mb',
                     imageUrl: '{{ asset('img/STK-20230906-WA0006.webp') }}',
                     imageWidth: 150,
                     imageHeight: 150,
                     imageAlt: 'Custom image',
                 });
-                $('#input-file').val(null);
+
+                $(this).val('');
                 return;
             }
         });
@@ -158,8 +153,13 @@
                 return;
             }
 
-            var alasanCuti = $('#alasan-cuti').val();
+            // var alasanCuti = $('#alasan-cuti').val();
+            var alasanCuti = '-';
+
             lampiranFile = $('#input-file').prop('files')[0];
+            if (!lampiranFile) {
+                lampiranFile = ' ';
+            }
 
             var fromData = new FormData();
             fromData.append('id_karyawan', username);
@@ -169,10 +169,9 @@
             fromData.append('tanggal', tanggalCutiKhusus);
             fromData.append('total_cuti', decryptedDataCutiKhusus.length);
             fromData.append('keterangan', alasanCuti);
-            fromData.append('lampiran', lampiranFile);
-            console.log(fromData);
+            fromData.append('lampiran_file', lampiranFile);
 
-            if (!fromData.get('id_karyawan') || !fromData.get('id_cuti') || !fromData.get('tipe_cuti') || !fromData.get('cuti') || !decryptedDataCutiKhusus || !alasanCuti || !lampiranFile || !tanggalCutiKhusus) {
+            if (!fromData.get('id_karyawan') || !fromData.get('id_cuti') || !fromData.get('tipe_cuti') || !fromData.get('cuti') || !decryptedDataCutiKhusus || !alasanCuti || !tanggalCutiKhusus) {
                 Swal.fire({
                     title: 'Oops!',
                     text: 'Harap Lengkapi Data Pengajuan Cuti Terlebih Dahulu',
@@ -187,10 +186,12 @@
             
             Swal.fire({
                 title: 'Loading!',
-                text : 'Proses Pengajuan Cuti Khusus',
+                text: 'Proses Pengajuan Cuti Khusus',
                 timerProgressBar: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
                 didOpen: () => {
-                    Swal.showLoading()
+                    Swal.showLoading();
                 },
             });
 
@@ -215,7 +216,7 @@
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        $('#alasan-cuti').val('');
+                        
                         $('#input-file').val('');
                         window.location.href = "{{ url('/cuti/permintaan-cutitahunan') }}";
                     }else {
@@ -270,6 +271,10 @@
         $('#riwayat-cuti').click(function (e) {
             e.preventDefault();
             window.location.href = "{{ url('/cuti/riwayat-cutitahunan') }}";
+        });
+
+        window.addEventListener('beforeunload', function() {
+            localStorage.removeItem('encryptedJumlahHari');
         });
 
         window.addEventListener('beforeunload', function() {
