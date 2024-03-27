@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             if (currentDate.getDate() > 25) {
                 currentDate.setDate(currentDate.getDate() + 6);
-            }else{
+            } else {
                 currentDate.setMonth(currentDate.getMonth() + 1);
             }
             calendar.innerHTML = "";
@@ -56,11 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
             event.target.classList.contains("calendar-day") &&
             !event.target.classList.contains("disabled")
         ) {
-            
-
-            const encryptedSisaCuti = localStorage.getItem('encryptedSisaCuti');
-            const decryptedBytesSisaCuti = CryptoJS.AES.decrypt(encryptedSisaCuti, 'base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ=');
-            const decryptedSisaCuti = JSON.parse(decryptedBytesSisaCuti.toString(CryptoJS.enc.Utf8));
+            const encryptedSisaCuti = localStorage.getItem("encryptedSisaCuti");
+            const decryptedBytesSisaCuti = CryptoJS.AES.decrypt(
+                encryptedSisaCuti,
+                "base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ="
+            );
+            const decryptedSisaCuti = JSON.parse(
+                decryptedBytesSisaCuti.toString(CryptoJS.enc.Utf8)
+            );
 
             const sisaCuti = parseInt(decryptedSisaCuti, 10);
 
@@ -100,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedText = formattedDates[0];
             }
 
-            selectedDateElement.textContent = selectedText;
+            selectedDateElement.textContent = formattedDates;
 
             const formattedDatesISO = selectedDates.map((date) => {
                 const year = date.getFullYear();
@@ -109,8 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 return `${year}-${month}-${day}`;
             });
 
-            const encryptedSelectedDates = CryptoJS.AES.encrypt(JSON.stringify(formattedDatesISO), 'base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ=').toString();
-            localStorage.setItem('encryptedSelectedDates', encryptedSelectedDates);
+            const encryptedSelectedDates = CryptoJS.AES.encrypt(
+                JSON.stringify(formattedDatesISO),
+                "base64:3nMewpgVZ67OrYpN+7In1VnRAk8N99/s8yVvgCw9eCQ="
+            ).toString();
+            localStorage.setItem(
+                "encryptedSelectedDates",
+                encryptedSelectedDates
+            );
             // console.log(selectedDates);
             // console.log(formattedDates);
         }
@@ -120,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const today = new Date();
 
         oneWeekFromNow = new Date(currentDate);
-        oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+        oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
 
         currentMonthElement.textContent = currentDate.toLocaleDateString(
             "id-ID",
@@ -171,12 +180,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 dayElement.classList.add("selected");
             }
 
-            var date_select = new Date((currentDate.getMonth()+1)+"/"+i+"/"+currentDate.getFullYear());
-            if (date_select < dateWeek)
-            {
+            var date_select = new Date(
+                currentDate.getMonth() +
+                    1 +
+                    "/" +
+                    i +
+                    "/" +
+                    currentDate.getFullYear()
+            );
+            if (date_select < dateWeek) {
                 dayElement.classList.add("disabled");
             }
-            
+
             if (
                 currentDate.getFullYear() === today.getFullYear() &&
                 currentDate.getMonth() === today.getMonth() &&

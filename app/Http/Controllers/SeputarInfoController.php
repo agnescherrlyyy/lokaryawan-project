@@ -66,6 +66,30 @@ class SeputarInfoController extends Controller
         );
     }
 
+    public function financeNon ()
+    {
+        $title = 'Finance & Accounting';
+        $subtitle = 'Finance & Accounting';
+        return view('seputar-info.finance', 
+            [
+                'title' => $title,
+                'subtitle' => $subtitle
+            ]
+        );
+    }
+
+    public function standaLayananPrima ()
+    {
+        $title = 'Standar Layanan Prima';
+        $subtitle = 'Standar Layanan Prima';
+        return view('seputar-info.standa-layanan-prima', 
+            [
+                'title' => $title,
+                'subtitle' => $subtitle
+            ]
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      */

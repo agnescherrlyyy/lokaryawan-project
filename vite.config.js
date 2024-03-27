@@ -3,7 +3,7 @@ import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
     server: {
-        host: "192.168.0.170",
+        host: "192.168.1.79",
     },
     // server: {
     //     host: "192.168.0.170",
@@ -16,7 +16,7 @@ export default defineConfig({
     ],
     build: {
         rollupOptions: {
-            external: ['swiper'],
+            external: ["swiper"],
         },
     },
 });

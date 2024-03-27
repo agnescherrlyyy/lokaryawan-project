@@ -55,6 +55,7 @@
             <ul class="sub-menu">
                 <li><a href="#" class="title-subMenu">Penggajian</a></li>
                 <li><a href="{{ url('/gajiku') }}" class="{{ $subtitle === 'Gajiku' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">Gajiku</a></li>
+                <li><a href="{{ url('/penggajian/thr') }}" class="{{ $subtitle === 'Thrku' ? 'item-sub-menuActive' : 'item-sub-menuBase' }}">THR</a></li>
             </ul>
         </li>
         <li class="w-full mt-2 relative">

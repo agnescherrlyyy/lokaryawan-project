@@ -17,7 +17,9 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\SeputarInfoController;
 use App\Http\Controllers\SlipGajiPDFController;
+use App\Http\Controllers\SlipThRPDFController;
 use App\Http\Controllers\SlipTiketKonfirmasiController;
+use App\Http\Controllers\thrController;
 use App\Http\Controllers\TiketkuController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +46,8 @@ Route::middleware(['check_login'])->group(function () {
     
     Route::get('/gajiku', [GajikuController::class, 'index']);
     Route::post('/gajiku/get_gajiku', [GajikuController::class, 'get_gajiku']);
+    Route::get('/penggajian/thr', [thrController::class, 'index']);
+    Route::post('/penggajian/thr/get_thrku', [thrController::class, 'get_thrku']);
     
     Route::get('/tiket', [TiketkuController::class, 'index']);
     Route::get('/tiket/konfirmasi-pembayaran', [SlipTiketKonfirmasiController::class, 'index']);
@@ -69,10 +73,15 @@ Route::middleware(['check_login'])->group(function () {
     Route::get('/manual-book', [SeputarInfoController::class, 'manualbook']);
     Route::get('/hospitality', [SeputarInfoController::class, 'hospitality']);
     Route::get('/manual-book-komplemen', [SeputarInfoController::class, 'manualbookKomplemen']);
+    Route::get('/finance-non', [SeputarInfoController::class, 'financeNon']);
+    Route::get('/seputar-info/standar-layanan-prima', [SeputarInfoController::class, 'standaLayananPrima']);
     
     Route::post('/encrypt-password', [SlipGajiPDFController::class, 'encryptPassword']);
     Route::get('/generate-pdf', [SlipGajiPDFController::class, 'generatePDF']);
     Route::get('/slip-gaji-pdf', [PDFController::class, 'generatePDF']);
+
+    Route::post('/encrypt-password-thr', [SlipThRPDFController::class, 'encryptPassword']);
+    Route::get('/generate-pdf-thr', [SlipThRPDFController::class, 'generatePDF']);
 });
 
 Route::get('/login-admin', [AdminAuthController::class, 'index']);
