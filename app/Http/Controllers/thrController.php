@@ -27,7 +27,7 @@ class thrController extends Controller
     }
 
     public function get_thrku(Request $request){
-        $url = "http://192.168.0.75:8099/api/thrku?id_karyawan=".$request->id_karyawan."&password=".$request->password."&id_periode=".$request->id_periode."&nip=".$request->nip;
+        $url = "http://103.164.114.22:8096/api/thrku?id_karyawan=".$request->id_karyawan."&password=".$request->password."&id_periode=".$request->id_periode."&nip=".$request->nip;
         $client = new \GuzzleHttp\Client(['verify' => false]);
         $request = $client->post($url);
         $response = $request->getBody()->getContents();

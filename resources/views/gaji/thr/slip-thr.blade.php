@@ -89,7 +89,7 @@
                                                             </td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
                                                             <td style="padding: .1rem; font-size:.8rem;"><strong
-                                                                    id="periode">{{ $detail_karyawan->periode }}</strong>
+                                                                    id="periode">{{ $detail_karyawan === null ? '-' : $detail_karyawan->periode }}</strong>
                                                             </td>
                                                         </tr>
                                                         <tr align="left">
@@ -98,7 +98,7 @@
                                                             </td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
                                                             <td style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="nip">{{ $detail_karyawan->nik }}</span>
+                                                                    id="nip">{{ $detail_karyawan === null ? '-' : $detail_karyawan->nik }}</span>
                                                             </td>
                                                         </tr>
                                                         <tr align="left">
@@ -107,7 +107,7 @@
                                                             </td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
                                                             <td style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="nama">{{ $detail_karyawan->nama }}</span>
+                                                                    id="nama">{{ $detail_karyawan === null ? '-' : $detail_karyawan->nama }}</span>
                                                             </td>
                                                         </tr>
                                                     </thead>
@@ -126,7 +126,7 @@
                                                             </td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
                                                             <td style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="departemen">{{ $detail_karyawan->departemen }}</span>
+                                                                    id="departemen">{{ $detail_karyawan === null ? '-' : $detail_karyawan->departemen }}</span>
                                                             </td>
                                                         </tr>
                                                         <tr align="left"
@@ -135,7 +135,7 @@
                                                                     Departemen</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
                                                             <td style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="sub-dep">{{ $detail_karyawan->subDepartemen }}</span>
+                                                                    id="sub-dep">{{ $detail_karyawan === null ? '-' : $detail_karyawan->subDepartemen }}</span>
                                                             </td>
                                                         </tr>
                                                     </thead>
@@ -155,7 +155,7 @@
                                                             </td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
                                                             <td style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="jabatan">{{ $detail_karyawan->jabatan }}</span>
+                                                                    id="jabatan">{{ $detail_karyawan === null ? '-' : $detail_karyawan->jabatan }}</span>
                                                             </td>
                                                         </tr>
                                                         <tr align="right"
@@ -164,7 +164,7 @@
                                                                     Rekening</strong></td>
                                                             <td style="padding: .1rem; font-size:.8rem;">:</td>
                                                             <td style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="no-rek">{{ $detail_karyawan->noRekening }}</span>
+                                                                    id="no-rek">{{ $detail_karyawan === null ? '-' : $detail_karyawan->noRekening }}</span>
                                                             </td>
                                                         </tr>
                                                     </thead>
@@ -203,7 +203,7 @@
                                                             </td>
                                                             <td align="right"
                                                                 style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="gaji-pokok">{{ $detail_thrku[0]->nominal !== null ? number_format($detail_thrku[0]->nominal, 2, ',', '.') : number_format(0, 2, ',', '.') }}</span>
+                                                                    id="gaji-pokok">{{ $detail_thrku !== null && count($detail_thrku) > 0 && $detail_thrku[0]->nominal !== null ? number_format($detail_thrku[0]->nominal, 2, ',', '.') : number_format(0, 2, ',', '.') }}</span>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -212,7 +212,7 @@
                                                                 Jabatan</td>
                                                             <td align="right"
                                                                 style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="tunj-jabatan">{{ $detail_thrku[1]->nominal !== null ? number_format($detail_thrku[1]->nominal, 2, ',', '.') : number_format(0, 2, ',', '.') }}</span>
+                                                                    id="tunj-jabatan">{{ $detail_thrku !== null && count($detail_thrku) > 0 && $detail_thrku[1]->nominal !== null ? number_format($detail_thrku[1]->nominal, 2, ',', '.') : number_format(0, 2, ',', '.') }}</span>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -221,7 +221,7 @@
                                                                 Keahlian</td>
                                                             <td align="right"
                                                                 style="padding: .1rem; font-size:.8rem;"><span
-                                                                    id="tunj-keahlian">{{ $detail_thrku[2]->nominal !== null ? number_format($detail_thrku[2]->nominal, 2, ',', '.') : number_format(0, 2, ',', '.') }}</span>
+                                                                    id="tunj-keahlian">{{ $detail_thrku !== null && count($detail_thrku) > 0 && $detail_thrku[2]->nominal !== null ? number_format($detail_thrku[2]->nominal, 2, ',', '.') : number_format(0, 2, ',', '.') }}</span>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -254,14 +254,16 @@
                                                             <td align="right"
                                                                 style="padding: .1rem; font-size:.8rem;">
                                                                 <strong id="total-gaji-pokok">Rp
-                                                                    {{ number_format(
-                                                                        ($detail_thrku[0]->nominal !== null ? $detail_thrku[0]->nominal : 0) +
-                                                                            ($detail_thrku[1]->nominal !== null ? $detail_thrku[1]->nominal : 0) +
-                                                                            ($detail_thrku[2]->nominal !== null ? $detail_thrku[2]->nominal : 0),
-                                                                        2,
-                                                                        ',',
-                                                                        '.',
-                                                                    ) }}
+                                                                    {{ $detail_thrku !== null && count($detail_thrku) > 0
+                                                                        ? number_format(
+                                                                            ($detail_thrku[0]->nominal !== null ? $detail_thrku[0]->nominal : 0) +
+                                                                                ($detail_thrku[1]->nominal !== null ? $detail_thrku[1]->nominal : 0) +
+                                                                                ($detail_thrku[2]->nominal !== null ? $detail_thrku[2]->nominal : 0),
+                                                                            2,
+                                                                            ',',
+                                                                            '.',
+                                                                        )
+                                                                        : number_format(0, 2, ',', '.') }}
                                                                 </strong>
                                                             </td>
                                                         </tr>
@@ -499,23 +501,30 @@
                                         </td>
                                         <td align="right" style="padding: .5rem; color: #fff; font-size:.8rem;">
                                             <strong id="total-yang-di-terima">Rp
-                                                {{ number_format(
-                                                    ($detail_thrku[0]->nominal !== null ? $detail_thrku[0]->nominal : 0) +
-                                                        ($detail_thrku[1]->nominal !== null ? $detail_thrku[1]->nominal : 0) +
-                                                        ($detail_thrku[2]->nominal !== null ? $detail_thrku[2]->nominal : 0),
-                                                    2,
-                                                    ',',
-                                                    '.',
-                                                ) }}
-                                                <span
-                                                    style="padding: .5rem; color: #fff; font-size:.8rem;">{{ $detail_karyawan->tipeThr === '0' || $detail_karyawan->tipeThr === '2' || $detail_karyawan->tipeThr !== '1' ? 'THR Prorate' : '' }}</span>
+                                                {{ $detail_thrku !== null && count($detail_thrku) > 0
+                                                    ? number_format(
+                                                        ($detail_thrku[0]->nominal !== null ? $detail_thrku[0]->nominal : 0) +
+                                                            ($detail_thrku[1]->nominal !== null ? $detail_thrku[1]->nominal : 0) +
+                                                            ($detail_thrku[2]->nominal !== null ? $detail_thrku[2]->nominal : 0),
+                                                        2,
+                                                        ',',
+                                                        '.',
+                                                    )
+                                                    : number_format(0, 2, ',', '.') }}
+                                                <span style="padding: .5rem; color: #fff; font-size: .8rem;">
+                                                    {{ $detail_thrku !== null && count($detail_thrku) > 0
+                                                        ? ($detail_karyawan->tipeThr === '0' || $detail_karyawan->tipeThr === '2' || $detail_karyawan->tipeThr !== '1'
+                                                            ? 'THR Prorate'
+                                                            : '')
+                                                        : '-' }}
+                                                </span>
                                             </strong>
                                         </td>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
-                        <div style="width: 100%; margin-bottom: 2rem;">
+                        <div style="width: 100%; margin-bottom: 12rem;">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <thead width="100%">
                                     <tr align="left" style="width=100%;">

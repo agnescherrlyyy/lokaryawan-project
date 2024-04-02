@@ -96,9 +96,6 @@
                             </svg>          
                         </button>
                     </div>
-                    {{-- <button onclick="window.location.href = '{{ url('/lembur/approved-lembur') }}'" class="hidden ml-2 px-4 py-3 rounded-full text-slate-50 font-semibold text-xs bg-primer-60 hover:bg-primer-80 transition-colors duration-200 ease-in-out w-fit">
-                        Approved Lembur
-                    </button> --}}
                 </div>
             </div>
             <div class="w-full py-4">

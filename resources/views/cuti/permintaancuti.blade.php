@@ -232,6 +232,7 @@
                                             <div class="h-16 w-16 mr-6">
                                                 <img src="{{ asset('img/user.svg') }}" alt="" srcset="" class="h-full w-full">
                                             </div>
+                                            
                                             <div class="w-full flex flex-col gap-2">
                                                 <span class="block font-semibold text-sm">${itemData.name}</span>
                                                 <p class="text-xs">${itemData.id_karyawan_approve}</p>

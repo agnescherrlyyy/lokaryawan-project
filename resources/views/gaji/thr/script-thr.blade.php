@@ -125,21 +125,24 @@
 
                         if (response.thrku !== null || response.thrku !== undefined ||
                             response.thrku !== "") {
-                            let detailKaryawan = response.thrku.karyawan;
-                            $('#nama-karyawan').text(detailKaryawan.nama !== null ?
-                                detailKaryawan.nama : '-');
-                            $('#nik-karyawan').text(detailKaryawan.nik !== null ?
-                                detailKaryawan.nik : '-');
-                            $('#dept').text(detailKaryawan.departemen !== null &&
-                                detailKaryawan.subDepartemen !== null ? detailKaryawan
-                                .departemen + ' - ' + detailKaryawan.subDepartemen :
-                                "-" + "-");
-                            $('#rekening-karyawan').text(detailKaryawan.noRekening !==
-                                null ? detailKaryawan.noRekening : '-');
-                            $('#priode').text(detailKaryawan.periode !== null ?
-                                detailKaryawan.periode : '-');
+                            if (response.thrku.karyawan !== null) {
+                                let detailKaryawan = response.thrku.karyawan;
+                                $('#nama-karyawan').text(detailKaryawan.nama !== null ?
+                                    detailKaryawan.nama : '-');
+                                $('#nik-karyawan').text(detailKaryawan.nik !== null ?
+                                    detailKaryawan.nik : '-');
+                                $('#dept').text(detailKaryawan.departemen !== null &&
+                                    detailKaryawan.subDepartemen !== null ?
+                                    detailKaryawan
+                                    .departemen + ' - ' + detailKaryawan.subDepartemen :
+                                    "-" + "-");
+                                $('#rekening-karyawan').text(detailKaryawan.noRekening !==
+                                    null ? detailKaryawan.noRekening : '-');
+                                $('#priode').text(detailKaryawan.periode !== null ?
+                                    detailKaryawan.periode : '-');
+                            }
 
-                            if (response.thrku.karyawan_thr.length > 0) {
+                            if (response.thrku.karyawan_thr !== null) {
                                 console.log(response.thrku.karyawan_thr);
                                 let detailTotalThrku = response.thrku.karyawan_thr;
                                 console.log(detailTotalThrku[0].nominal);
@@ -202,11 +205,6 @@
 
         $('.unduh-slip').click(function(e) {
             e.preventDefault();
-            console.log(password);
-            console.log(id_periode);
-            console.log(nip_karyawan);
-            console.log(passwordThr);
-            console.log(id_karyawan);
 
             if (passwordThr === undefined || passwordThr === null || passwordThr === "" ||
                 id_karyawan === undefined || id_karyawan === null || id_karyawan === "" ||
